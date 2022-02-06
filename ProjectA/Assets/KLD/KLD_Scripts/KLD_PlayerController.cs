@@ -28,7 +28,7 @@ public class KLD_PlayerController : MonoBehaviour
     {
         ProcessAxis();
 
-        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed * Time.deltaTime * 200f;
+        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
     }
 
     void ProcessAxis()
