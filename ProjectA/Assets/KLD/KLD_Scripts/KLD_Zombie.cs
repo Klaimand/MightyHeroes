@@ -78,9 +78,10 @@ public class KLD_Zombie : MonoBehaviour
     {
         GUIStyle _gui = new GUIStyle();
 
-        _gui.normal.textColor = Color.blue;
+        _gui.normal.textColor = Color.white;
         _gui.fontSize = 30;
         _gui.alignment = TextAnchor.UpperCenter;
+
 
         gUIStyle = _gui;
     }
