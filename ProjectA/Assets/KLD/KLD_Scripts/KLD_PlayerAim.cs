@@ -1,17 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class KLD_PlayerAim : MonoBehaviour
 {
 
-    [SerializeField] Transform target = null;
+    [SerializeField] KLD_ZombieList zombieList;
+    [SerializeField] Transform defaultTarget = null;
+
+    [SerializeField, ReadOnly] KLD_ZombieAttributes selectedZombie = null;
+
+    [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+    [SerializeField] KLD_AimBehavior aimBehavior;
+
 
     Vector3 targetPos = Vector3.zero;
 
     Vector3 debugPosa = Vector3.zero;
     Vector3 debugPosb = Vector3.zero;
-
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +29,11 @@ public class KLD_PlayerAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        targetPos = target.position;
+        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), transform);
+
+        targetPos = selectedZombie != null ? selectedZombie.transform.position : defaultTarget.position;
+
+
         targetPos.y = transform.position.y;
         transform.LookAt(targetPos, Vector3.up);
 
