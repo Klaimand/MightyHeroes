@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class KLD_Zombie : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class KLD_Zombie : MonoBehaviour
     [SerializeField] Transform healthBar;
 
     Vector3 scale = Vector3.one;
+
+    static GUIStyle gUIStyle;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +48,14 @@ public class KLD_Zombie : MonoBehaviour
     void OnValidate()
     {
         UpdateHealthBar();
+        attributes.OnValidate();
+
+        if (gUIStyle == null) SetupGUIStyle();
+    }
+
+    void OnDrawGizmos()
+    {
+        Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
     }
 
     // Update is called once per frame
@@ -55,15 +66,22 @@ public class KLD_Zombie : MonoBehaviour
 
     void UpdateHealthBar()
     {
-        scale.x = (attributes.health / 100f);
+        scale.x = (attributes.health / (float)attributes.maxHealth);
+
+        if (scale.x == Mathf.Infinity) scale.x = 1f; //debug to avoid error in console
 
         healthBar.localScale = scale;
     }
-}
 
-[System.Serializable]
-public class KLD_ZombieAttributes
-{
-    [Range(0, 100)] public int health = 100;
-    public Transform transform = null;
+    [ContextMenu("Setup GUI Style")]
+    void SetupGUIStyle()
+    {
+        GUIStyle _gui = new GUIStyle();
+
+        _gui.normal.textColor = Color.blue;
+        _gui.fontSize = 30;
+        _gui.alignment = TextAnchor.UpperCenter;
+
+        gUIStyle = _gui;
+    }
 }
