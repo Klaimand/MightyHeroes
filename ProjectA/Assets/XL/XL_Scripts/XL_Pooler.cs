@@ -96,18 +96,19 @@ public class XL_Pooler : MonoBehaviour
 
     public GameObject Pop(string key)
     {
-        if (pools[key].queue.Count != 0)
-        {
-            objectInstance = pools[key].queue.Dequeue();
-            objectInstance.SetActive(true);
-        }
-        else
+        return PopPosition(key, Vector3.zero);
+    }
+
+    public GameObject PopPosition(string key, Vector3 position) 
+    {
+        if (pools[key].queue.Count == 0)
         {
             Debug.LogWarning("pool of" + key + "is empty");
             AddInstance(pools[key]);
-            objectInstance = pools[key].queue.Dequeue();
-            objectInstance.SetActive(true);
         }
+        objectInstance = pools[key].queue.Dequeue();
+        objectInstance.transform.position = position;
+        objectInstance.SetActive(true);
 
         return objectInstance;
     }
