@@ -83,20 +83,45 @@ ModelImporter:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: Chara
-      parentName: TargetDummu_Tpose(Clone)
-      position: {x: -0, y: 0, z: 0}
-      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-      scale: {x: 0.491431, y: 0.491431, z: 0.491431}
     - name: Bassin
       parentName: TargetDummu_Tpose(Clone)
       position: {x: 0.000000003709842, y: 0.21236819, z: 0.0848713}
       rotation: {x: -0.47310543, y: 0.52552, z: -0.47310537, w: 0.52551997}
       scale: {x: 1, y: 1, z: 1}
+    - name: JambeDroite
+      parentName: Bassin
+      position: {x: 0.009266338, y: 0.009524698, z: -0.09500001}
+      rotation: {x: -0.17699213, y: 0.68460083, z: -0.6845946, w: 0.17699087}
+      scale: {x: 1, y: 1, z: 1}
+    - name: PiedDroit
+      parentName: JambeDroite
+      position: {x: -0.16328363, y: 0, z: 0.000000014305114}
+      rotation: {x: -0.0000033983176, y: 0.57357675, z: 0.0000025786223, w: 0.8191518}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone015(mirrored)
+      parentName: PiedDroit
+      position: {x: -0.056436043, y: -0.000000028610229, z: 0.000000007152557}
+      rotation: {x: -0.00000023841834, y: -0.00000008940691, z: -0.00000023841892, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: JambeGauche
+      parentName: Bassin
+      position: {x: 0.009266338, y: 0.009524712, z: 0.095324144}
+      rotation: {x: 0.17699057, y: -0.6845947, z: 0.68460083, w: -0.17699222}
+      scale: {x: 1, y: 1, z: 1}
+    - name: PiedGauche
+      parentName: JambeGauche
+      position: {x: -0.16328363, y: 0.000000028610229, z: 0.0000000047683715}
+      rotation: {x: 0.0000035893058, y: 0.5735767, z: -0.000002548258, w: 0.8191519}
+      scale: {x: 1, y: 1, z: 1}
+    - name: Bone015
+      parentName: PiedGauche
+      position: {x: -0.05643606, y: 0, z: -0.0000000047683715}
+      rotation: {x: 1.811884e-13, y: 0.000000014901161, z: 5.3290702e-14, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: Torse
       parentName: Bassin
       position: {x: -0.114303246, y: -0.00000012397766, z: -0.000000001426236}
-      rotation: {x: 0.000000029802326, y: 0.000000014901163, z: -0.29576412, w: 0.95526105}
+      rotation: {x: 0.000000031186932, y: -0.00000001098952, z: -0.33234608, w: 0.94315755}
       scale: {x: 1, y: 1, z: 1}
     - name: Cou
       parentName: Torse
@@ -113,26 +138,6 @@ ModelImporter:
       position: {x: -0.078637235, y: 0, z: 0.0000000015723935}
       rotation: {x: 1.7763564e-15, y: -8.881782e-16, z: 1.5777211e-30, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: EpauleGauche
-      parentName: Torse
-      position: {x: -0.15251033, y: 0.016885318, z: 0.14416808}
-      rotation: {x: 0.33830768, y: 0.6209631, z: -0.33847496, w: 0.6207958}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bras1Gauche
-      parentName: EpauleGauche
-      position: {x: -0.15554887, y: -0.0025709153, z: 0.000000024815089}
-      rotation: {x: -0.000042468313, y: -0.000040918592, z: -0.0036437067, w: 0.9999934}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bras2Gauche
-      parentName: Bras1Gauche
-      position: {x: -0.19236784, y: -0.0000015068053, z: 0.000000013639219}
-      rotation: {x: -0.000000002089959, y: -0.00000008775377, z: -0.09445032, w: 0.9955296}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bone012
-      parentName: Bras2Gauche
-      position: {x: -0.2281483, y: 0.000000019073486, z: 4.6566128e-12}
-      rotation: {x: -0.0000001562812, y: -1.1643857e-15, z: 0.000000007450581, w: 1}
-      scale: {x: 1, y: 1, z: 1}
     - name: EpauleDroite
       parentName: Torse
       position: {x: -0.15251033, y: 0.0168853, z: -0.14399998}
@@ -141,7 +146,7 @@ ModelImporter:
     - name: Bras1Droit
       parentName: EpauleDroite
       position: {x: -0.15554886, y: 0.0025709532, z: 0.000000076293944}
-      rotation: {x: 0.000004202127, y: -0.00000604242, z: 0.003813296, w: 0.9999927}
+      rotation: {x: -0.0000014120868, y: -0.0000018927161, z: 0.7149061, w: 0.6992205}
       scale: {x: 1, y: 1, z: 1}
     - name: Bras2Droit
       parentName: Bras1Droit
@@ -153,36 +158,31 @@ ModelImporter:
       position: {x: -0.2281483, y: 0.000000019073486, z: -0.000000014305114}
       rotation: {x: 4.156675e-13, y: 1.0658153e-13, z: 0.0000002756715, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: JambeGauche
-      parentName: Bassin
-      position: {x: 0.009266338, y: 0.009524712, z: 0.095324144}
-      rotation: {x: 0.032999095, y: -0.7085373, z: 0.70270723, w: -0.05557462}
+    - name: EpauleGauche
+      parentName: Torse
+      position: {x: -0.15251033, y: 0.016885318, z: 0.14416808}
+      rotation: {x: 0.33830768, y: 0.6209631, z: -0.33847496, w: 0.6207958}
       scale: {x: 1, y: 1, z: 1}
-    - name: PiedGauche
-      parentName: JambeGauche
-      position: {x: -0.16328363, y: 0.000000028610229, z: 0.0000000047683715}
-      rotation: {x: 0.0045868545, y: 0.18548904, z: 0.006543767, w: 0.98261386}
+    - name: Bras1Gauche
+      parentName: EpauleGauche
+      position: {x: -0.15554887, y: -0.0025709153, z: 0.000000024815089}
+      rotation: {x: -0.00000038241743, y: -0.000000041459025, z: -0.71490616, w: 0.6992204}
       scale: {x: 1, y: 1, z: 1}
-    - name: Bone015
-      parentName: PiedGauche
-      position: {x: -0.05643606, y: 0, z: -0.0000000047683715}
-      rotation: {x: 1.811884e-13, y: 0.000000014901161, z: 5.3290702e-14, w: 1}
+    - name: Bras2Gauche
+      parentName: Bras1Gauche
+      position: {x: -0.19236784, y: -0.0000015068053, z: 0.000000013639219}
+      rotation: {x: -0.000000002089959, y: -0.00000008775377, z: -0.09445032, w: 0.9955296}
       scale: {x: 1, y: 1, z: 1}
-    - name: JambeDroite
-      parentName: Bassin
-      position: {x: 0.009266338, y: 0.009524698, z: -0.09500001}
-      rotation: {x: -0.055574954, y: 0.7027073, z: -0.7085372, w: 0.03299962}
+    - name: Bone012
+      parentName: Bras2Gauche
+      position: {x: -0.2281483, y: 0.000000019073486, z: 4.6566128e-12}
+      rotation: {x: -0.0000001562812, y: -1.1643857e-15, z: 0.000000007450581, w: 1}
       scale: {x: 1, y: 1, z: 1}
-    - name: PiedDroit
-      parentName: JambeDroite
-      position: {x: -0.16328363, y: 0, z: 0.000000014305114}
-      rotation: {x: -0.0045856223, y: 0.18548909, z: -0.006542567, w: 0.9826139}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bone015(mirrored)
-      parentName: PiedDroit
-      position: {x: -0.056436043, y: -0.000000028610229, z: 0.000000007152557}
-      rotation: {x: -0.00000023841834, y: -0.00000008940691, z: -0.00000023841892, w: 1}
-      scale: {x: 1, y: 1, z: 1}
+    - name: Chara
+      parentName: TargetDummu_Tpose(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+      scale: {x: 0.491431, y: 0.491431, z: 0.491431}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
