@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class XL_Swarmers : XL_Enemy
 {
+    [SerializeField] private float attackRange;
+
     private void Update()
     {
         Move();
@@ -25,6 +27,10 @@ public class XL_Swarmers : XL_Enemy
         if (isAlerted) 
         {
             agent.destination = targetedPlayer.position;
+            if ((transform.position - targetedPlayer.position).magnitude < attackRange) 
+            {
+                Attack();
+            }
         }
             
     }
