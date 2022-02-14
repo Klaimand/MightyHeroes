@@ -20,11 +20,13 @@ public class RSL_DummyController : MonoBehaviour
     }
     void Update()
     {
-        ProcessAxis();    
+        ProcessAxis();
+
     }
 
     private void FixedUpdate()
     {
+
         rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
 
         if (rb.velocity == new Vector3(0, 0, 0))
