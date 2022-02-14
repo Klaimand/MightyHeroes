@@ -10,25 +10,28 @@ public class KLD_AimBehavior : ScriptableObject
 
     [SerializeField] List<WeightedWeight> weights = new List<WeightedWeight>();
 
-    float bestZombieScore = 0;
+    float bestZombieScore = -99999f;
     int bestZombieIndex = 0;
-    float curZombieScore = 0;
+    float curZombieScore = -99999f;
 
     public KLD_ZombieAttributes GetZombieToTarget(List<KLD_ZombieAttributes> _zombieAttributes, Transform _player)
     {
         if (_zombieAttributes.Count == 0) return null;
 
-        bestZombieScore = 0;
+        bestZombieScore = -99999f;
         bestZombieIndex = 0;
 
         for (int i = 0; i < _zombieAttributes.Count; i++) //for each zombie
         {
-            curZombieScore = 0;
+            curZombieScore = 0f;
 
             foreach (var weightedWeight in weights)
             {
-                curZombieScore +=
-                weightedWeight.weight.CalculateWeight(_zombieAttributes[i], _player) * weightedWeight.coef;
+                if (weightedWeight.weight != null)
+                {
+                    curZombieScore +=
+                    weightedWeight.weight.CalculateWeight(_zombieAttributes[i], _player) * weightedWeight.coef;
+                }
             }
 
             _zombieAttributes[i].score = curZombieScore;

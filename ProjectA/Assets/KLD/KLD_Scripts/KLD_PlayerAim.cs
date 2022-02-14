@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class KLD_PlayerAim : MonoBehaviour
 {
+    Rigidbody rb;
 
     [SerializeField] KLD_ZombieList zombieList;
     [SerializeField] Transform defaultTarget = null;
@@ -20,6 +21,11 @@ public class KLD_PlayerAim : MonoBehaviour
     Vector3 debugPosa = Vector3.zero;
     Vector3 debugPosb = Vector3.zero;
 
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +37,9 @@ public class KLD_PlayerAim : MonoBehaviour
     {
         selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), transform);
 
-        targetPos = selectedZombie != null ? selectedZombie.transform.position : defaultTarget.position;
-
+        targetPos = selectedZombie != null ?
+        selectedZombie.transform.position :
+        transform.position + rb.velocity;
 
         targetPos.y = transform.position.y;
         transform.LookAt(targetPos, Vector3.up);
