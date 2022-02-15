@@ -1851,12 +1851,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombieList: {fileID: 857304166}
   defaultTarget: {fileID: 1755229082}
+  isAiming: 1
+  inputAimVector: {x: 0, y: 0}
   selectedZombie:
     maxHealth: 100
     health: 100
     transform: {fileID: 0}
     score: 0
   aimBehavior: {fileID: 11400000, guid: c5de52ffc67e83043ae45c453a9e8dd9, type: 2}
+  playerAttributes:
+    transform: {fileID: 0}
+    worldAimDirection: {x: 0, y: 0}
 --- !u!1 &1093235989
 GameObject:
   m_ObjectHideFlags: 0
