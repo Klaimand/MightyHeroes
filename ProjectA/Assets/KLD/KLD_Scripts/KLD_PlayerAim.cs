@@ -15,11 +15,12 @@ public class KLD_PlayerAim : MonoBehaviour
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
     [SerializeField] KLD_AimBehavior aimBehavior;
 
-
     Vector3 targetPos = Vector3.zero;
 
     Vector3 debugPosa = Vector3.zero;
     Vector3 debugPosb = Vector3.zero;
+
+    KLD_PlayerAttributes playerAttributes;
 
     void Awake()
     {
@@ -29,13 +30,13 @@ public class KLD_PlayerAim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        InitPlayerAttributes();
     }
 
     // Update is called once per frame
     void Update()
     {
-        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), transform);
+        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
 
         targetPos = selectedZombie != null ?
         selectedZombie.transform.position :
@@ -55,4 +56,19 @@ public class KLD_PlayerAim : MonoBehaviour
         debugPosb.y = 1f;
         Debug.DrawLine(debugPosa, debugPosb, Color.red);
     }
+
+    void InitPlayerAttributes()
+    {
+        if (playerAttributes == null)
+        {
+            playerAttributes = new KLD_PlayerAttributes { transform = this.transform };
+        }
+    }
+}
+
+[System.Serializable]
+public class KLD_PlayerAttributes
+{
+    public Transform transform = null;
+    public Vector2 worldAimDirection = Vector2.zero;
 }

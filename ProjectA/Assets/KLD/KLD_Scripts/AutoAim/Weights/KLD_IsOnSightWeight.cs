@@ -15,9 +15,9 @@ public class KLD_IsOnSightWeight : KLD_AimWeight
     Vector3 playerPos = Vector3.zero;
     Vector3 zombiePos = Vector3.zero;
 
-    public override float CalculateWeight(KLD_ZombieAttributes _attributes, Transform _player)
+    public override float CalculateWeight(KLD_ZombieAttributes _attributes, KLD_PlayerAttributes _playerAttributes)
     {
-        playerPos = _player.position;
+        playerPos = _playerAttributes.transform.position;
         playerPos.y += heightOffset;
 
         zombiePos = _attributes.transform.position;
@@ -25,7 +25,7 @@ public class KLD_IsOnSightWeight : KLD_AimWeight
 
         RaycastHit hit;
 
-        if (drawRays) Debug.DrawRay(playerPos, zombiePos - playerPos, Color.blue);
+        if (drawRays) Debug.DrawRay(playerPos, zombiePos - playerPos, Color.blue); //this should not be there
 
         if (Physics.Raycast(playerPos, zombiePos - playerPos, out hit,
         Vector3.Distance(playerPos, zombiePos), sightBlockers))
