@@ -14,7 +14,7 @@ public class KLD_AimBehavior : ScriptableObject
     int bestZombieIndex = 0;
     float curZombieScore = -99999f;
 
-    public KLD_ZombieAttributes GetZombieToTarget(List<KLD_ZombieAttributes> _zombieAttributes, Transform _player)
+    public KLD_ZombieAttributes GetZombieToTarget(List<KLD_ZombieAttributes> _zombieAttributes, KLD_PlayerAttributes _playerAttributes)
     {
         if (_zombieAttributes.Count == 0) return null;
 
@@ -30,7 +30,7 @@ public class KLD_AimBehavior : ScriptableObject
                 if (weightedWeight.weight != null)
                 {
                     curZombieScore +=
-                    weightedWeight.weight.CalculateWeight(_zombieAttributes[i], _player) * weightedWeight.coef;
+                    weightedWeight.weight.CalculateWeight(_zombieAttributes[i], _playerAttributes) * weightedWeight.coef;
                 }
             }
 
