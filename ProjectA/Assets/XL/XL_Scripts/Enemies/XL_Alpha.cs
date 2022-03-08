@@ -6,6 +6,8 @@ public class XL_Alpha : XL_Enemy
 {
 
     [SerializeField] private float summonCooldown;
+    [SerializeField] private int nbEnemiesSummoned;
+    [SerializeField] private float summonDistance;
 
     public override void Alert()
     {
@@ -19,22 +21,17 @@ public class XL_Alpha : XL_Enemy
         throw new System.NotImplementedException();
     }
 
-    Vector2 summonPosition;
-
+    private Vector3 summonPosition;
+    private float angleOffset;
     IEnumerator SummonCoroutine(float t) 
     {
         yield return new WaitForSeconds(t);
 
-        for (int i = -1; i < 2; i++)
+        angleOffset = 360 / nbEnemiesSummoned;
+        for (int i = 0; i < nbEnemiesSummoned; i++) 
         {
-            for (int j = -1; j < 2; j++)
-            {
-                if (i != 0 && j != 0) 
-                {
-                    pooler.PopPosition("Swarmer",new Vector3(i*3, 0, j*3) + transform.position);
-                    Debug.Log("Swarmer Poped");
-                }
-            }
+            summonPosition = Quaternion.Euler(0, angleOffset * i, 0) * transform.forward * summonDistance;
+            pooler.PopPosition("Swarmer", summonPosition + transform.position);
         }
         StartCoroutine(SummonCoroutine(t));
     }
