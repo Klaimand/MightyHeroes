@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 901648824140653449}
   - component: {fileID: 901648824140653450}
   - component: {fileID: 901648824140653451}
+  - component: {fileID: 5654632644874525452}
   m_Layer: 0
   m_Name: Swarmer_parent
   m_TagString: Untagged
@@ -51,7 +52,12 @@ MonoBehaviour:
   agent: {fileID: 901648824140653451}
   pooler: {fileID: 0}
   healthBar: {fileID: 901648825244712254}
-  attackRange: 0
+  attackRange: 1.5
+  attackWidth: 0.5
+  layer:
+    serializedVersion: 2
+    m_Bits: 64
+  nbRaycast: 5
 --- !u!195 &901648824140653451
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -73,7 +79,20 @@ NavMeshAgent:
   m_Height: 0.78
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 2
+  m_ObstacleAvoidanceType: 0
+--- !u!65 &5654632644874525452
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901648824140653448}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.6, z: 1.5}
+  m_Center: {x: 0, y: 0.4, z: 0.5}
 --- !u!1 &901648824627477723
 GameObject:
   m_ObjectHideFlags: 0

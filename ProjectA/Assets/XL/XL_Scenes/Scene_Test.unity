@@ -174,9 +174,9 @@ GameObject:
   - component: {fileID: 303806380}
   - component: {fileID: 303806384}
   - component: {fileID: 303806385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -813,9 +813,9 @@ GameObject:
   - component: {fileID: 1028151718}
   - component: {fileID: 1028151717}
   - component: {fileID: 1028151716}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player (1)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -834,7 +834,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &1028151717
 MonoBehaviour:
@@ -921,7 +921,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028151715}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.69, y: 1.0804482, z: -0.85}
+  m_LocalPosition: {x: 5.05, y: 1.0804482, z: -1.17}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1025,9 +1025,9 @@ GameObject:
   - component: {fileID: 1332009462}
   - component: {fileID: 1332009461}
   - component: {fileID: 1332009460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player (2)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1133,7 +1133,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332009459}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.32, y: 1.0804482, z: -9.81}
+  m_LocalPosition: {x: -4.22, y: 1.0804482, z: -9.21}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1842,6 +1842,10 @@ PrefabInstance:
       propertyPath: agent
       value: 
       objectReference: {fileID: 1181335107}
+    - target: {fileID: 901648824140653451, guid: 1fb2b6b4002802d46be4aee8c72fed73, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1fb2b6b4002802d46be4aee8c72fed73, type: 3}
 --- !u!1001 &2467185498300096482

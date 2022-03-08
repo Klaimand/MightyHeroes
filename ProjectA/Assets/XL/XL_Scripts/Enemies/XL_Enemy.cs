@@ -35,6 +35,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Debug.Log("Initialized");
         health = attributes.maxHP;
         agent.speed = attributes.speed;
+        canAttack = true;
     }
 
     public abstract void Alert();
@@ -80,6 +81,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     {
         canAttack = false;
         yield return new WaitForSeconds(t);
+        agent.isStopped = false;
         canAttack = true;
     }
 
