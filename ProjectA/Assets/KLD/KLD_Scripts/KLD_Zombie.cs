@@ -55,7 +55,9 @@ public class KLD_Zombie : MonoBehaviour
 
     void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
+#endif
     }
 
     // Update is called once per frame
