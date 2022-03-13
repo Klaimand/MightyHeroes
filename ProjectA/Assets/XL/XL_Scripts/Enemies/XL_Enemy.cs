@@ -5,8 +5,7 @@ using UnityEngine.AI;
 
 public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 {
-
-    [SerializeField] protected XL_EnemyAttributesSO attributes;
+    [SerializeField] private KLD_ZombieAttributes attributes;
     protected float health;
 
     //ATTACK
@@ -16,6 +15,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [SerializeField] protected float targetedPlayerUpdateRate;
 
     [SerializeField] protected NavMeshAgent agent;
+    [SerializeField] protected float speed;
 
     [Header("Pooler")]
     [SerializeField] protected XL_Pooler pooler;
@@ -32,9 +32,9 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
     protected void Initialize()
     {
-        Debug.Log("Initialized");
-        health = attributes.maxHP;
-        agent.speed = attributes.speed;
+        //Debug.Log("Initialized");
+        health = attributes.maxHealth;
+        agent.speed = speed;
         canAttack = true;
     }
 
@@ -60,7 +60,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     private void FindNearestPlayer()
     {
         targetedPlayerIdx = 0;
-        Debug.Log("player 0 : " + XL_GameManager.instance.GetPlayers());
+        //Debug.Log("player 0 : " + XL_GameManager.instance.GetPlayers());
         targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude;    // distance between player 0 and the enemy
         
 
@@ -95,7 +95,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     {
         //"ZombieList" things here
 
-        attributes.maxHP = Random.Range(10, 101);
+        attributes.maxHealth = Random.Range(10, 101);
         UpdateHealthBar();
     }
 

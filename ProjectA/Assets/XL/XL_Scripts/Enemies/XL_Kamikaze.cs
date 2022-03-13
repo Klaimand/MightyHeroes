@@ -6,9 +6,8 @@ public class XL_Kamikaze : XL_Enemy
 {
     [SerializeField] protected MeshRenderer[] meshRenderers;
 
-    [SerializeField] protected GameObject explosionVFX; // GameObject for now, but might change
-    [SerializeField] protected GameObject[] playersInExplosionRange;
-    [SerializeField] protected float explosionDamage;
+    [SerializeField] protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
+    [SerializeField] protected int explosionDamage;
     [SerializeField] protected float explosionRange;
     [SerializeField] protected float detonationTime;
 
@@ -39,17 +38,16 @@ public class XL_Kamikaze : XL_Enemy
         {
             meshRenderers[i].enabled = false;
         }
-        explosionVFX.transform.position = transform.position; // Will change, just a "placeholder"
-        explosionVFX.SetActive(true);   // Will change, just a "placeholder"
 
         yield return new WaitForSeconds(t);
 
-        for (int i = 0; i < playersInExplosionRange.Length; i++)
+        foreach(XL_IDamageable objects in objectsInExplosionRange)
         {
-            Debug.Log("Player " + i + " is taking damage from explosion");
-            //playersInExplosionRange[i].TakeDamage(explosionDamage);
+            objects.TakeDamage(explosionDamage);
         }
-        //pooler.DePop("Kamikaze", transform.gameObject);
+
+    
+
     }
 
     public override void Move()
@@ -61,6 +59,28 @@ public class XL_Kamikaze : XL_Enemy
             {
                 Die();
             }
+        }
+    }
+
+    private XL_IDamageable damageableObject;
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name + " has entered explosion range");
+        damageableObject = other.transform.GetComponent<XL_IDamageable>();
+        if (damageableObject != null)
+        {
+            objectsInExplosionRange.Add(damageableObject);
+        }
+    }
+
+    
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log(other.name + " has exited explosion range");
+        damageableObject = other.transform.GetComponent<XL_IDamageable>();
+        if (objectsInExplosionRange.Contains(damageableObject))
+        {
+            objectsInExplosionRange.Remove(damageableObject);
         }
     }
 }
