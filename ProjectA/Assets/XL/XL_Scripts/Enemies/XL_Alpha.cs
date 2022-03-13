@@ -8,6 +8,8 @@ public class XL_Alpha : XL_Enemy
     [SerializeField] private float summonCooldown;
     [SerializeField] private int nbEnemiesSummoned;
     [SerializeField] private float summonDistance;
+    [SerializeField] private float projectilespeed;
+    [SerializeField] private float fireRate;
 
     public override void Alert()
     {
@@ -39,11 +41,27 @@ public class XL_Alpha : XL_Enemy
     public override void Die()
     {
         StopAllCoroutines();
-        throw new System.NotImplementedException();
+        XL_Pooler.instance.DePop("Alpha", transform.gameObject);
     }
 
     public override void Move()
     {
         throw new System.NotImplementedException();
+    }
+
+
+    private Vector3 shootDirection;
+    private GameObject projectile;
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.transform.CompareTag("Player") && canAttack)
+        {
+            //Debug.Log("Alpha is attacking");
+            StartCoroutine(AttackCooldownCoroutine(fireRate));
+            shootDirection = (other.transform.position - transform.position).normalized;
+            projectile = XL_Pooler.instance.PopPosition("AlphaProjectile", shootDirection + transform.position);
+            projectile.GetComponent<XL_Projectile>().Initialize();
+            projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
+        }
     }
 }

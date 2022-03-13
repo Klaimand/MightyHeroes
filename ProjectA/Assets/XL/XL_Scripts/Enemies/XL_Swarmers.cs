@@ -51,7 +51,7 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Attack()
     {
-        Debug.Log("Attacking");
+        //Debug.Log("Attacking");
         StartCoroutine(AttackCoroutine(1));
         StartCoroutine(AttackCooldownCoroutine(2));
     }
@@ -78,7 +78,7 @@ public class XL_Swarmers : XL_Enemy
                 if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject)) 
                 {
                     playersHit.Add(hits[j].transform.gameObject);
-                    Debug.Log("Player " + hits[j].transform.name + " has been damaged");
+                    //Debug.Log("Player " + hits[j].transform.name + " has been damaged");
                 }
             }
         }
