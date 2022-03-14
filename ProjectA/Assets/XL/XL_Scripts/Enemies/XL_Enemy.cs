@@ -8,7 +8,9 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [SerializeField] private KLD_ZombieAttributes attributes;
     protected float health;
 
+
     //ATTACK
+    [SerializeField] protected int damage;
     public bool isAlerted; // public for tests, set to protected after tests !
     protected bool canAttack;
     protected Transform targetedPlayer;
@@ -64,7 +66,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude;    // distance between player 0 and the enemy
         
 
-        for (int i = 1; i < XL_GameManager.instance.players.Length; i++)
+        for (int i = 1; i < XL_GameManager.instance.players.Count; i++)
         {
             nextTargetedPlayerDistance = (transform.position - XL_GameManager.instance.players[i].transform.position).magnitude;    // distance between player i and the enemy
             if (targetedPlayerDistance > nextTargetedPlayerDistance)

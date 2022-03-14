@@ -5,16 +5,22 @@ using UnityEngine;
 public class XL_GameManager : MonoBehaviour
 {
     public static XL_GameManager instance;
-    public GameObject[] players = new GameObject[3];
+    //public GameObject[] players = new GameObject[3];
+    public List<GameObject> players = new List<GameObject>();
 
     private void Awake()
     {
         instance = this;
     }
 
-    public GameObject[] GetPlayers() 
+    public void AddPlayer(GameObject player) 
     {
-        return players;
+        players.Add(player);
+    }
+
+    public void removePlayer(GameObject player) 
+    {
+        players.Remove(player);
     }
 
 }
