@@ -38,6 +38,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         health = attributes.maxHealth;
         agent.speed = speed;
         canAttack = true;
+        UpdateHealthBar();
     }
 
     public abstract void Alert();
@@ -90,6 +91,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     public void TakeDamage(int damage)
     {
         health -= damage;
+        UpdateHealthBar();
         if (health < 1) Die();
     }
 
@@ -98,7 +100,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         //"ZombieList" things here
 
         attributes.maxHealth = Random.Range(10, 101);
-        UpdateHealthBar();
+        Initialize();
     }
 
     void OnDisable()
