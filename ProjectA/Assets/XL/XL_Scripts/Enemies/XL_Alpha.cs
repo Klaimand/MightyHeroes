@@ -19,8 +19,9 @@ public class XL_Alpha : XL_Enemy
 
     public override void Attack()
     {
-        //Increase enemy spawns during waves
-        throw new System.NotImplementedException();
+        projectile = XL_Pooler.instance.PopPosition("AlphaProjectile", shootDirection + transform.position);
+        projectile.GetComponent<XL_Projectile>().Initialize();
+        projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
     }
 
     private Vector3 summonPosition;
@@ -41,6 +42,7 @@ public class XL_Alpha : XL_Enemy
     public override void Die()
     {
         StopAllCoroutines();
+        Debug.Log("Alpha has died");
         XL_Pooler.instance.DePop("Alpha", transform.gameObject);
     }
 
@@ -59,9 +61,7 @@ public class XL_Alpha : XL_Enemy
             //Debug.Log("Alpha is attacking");
             StartCoroutine(AttackCooldownCoroutine(fireRate));
             shootDirection = (other.transform.position - transform.position).normalized;
-            projectile = XL_Pooler.instance.PopPosition("AlphaProjectile", shootDirection + transform.position);
-            projectile.GetComponent<XL_Projectile>().Initialize();
-            projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
+            Attack();
         }
     }
 }

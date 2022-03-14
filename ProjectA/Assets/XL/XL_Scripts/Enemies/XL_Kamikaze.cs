@@ -29,6 +29,7 @@ public class XL_Kamikaze : XL_Enemy
 
     public override void Die()
     {
+        StopAllCoroutines();
         StartCoroutine(ExplosionCoroutine(detonationTime));
     }
 
@@ -52,7 +53,7 @@ public class XL_Kamikaze : XL_Enemy
 
     public override void Move()
     {
-        if (isAlerted)
+        if (isAlerted && targetedPlayer != null)
         {
             agent.destination = targetedPlayer.position;
             if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 0.5f)

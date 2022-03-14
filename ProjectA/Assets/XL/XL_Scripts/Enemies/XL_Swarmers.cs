@@ -26,7 +26,8 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Die()
     {
-        pooler.DePop("Swarmer", transform.gameObject);
+        XL_Pooler.instance.DePop("Swarmer", transform.gameObject);
+        StopAllCoroutines();
     }
 
     public override void Alert()
@@ -39,12 +40,15 @@ public class XL_Swarmers : XL_Enemy
     {
         if (isAlerted) 
         {
-            agent.destination = targetedPlayer.position;
-            if ((transform.position - targetedPlayer.position).magnitude < attackRange) 
+            if (targetedPlayer != null) 
             {
-                agent.isStopped = true;
-                if (canAttack) Attack();
-            }
+                agent.destination = targetedPlayer.position;
+                if ((transform.position - targetedPlayer.position).magnitude < attackRange)
+                {
+                    agent.isStopped = true;
+                    if (canAttack) Attack();
+                }
+            } 
         }
             
     }
@@ -77,8 +81,9 @@ public class XL_Swarmers : XL_Enemy
             {
                 if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject)) 
                 {
+                    //Debug.Log(transform.name + " damaged " + hits[j].transform.name);
                     playersHit.Add(hits[j].transform.gameObject);
-                    //Debug.Log("Player " + hits[j].transform.name + " has been damaged");
+                    if(hits[j].transform != null) hits[j].transform.GetComponent<XL_PlayerAttributes>().TakeDamage(damage);
                 }
             }
         }
