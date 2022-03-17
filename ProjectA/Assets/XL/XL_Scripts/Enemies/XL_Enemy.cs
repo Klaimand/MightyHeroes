@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -26,6 +27,8 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
     Vector3 scale = Vector3.one;
 
+    static GUIStyle gUIStyle;
+
     private void Start()
     {
         Initialize();
@@ -44,7 +47,12 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     public abstract void Alert();
     public abstract void Move();
     public abstract void Attack();
-    public abstract void Die();
+
+    public virtual void Die() 
+    {
+        Debug.Log("Remove enemy : " + this.name);
+        XL_GameManager.instance.RemoveEnemy(attributes);
+    }
 
 
     protected int targetedPlayerIdx = 0;
@@ -111,6 +119,8 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     void OnValidate()
     {
         UpdateHealthBar();
+
+        if (gUIStyle == null) SetupGUIStyle();
     }
 
     void UpdateHealthBar()
@@ -118,5 +128,30 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         scale.x = (health / 100f);
 
         healthBar.localScale = scale;
+    }
+
+    public KLD_ZombieAttributes GetZombieAttributes() 
+    {
+        return attributes;
+    }
+
+    void OnDrawGizmos()
+    {
+#if UNITY_EDITOR
+        Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
+#endif
+    }
+
+    [ContextMenu("Setup GUI Style")]
+    void SetupGUIStyle()
+    {
+        GUIStyle _gui = new GUIStyle();
+
+        _gui.normal.textColor = Color.white;
+        _gui.fontSize = 30;
+        _gui.alignment = TextAnchor.UpperCenter;
+
+
+        gUIStyle = _gui;
     }
 }

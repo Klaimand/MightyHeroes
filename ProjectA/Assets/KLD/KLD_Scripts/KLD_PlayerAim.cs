@@ -97,6 +97,11 @@ public class KLD_PlayerAim : MonoBehaviour
             playerAttributes.transform = transform;
         }
     }
+
+    public Vector3 GetTargetPos() 
+    {
+        return targetPos;
+    }
 }
 
 [System.Serializable]

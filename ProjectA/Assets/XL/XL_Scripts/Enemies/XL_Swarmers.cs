@@ -26,6 +26,7 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Die()
     {
+        base.Die();
         XL_Pooler.instance.DePop("Swarmer", transform.gameObject);
         StopAllCoroutines();
     }
@@ -83,7 +84,7 @@ public class XL_Swarmers : XL_Enemy
                 {
                     //Debug.Log(transform.name + " damaged " + hits[j].transform.name);
                     playersHit.Add(hits[j].transform.gameObject);
-                    if(hits[j].transform != null) hits[j].transform.GetComponent<XL_PlayerAttributes>().TakeDamage(damage);
+                    if(hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage);
                 }
             }
         }

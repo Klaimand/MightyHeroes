@@ -29,26 +29,10 @@ public class XL_Kamikaze : XL_Enemy
 
     public override void Die()
     {
+        base.Die();
         StopAllCoroutines();
-        StartCoroutine(ExplosionCoroutine(detonationTime));
-    }
-
-    IEnumerator ExplosionCoroutine(float t) 
-    {
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            meshRenderers[i].enabled = false;
-        }
-
-        yield return new WaitForSeconds(t);
-
-        foreach(XL_IDamageable objects in objectsInExplosionRange)
-        {
-            objects.TakeDamage(explosionDamage);
-        }
-
-    
-
+        XL_Pooler.instance.PopPosition("Explosion", transform.position).GetComponent<XL_Explosion>().StartExplosion(explosionDamage, explosionRange, detonationTime);
+        XL_Pooler.instance.DePop("Kamikaze", transform.gameObject);
     }
 
     public override void Move()
@@ -56,32 +40,14 @@ public class XL_Kamikaze : XL_Enemy
         if (isAlerted && targetedPlayer != null)
         {
             agent.destination = targetedPlayer.position;
+            if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 2)
+            {
+                agent.speed = speed * 2;
+            }
             if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 0.5f)
             {
                 Die();
             }
-        }
-    }
-
-    private XL_IDamageable damageableObject;
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log(other.name + " has entered explosion range");
-        damageableObject = other.transform.GetComponent<XL_IDamageable>();
-        if (damageableObject != null)
-        {
-            objectsInExplosionRange.Add(damageableObject);
-        }
-    }
-
-    
-    private void OnTriggerExit(Collider other)
-    {
-        Debug.Log(other.name + " has exited explosion range");
-        damageableObject = other.transform.GetComponent<XL_IDamageable>();
-        if (objectsInExplosionRange.Contains(damageableObject))
-        {
-            objectsInExplosionRange.Remove(damageableObject);
         }
     }
 }
