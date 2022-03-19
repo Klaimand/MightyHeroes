@@ -11,10 +11,17 @@ public class KLD_TouchInputs : MonoBehaviour
     class Joystick
     {
         public int padding = 100;
+        public Vector2 defaultOffset;
+        public bool offsetFromRightCorner = false;
+        public bool draggable = false;
+        public enum DragMode { DELTA, LERP };
+        [ShowIf("draggable")] public DragMode dragMode = DragMode.LERP;
+        [ShowIf("draggable")] public float dragRatio = 0.2f;
         public CanvasGroup canvasGroup;
         public RectTransform firstTouchCircle;
         public RectTransform touchCircle;
         public RectTransform stickCircle;
+        public Animator animator;
         [HideInInspector] public Vector2 rawPosition;
         [HideInInspector] public Vector2 rawVector;
         [HideInInspector] public Vector2 rawCappedVector;
@@ -53,6 +60,7 @@ public class KLD_TouchInputs : MonoBehaviour
     Touch curTouch;
     bool isLeftTouch;
     int joyIndex;
+    Vector2 offset;
 
     void UpdateInputs()
     {
@@ -71,23 +79,59 @@ public class KLD_TouchInputs : MonoBehaviour
                     if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
                     {
                         joysticks[joyIndex].rawPosition = curTouch.position;
-                        joysticks[joyIndex].firstTouchCircle.anchoredPosition = joysticks[joyIndex].rawPosition;
+                        joysticks[joyIndex].touchCircle.gameObject.SetActive(true);
                         joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
 
-                        joysticks[joyIndex].canvasGroup.alpha = 1f;
+                        if (joysticks[joyIndex].animator != null) joysticks[joyIndex].animator.SetTrigger("active");
+                        //joysticks[joyIndex].canvasGroup.alpha = 1f;
                     }
                 }
                 else if (curTouch.phase == TouchPhase.Moved)
                 {
                     joysticks[joyIndex].rawVector = curTouch.position - joysticks[joyIndex].rawPosition;
                     joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
+
+                    DoDrag();
+                }
+                else if (curTouch.phase == TouchPhase.Stationary)
+                {
+                    DoDrag();
                 }
                 else if (curTouch.phase == TouchPhase.Ended)
                 {
-                    joysticks[joyIndex].rawPosition = Vector2.zero;
+                    offset.x = (joysticks[joyIndex].offsetFromRightCorner ? width : 0) + joysticks[joyIndex].defaultOffset.x;
+                    offset.y = joysticks[joyIndex].defaultOffset.y;
+
+                    joysticks[joyIndex].rawPosition = offset;
                     joysticks[joyIndex].rawVector = Vector2.zero;
-                    joysticks[joyIndex].canvasGroup.alpha = 0f;
+                    if (joysticks[joyIndex].animator != null) joysticks[joyIndex].animator.SetTrigger("respawn");
+                    //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
+                    joysticks[joyIndex].touchCircle.gameObject.SetActive(false);
                 }
+
+                void DoDrag()
+                {
+                    if (joysticks[joyIndex].draggable)
+                    {
+                        switch (joysticks[joyIndex].dragMode)
+                        {
+                            case Joystick.DragMode.DELTA:
+                                joysticks[joyIndex].rawPosition += curTouch.deltaPosition * joysticks[joyIndex].dragRatio;
+                                break;
+
+                            case Joystick.DragMode.LERP:
+                                Vector2 targetPos = curTouch.position - (joysticks[joyIndex].rawCappedVector * 1.1f);
+                                joysticks[joyIndex].rawPosition =
+                                Vector2.Lerp(joysticks[joyIndex].rawPosition, targetPos, joysticks[joyIndex].dragRatio);
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
+                }
+
+                joysticks[joyIndex].firstTouchCircle.anchoredPosition = joysticks[joyIndex].rawPosition;
             }
         }
     }
@@ -105,6 +149,11 @@ public class KLD_TouchInputs : MonoBehaviour
 
             joysticks[i].normalizedVector = joysticks[i].rawCappedVector / joysticks[i].padding;
         }
+    }
+
+    public Vector2 GetJoystickNormalizedVector(int _joystickID)
+    {
+        return joysticks[_joystickID].normalizedVector;
     }
 
 }
