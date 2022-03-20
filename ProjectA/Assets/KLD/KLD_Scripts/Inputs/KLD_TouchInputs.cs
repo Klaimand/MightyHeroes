@@ -30,6 +30,10 @@ public class KLD_TouchInputs : MonoBehaviour
         [ReadOnly] public Vector2 normalizedVector;
     }
 
+    [SerializeField] bool useButtonForUltimate = false;
+    [SerializeField] GameObject ultiButton = null;
+    [SerializeField] GameObject ultiJoystick = null;
+
     [SerializeField] Joystick[] joysticks;
 
     [SerializeField] bool overrideScreenSize = false;
@@ -37,6 +41,8 @@ public class KLD_TouchInputs : MonoBehaviour
 
     int height;
     int width;
+
+    bool isPressingActiveSkillJoystick = false;
 
     public event Action onActiveSkillButton;
 
@@ -54,6 +60,7 @@ public class KLD_TouchInputs : MonoBehaviour
         }
 
         InitializeJoysticks();
+        InitializeActiveJoystickOrButton();
     }
 
     void InitializeJoysticks()
@@ -71,6 +78,12 @@ public class KLD_TouchInputs : MonoBehaviour
             //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
             joysticks[i].touchCircle.gameObject.SetActive(false);
         }
+    }
+
+    void InitializeActiveJoystickOrButton()
+    {
+        ultiButton.SetActive(useButtonForUltimate);
+        ultiJoystick.SetActive(!useButtonForUltimate);
     }
 
     void Update()
@@ -95,11 +108,14 @@ public class KLD_TouchInputs : MonoBehaviour
 
                 isLeftTouch = curTouch.position.x < width / 2;
 
-                joyIndex = isLeftTouch ? 0 : 2;
+                //joyIndex = isLeftTouch ? 0 : 2;
+                if (isLeftTouch) { joyIndex = 0; }
+                else if (!isPressingActiveSkillJoystick) { joyIndex = 1; }
+                else if (!useButtonForUltimate) { joyIndex = 2; }
 
                 if (curTouch.phase == TouchPhase.Began)
                 {
-                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId) || joyIndex == 2)
                     {
                         if (joysticks[joyIndex].floating)
                         {
@@ -140,6 +156,11 @@ public class KLD_TouchInputs : MonoBehaviour
                     { joysticks[joyIndex].animator.SetTrigger("respawn"); }
                     //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
                     joysticks[joyIndex].touchCircle.gameObject.SetActive(false);
+
+                    if (joyIndex == 2)
+                    {
+                        isPressingActiveSkillJoystick = false;
+                    }
                 }
 
                 void CalculateOffset()
@@ -185,6 +206,8 @@ public class KLD_TouchInputs : MonoBehaviour
     {
         for (int i = 0; i < joysticks.Length; i++)
         {
+            if (i == 2 && useButtonForUltimate) break;
+
             joysticks[i].rawCappedVector =
             joysticks[i].rawVector.sqrMagnitude > joysticks[i].padding * joysticks[i].padding ?
             joysticks[i].rawVector.normalized * joysticks[i].padding :
@@ -204,6 +227,11 @@ public class KLD_TouchInputs : MonoBehaviour
     public void PressActiveSkillButton()
     {
         onActiveSkillButton?.Invoke();
+    }
+
+    public void DetectActiveSkillJoystick()
+    {
+        isPressingActiveSkillJoystick = true;
     }
 
 

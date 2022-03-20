@@ -487,8 +487,8 @@ CanvasGroup:
   m_GameObject: {fileID: 278317316}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!1 &377575233
 GameObject:
@@ -968,6 +968,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b21d08fca9becc4d9a4d3471981642a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useButtonForUltimate: 1
+  ultiButton: {fileID: 1633193132}
+  ultiJoystick: {fileID: 278317316}
   joysticks:
   - floating: 1
     padding: 100
@@ -1222,6 +1225,7 @@ GameObject:
   - component: {fileID: 1182360369}
   - component: {fileID: 1182360371}
   - component: {fileID: 1182360370}
+  - component: {fileID: 1182360372}
   m_Layer: 5
   m_Name: U_FirstTouchCircle
   m_TagString: Untagged
@@ -1262,7 +1266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0.9353303, b: 0.8349056, a: 0.6039216}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1286,6 +1290,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182360368}
   m_CullTransparentMesh: 1
+--- !u!114 &1182360372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182360368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cd2971743937247803822fc1e1d4b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onPointerDown:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 787172959}
+        m_TargetAssemblyTypeName: KLD_TouchInputs, Assembly-CSharp
+        m_MethodName: DetectActiveSkillJoystick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1470885299
 GameObject:
   m_ObjectHideFlags: 0
