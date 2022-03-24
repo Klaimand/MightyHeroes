@@ -9,6 +9,7 @@ public class XL_Alpha : XL_Enemy
     [SerializeField] private int nbEnemiesSummoned;
     [SerializeField] private float summonDistance;
     [SerializeField] private float projectilespeed;
+    [SerializeField] private float projectileTravelTime;
     [SerializeField] private float fireRate;
 
     public override void Alert()
@@ -17,11 +18,25 @@ public class XL_Alpha : XL_Enemy
         isAlerted = true;
     }
 
+    private const float g = 9.81f; //gravity
+    private const float h = 0.5f; //starting height
+    private float distance; //shoot
+    private float[] velocity;
+
     public override void Attack()
     {
-        projectile = XL_Pooler.instance.PopPosition("AlphaProjectile", shootDirection + transform.position);
+        projectile = XL_Pooler.instance.PopPosition("AlphaProjectile", shootDirection.normalized + transform.position);
         projectile.GetComponent<XL_Projectile>().Initialize();
-        projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
+        //projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
+        velocity = XL_Utilities.GetVelocity(h, distance - 1, projectileTravelTime); //-1 because the projectile is shoot 1 meter in front of the enemy
+        Debug.Log("vy = " + velocity[1] + "\n" +
+            "vx = " + velocity[0] + "\n" +
+            "multiplier x = " + (shootDirection.x / distance) + "\n" +
+            "multiplier z = " + (shootDirection.z / distance) + "\n" +
+            "vxx = " + velocity[0] * (shootDirection.x / distance) + "\n" +
+            "vxz = " + velocity[0] * (shootDirection.z / distance) + "\n" +
+            "distance = " + distance);
+        projectile.GetComponent<Rigidbody>().velocity = new Vector3(velocity[0] * (shootDirection.x / distance), velocity[1], velocity[0] * (shootDirection.z / distance));
     }
 
     private Vector3 summonPosition;
@@ -61,7 +76,8 @@ public class XL_Alpha : XL_Enemy
         {
             //Debug.Log("Alpha is attacking");
             StartCoroutine(AttackCooldownCoroutine(fireRate));
-            shootDirection = (other.transform.position - transform.position).normalized;
+            shootDirection = (other.transform.position - transform.position);
+            distance = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z)).magnitude;
             Attack();
         }
     }

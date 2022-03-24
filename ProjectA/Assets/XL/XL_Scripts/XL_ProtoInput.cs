@@ -20,6 +20,10 @@ public class XL_ProtoInput : MonoBehaviour
         {
             character.Shoot();
         }
+        if (Input.GetButton("Fire2")) 
+        {
+            character.ActivateSpell(new Vector3(inputRight, 0, inputForward));
+        }
 
         character.Move((camera.right * inputRight + camera.forward * inputForward).normalized);
     }

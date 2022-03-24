@@ -6,7 +6,7 @@ public class XL_Explosion : MonoBehaviour
 {
     private float radius;
     private int damage;
-    protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
+    //protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
     private XL_IDamageable damageableObject;
 
     public void StartExplosion(int damage, float radius, float explosionTime)

@@ -12,14 +12,23 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     [SerializeField] protected float fireRate;
     private bool canFire;
 
+    [SerializeField] private XL_ISpells spell;
+    private float ultimateCharge;
+    [SerializeField] private float ultimateChargeTick;
+
+    [SerializeField] private float outOfCombatTime;
+    private float isOutOfCombat;
+
+    private void Awake()
+    {
+        characterAttributes.Initialize();
+    }
     private void Start()
     {
         canFire = true;
-    }
-
-    private void Update()
-    {
-        //Debug.Log("targetPos : " + playerAim.GetTargetPos());
+        ultimateCharge = 100;
+        spell = transform.GetComponent<XL_ISpells>();
+        StartCoroutine(OutOfCombatHealingCoroutine(1f));
     }
 
     public void Move(Vector3 direction)
@@ -33,11 +42,16 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (canFire) 
         {
+
             if (Physics.Raycast(transform.position, playerAim.GetTargetPos() - transform.position, out hit, 50/*, layer*/))
             {
                 StartCoroutine(FireRateCooldown(fireRate));
                 if ((target = hit.transform.GetComponent<XL_IDamageable>()) != null) target.TakeDamage(10);
             }
+
+            StopPassiveHeal();
+            CancelInvoke("RestorePassiveHeal");
+            Invoke("RestorePassiveHeal", restorePassiveHealDuration);
         }
     }
 
@@ -48,6 +62,33 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         canFire = true;
     }
 
+    public void ActivateSpell(Vector3 direction)
+    {
+        if (ultimateCharge == 100) 
+        {
+            ultimateCharge = 0;
+            StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
+            spell.ActivateSpell(direction);
+
+            StopPassiveHeal();
+            CancelInvoke("RestorePassiveHeal");
+            Invoke("RestorePassiveHeal", restorePassiveHealDuration);
+        }
+    }
+
+    IEnumerator SpellCooldownCoroutine(float t) 
+    {
+
+        yield return new WaitForSeconds(t);
+
+        ultimateCharge += characterAttributes.activeTick;
+        if (ultimateCharge < 100) 
+        {
+            StartCoroutine(SpellCooldownCoroutine(t));
+        }
+    }
+
+
     public void Die()
     {
         StopAllCoroutines();
@@ -55,12 +96,54 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         transform.gameObject.SetActive(false);
     }
 
+    [ContextMenu("Take 1 Damage")]
+    public void Take100Damage() { TakeDamage(100); }
+
     public void TakeDamage(int damage)
     {
+        if (damage > 0) // if it takes damage, then reduce the damage taken
+        {
+            if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
+        }
+
         characterAttributes.health -= damage;
+
         if (characterAttributes.health < 1)
         {
             Die();
+        }
+
+        if (characterAttributes.health > characterAttributes.healthMax) 
+        {
+            characterAttributes.health = characterAttributes.healthMax;
+        }
+        Debug.Log(gameObject.name + " : " + characterAttributes.health);
+
+        StopPassiveHeal();
+        CancelInvoke("RestorePassiveHeal");
+        Invoke("RestorePassiveHeal", restorePassiveHealDuration);
+    }
+
+    public bool passiveHealEnabled = true;
+    public float restorePassiveHealDuration = 5f;
+
+    private void RestorePassiveHeal()
+    {
+        passiveHealEnabled = true;
+    }
+
+    private void StopPassiveHeal()
+    {
+        passiveHealEnabled = false;
+    }
+
+    IEnumerator OutOfCombatHealingCoroutine(float t) 
+    {
+        while (true) 
+        {
+            yield return new WaitForSeconds(t);
+
+            if (passiveHealEnabled) TakeDamage(-characterAttributes.healingTick);
         }
     }
 }

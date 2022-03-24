@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class XL_CharacterAttributes
+public class XL_CharacterAttributes 
 {
     [Header("Base Values")]
     public int level;
+    public float healthMax;
     public float health;
     public float movementSpeed;
     public float armor;
-    public float healingTick;
+    public int healingTick;
     public float activeTick;
 
     [Header("Value growth per level : F = Flat / P = percentage")]
@@ -20,12 +21,13 @@ public class XL_CharacterAttributes
     [SerializeField] private float healingTickGrowthP;
     [SerializeField] private float[] activeTickGrowthF = new float[10];
 
-    private void Awake()
+    public void Initialize()
     {
-        health = health * Mathf.Pow(healthGrowthP, level);
+        healthMax = healthMax * Mathf.Pow(healthGrowthP, level);
+        health = healthMax;
         movementSpeed = movementSpeed + movementSpeedGrowthF * level;
         armor = armor + armorGrowthF * level;
-        healingTick = healingTick * Mathf.Pow(healingTickGrowthP, level);
+        healingTick = healingTick * (int)Mathf.Pow(healingTickGrowthP, level);
         activeTick = activeTickGrowthF[level];
     }
 }
