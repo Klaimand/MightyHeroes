@@ -5,6 +5,7 @@ using UnityEngine;
 public class XL_ProtoInput : MonoBehaviour
 {
     [SerializeField] private XL_Characters character;
+    [SerializeField] private KLD_TouchInputs inputs;
     [SerializeField] private Transform camera;
 
     private float inputRight;
@@ -13,6 +14,7 @@ public class XL_ProtoInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         inputRight = Input.GetAxisRaw("Horizontal");
         inputForward = Input.GetAxisRaw("Vertical");
 

@@ -92,7 +92,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     public void Die()
     {
         StopAllCoroutines();
-        XL_GameManager.instance.removePlayer(transform.gameObject);
+        XL_GameManager.instance.RemovePlayer(transform.gameObject);
         transform.gameObject.SetActive(false);
     }
 

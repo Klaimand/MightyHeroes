@@ -49,7 +49,7 @@ public class XL_Alpha : XL_Enemy
         for (int i = 0; i < nbEnemiesSummoned; i++) 
         {
             summonPosition = Quaternion.Euler(0, angleOffset * i, 0) * transform.forward * summonDistance;
-            XL_GameManager.instance.AddEnemy(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
+            XL_GameManager.instance.AddEnemyAttributes(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
         }
         StartCoroutine(SummonCoroutine(t));
     }

@@ -14,7 +14,7 @@ public class XL_PlayerAttributes : MonoBehaviour, XL_IDamageable
 
     public void Die()
     {
-        XL_GameManager.instance.removePlayer(transform.gameObject);
+        XL_GameManager.instance.RemovePlayer(transform.gameObject);
         transform.gameObject.SetActive(false);
     }
 

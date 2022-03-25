@@ -16,7 +16,7 @@ public class XL_EnemySpawner : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         
-        XL_GameManager.instance.AddEnemy(XL_Pooler.instance.PopPosition(enemyName, transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
+        XL_GameManager.instance.AddEnemy(XL_Pooler.instance.PopPosition(enemyName, transform.position).GetComponent<XL_Enemy>());
         StartCoroutine(SpawnCoroutine(t));
     }
 }
