@@ -113,6 +113,7 @@ public class KLD_TouchInputs : MonoBehaviour
                 if (isLeftTouch) { joyIndex = 0; }
                 else if (!isPressingActiveSkillJoystick) { joyIndex = 1; }
                 else if (!useButtonForUltimate) { joyIndex = 2; }
+                else { }//AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 
                 if (curTouch.phase == TouchPhase.Began)
                 {
