@@ -13,6 +13,7 @@ public class KLD_TouchInputs : MonoBehaviour
     {
         public bool floating = true;
         public int padding = 100;
+        public int deadzone = 30;
         public Vector2 defaultOffset;
         public bool offsetFromRightCorner = false;
         public bool draggable = false;
@@ -113,7 +114,6 @@ public class KLD_TouchInputs : MonoBehaviour
                 if (isLeftTouch) { joyIndex = 0; }
                 else if (!isPressingActiveSkillJoystick) { joyIndex = 1; }
                 else if (!useButtonForUltimate) { joyIndex = 2; }
-                else { }//AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
 
                 if (curTouch.phase == TouchPhase.Began)
                 {
@@ -140,9 +140,12 @@ public class KLD_TouchInputs : MonoBehaviour
                 }
                 else if (curTouch.phase == TouchPhase.Moved)
                 {
-                    DoRawVectorCalculation();
+                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    {
+                        DoRawVectorCalculation();
 
-                    DoDrag();
+                        DoDrag();
+                    }
                 }
                 else if (curTouch.phase == TouchPhase.Stationary)
                 {
@@ -175,6 +178,12 @@ public class KLD_TouchInputs : MonoBehaviour
                 void DoRawVectorCalculation()
                 {
                     joysticks[joyIndex].rawVector = curTouch.position - joysticks[joyIndex].rawPosition;
+
+                    if (joysticks[joyIndex].rawVector.magnitude < joysticks[joyIndex].deadzone)
+                    {
+                        joysticks[joyIndex].rawVector = Vector2.zero;
+                    }
+
                     joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
                 }
 
@@ -215,6 +224,11 @@ public class KLD_TouchInputs : MonoBehaviour
             joysticks[i].rawVector.sqrMagnitude > joysticks[i].padding * joysticks[i].padding ?
             joysticks[i].rawVector.normalized * joysticks[i].padding :
             joysticks[i].rawVector;
+
+            //if (joysticks[i].rawCappedVector.magnitude < joysticks[i].deadzone)
+            //{
+            //    joysticks[i].rawCappedVector = Vector2.zero;
+            //}
 
             joysticks[i].stickCircle.anchoredPosition = joysticks[i].rawPosition + joysticks[i].rawCappedVector;
 
