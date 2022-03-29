@@ -45,6 +45,7 @@ public class KLD_TouchInputs : MonoBehaviour
     bool isPressingActiveSkillJoystick = false;
 
     public event Action onActiveSkillButton;
+    public event Action<Vector2> onActiveSkillJoystickRelease;
 
     void Start()
     {
@@ -160,6 +161,7 @@ public class KLD_TouchInputs : MonoBehaviour
                     if (joyIndex == 2)
                     {
                         isPressingActiveSkillJoystick = false;
+                        ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                     }
                 }
 
@@ -232,6 +234,11 @@ public class KLD_TouchInputs : MonoBehaviour
     public void DetectActiveSkillJoystick()
     {
         isPressingActiveSkillJoystick = true;
+    }
+
+    void ReleaseActiveSkillJoystick(Vector2 _input)
+    {
+        onActiveSkillJoystickRelease?.Invoke(_input);
     }
 
 
