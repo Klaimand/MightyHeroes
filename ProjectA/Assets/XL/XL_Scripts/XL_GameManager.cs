@@ -36,6 +36,11 @@ public class XL_GameManager : MonoBehaviour
         Debug.Log("Game Lost !");
     }
 
+    IEnumerator ChangeSceneCoroutine(float t)
+    {
+        yield return new WaitForSeconds(1);
+    }
+
     public void AddPlayer(GameObject player) 
     {
         players.Add(player);
@@ -44,6 +49,7 @@ public class XL_GameManager : MonoBehaviour
     public void RemovePlayer(GameObject player) 
     {
         players.Remove(player);
+        if (players.Count < 1) LoseGame();
     }
 
     public void AddEnemy(XL_Enemy enemy) 
