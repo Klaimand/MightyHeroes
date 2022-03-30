@@ -54,7 +54,6 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         XL_GameManager.instance.RemoveEnemyAttributes(attributes);
     }
 
-
     protected int targetedPlayerIdx = 0;
     protected float targetedPlayerDistance = 0;
     protected float nextTargetedPlayerDistance = 0;
@@ -68,24 +67,32 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         StartCoroutine(FindTargetedPlayerCoroutine(targetedPlayerUpdateRate));
     }
 
+
+    private int i;
     private void FindNearestPlayer()
     {
-        targetedPlayerIdx = 0;
-        //Debug.Log("player 0 : " + XL_GameManager.instance.GetPlayers());
-        targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude;    // distance between player 0 and the enemy
-        
 
-        for (int i = 1; i < XL_GameManager.instance.players.Count; i++)
+
+        targetedPlayerIdx = 0;
+        i = 0;
+        targetedPlayerDistance = 100000;
+
+        while (i < XL_GameManager.instance.players.Count)
         {
-            nextTargetedPlayerDistance = (transform.position - XL_GameManager.instance.players[i].transform.position).magnitude;    // distance between player i and the enemy
-            if (targetedPlayerDistance > nextTargetedPlayerDistance)
+            if (i > 0)
             {
-                targetedPlayerIdx = i;
-                targetedPlayerDistance = nextTargetedPlayerDistance;
-            }
+                nextTargetedPlayerDistance = (transform.position - XL_GameManager.instance.players[i].transform.position).magnitude;    // distance between player i and the enemy
+                if (targetedPlayerDistance > nextTargetedPlayerDistance)
+                {
+                    targetedPlayerIdx = i;
+                    targetedPlayerDistance = nextTargetedPlayerDistance;
+                }
+            } else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
+
+            i++;
         }
 
-        targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
+        if(i > 0) targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
     }
 
     protected IEnumerator AttackCooldownCoroutine(float t) 
