@@ -5,6 +5,8 @@ using Sirenix.OdinInspector;
 
 public class KLD_PlayerAim : MonoBehaviour
 {
+    [SerializeField] KLD_TouchInputs inputs;
+
     Rigidbody rb;
 
     [SerializeField] KLD_ZombieList zombieList;
@@ -47,6 +49,8 @@ public class KLD_PlayerAim : MonoBehaviour
         //Aim();
 
         selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
+
+
 
         targetPos = selectedZombie != null ?
         selectedZombie.transform.position :

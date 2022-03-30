@@ -28,6 +28,7 @@ public class KLD_TouchInputs : MonoBehaviour
         [HideInInspector] public Vector2 rawPosition;
         [HideInInspector] public Vector2 rawVector;
         [HideInInspector] public Vector2 rawCappedVector;
+        [HideInInspector] public bool drawed = false;
         [ReadOnly] public Vector2 normalizedVector;
     }
 
@@ -79,6 +80,7 @@ public class KLD_TouchInputs : MonoBehaviour
             { joysticks[i].animator.SetTrigger("active"); }
             //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
             joysticks[i].touchCircle.gameObject.SetActive(false);
+            joysticks[i].drawed = !joysticks[i].floating;
         }
     }
 
@@ -122,6 +124,7 @@ public class KLD_TouchInputs : MonoBehaviour
                         if (joysticks[joyIndex].floating)
                         {
                             joysticks[joyIndex].rawPosition = curTouch.position;
+                            joysticks[joyIndex].drawed = true;
                         }
                         else
                         {
@@ -161,6 +164,11 @@ public class KLD_TouchInputs : MonoBehaviour
                     { joysticks[joyIndex].animator.SetTrigger("respawn"); }
                     //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
                     joysticks[joyIndex].touchCircle.gameObject.SetActive(false);
+
+                    if (joysticks[joyIndex].floating)
+                    {
+                        joysticks[joyIndex].drawed = false;
+                    }
 
                     if (joyIndex == 2)
                     {
@@ -239,6 +247,11 @@ public class KLD_TouchInputs : MonoBehaviour
     public Vector2 GetJoystickNormalizedVector(int _joystickID)
     {
         return joysticks[_joystickID].normalizedVector;
+    }
+
+    public bool IsJoystickPressed(int _joystickID)
+    {
+        return joysticks[_joystickID].drawed;
     }
 
     public void PressActiveSkillButton()
