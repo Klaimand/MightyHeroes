@@ -23,6 +23,10 @@ public class KLD_PlayerController : MonoBehaviour
     //[SerializeField] float timedAxisZeroingDeadzone = 0.05f;
     float timedMagnitude = 0f;
 
+    [SerializeField, Header("Animation")] Animator animator;
+    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING };
+    LocomotionState locomotionState = LocomotionState.IDLE;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -39,6 +43,8 @@ public class KLD_PlayerController : MonoBehaviour
 
         //rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
         rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed;
+
+        AnimateLocomotionState();
     }
 
     void ProcessAxis()
@@ -57,5 +63,19 @@ public class KLD_PlayerController : MonoBehaviour
         timedAxis = rawAxis != Vector2.zero ?
          rawAxis.normalized * timedMagnitude :
          timedAxis.normalized * timedMagnitude;
+    }
+
+    void AnimateLocomotionState()
+    {
+        if (timedAxis == Vector2.zero)
+        {
+            locomotionState = LocomotionState.IDLE;
+        }
+        else if (timedAxis != Vector2.zero)
+        {
+            locomotionState = LocomotionState.RUNNING;
+        }
+
+        animator.SetInteger("locomotionState", (int)locomotionState);
     }
 }

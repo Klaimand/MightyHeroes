@@ -20,6 +20,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
 
 
+
     [SerializeField, ReadOnly] KLD_ZombieAttributes selectedZombie = null;
 
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
@@ -46,23 +47,17 @@ public class KLD_PlayerAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Aim();
+        isAiming = inputs.IsJoystickPressed(1);
+        inputAimVector = inputs.GetJoystickNormalizedVector(1);
 
-        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
+        ProcessPlayerAttributeAimVector();
 
-
-
-        targetPos = selectedZombie != null ?
-        selectedZombie.transform.position :
-        transform.position + rb.velocity;
-
-        targetPos.y = transform.position.y;
-        transform.LookAt(targetPos, Vector3.up);
+        DoAim();
 
         DrawSelectedLine();
     }
 
-    void Aim()
+    void ProcessPlayerAttributeAimVector()
     {
         if (isAiming && inputAimVector.sqrMagnitude > 0.05f)
         {
@@ -79,6 +74,31 @@ public class KLD_PlayerAim : MonoBehaviour
 
         playerAttributes.worldAimDirection.x = inputAimVector3.x;
         playerAttributes.worldAimDirection.y = inputAimVector3.z;
+    }
+
+    void DoAim()
+    {
+        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
+
+        //targetPos = selectedZombie != null && isAiming ?
+        //selectedZombie.transform.position :
+        //transform.position + rb.velocity;
+
+        if (selectedZombie != null && isAiming)
+        {
+            targetPos = selectedZombie.transform.position;
+        }
+        else if (rb.velocity.sqrMagnitude > 0.1f)
+        {
+            targetPos = transform.position + rb.velocity;
+        }
+        else
+        {
+            targetPos = transform.position + transform.forward;
+        }
+
+        targetPos.y = transform.position.y;
+        transform.LookAt(targetPos, Vector3.up);
     }
 
     void DrawSelectedLine()
