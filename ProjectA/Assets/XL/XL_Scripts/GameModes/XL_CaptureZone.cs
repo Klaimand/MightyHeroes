@@ -5,6 +5,8 @@ using UnityEngine;
 public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 {
     [SerializeField] private XL_GameManager manager;
+    [SerializeField] private XL_UICaptureZone ui;
+
     [SerializeField] private float tickTime;
     private int capturePercentage;
 
@@ -36,6 +38,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         while (true) 
         {
             capturePercentage += playersInside.Count;
+            ui.UpdateUI(capturePercentage);
             Debug.Log("Capture percentage : " + capturePercentage);
             yield return new WaitForSeconds(t);
         }
