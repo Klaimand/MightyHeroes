@@ -1587,6 +1587,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blast_Character
       objectReference: {fileID: 0}
+    - target: {fileID: 1246526016468759002, guid: 647b5bd25f71f0548aeeec0097778b74, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1246526016468759004, guid: 647b5bd25f71f0548aeeec0097778b74, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1943,9 +1947,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputs: {fileID: 1907775921}
   animator: {fileID: 1039294903}
+  controller: {fileID: 1090355173}
   zombieList: {fileID: 857304166}
   defaultTarget: {fileID: 1755229082}
-  isAiming: 0
+  isPressingAimJoystick: 0
   inputAimVector: {x: 0, y: 0}
   selectedZombie:
     maxHealth: 100
@@ -1955,7 +1960,9 @@ MonoBehaviour:
   aimBehavior: {fileID: 11400000, guid: c5de52ffc67e83043ae45c453a9e8dd9, type: 2}
   playerAttributes:
     transform: {fileID: 0}
-    worldAimDirection: {x: 0, y: 0}
+    worldAimDirection: {x: 0, y: 0, z: 0}
+  isReloading: 0
+  isShooting: 0
 --- !u!1 &1093235989
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ public class KLD_IsInAimAngleWeight : KLD_AimWeight
 
     Vector3 playerToZombie = Vector3.zero;
 
-    Vector2 flatPlayerToZombie = Vector2.zero;
+    //Vector2 flatPlayerToZombie = Vector2.zero;
 
     [SerializeField] float maxAngle = 25f;
 
@@ -23,14 +23,17 @@ public class KLD_IsInAimAngleWeight : KLD_AimWeight
     public override float CalculateWeight(KLD_ZombieAttributes _attributes, KLD_PlayerAttributes _playerAttributes)
     {
         playerToZombie = _attributes.transform.position - _playerAttributes.transform.position;
+        playerToZombie.y = 0f;
 
-        flatPlayerToZombie.x = playerToZombie.x;
-        flatPlayerToZombie.y = playerToZombie.z;
+        //flatPlayerToZombie.x = playerToZombie.x;
+        //flatPlayerToZombie.y = playerToZombie.z;
 
         if (drawRays) //this should not be there bc it does it for each zombie (not opti)
         {
-            ray1 = _playerAttributes.transform.forward;
-            ray2 = _playerAttributes.transform.forward;
+            //ray1 = _playerAttributes.transform.forward;
+            //ray2 = _playerAttributes.transform.forward;
+            ray1 = _playerAttributes.worldAimDirection;
+            ray2 = _playerAttributes.worldAimDirection;
 
             ray1 = Quaternion.Euler(0f, maxAngle, 0f) * ray1;
             ray2 = Quaternion.Euler(0f, -maxAngle, 0f) * ray2;
@@ -42,11 +45,22 @@ public class KLD_IsInAimAngleWeight : KLD_AimWeight
             Debug.DrawRay(_playerAttributes.transform.position + Vector3.up, ray2, Color.green);
         }
 
-        if (_attributes.transform.gameObject.name == "Zombie") Debug.Log(Vector2.Angle(_playerAttributes.worldAimDirection, flatPlayerToZombie));
+        //if (_attributes.transform.gameObject.name == "Zombie") Debug.Log(Vector2.Angle(_playerAttributes.worldAimDirection, flatPlayerToZombie));
 
-        return
-        Vector2.Angle(_playerAttributes.worldAimDirection, flatPlayerToZombie) < maxAngle ?
-        inAngleScore :
-        outOfAngleScore;
+        //return
+        //Vector3.Angle(_playerAttributes.worldAimDirection, playerToZombie) < maxAngle ?
+        //inAngleScore :
+        //outOfAngleScore;
+
+        if (Vector3.Angle(_playerAttributes.worldAimDirection, playerToZombie) < maxAngle)
+        {
+            return inAngleScore;
+        }
+        else
+        {
+            return outOfAngleScore;
+        }
+
+        //return 0f;
     }
 }

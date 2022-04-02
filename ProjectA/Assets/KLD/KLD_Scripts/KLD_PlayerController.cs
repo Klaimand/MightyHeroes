@@ -14,7 +14,7 @@ public class KLD_PlayerController : MonoBehaviour
     [SerializeField, ReadOnly] Vector2 timedAxis = Vector2.zero;
 
     //controller
-    [SerializeField] Transform refTransform = null;
+    public Transform refTransform = null;
     [SerializeField] float speed = 10f;
     [SerializeField] float axisDeadzone = 0.1f;
 

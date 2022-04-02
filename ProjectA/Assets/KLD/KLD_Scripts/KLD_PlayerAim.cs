@@ -7,6 +7,7 @@ public class KLD_PlayerAim : MonoBehaviour
 {
     [SerializeField] KLD_TouchInputs inputs;
     [SerializeField] Animator animator;
+    [SerializeField] KLD_PlayerController controller;
 
     Rigidbody rb;
 
@@ -71,7 +72,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
         DrawSelectedLine();
 
-        isShooting = isPressingAimJoystick;
+        isShooting = isPressingAimJoystick && selectedZombie != null;
         AnimateWeaponState();
     }
 
@@ -83,15 +84,18 @@ public class KLD_PlayerAim : MonoBehaviour
             inputAimVector3.y = 0f;
             inputAimVector3.z = inputAimVector.y;
 
-            inputAimVector3 = playerAttributes.transform.rotation * inputAimVector3;
+            inputAimVector3 = controller.refTransform.transform.rotation * inputAimVector3;
         }
         else
         {
-            inputAimVector3 = playerAttributes.transform.forward;
+            inputAimVector3 = controller.refTransform.forward;
         }
 
-        playerAttributes.worldAimDirection.x = inputAimVector3.x;
-        playerAttributes.worldAimDirection.y = inputAimVector3.z;
+        //playerAttributes.worldAimDirection.x = inputAimVector3.x;
+        //playerAttributes.worldAimDirection.y = inputAimVector3.z;
+        playerAttributes.worldAimDirection = inputAimVector3;
+
+        Debug.DrawRay(transform.position, inputAimVector3, Color.magenta);
     }
 
     void DoAim()
@@ -166,5 +170,5 @@ public class KLD_PlayerAim : MonoBehaviour
 public class KLD_PlayerAttributes
 {
     public Transform transform = null;
-    public Vector2 worldAimDirection = Vector2.zero;
+    public Vector3 worldAimDirection = Vector3.zero;
 }
