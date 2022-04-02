@@ -5,16 +5,20 @@ using Sirenix.OdinInspector;
 
 public class KLD_PlayerAim : MonoBehaviour
 {
+    [SerializeField] KLD_TouchInputs inputs;
+    [SerializeField] Animator animator;
+
     Rigidbody rb;
 
     [SerializeField] KLD_ZombieList zombieList;
     [SerializeField] Transform defaultTarget = null;
 
 
-    [SerializeField] bool isAiming = false;
+    [SerializeField] bool isPressingAimJoystick = false;
     [SerializeField, ReadOnly] Vector2 inputAimVector = Vector2.zero;
     Vector3 inputAimVector3 = Vector3.zero;
     Vector3 worldAimVector3 = Vector3.zero;
+
 
 
 
@@ -30,6 +34,20 @@ public class KLD_PlayerAim : MonoBehaviour
 
     [SerializeField, ReadOnly] KLD_PlayerAttributes playerAttributes;
 
+    //shooting
+    [HideInInspector] public bool isReloading;
+    [HideInInspector] public bool isShooting;
+
+    //animation
+    enum WeaponState
+    {
+        HOLD,
+        AIMING,
+        SHOOTING,
+        RELOADING
+    }
+    WeaponState weaponState = WeaponState.HOLD;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -44,23 +62,22 @@ public class KLD_PlayerAim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Aim();
+        isPressingAimJoystick = inputs.IsJoystickPressed(1);
+        inputAimVector = inputs.GetJoystickNormalizedVector(1);
 
-        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
+        ProcessPlayerAttributeAimVector();
 
-        targetPos = selectedZombie != null ?
-        selectedZombie.transform.position :
-        transform.position + rb.velocity;
-
-        targetPos.y = transform.position.y;
-        transform.LookAt(targetPos, Vector3.up);
+        DoAim();
 
         DrawSelectedLine();
+
+        isShooting = isPressingAimJoystick;
+        AnimateWeaponState();
     }
 
-    void Aim()
+    void ProcessPlayerAttributeAimVector()
     {
-        if (isAiming && inputAimVector.sqrMagnitude > 0.05f)
+        if (isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.05f)
         {
             inputAimVector3.x = inputAimVector.x;
             inputAimVector3.y = 0f;
@@ -75,6 +92,31 @@ public class KLD_PlayerAim : MonoBehaviour
 
         playerAttributes.worldAimDirection.x = inputAimVector3.x;
         playerAttributes.worldAimDirection.y = inputAimVector3.z;
+    }
+
+    void DoAim()
+    {
+        selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
+
+        //targetPos = selectedZombie != null && isPressingAimJoystick ?
+        //selectedZombie.transform.position :
+        //transform.position + rb.velocity;
+
+        if (selectedZombie != null && isPressingAimJoystick)
+        {
+            targetPos = selectedZombie.transform.position;
+        }
+        else if (rb.velocity.sqrMagnitude > 0.1f)
+        {
+            targetPos = transform.position + rb.velocity;
+        }
+        else
+        {
+            targetPos = transform.position + transform.forward;
+        }
+
+        targetPos.y = transform.position.y;
+        transform.LookAt(targetPos, Vector3.up);
     }
 
     void DrawSelectedLine()
@@ -98,9 +140,25 @@ public class KLD_PlayerAim : MonoBehaviour
         }
     }
 
-    public Vector3 GetTargetPos() 
+    void AnimateWeaponState()
     {
-        return targetPos;
+        if (isReloading)
+        {
+            weaponState = WeaponState.RELOADING;
+        }
+        else if (!isPressingAimJoystick)
+        {
+            weaponState = WeaponState.HOLD;
+        }
+        else if (!isShooting)
+        {
+            weaponState = WeaponState.AIMING;
+        }
+        else
+        {
+            weaponState = WeaponState.SHOOTING;
+        }
+        animator.SetInteger("weaponState", (int)weaponState);
     }
 }
 
