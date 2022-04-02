@@ -37,7 +37,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon_AR15_Reload
+  m_Name: (3) Weapon_AR15_Reload
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -117,7 +117,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon_Hold
+  m_Name: (0) Weapon_Hold
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -332,7 +332,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon_AR15_ShootingAnim
+  m_Name: (2) Weapon_AR15_ShootingAnim
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -459,6 +459,12 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: weaponState
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: LocomotionLayer
@@ -528,7 +534,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Weapon_Aiming
+  m_Name: (1) Weapon_Aiming
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
