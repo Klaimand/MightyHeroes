@@ -27,6 +27,8 @@ public class KLD_PlayerController : MonoBehaviour
     enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING };
     LocomotionState locomotionState = LocomotionState.IDLE;
 
+    Vector3 worldLookAtPos = Vector3.zero;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,6 +45,11 @@ public class KLD_PlayerController : MonoBehaviour
 
         //rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
         rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed;
+
+        worldLookAtPos = rb.velocity;
+        worldLookAtPos.y = 0f;
+        worldLookAtPos.Normalize();
+        //transform.LookAt(transform.position + worldLookAtPos);
 
         AnimateLocomotionState();
     }

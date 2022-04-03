@@ -12,8 +12,11 @@ public class KLD_PlayerAim : MonoBehaviour
     Rigidbody rb;
 
     [SerializeField] KLD_ZombieList zombieList;
-    [SerializeField] Transform defaultTarget = null;
+    [SerializeField] Transform targetPosTransform = null;
 
+    //offsets
+    [SerializeField] float targetPosAngleOffset = 0f;
+    Vector3 playerToTargetPos = Vector3.zero;
 
     [SerializeField] bool isPressingAimJoystick = false;
     [SerializeField, ReadOnly] Vector2 inputAimVector = Vector2.zero;
@@ -73,6 +76,7 @@ public class KLD_PlayerAim : MonoBehaviour
         DrawSelectedLine();
 
         isShooting = isPressingAimJoystick && selectedZombie != null;
+
         AnimateWeaponState();
     }
 
@@ -126,7 +130,24 @@ public class KLD_PlayerAim : MonoBehaviour
         }
 
         targetPos.y = transform.position.y;
+
+        playerToTargetPos = (targetPos - transform.position);
+
+        playerToTargetPos = Quaternion.Euler(0f, targetPosAngleOffset, 0f) * playerToTargetPos;
+
+        Debug.DrawRay(transform.position, playerToTargetPos, Color.yellow);
+
+        targetPosTransform.position = transform.position + playerToTargetPos;
+
+        /*right = Vector3.Cross(Vector3.up, playerToTargetPos).normalized;
+
+        targetPosGlobalOffset = right * targetPosLocalOffset.x + playerToTargetPos * targetPosLocalOffset.z;
+        targetPosGlobalOffset.y = targetPosLocalOffset.y;
+
+        targetPosTransform.position = targetPos + targetPosGlobalOffset;*/
         transform.LookAt(targetPos, Vector3.up);
+
+
     }
 
     void DrawSelectedLine()
