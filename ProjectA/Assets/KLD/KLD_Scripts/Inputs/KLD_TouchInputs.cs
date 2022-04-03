@@ -32,6 +32,8 @@ public class KLD_TouchInputs : MonoBehaviour
         [ReadOnly] public Vector2 normalizedVector;
     }
 
+    [SerializeField] bool useDebugControls = false;
+
     [SerializeField] bool useButtonForUltimate = false;
     [SerializeField] GameObject ultiButton = null;
     [SerializeField] GameObject ultiJoystick = null;
@@ -246,12 +248,44 @@ public class KLD_TouchInputs : MonoBehaviour
 
     public Vector2 GetJoystickNormalizedVector(int _joystickID)
     {
-        return joysticks[_joystickID].normalizedVector;
+        if (!useDebugControls)
+        {
+            return joysticks[_joystickID].normalizedVector;
+        }
+        else
+        {
+            if (_joystickID == 0)
+            {
+                return GetDebugMoveVector();
+            }
+            else if (_joystickID == 1)
+            {
+                return GetDebugAimVector();
+            }
+            else
+            {
+                return Vector2.zero;
+            }
+        }
     }
 
     public bool IsJoystickPressed(int _joystickID)
     {
-        return joysticks[_joystickID].drawed;
+        if (!useDebugControls)
+        {
+            return joysticks[_joystickID].drawed;
+        }
+        else
+        {
+            if (_joystickID == 1)
+            {
+                return Input.GetKey(KeyCode.Space);
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
     public void PressActiveSkillButton()
@@ -269,6 +303,45 @@ public class KLD_TouchInputs : MonoBehaviour
         onActiveSkillJoystickRelease?.Invoke(_input);
     }
 
+    #region Debug
 
+    Vector2 debugMoveVector = Vector2.zero;
+
+    Vector2 GetDebugMoveVector()
+    {
+        debugMoveVector.x = Input.GetAxisRaw("Horizontal");
+        debugMoveVector.y = Input.GetAxisRaw("Vertical");
+
+        if (debugMoveVector.sqrMagnitude > 1f)
+        {
+            debugMoveVector.Normalize();
+        }
+
+        return debugMoveVector;
+    }
+
+    Vector2 debugAimVector = Vector2.zero;
+
+    Vector2 GetDebugAimVector()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            debugAimVector.x = Input.GetAxisRaw("AimHorizontal");
+            debugAimVector.y = Input.GetAxisRaw("AimVertical");
+
+            if (debugAimVector.sqrMagnitude > 1f)
+            {
+                debugAimVector.Normalize();
+            }
+
+            return debugAimVector;
+        }
+        else
+        {
+            return Vector2.zero;
+        }
+    }
+
+    #endregion
 
 }

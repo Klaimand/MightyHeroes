@@ -78,6 +78,8 @@ public class KLD_PlayerAim : MonoBehaviour
 
     void ProcessPlayerAttributeAimVector()
     {
+        playerAttributes.normalizedAimInput = inputAimVector;
+
         if (isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.05f)
         {
             inputAimVector3.x = inputAimVector.x;
@@ -171,4 +173,5 @@ public class KLD_PlayerAttributes
 {
     public Transform transform = null;
     public Vector3 worldAimDirection = Vector3.zero;
+    public Vector2 normalizedAimInput = Vector2.zero;
 }

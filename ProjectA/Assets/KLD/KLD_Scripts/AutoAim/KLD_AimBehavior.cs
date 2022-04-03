@@ -54,6 +54,7 @@ public class KLD_AimBehavior : ScriptableObject
     class WeightedWeight
     {
         public float coef = 1f;
+        [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
         public KLD_AimWeight weight;
     }
 
