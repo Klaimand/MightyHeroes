@@ -12929,9 +12929,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc8962636c7a864a897772144bca74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputs: {fileID: 0}
+  animator: {fileID: 0}
+  controller: {fileID: 0}
   zombieList: {fileID: 1286268289}
-  defaultTarget: {fileID: 659264541}
-  isAiming: 1
+  targetPosTransform: {fileID: 0}
+  targetPosAngleOffset: 0
+  isPressingAimJoystick: 0
   inputAimVector: {x: 0, y: 0}
   selectedZombie:
     maxHealth: 100
@@ -12941,7 +12945,10 @@ MonoBehaviour:
   aimBehavior: {fileID: 11400000, guid: c5de52ffc67e83043ae45c453a9e8dd9, type: 2}
   playerAttributes:
     transform: {fileID: 0}
-    worldAimDirection: {x: 0, y: 0}
+    worldAimDirection: {x: 0, y: 0, z: 0}
+    normalizedAimInput: {x: 0, y: 0}
+  isReloading: 0
+  isShooting: 0
 --- !u!1 &1045025775
 GameObject:
   m_ObjectHideFlags: 0
@@ -18100,6 +18107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b21d08fca9becc4d9a4d3471981642a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useDebugControls: 0
   useButtonForUltimate: 0
   ultiButton: {fileID: 0}
   ultiJoystick: {fileID: 0}
