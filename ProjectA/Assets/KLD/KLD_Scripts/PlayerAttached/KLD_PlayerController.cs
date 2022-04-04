@@ -33,6 +33,7 @@ public class KLD_PlayerController : MonoBehaviour
     [SerializeField] float rbVelocityDead = 0.05f;
     [SerializeField, ReadOnly]
     float forwardToAimAngle = 0f;
+    [SerializeField, ReadOnly]
     float absoluteForwardToAimAngle = 0f;
     Vector3 playerToLookAtTransform = Vector3.zero;
     bool runningBackward = false;
@@ -87,8 +88,13 @@ public class KLD_PlayerController : MonoBehaviour
     void DoFeetRotation()
     {
         playerToLookAtTransform = lookAtTransform.position - transform.position;
+
+        Debug.DrawRay(transform.position + Vector3.up, playerToLookAtTransform, Color.cyan);
+        Debug.DrawRay(transform.position + Vector3.up, transform.forward * 5f, Color.magenta);
+
         forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerToLookAtTransform, Vector3.up);
-        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle);
+        forwardToAimAngle -= 30f;
+        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle) + 30f;
 
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {
@@ -114,16 +120,11 @@ public class KLD_PlayerController : MonoBehaviour
         {
             runningBackward = false;
             scaler.localRotation = Quaternion.identity;
-            //forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerAim.GetPlayerAttributes().worldAimDirection, Vector3.up);
-            //if (!inputs.IsJoystickPressed(1))
-            //{
-            //forwardToAimAngle = 0f;
-            //}
 
             if (absoluteForwardToAimAngle > 90f)
             {
                 eulerRotationToDo.x = 0f;
-                eulerRotationToDo.y = (absoluteForwardToAimAngle - 90f) * Mathf.Sign(forwardToAimAngle);
+                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 90f) * Mathf.Sign(forwardToAimAngle));
                 eulerRotationToDo.z = 0f;
                 transform.Rotate(eulerRotationToDo);
             }
