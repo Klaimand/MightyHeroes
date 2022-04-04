@@ -36,6 +36,7 @@ public class KLD_PlayerController : MonoBehaviour
     float absoluteForwardToAimAngle = 0f;
     Vector3 playerToLookAtTransform = Vector3.zero;
     bool runningBackward = false;
+    Vector3 eulerRotationToDo = Vector3.zero;
 
 
 
@@ -85,6 +86,10 @@ public class KLD_PlayerController : MonoBehaviour
 
     void DoFeetRotation()
     {
+        playerToLookAtTransform = lookAtTransform.position - transform.position;
+        forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerToLookAtTransform, Vector3.up);
+        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle);
+
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {
             worldLookAtPos = rb.velocity;
@@ -92,11 +97,8 @@ public class KLD_PlayerController : MonoBehaviour
             worldLookAtPos.Normalize(); //may be useless
             transform.LookAt(transform.position + worldLookAtPos);
 
-            playerToLookAtTransform = lookAtTransform.position - transform.position;
-
-            forwardToAimAngle = Vector3.Angle(transform.forward, playerToLookAtTransform);
             //if its > 90 change scaler direction
-            if (forwardToAimAngle > 90f)
+            if (absoluteForwardToAimAngle > 90f)
             {
                 runningBackward = true;
                 scaler.localRotation = Quaternion.Euler(0f, 180f, 0f);
@@ -110,16 +112,20 @@ public class KLD_PlayerController : MonoBehaviour
         }
         else //we are not moving
         {
+            runningBackward = false;
+            scaler.localRotation = Quaternion.identity;
             //forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerAim.GetPlayerAttributes().worldAimDirection, Vector3.up);
             //if (!inputs.IsJoystickPressed(1))
             //{
             //forwardToAimAngle = 0f;
             //}
-            //absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle);
 
             if (absoluteForwardToAimAngle > 90f)
             {
-
+                eulerRotationToDo.x = 0f;
+                eulerRotationToDo.y = (absoluteForwardToAimAngle - 90f) * Mathf.Sign(forwardToAimAngle);
+                eulerRotationToDo.z = 0f;
+                transform.Rotate(eulerRotationToDo);
             }
             runningBackward = false;
         }
