@@ -9,6 +9,8 @@ public class KLD_PlayerController : MonoBehaviour
     [SerializeField] KLD_TouchInputs inputs;
     KLD_PlayerAim playerAim;
     Rigidbody rb;
+    [SerializeField] Transform scaler = null;
+    [SerializeField] Transform lookAtTransform = null;
 
     //axis
     Vector2 rawAxis = Vector2.zero;
@@ -29,6 +31,11 @@ public class KLD_PlayerController : MonoBehaviour
     LocomotionState locomotionState = LocomotionState.IDLE;
 
     [SerializeField] float rbVelocityDead = 0.05f;
+    [SerializeField, ReadOnly]
+    float forwardToAimAngle = 0f;
+    float absoluteForwardToAimAngle = 0f;
+    Vector3 playerToLookAtTransform = Vector3.zero;
+    Quaternion scalerRotation = Quaternion.identity;
 
 
 
@@ -75,7 +82,6 @@ public class KLD_PlayerController : MonoBehaviour
          timedAxis.normalized * timedMagnitude;
     }
 
-
     void DoFeetRotation()
     {
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
@@ -84,13 +90,34 @@ public class KLD_PlayerController : MonoBehaviour
             worldLookAtPos.y = 0f;
             worldLookAtPos.Normalize(); //may be useless
             transform.LookAt(transform.position + worldLookAtPos);
+
+            playerToLookAtTransform = lookAtTransform.position - transform.position;
+
+            forwardToAimAngle = Vector3.Angle(transform.forward, playerToLookAtTransform);
+            //if its > 90 change scaler direction
+            if (forwardToAimAngle > 90f)
+            {
+                scaler.localRotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else
+            {
+                scaler.localRotation = Quaternion.identity;
+            }
+            //scaler.rotation = scalerRotation;
         }
         else //we are not moving
         {
-            //if (Vector3.Angle(transform.forward, playerAim.GetPlayerAttributes().worldAimDirection))
+            //forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerAim.GetPlayerAttributes().worldAimDirection, Vector3.up);
+            //if (!inputs.IsJoystickPressed(1))
             //{
-
+            //forwardToAimAngle = 0f;
             //}
+            //absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle);
+
+            if (absoluteForwardToAimAngle > 90f)
+            {
+
+            }
         }
     }
 

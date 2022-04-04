@@ -36,7 +36,7 @@ public class KLD_PlayerAim : MonoBehaviour
     Vector3 debugPosa = Vector3.zero;
     Vector3 debugPosb = Vector3.zero;
 
-    [SerializeField, ReadOnly] public KLD_PlayerAttributes playerAttributes; //{ get; private set; }
+    [SerializeField, ReadOnly] KLD_PlayerAttributes playerAttributes;
 
     //shooting
     [HideInInspector] public bool isReloading;
@@ -152,7 +152,8 @@ public class KLD_PlayerAim : MonoBehaviour
         targetPosGlobalOffset.y = targetPosLocalOffset.y;
 
         targetPosTransform.position = targetPos + targetPosGlobalOffset;*/
-        transform.LookAt(targetPos, Vector3.up);
+
+        //transform.LookAt(targetPos, Vector3.up);
 
 
     }
@@ -199,10 +200,21 @@ public class KLD_PlayerAim : MonoBehaviour
         animator.SetInteger("weaponState", (int)weaponState);
     }
 
+    #region Getters and Setters
+
     public Vector3 GetTargetPos()
     {
         return Vector3.zero;
     }
+
+    public KLD_PlayerAttributes GetPlayerAttributes()
+    {
+        return playerAttributes;
+    }
+
+
+
+    #endregion
 
 }
 

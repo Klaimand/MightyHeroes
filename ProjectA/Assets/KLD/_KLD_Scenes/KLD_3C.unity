@@ -2002,6 +2002,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputs: {fileID: 1907775921}
+  scaler: {fileID: 1627443378}
+  lookAtTransform: {fileID: 2106591494}
   timedAxis: {x: 0, y: 0}
   refTransform: {fileID: 1422993341}
   speed: 6
@@ -2009,6 +2011,7 @@ MonoBehaviour:
   accelerationTime: 0.2
   decelerationTime: 0.1
   animator: {fileID: 1039294903}
+  rbVelocityDead: 0.05
 --- !u!54 &1090355174
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2056,7 +2059,6 @@ MonoBehaviour:
   controller: {fileID: 1090355173}
   zombieList: {fileID: 857304166}
   targetPosTransform: {fileID: 2106591494}
-  targetPosLocalOffset: {x: 0, y: 0, z: 0}
   targetPosAngleOffset: 30
   isPressingAimJoystick: 0
   inputAimVector: {x: 0, y: 0}
