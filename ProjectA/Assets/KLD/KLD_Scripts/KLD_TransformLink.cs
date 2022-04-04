@@ -7,6 +7,8 @@ public class KLD_TransformLink : MonoBehaviour
 {
     [SerializeField] Transform linkTo = null;
     [SerializeField] Vector3 offset = Vector3.zero;
+    [SerializeField] bool smoothTranslation = false;
+    [SerializeField, ShowIf("smoothTranslation")] float smoothness = 0.2f;
 
     [SerializeField] bool lockRotation = false;
     [SerializeField, ShowIf("lockRotation")] Vector3 angleOffset = Vector3.zero;
@@ -23,7 +25,15 @@ public class KLD_TransformLink : MonoBehaviour
             return;
         }
 
-        transform.position = linkTo.position + offset;
+        if (!smoothTranslation)
+        {
+            transform.position = linkTo.position + offset;
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(transform.position, linkTo.position + offset, smoothness);
+        }
+
         if (lockRotation)
         {
             angles.x = lockX ? linkTo.rotation.eulerAngles.x + angleOffset.x : transform.rotation.eulerAngles.x;

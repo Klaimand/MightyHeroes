@@ -27,7 +27,7 @@ public class KLD_PlayerController : MonoBehaviour
     float timedMagnitude = 0f;
 
     [SerializeField, Header("Animation")] Animator animator;
-    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING };
+    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING, RUNNING_BACKWARD };
     LocomotionState locomotionState = LocomotionState.IDLE;
 
     [SerializeField] float rbVelocityDead = 0.05f;
@@ -35,7 +35,8 @@ public class KLD_PlayerController : MonoBehaviour
     float forwardToAimAngle = 0f;
     float absoluteForwardToAimAngle = 0f;
     Vector3 playerToLookAtTransform = Vector3.zero;
-    Quaternion scalerRotation = Quaternion.identity;
+    bool runningBackward = false;
+
 
 
 
@@ -97,10 +98,12 @@ public class KLD_PlayerController : MonoBehaviour
             //if its > 90 change scaler direction
             if (forwardToAimAngle > 90f)
             {
+                runningBackward = true;
                 scaler.localRotation = Quaternion.Euler(0f, 180f, 0f);
             }
             else
             {
+                runningBackward = false;
                 scaler.localRotation = Quaternion.identity;
             }
             //scaler.rotation = scalerRotation;
@@ -118,6 +121,7 @@ public class KLD_PlayerController : MonoBehaviour
             {
 
             }
+            runningBackward = false;
         }
     }
 
@@ -129,7 +133,7 @@ public class KLD_PlayerController : MonoBehaviour
         }
         else if (timedAxis != Vector2.zero)
         {
-            locomotionState = LocomotionState.RUNNING;
+            locomotionState = runningBackward ? LocomotionState.RUNNING_BACKWARD : LocomotionState.RUNNING;
         }
 
         animator.SetInteger("locomotionState", (int)locomotionState);
