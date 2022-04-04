@@ -13,6 +13,7 @@ public class KLD_TouchInputs : MonoBehaviour
     {
         public bool floating = true;
         public int padding = 100;
+        public int deadzone = 30;
         public Vector2 defaultOffset;
         public bool offsetFromRightCorner = false;
         public bool draggable = false;
@@ -27,8 +28,11 @@ public class KLD_TouchInputs : MonoBehaviour
         [HideInInspector] public Vector2 rawPosition;
         [HideInInspector] public Vector2 rawVector;
         [HideInInspector] public Vector2 rawCappedVector;
+        [HideInInspector] public bool drawed = false;
         [ReadOnly] public Vector2 normalizedVector;
     }
+
+    [SerializeField] bool useDebugControls = false;
 
     [SerializeField] bool useButtonForUltimate = false;
     [SerializeField] GameObject ultiButton = null;
@@ -45,6 +49,7 @@ public class KLD_TouchInputs : MonoBehaviour
     bool isPressingActiveSkillJoystick = false;
 
     public event Action onActiveSkillButton;
+    public event Action<Vector2> onActiveSkillJoystickRelease;
 
     void Start()
     {
@@ -77,6 +82,7 @@ public class KLD_TouchInputs : MonoBehaviour
             { joysticks[i].animator.SetTrigger("active"); }
             //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
             joysticks[i].touchCircle.gameObject.SetActive(false);
+            joysticks[i].drawed = !joysticks[i].floating;
         }
     }
 
@@ -120,6 +126,7 @@ public class KLD_TouchInputs : MonoBehaviour
                         if (joysticks[joyIndex].floating)
                         {
                             joysticks[joyIndex].rawPosition = curTouch.position;
+                            joysticks[joyIndex].drawed = true;
                         }
                         else
                         {
@@ -138,9 +145,12 @@ public class KLD_TouchInputs : MonoBehaviour
                 }
                 else if (curTouch.phase == TouchPhase.Moved)
                 {
-                    DoRawVectorCalculation();
+                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    {
+                        DoRawVectorCalculation();
 
-                    DoDrag();
+                        DoDrag();
+                    }
                 }
                 else if (curTouch.phase == TouchPhase.Stationary)
                 {
@@ -157,9 +167,15 @@ public class KLD_TouchInputs : MonoBehaviour
                     //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
                     joysticks[joyIndex].touchCircle.gameObject.SetActive(false);
 
+                    if (joysticks[joyIndex].floating)
+                    {
+                        joysticks[joyIndex].drawed = false;
+                    }
+
                     if (joyIndex == 2)
                     {
                         isPressingActiveSkillJoystick = false;
+                        ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                     }
                 }
 
@@ -172,6 +188,12 @@ public class KLD_TouchInputs : MonoBehaviour
                 void DoRawVectorCalculation()
                 {
                     joysticks[joyIndex].rawVector = curTouch.position - joysticks[joyIndex].rawPosition;
+
+                    if (joysticks[joyIndex].rawVector.magnitude < joysticks[joyIndex].deadzone)
+                    {
+                        joysticks[joyIndex].rawVector = Vector2.zero;
+                    }
+
                     joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
                 }
 
@@ -213,6 +235,11 @@ public class KLD_TouchInputs : MonoBehaviour
             joysticks[i].rawVector.normalized * joysticks[i].padding :
             joysticks[i].rawVector;
 
+            //if (joysticks[i].rawCappedVector.magnitude < joysticks[i].deadzone)
+            //{
+            //    joysticks[i].rawCappedVector = Vector2.zero;
+            //}
+
             joysticks[i].stickCircle.anchoredPosition = joysticks[i].rawPosition + joysticks[i].rawCappedVector;
 
             joysticks[i].normalizedVector = joysticks[i].rawCappedVector / joysticks[i].padding;
@@ -221,7 +248,44 @@ public class KLD_TouchInputs : MonoBehaviour
 
     public Vector2 GetJoystickNormalizedVector(int _joystickID)
     {
-        return joysticks[_joystickID].normalizedVector;
+        if (!useDebugControls)
+        {
+            return joysticks[_joystickID].normalizedVector;
+        }
+        else
+        {
+            if (_joystickID == 0)
+            {
+                return GetDebugMoveVector();
+            }
+            else if (_joystickID == 1)
+            {
+                return GetDebugAimVector();
+            }
+            else
+            {
+                return Vector2.zero;
+            }
+        }
+    }
+
+    public bool IsJoystickPressed(int _joystickID)
+    {
+        if (!useDebugControls)
+        {
+            return joysticks[_joystickID].drawed;
+        }
+        else
+        {
+            if (_joystickID == 1)
+            {
+                return Input.GetKey(KeyCode.Space);
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
     public void PressActiveSkillButton()
@@ -234,6 +298,50 @@ public class KLD_TouchInputs : MonoBehaviour
         isPressingActiveSkillJoystick = true;
     }
 
+    void ReleaseActiveSkillJoystick(Vector2 _input)
+    {
+        onActiveSkillJoystickRelease?.Invoke(_input);
+    }
 
+    #region Debug
+
+    Vector2 debugMoveVector = Vector2.zero;
+
+    Vector2 GetDebugMoveVector()
+    {
+        debugMoveVector.x = Input.GetAxisRaw("Horizontal");
+        debugMoveVector.y = Input.GetAxisRaw("Vertical");
+
+        if (debugMoveVector.sqrMagnitude > 1f)
+        {
+            debugMoveVector.Normalize();
+        }
+
+        return debugMoveVector;
+    }
+
+    Vector2 debugAimVector = Vector2.zero;
+
+    Vector2 GetDebugAimVector()
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            debugAimVector.x = Input.GetAxisRaw("AimHorizontal");
+            debugAimVector.y = Input.GetAxisRaw("AimVertical");
+
+            if (debugAimVector.sqrMagnitude > 1f)
+            {
+                debugAimVector.Normalize();
+            }
+
+            return debugAimVector;
+        }
+        else
+        {
+            return Vector2.zero;
+        }
+    }
+
+    #endregion
 
 }

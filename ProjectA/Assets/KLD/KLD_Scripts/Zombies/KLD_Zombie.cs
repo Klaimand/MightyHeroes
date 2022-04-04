@@ -56,7 +56,7 @@ public class KLD_Zombie : MonoBehaviour
     void OnDrawGizmos()
     {
 #if UNITY_EDITOR
-        Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
+        Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString("F1"), gUIStyle);
 #endif
     }
 
