@@ -202,9 +202,9 @@ public class KLD_PlayerAim : MonoBehaviour
 
     #region Getters and Setters
 
-    public Vector3 GetTargetPos()
+    public KLD_ZombieAttributes GetSelectedZombie()
     {
-        return Vector3.zero;
+        return selectedZombie;
     }
 
     public KLD_PlayerAttributes GetPlayerAttributes()
