@@ -36,7 +36,7 @@ public class KLD_PlayerAim : MonoBehaviour
     Vector3 debugPosa = Vector3.zero;
     Vector3 debugPosb = Vector3.zero;
 
-    [SerializeField, ReadOnly] KLD_PlayerAttributes playerAttributes;
+    [SerializeField, ReadOnly] public KLD_PlayerAttributes playerAttributes; //{ get; private set; }
 
     //shooting
     [HideInInspector] public bool isReloading;
@@ -131,13 +131,20 @@ public class KLD_PlayerAim : MonoBehaviour
 
         targetPos.y = transform.position.y;
 
-        playerToTargetPos = (targetPos - transform.position);
+        if (weaponState == WeaponState.AIMING || weaponState == WeaponState.SHOOTING)
+        {
+            playerToTargetPos = (targetPos - transform.position);
 
-        playerToTargetPos = Quaternion.Euler(0f, targetPosAngleOffset, 0f) * playerToTargetPos;
+            playerToTargetPos = Quaternion.Euler(0f, targetPosAngleOffset, 0f) * playerToTargetPos;
 
-        Debug.DrawRay(transform.position, playerToTargetPos, Color.yellow);
+            Debug.DrawRay(transform.position, playerToTargetPos, Color.yellow);
 
-        targetPosTransform.position = transform.position + playerToTargetPos;
+            targetPosTransform.position = transform.position + playerToTargetPos;
+        }
+        else
+        {
+            targetPosTransform.position = targetPos;
+        }
 
         /*right = Vector3.Cross(Vector3.up, playerToTargetPos).normalized;
 
@@ -191,6 +198,12 @@ public class KLD_PlayerAim : MonoBehaviour
         }
         animator.SetInteger("weaponState", (int)weaponState);
     }
+
+    public Vector3 GetTargetPos()
+    {
+        return Vector3.zero;
+    }
+
 }
 
 [System.Serializable]

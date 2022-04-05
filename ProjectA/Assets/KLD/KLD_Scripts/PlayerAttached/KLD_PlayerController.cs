@@ -5,8 +5,9 @@ using Sirenix.OdinInspector;
 
 public class KLD_PlayerController : MonoBehaviour
 {
-    [SerializeField] KLD_TouchInputs inputs;
     //refs
+    [SerializeField] KLD_TouchInputs inputs;
+    KLD_PlayerAim playerAim;
     Rigidbody rb;
 
     //axis
@@ -27,11 +28,16 @@ public class KLD_PlayerController : MonoBehaviour
     enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING };
     LocomotionState locomotionState = LocomotionState.IDLE;
 
+    [SerializeField] float rbVelocityDead = 0.05f;
+
+
+
     Vector3 worldLookAtPos = Vector3.zero;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        playerAim = GetComponent<KLD_PlayerAim>();
     }
 
     void Start()
@@ -46,10 +52,7 @@ public class KLD_PlayerController : MonoBehaviour
         //rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
         rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed;
 
-        worldLookAtPos = rb.velocity;
-        worldLookAtPos.y = 0f;
-        worldLookAtPos.Normalize();
-        //transform.LookAt(transform.position + worldLookAtPos);
+        DoFeetRotation();
 
         AnimateLocomotionState();
     }
@@ -72,6 +75,25 @@ public class KLD_PlayerController : MonoBehaviour
          timedAxis.normalized * timedMagnitude;
     }
 
+
+    void DoFeetRotation()
+    {
+        if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
+        {
+            worldLookAtPos = rb.velocity;
+            worldLookAtPos.y = 0f;
+            worldLookAtPos.Normalize(); //may be useless
+            transform.LookAt(transform.position + worldLookAtPos);
+        }
+        else //we are not moving
+        {
+            //if (Vector3.Angle(transform.forward, playerAim.GetPlayerAttributes().worldAimDirection))
+            //{
+
+            //}
+        }
+    }
+
     void AnimateLocomotionState()
     {
         if (timedAxis == Vector2.zero)
@@ -85,4 +107,6 @@ public class KLD_PlayerController : MonoBehaviour
 
         animator.SetInteger("locomotionState", (int)locomotionState);
     }
+
+
 }
