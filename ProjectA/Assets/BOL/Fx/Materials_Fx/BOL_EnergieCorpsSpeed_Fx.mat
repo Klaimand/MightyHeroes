@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BOL_EnergieCorps_Fx
-  m_Shader: {fileID: -6465566751694194690, guid: 1a4beef96e864c348a3bd95ba3e84c77, type: 3}
+  m_Name: BOL_EnergieCorpsSpeed_Fx
+  m_Shader: {fileID: 10720, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -33,18 +33,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_099b00a28526451aa37a1b8c37941af7:
-        m_Texture: {fileID: 2800000, guid: 605769f72015c5540af5428ccf80dd6d, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_117d2188aa55428da0faf5fe59830c8f:
-        m_Texture: {fileID: 2800000, guid: 440b3b4aa471e184b9c2143ef88bf21f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_484615030bc94d2cb12bddad98542f65:
-        m_Texture: {fileID: 2800000, guid: 3303b8d6340025b4ea32b0517d2e2a96, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - Texture2D_84b679e1fe3e457cb30e64ca5e902f3e:
         m_Texture: {fileID: 2800000, guid: 7a394559e1c031c448bfe3faa5236e75, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -74,7 +62,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 85f70f56c8b5f814ab073fac6c295200, type: 3}
+        m_Texture: {fileID: 2800000, guid: 440b3b4aa471e184b9c2143ef88bf21f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -113,7 +101,7 @@ Material:
     - Vector1_72cab2c80332467c9466a7c3568a6286: 0.3
     - Vector1_783771d84d3e476087fbfb9cd7bc5f9f: 0.2
     - Vector1_cda0dd38f8e743a0b78b33e9e168e249: 0.3
-    - Vector1_fd089a47673a47a581834e2730b50874: 2
+    - Vector1_fd089a47673a47a581834e2730b50874: 10
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
@@ -156,10 +144,10 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - Color_5c3bba1d2c7943098f673550bf0239ae: {r: 1, g: 0.19129385, b: 0, a: 0}
-    - Color_7eefa42a1e144f27b1dd37a57a4ba1f8: {r: 1, g: 0.91517913, b: 0, a: 1}
+    - Color_5c3bba1d2c7943098f673550bf0239ae: {r: 1, g: 0, b: 0.906075, a: 0}
+    - Color_7eefa42a1e144f27b1dd37a57a4ba1f8: {r: 1, g: 0.97251976, b: 0, a: 0}
     - Color_95301faf991d49a7b986bddd15e62fc0: {r: 0.695953, g: 0.6650943, b: 0.8867924, a: 0}
-    - Color_c5817465196f4334919783c53d0a4a8f: {r: 1, g: 0.65217394, b: 0, a: 1}
+    - Color_c5817465196f4334919783c53d0a4a8f: {r: 1, g: 0.7775324, b: 0.3726415, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
