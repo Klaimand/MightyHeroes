@@ -12,6 +12,13 @@ public class WeaponAttributes
 
     public int rpm = 450;
 
+    [Header("Magazine & Reloading")]
+    [LabelText("$reloadSpeedLabel")]
+    public float reloadSpeed = 1.5f;
+
+    public int magazineSize = 30;
+
+    [Header("Shot Parameters")]
     [Range(1, 10)]
     public int bulletsPerShot = 1;
 
@@ -21,19 +28,20 @@ public class WeaponAttributes
     [ReadOnly, HideIf("bulletsPerShot", 1)]
     public bool isBuckshot = false;
 
-    public float reloadSpeed = 1.5f;
 
-    public int magazineSize = 30;
 
     [LabelText("$spreadLabel"), Range(0, 90)]
     public int spread = 25;
 
     public float range = 15f;
 
+    [Space(10)]
     public int activePointsPerKill = 5;
 
     [HideInInspector] public string displayedName = "";
+    [HideInInspector] public bool isBPBReloading = false;
     string spreadLabel = "spread";
+    string reloadSpeedLabel = "";
     public void OnValidate()
     {
         ProtectNonNegativeValues();
@@ -41,6 +49,8 @@ public class WeaponAttributes
         isBuckshot = bulletsPerShot > 1 && timeBetweenBullets == 0;
 
         spreadLabel = isBuckshot ? "spread (buckshot)" : "spread";
+
+        reloadSpeedLabel = isBPBReloading ? "Reload Speed (1 bullet)" : "Reload Speed";
     }
 
     void ProtectNonNegativeValues()

@@ -53,6 +53,8 @@ public class KLD_WeaponSO : ScriptableObject
     [ListDrawerSettings(ListElementLabelName = "displayedName")]
     public WeaponAttributes[] weaponAttributes;
 
+    [HideInInspector] public float shootDelay = 0f;
+
     [Header("Animations"), Space(10)]
     public AnimationClip holdingAnim;
     public AnimationClip aimingAnim;
@@ -74,12 +76,19 @@ public class KLD_WeaponSO : ScriptableObject
 
     void OnValidate()
     {
+        ValidateValues();
+    }
+
+    public void ValidateValues()
+    {
         for (int i = 0; i < weaponAttributes.Length; i++)
         {
             weaponAttributes[i].displayedName = "Level " + i;
+            weaponAttributes[i].isBPBReloading = reloadType == ReloadType.BULLET_PER_BULLET;
             weaponAttributes[i].OnValidate();
         }
         ProtectValues();
+        shootDelay = RpmToDelay(GetCurAttributes().rpm);
     }
 
     void ProtectValues()
@@ -87,5 +96,11 @@ public class KLD_WeaponSO : ScriptableObject
         maxLevel = weaponAttributes.Length - 1;
         if (level > maxLevel) level = maxLevel;
         if (experience < 0) experience = 0;
+    }
+
+
+    float RpmToDelay(int rpm)
+    {
+        return 1f / ((float)rpm / 60f);
     }
 }

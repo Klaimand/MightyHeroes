@@ -75,7 +75,9 @@ public class KLD_PlayerAim : MonoBehaviour
 
         DrawSelectedLine();
 
-        isShooting = isPressingAimJoystick && selectedZombie != null;
+        //isShooting = isPressingAimJoystick && selectedZombie != null;
+        isShooting = isPressingAimJoystick && selectedZombie != null ||
+         isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.1f;
 
         AnimateWeaponState();
     }
