@@ -8,6 +8,7 @@ public class KLD_BaseBullet : KLD_Bullet
     public override void OnHit(KLD_Zombie _zombie, int _damage)
     {
         //do damage to zombie
-        throw new System.NotImplementedException();
+
+        //throw new System.NotImplementedException();
     }
 }

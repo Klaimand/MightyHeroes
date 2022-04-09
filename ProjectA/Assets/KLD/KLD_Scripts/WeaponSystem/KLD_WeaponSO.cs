@@ -59,10 +59,10 @@ public class KLD_WeaponSO : ScriptableObject
     public AnimationClip reloadAnim;
     public AnimationClip shootAnim;
 
-    [Header("FX"), Space(10)]
-    public GameObject muzzleFlashFX;
-    public GameObject lineRendererFX;
-    public GameObject impactFX;
+    //[Header("FX"), Space(10)]
+    //public GameObject muzzleFlashFX;
+    //public GameObject lineRendererFX;
+    //public GameObject impactFX;
 
 
     int maxLevel = 0;

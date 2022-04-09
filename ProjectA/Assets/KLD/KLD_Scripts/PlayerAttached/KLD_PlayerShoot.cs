@@ -60,8 +60,8 @@ public class KLD_PlayerShoot : MonoBehaviour
 
             //Debug.DrawRay(canon.position, shootDirection, raysColor, debugShootDelay);
 
-            impactPosition = weapon.bullet.Shoot(weapon, canon.position, shootDirection, layerMask);
-            Debug.DrawLine(canon.position, impactPosition, raysColor, debugShootDelay);
+            weapon.bullet.Shoot(weapon, canon.position, shootDirection, layerMask);
+            //Debug.DrawLine(canon.position, impactPosition, raysColor, debugShootDelay);
             curDebugShootDelay = 0f;
         }
 
