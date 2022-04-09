@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 59984870}
   - component: {fileID: 59984872}
   - component: {fileID: 59984871}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arm_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 134882839}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -552,6 +552,11 @@ Transform:
   m_Father: {fileID: 734239582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &239828533 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &283592238
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 283592239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +599,7 @@ GameObject:
   - component: {fileID: 367868268}
   - component: {fileID: 367868270}
   - component: {fileID: 367868269}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,9 +680,9 @@ GameObject:
   - component: {fileID: 388478752}
   - component: {fileID: 388478751}
   - component: {fileID: 388478750}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Zombie (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -840,7 +845,7 @@ GameObject:
   - component: {fileID: 533615239}
   - component: {fileID: 533615238}
   - component: {fileID: 533615237}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: maxbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1125,7 +1130,7 @@ GameObject:
   - component: {fileID: 692316350}
   - component: {fileID: 692316352}
   - component: {fileID: 692316351}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arm_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1297,7 +1302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 734239582}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: healthbarscaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1749,7 +1754,7 @@ GameObject:
   - component: {fileID: 1259867377}
   - component: {fileID: 1259867376}
   - component: {fileID: 1259867375}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: maxbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1843,7 +1848,7 @@ GameObject:
   - component: {fileID: 1334070385}
   - component: {fileID: 1334070387}
   - component: {fileID: 1334070386}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1922,7 +1927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1334940589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: healthbarscaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2008,9 +2013,9 @@ GameObject:
   - component: {fileID: 1429145637}
   - component: {fileID: 1429145636}
   - component: {fileID: 1429145638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2230,7 +2235,7 @@ GameObject:
   - component: {fileID: 1631975416}
   - component: {fileID: 1631975415}
   - component: {fileID: 1631975414}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2325,7 +2330,7 @@ GameObject:
   - component: {fileID: 1636489185}
   - component: {fileID: 1636489184}
   - component: {fileID: 1636489183}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2419,7 +2424,7 @@ GameObject:
   - component: {fileID: 1679012098}
   - component: {fileID: 1679012100}
   - component: {fileID: 1679012099}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arm_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2500,7 +2505,7 @@ GameObject:
   - component: {fileID: 1731398399}
   - component: {fileID: 1731398401}
   - component: {fileID: 1731398400}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: arm_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3073,4 +3078,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 002ca19db7c227c46aa1bc9f0144334a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canon: {fileID: 239828533}
   weapon: {fileID: 11400000, guid: 519c1da0b5c26594f938803afed29f03, type: 2}
+  zombieVerticalOffset: 1.5
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 129
+  debugShootDelay: 0.05
+  raysColor: {r: 1, g: 0.491725, b: 0, a: 1}

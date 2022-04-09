@@ -43,6 +43,8 @@ public class KLD_WeaponSO : ScriptableObject
 
     public ReloadType reloadType = ReloadType.MAGAZINE;
 
+    public KLD_Bullet bullet;
+
     [PropertyRange(0, "maxLevel")]
     public int level = 0;
 
@@ -65,7 +67,7 @@ public class KLD_WeaponSO : ScriptableObject
 
     int maxLevel = 0;
 
-    public WeaponAttributes GetCurWeaponAttributes()
+    public WeaponAttributes GetCurAttributes()
     {
         return weaponAttributes[level];
     }
