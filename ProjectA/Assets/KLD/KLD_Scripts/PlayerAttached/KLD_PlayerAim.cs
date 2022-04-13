@@ -214,6 +214,11 @@ public class KLD_PlayerAim : MonoBehaviour
         return playerAttributes;
     }
 
+    public Vector3 GetTargetPos() //debug la ptn de ta race
+    {
+        return Vector3.zero;
+    }
+
 
 
     #endregion
