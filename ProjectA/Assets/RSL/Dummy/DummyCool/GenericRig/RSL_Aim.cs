@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class RSL_Aim : MonoBehaviour
 {
+    /*
 
     [SerializeField] KLD_ZombieList zombieList;
     [SerializeField] Transform defaultTarget = null;
@@ -29,7 +30,7 @@ public class RSL_Aim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*
+        
         selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), transform);
 
         targetPos = selectedZombie != null ? selectedZombie.transform.position : defaultTarget.position;
@@ -39,7 +40,7 @@ public class RSL_Aim : MonoBehaviour
         transform.LookAt(targetPos, Vector3.up);
 
         DrawSelectedLine();
-        */
+        
     }
 
     void DrawSelectedLine()
@@ -50,4 +51,5 @@ public class RSL_Aim : MonoBehaviour
         debugPosb.y = 1f;
         Debug.DrawLine(debugPosa, debugPosb, Color.red);
     }
+*/
 }
