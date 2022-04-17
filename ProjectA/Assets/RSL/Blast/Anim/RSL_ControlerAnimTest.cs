@@ -25,6 +25,7 @@ public class RSL_ControlerAnimTest : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha3)) { weaponState = 0; }
         if (Input.GetKey(KeyCode.Alpha2)) { weaponState = 1; }
         if (Input.GetKeyDown(KeyCode.R)) { weaponState = 3; }
+        if (Input.GetKeyDown(KeyCode.T)) { weaponState = 5; }
         if (Input.GetKeyDown(KeyCode.E)) { weaponState = 4; }
         if (Input.GetMouseButton(0)) { weaponState = 2; } 
     }
