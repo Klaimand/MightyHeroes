@@ -18,7 +18,6 @@ public class KLD_Depoper : MonoBehaviour
         if (gameObject.activeSelf)
         {
             XL_Pooler.instance.DePop(poolKey, gameObject);
-            print("depoped");
         }
     }
 }
