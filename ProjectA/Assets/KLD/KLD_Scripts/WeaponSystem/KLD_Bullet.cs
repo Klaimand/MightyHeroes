@@ -65,8 +65,8 @@ public abstract class KLD_Bullet : ScriptableObject
 
     void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted)
     {
-        //Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
-        XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_muzzle", startPos);
+        Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
+        XL_Pooler.instance.PopPosition("_muzzle", startPos);
         if (impacted)
         {
             XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_impact", impactPos);
@@ -83,8 +83,8 @@ public abstract class KLD_Bullet : ScriptableObject
 
     public void PoolBullets(KLD_WeaponSO weaponSO)
     {
-        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_muzzle", weaponSO.muzzleFlashFX, weaponSO.fxPoolSize);
-        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_impact", weaponSO.impactFX, weaponSO.fxPoolSize);
-        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_lineRenderer", weaponSO.lineRendererFX, weaponSO.fxPoolSize);
+        XL_Pooler.instance.CreatePool("_muzzle", weaponSO.muzzleFlashFX, weaponSO.fxPoolSize);
+        XL_Pooler.instance.CreatePool("_impact", weaponSO.impactFX, weaponSO.fxPoolSize);
+        XL_Pooler.instance.CreatePool("_lineRenderer", weaponSO.lineRendererFX, weaponSO.fxPoolSize);
     }
 }

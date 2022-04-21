@@ -153,17 +153,17 @@ public class XL_Pooler : MonoBehaviour
 
     public void CreatePool(string poolKey, GameObject _go, int _poolSize)
     {
-        if (poolInstance == null)
-        {
-            poolInstance = new Pool(_go, _poolSize);
-        }
-        else
-        {
-            poolInstance.prefab = _go;
-            poolInstance.baseCount = _poolSize;
-            poolInstance.baseRefreshSpeed = 5f;
-            poolInstance.refreshSpeed = 5f;
-        }
+        //if (poolInstance == null)
+        //{
+        poolInstance = new Pool(_go, _poolSize);
+        //}
+        //else
+        //{
+        //    poolInstance.prefab = _go;
+        //    poolInstance.baseCount = _poolSize;
+        //    poolInstance.baseRefreshSpeed = 5f;
+        //    poolInstance.refreshSpeed = 5f;
+        //}
 
         pools.Add(poolKey, poolInstance);
 
