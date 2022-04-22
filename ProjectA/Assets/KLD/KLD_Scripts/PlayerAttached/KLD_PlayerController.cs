@@ -39,9 +39,6 @@ public class KLD_PlayerController : MonoBehaviour
     bool runningBackward = false;
     Vector3 eulerRotationToDo = Vector3.zero;
 
-
-
-
     Vector3 worldLookAtPos = Vector3.zero;
 
     void Awake()
@@ -59,8 +56,9 @@ public class KLD_PlayerController : MonoBehaviour
     {
         ProcessAxis();
 
-        //rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
-        rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed;
+        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
+        //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
+        //(runningBackward ? -1f : 1f);
 
         DoFeetRotation();
 
@@ -89,8 +87,8 @@ public class KLD_PlayerController : MonoBehaviour
     {
         playerToLookAtTransform = lookAtTransform.position - transform.position;
 
-        Debug.DrawRay(transform.position + Vector3.up, playerToLookAtTransform, Color.cyan);
-        Debug.DrawRay(transform.position + Vector3.up, transform.forward * 5f, Color.magenta);
+        //Debug.DrawRay(transform.position + Vector3.up, playerToLookAtTransform, Color.cyan);
+        //Debug.DrawRay(transform.position + Vector3.up, transform.forward * 5f, Color.magenta);
 
         forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerToLookAtTransform, Vector3.up);
         forwardToAimAngle -= 30f;
@@ -98,11 +96,6 @@ public class KLD_PlayerController : MonoBehaviour
 
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {
-            worldLookAtPos = rb.velocity;
-            worldLookAtPos.y = 0f;
-            worldLookAtPos.Normalize(); //may be useless
-            transform.LookAt(transform.position + worldLookAtPos);
-
             //if its > 90 change scaler direction
             if (absoluteForwardToAimAngle > 90f)
             {
@@ -114,6 +107,13 @@ public class KLD_PlayerController : MonoBehaviour
                 runningBackward = false;
                 scaler.localRotation = Quaternion.identity;
             }
+
+            worldLookAtPos = rb.velocity;
+            worldLookAtPos.y = 0f;
+            worldLookAtPos.Normalize(); //may be useless
+
+            transform.LookAt((transform.position + worldLookAtPos)); //* (runningBackward ? -1f : 1f));
+
             //scaler.rotation = scalerRotation;
         }
         else //we are not moving
