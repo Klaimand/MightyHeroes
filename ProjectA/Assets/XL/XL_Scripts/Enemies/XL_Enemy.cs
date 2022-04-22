@@ -88,7 +88,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
                     targetedPlayerDistance = nextTargetedPlayerDistance;
                 }
             } else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
-
+            
             i++;
         }
 

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface XL_GameMode
 {
-    public bool GetGameState();
+    bool GetGameState();
 }
