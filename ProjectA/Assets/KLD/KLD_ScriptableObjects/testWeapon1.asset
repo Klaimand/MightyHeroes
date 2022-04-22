@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 366c70be5dfc8e8428a608f560d42e10, type: 3}
   m_Name: testWeapon1
   m_EditorClassIdentifier: 
-  weaponName: newWeapon
+  weaponName: testWeapon
   description: This is a new weapon.
   type: 0
   rarity: 0
@@ -23,12 +23,12 @@ MonoBehaviour:
   weaponAttributes:
   - experienceToReach: 0
     bulletDamage: 20
-    rpm: 60
+    rpm: 500
     reloadSpeed: 1.5
-    magazineSize: 30
-    bulletsPerShot: 7
+    magazineSize: 50000
+    bulletsPerShot: 1
     timeBetweenBullets: 0
-    isBuckshot: 1
+    isBuckshot: 0
     spread: 15
     range: 10
     activePointsPerKill: 5
@@ -99,8 +99,12 @@ MonoBehaviour:
     activePointsPerKill: 5
     displayedName: Level 5
     isBPBReloading: 0
-  shootDelay: 1
+  shootDelay: 0.12
   holdingAnim: {fileID: 0}
   aimingAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
   shootAnim: {fileID: 0}
+  muzzleFlashFX: {fileID: 4222129529927080166, guid: 302db041fbd22b64582d54745a6acca7, type: 3}
+  lineRendererFX: {fileID: 5147150837283688741, guid: 8b6d66755807b1044abc78545f3144b9, type: 3}
+  impactFX: {fileID: 13722952917908546, guid: 978e0e5278e96224e91a796e07d09bb1, type: 3}
+  fxPoolSize: 10

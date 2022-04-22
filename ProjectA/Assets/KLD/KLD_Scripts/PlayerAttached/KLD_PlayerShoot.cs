@@ -47,6 +47,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
+        weapon.PoolBullets();
         UpdateUI();
     }
 

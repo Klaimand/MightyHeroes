@@ -18,6 +18,15 @@ public class XL_Pooler : MonoBehaviour
         public int baseCount;
         public float baseRefreshSpeed = 5;
         public float refreshSpeed = 5;
+
+        public Pool(GameObject _prefab, int _baseCount = 5, float _baseRefreshSpeed = 5f, float _refreshSpeed = 5f)
+        {
+            prefab = _prefab;
+            queue = new Queue<GameObject>();
+            baseCount = _baseCount;
+            baseRefreshSpeed = _baseRefreshSpeed;
+            refreshSpeed = _refreshSpeed;
+        }
     }
 
     [System.Serializable]
@@ -99,7 +108,7 @@ public class XL_Pooler : MonoBehaviour
         return PopPosition(key, Vector3.zero);
     }
 
-    public GameObject PopPosition(string key, Vector3 position) 
+    public GameObject PopPosition(string key, Vector3 position)
     {
         if (pools[key].queue.Count == 0)
         {
@@ -138,5 +147,28 @@ public class XL_Pooler : MonoBehaviour
     {
         yield return new WaitForSeconds(t);
         DePop(key, go);
+    }
+
+    Pool poolInstance;
+
+    public void CreatePool(string poolKey, GameObject _go, int _poolSize)
+    {
+        //if (poolInstance == null)
+        //{
+        poolInstance = new Pool(_go, _poolSize);
+        //}
+        //else
+        //{
+        //    poolInstance.prefab = _go;
+        //    poolInstance.baseCount = _poolSize;
+        //    poolInstance.baseRefreshSpeed = 5f;
+        //    poolInstance.refreshSpeed = 5f;
+        //}
+
+        pools.Add(poolKey, poolInstance);
+
+        PopulatePool(pools[poolKey]);
+
+        StartCoroutine(RefreshPool(pools[poolKey], pools[poolKey].baseRefreshSpeed));
     }
 }

@@ -61,10 +61,13 @@ public class KLD_WeaponSO : ScriptableObject
     public AnimationClip reloadAnim;
     public AnimationClip shootAnim;
 
-    //[Header("FX"), Space(10)]
-    //public GameObject muzzleFlashFX;
-    //public GameObject lineRendererFX;
-    //public GameObject impactFX;
+    [Header("FX"), Space(10)]
+    public GameObject muzzleFlashFX;
+    public GameObject lineRendererFX;
+    public GameObject impactFX;
+
+    [Header("Pooling")]
+    public int fxPoolSize = 9;
 
 
     int maxLevel = 0;
@@ -98,9 +101,13 @@ public class KLD_WeaponSO : ScriptableObject
         if (experience < 0) experience = 0;
     }
 
-
     float RpmToDelay(int rpm)
     {
         return 1f / ((float)rpm / 60f);
+    }
+
+    public void PoolBullets()
+    {
+        bullet.PoolBullets(this);
     }
 }
