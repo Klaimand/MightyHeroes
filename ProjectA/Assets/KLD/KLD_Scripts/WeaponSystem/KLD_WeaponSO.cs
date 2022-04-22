@@ -60,6 +60,7 @@ public class KLD_WeaponSO : ScriptableObject
     public AnimationClip aimingAnim;
     public AnimationClip reloadAnim;
     public AnimationClip shootAnim;
+    public float shootAnimDelay = 0.3f;
 
     [Header("FX"), Space(10)]
     public GameObject muzzleFlashFX;
