@@ -7,7 +7,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     [SerializeField] protected XL_CharacterAttributes characterAttributes;
     [SerializeField] protected Rigidbody rb;
     [SerializeField] protected KLD_PlayerAim playerAim;
-    [SerializeField] protected LayerMask layer;
+    [SerializeField] protected Transform shootDirection;
 
     [SerializeField] protected float fireRate;
     private bool canFire;
@@ -15,9 +15,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     [SerializeField] private XL_ISpells spell;
     private float ultimateCharge;
     [SerializeField] private float ultimateChargeTick;
-
-    [SerializeField] private float outOfCombatTime;
-    private float isOutOfCombat;
 
     private void Awake()
     {
@@ -31,10 +28,18 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         StartCoroutine(OutOfCombatHealingCoroutine(1f));
     }
 
-    public void Move(Vector3 direction)
+    private void Update()
+    {
+        if (playerAim.isShooting) 
+        {
+            Shoot();
+        }
+    }
+
+    /*public void Move(Vector3 direction)
     {
         rb.velocity = direction * characterAttributes.movementSpeed;
-    }
+    }*/
 
     private RaycastHit hit;
     private XL_IDamageable target;
@@ -42,12 +47,13 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (canFire) 
         {
-
-            if (Physics.Raycast(transform.position, playerAim.GetTargetPos() - transform.position, out hit, 50/*, layer*/))
+            Debug.Log("Shoot");
+            if (Physics.Raycast(transform.position + Vector3.up * 1f, playerAim.GetSelectedZombie().transform.position - transform.position, out hit, 50/*, layer*/))
             {
                 StartCoroutine(FireRateCooldown(fireRate));
                 if ((target = hit.transform.GetComponent<XL_IDamageable>()) != null) target.TakeDamage(10);
             }
+            Debug.DrawRay(transform.position, playerAim.GetSelectedZombie().transform.position - transform.position, Color.black);
 
             StopPassiveHeal();
             CancelInvoke("RestorePassiveHeal");
