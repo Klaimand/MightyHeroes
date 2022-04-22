@@ -5,6 +5,7 @@ using UnityEngine;
 public class XL_SpellGrenade : MonoBehaviour, XL_ISpells
 {
     [SerializeField] private XL_SpellGrenadeAttributes grenadeAttributes;
+    [SerializeField] private float minThrowingDistance;
     [SerializeField] private float travelTime;
     private GameObject grenade;
     private float[] startingVelocity;
@@ -21,14 +22,14 @@ public class XL_SpellGrenade : MonoBehaviour, XL_ISpells
 
     private void Start()
     {
-        Debug.Log("throwing Distance : "+grenadeAttributes.throwingDistance);
-        curvePoints = XL_Utilities.GenerateCurve(6, grenadeAttributes.throwingDistance-1);
+        //Debug.Log("throwing Distance : "+grenadeAttributes.throwingDistance);
+        //curvePoints = XL_Utilities.GenerateCurve(6, grenadeAttributes.throwingDistance-1);
         
     }
 
     private void Update()
     {
-        curvePrevisualisation();
+        //curvePrevisualisation();
     }
 
     public void curvePrevisualisation()
@@ -53,7 +54,7 @@ public class XL_SpellGrenade : MonoBehaviour, XL_ISpells
     {
         Debug.Log("launchGrenade");
         grenade = XL_Pooler.instance.PopPosition("BlastGrenade", transform.position + transform.forward);
-        startingVelocity = XL_Utilities.GetVelocity(0.5f, grenadeAttributes.throwingDistance - 1, travelTime);
+        startingVelocity = XL_Utilities.GetVelocity(0.5f, Mathf.Lerp(minThrowingDistance, grenadeAttributes.throwingDistance, throwingDirection.magnitude), travelTime);
         grenade.GetComponent<Rigidbody>().velocity = new Vector3(startingVelocity[0] * (throwingDirection.x), startingVelocity[1], startingVelocity[0] * (throwingDirection.z));
         grenade.GetComponent<XL_Grenade>().SetValue(grenadeAttributes.explosionDamage, grenadeAttributes.explosionRadius);
     }
