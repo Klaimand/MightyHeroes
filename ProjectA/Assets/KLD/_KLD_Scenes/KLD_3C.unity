@@ -552,11 +552,6 @@ Transform:
   m_Father: {fileID: 734239582}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &239828533 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
-  m_PrefabInstance: {fileID: 3458527931660393463}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &283592238
 GameObject:
   m_ObjectHideFlags: 0
@@ -3056,6 +3051,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1358210346890135027, guid: 5b36a6e7417b479458d44cdd3c79cb90, type: 3}
+      propertyPath: useButtonForUltimate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1358210346890135027, guid: 5b36a6e7417b479458d44cdd3c79cb90, type: 3}
       propertyPath: joysticks.Array.data[0].padding
       value: 160
       objectReference: {fileID: 0}
@@ -3248,10 +3247,10 @@ MonoBehaviour:
     throwingDistanceGrowthF: 0
     explosionDamageGrowthF: 0
     explosionRadiusGrowthF: 0
-  throwingRange: 0
+  minThrowingDistance: 0
   travelTime: 0
-  explosionDamage: 0
-  explosionRadius: 0
+  lineRenderer: {fileID: 0}
+  circle: {fileID: 0}
 --- !u!4 &2075347943
 Transform:
   m_ObjectHideFlags: 0
@@ -3273,26 +3272,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071071
-      objectReference: {fileID: 0}
-    - target: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.7071065
-      objectReference: {fileID: 0}
-    - target: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.00000007235397
-      objectReference: {fileID: 0}
-    - target: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.00000001053665
-      objectReference: {fileID: 0}
-    - target: {fileID: 1102841255185912253, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 2755958450831084313, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3341,18 +3320,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerAndTargets
       objectReference: {fileID: 0}
-    - target: {fileID: 3458527930015255062, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_Data.m_MaxLimit
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3458527930015255062, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_Data.m_MinLimit
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 3458527930015255062, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_Data.m_ConstrainedAxes.x
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3458527930590635026, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: inputs
       value: 
@@ -3361,10 +3328,6 @@ PrefabInstance:
       propertyPath: refTransform
       value: 
       objectReference: {fileID: 1422993341}
-    - target: {fileID: 3458527930590635026, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: moduloTransform
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 3458527930590635039, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: inputs
       value: 
@@ -3373,34 +3336,9 @@ PrefabInstance:
       propertyPath: zombieList
       value: 
       objectReference: {fileID: 857304166}
-    - target: {fileID: 3458527930822924473, guid: 161698de267580d438b30f394a10a37a, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: ammoText
+      value: 
+      objectReference: {fileID: 1911612012}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 161698de267580d438b30f394a10a37a, type: 3}
---- !u!1 &3458527931660393464 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3458527930590635028, guid: 161698de267580d438b30f394a10a37a, type: 3}
-  m_PrefabInstance: {fileID: 3458527931660393463}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3458527931660393465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3458527931660393464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002ca19db7c227c46aa1bc9f0144334a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canon: {fileID: 239828533}
-  ammoText: {fileID: 1911612012}
-  weapon: {fileID: 11400000, guid: 519c1da0b5c26594f938803afed29f03, type: 2}
-  zombieVerticalOffset: 1.5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 129
-  isReloading: 0
