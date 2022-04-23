@@ -12,6 +12,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [Header("Public References")]
     [SerializeField] Transform canon;
     [SerializeField] Text ammoText;
+    [SerializeField] Button reloadButton;
 
     [Header("Weapon"), Space(10)]
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
@@ -63,8 +64,14 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
-        weapon.PoolBullets();
+        StartCoroutine(DelayedStart());
         UpdateUI();
+    }
+
+    IEnumerator DelayedStart()
+    {
+        yield return null;
+        weapon.PoolBullets();
     }
 
     // Update is called once per frame
@@ -191,11 +198,11 @@ public class KLD_PlayerShoot : MonoBehaviour
         {
             weaponState = WeaponState.HOLD;
         }
-        else if (!isShooting || isAiming)
+        else if (isAiming && !isShooting)
         {
             weaponState = WeaponState.AIMING;
         }
-        else
+        else if (isAiming && isShooting)
         {
             weaponState = WeaponState.SHOOTING;
         }

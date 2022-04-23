@@ -49,6 +49,7 @@ public class KLD_TouchInputs : MonoBehaviour
     bool isPressingActiveSkillJoystick = false;
 
     public event Action onActiveSkillButton;
+    public event Action onReloadButton;
     public event Action<Vector2> onActiveSkillJoystickRelease;
 
     void Start()
@@ -291,6 +292,11 @@ public class KLD_TouchInputs : MonoBehaviour
     public void PressActiveSkillButton()
     {
         onActiveSkillButton?.Invoke();
+    }
+
+    public void PressReloadButton()
+    {
+        onReloadButton?.Invoke();
     }
 
     public void DetectActiveSkillJoystick()
