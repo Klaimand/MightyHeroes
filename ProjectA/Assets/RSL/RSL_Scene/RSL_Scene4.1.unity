@@ -3404,67 +3404,6 @@ Transform:
   m_Father: {fileID: 885312678}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2148519749235467327
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6035251725699206666, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_Name
-      value: SniperMuzzleFlash
-      objectReference: {fileID: 0}
-    - target: {fileID: 6035251725699206666, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.59
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8287639380616197656, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
 --- !u!4 &6422369564620369670
 Transform:
   m_ObjectHideFlags: 0
@@ -3638,7 +3577,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &8565846231473560808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3893,6 +3832,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canon: {fileID: 2116658274}
   ammoText: {fileID: 1911612012}
+  reloadButton: {fileID: 0}
   weapon: {fileID: 11400000, guid: 47df08bc1b2fcf64faf17a41220eda0b, type: 2}
   zombieVerticalOffset: 1.5
   layerMask:
@@ -3996,7 +3936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8418085655444373790, guid: cbdbceab91bfe934b837846a516ea83c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8565846232205889958, guid: cbdbceab91bfe934b837846a516ea83c, type: 3}
       propertyPath: inputs
