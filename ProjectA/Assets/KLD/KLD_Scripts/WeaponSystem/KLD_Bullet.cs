@@ -11,12 +11,14 @@ public abstract class KLD_Bullet : ScriptableObject
     [SerializeField] Color raysColor;
 
 
-    public abstract void OnHit(KLD_Zombie _zombie, int _damage);
+    //public abstract void OnHit(KLD_Zombie _zombie, int _damage);
+    public abstract void OnHit(XL_IDamageable _damageable, int _damage);
 
 
     float spreadAngle = 0f;
     RaycastHit hit;
-    KLD_Zombie hitZombie;
+    //KLD_Zombie hitZombie;
+    XL_IDamageable hitZombie;
     int bulletsToShoot = 0;
     Vector3 newDir = Vector3.zero;
 
@@ -45,7 +47,7 @@ public abstract class KLD_Bullet : ScriptableObject
             {
                 if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    hitZombie = hit.collider.gameObject.GetComponent<KLD_Zombie>();
+                    hitZombie = hit.collider.gameObject.GetComponent<XL_IDamageable>();
                     if (hitZombie != null)
                     {
                         OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage);

@@ -1702,7 +1702,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
   m_PrefabInstance: {fileID: 3458527931660393463}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 3458527931660393464}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 002ca19db7c227c46aa1bc9f0144334a, type: 3}
@@ -3365,3 +3365,68 @@ PrefabInstance:
       objectReference: {fileID: 1601531099}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 161698de267580d438b30f394a10a37a, type: 3}
+--- !u!1 &3458527931660393464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3458527930590635028, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3458527931660393465 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3458527930590635039, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3458527931660393464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc8962636c7a864a897772144bca74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &3458527931660393466 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 3458527930590635025, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3458527931660393467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3458527931660393464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03510ea6dc508a64ba4982b662392519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterAttributes:
+    level: 1
+    healthMax: 200
+    health: 200
+    movementSpeed: 3
+    armor: 30
+    healingTick: 40
+    activeTick: 0.2
+    healthGrowthP: 1
+    movementSpeedGrowthF: 1
+    armorGrowthF: 1
+    healingTickGrowthP: 1
+    activeTickGrowthF:
+    - 3
+    - 3
+    - 3
+    - 3
+    - 3
+    - 4
+    - 4
+    - 4
+    - 4
+    - 5
+  rb: {fileID: 3458527931660393466}
+  playerAim: {fileID: 3458527931660393465}
+  shootDirection: {fileID: 0}
+  fireRate: 0
+  ultimateCharge: 0
+  isUltimateCharged: 0
+  ultimateChargeTick: 0
+  passiveHealEnabled: 1
+  restorePassiveHealDuration: 5
