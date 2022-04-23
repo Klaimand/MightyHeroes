@@ -21,8 +21,6 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] float zombieVerticalOffset = 1.5f;
     [SerializeField] LayerMask layerMask;
 
-    public bool isReloading = false;
-
     //private local fields
     Vector3 impactPosition = Vector3.zero;
     Vector3 shootDirection = Vector3.zero;
@@ -36,6 +34,24 @@ public class KLD_PlayerShoot : MonoBehaviour
 
     //weapon data
     int curBullets = 0;
+
+    //animation
+    //[HideInInspector] public bool isReloading;
+    [SerializeField] Animator animator;
+    [HideInInspector] public bool isReloading = false;
+    [HideInInspector] public bool isAiming = false;
+    [HideInInspector] public bool isShooting;
+
+    public enum WeaponState
+    {
+        HOLD,
+        AIMING,
+        SHOOTING,
+        RELOADING
+    }
+    WeaponState weaponState = WeaponState.HOLD;
+
+
 
     void Awake()
     {
@@ -54,7 +70,11 @@ public class KLD_PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerAim.isShooting && curBullets > 0)
+        ProcessIsAimingAndShooting();
+
+        AnimateWeaponState();
+
+        if (isShooting && curBullets > 0)
         {
             if (curShootDelay > weapon.shootDelay)
             {
@@ -137,5 +157,56 @@ public class KLD_PlayerShoot : MonoBehaviour
     void UpdateUI()
     {
         ammoText.text = $"{curBullets} / {weapon.GetCurAttributes().magazineSize}";
+    }
+
+    float curShootAnimDelay = 0f;
+    void ProcessIsAimingAndShooting()
+    {
+        isAiming = playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null ||
+         playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f;
+
+        if (!isAiming)
+        {
+            isShooting = false;
+            curShootAnimDelay = 0f;
+        }
+        else if (isAiming && !isShooting)
+        {
+            curShootAnimDelay += Time.deltaTime;
+            if (curShootAnimDelay > weapon.shootAnimDelay)
+            {
+                isShooting = true;
+            }
+        }
+    }
+
+
+    void AnimateWeaponState()
+    {
+        if (isReloading)
+        {
+            weaponState = WeaponState.RELOADING;
+        }
+        else if (!playerAim.GetIsPressingAimJoystick())
+        {
+            weaponState = WeaponState.HOLD;
+        }
+        else if (!isShooting || isAiming)
+        {
+            weaponState = WeaponState.AIMING;
+        }
+        else
+        {
+            weaponState = WeaponState.SHOOTING;
+        }
+        animator.SetInteger("weaponState", (int)weaponState);
+    }
+
+
+
+
+    public WeaponState GetWeaponState()
+    {
+        return weaponState;
     }
 }

@@ -62,14 +62,27 @@ public abstract class KLD_Bullet : ScriptableObject
 
     GameObject lineRenderer;
     LineRenderer curLr;
+    Vector3 shotDirection;
+    Quaternion shotAngles;
 
     void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted)
     {
         //Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
-        XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_muzzle", startPos);
+
+        shotDirection = impactPos - startPos;
+
+        shotAngles = Quaternion.LookRotation(shotDirection, Vector3.up);
+
+        XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_muzzle", startPos, shotAngles);
+
+        //XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_muzzle", startPos);
+
         if (impacted)
         {
-            XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_impact", impactPos);
+            //XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_impact", impactPos);
+            shotDirection = -shotDirection;
+            shotAngles = Quaternion.LookRotation(shotDirection, Vector3.up);
+            XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_impact", impactPos, shotAngles);
         }
         lineRenderer = XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_lineRenderer", startPos);
 
