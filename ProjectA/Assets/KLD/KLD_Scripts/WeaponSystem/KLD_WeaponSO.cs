@@ -66,6 +66,7 @@ public class KLD_WeaponSO : ScriptableObject
     public GameObject muzzleFlashFX;
     public GameObject lineRendererFX;
     public GameObject impactFX;
+    public GameObject wallImpactFX;
 
     [Header("Pooling")]
     public int fxPoolSize = 9;

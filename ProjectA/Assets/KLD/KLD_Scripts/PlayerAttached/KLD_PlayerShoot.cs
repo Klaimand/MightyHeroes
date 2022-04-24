@@ -12,6 +12,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [Header("Public References")]
     [SerializeField] Transform canon;
     [SerializeField] Text ammoText;
+    [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
 
     [Header("Weapon"), Space(10)]
@@ -21,6 +22,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     [Header("Shooting Parameters"), Space(10)]
     [SerializeField] float zombieVerticalOffset = 1.5f;
     [SerializeField] LayerMask layerMask;
+
+    bool canReload = false;
 
     //private local fields
     Vector3 impactPosition = Vector3.zero;
@@ -39,7 +42,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     //animation
     //[HideInInspector] public bool isReloading;
     [SerializeField] Animator animator;
-    [HideInInspector] public bool isReloading = false;
+    [ReadOnly] public bool isReloading = false;
     [HideInInspector] public bool isAiming = false;
     [HideInInspector] public bool isShooting;
 
@@ -74,6 +77,16 @@ public class KLD_PlayerShoot : MonoBehaviour
         weapon.PoolBullets();
     }
 
+    void OnEnable()
+    {
+        touchInputs.onReloadButton += Reload;
+    }
+
+    void OnDisable()
+    {
+        touchInputs.onReloadButton -= Reload;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -81,7 +94,10 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         AnimateWeaponState();
 
-        if (isShooting && curBullets > 0)
+        canReload = !isReloading && curBullets < weapon.GetCurAttributes().magazineSize;
+        reloadButton.interactable = canReload;
+
+        if (isShooting && curBullets > 0 && !isReloading)
         {
             if (curShootDelay > weapon.shootDelay)
             {
@@ -134,7 +150,7 @@ public class KLD_PlayerShoot : MonoBehaviour
 
     public void Reload()
     {
-        if (!isReloading && curBullets < weapon.GetCurAttributes().magazineSize)
+        if (canReload)
         {
             StartCoroutine(ReloadCoroutine());
         }

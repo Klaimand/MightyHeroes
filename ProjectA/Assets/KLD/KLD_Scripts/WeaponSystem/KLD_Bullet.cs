@@ -11,12 +11,14 @@ public abstract class KLD_Bullet : ScriptableObject
     [SerializeField] Color raysColor;
 
 
-    public abstract void OnHit(KLD_Zombie _zombie, int _damage);
+    //public abstract void OnHit(KLD_Zombie _zombie, int _damage);
+    public abstract void OnHit(XL_IDamageable _damageable, int _damage);
 
 
     float spreadAngle = 0f;
     RaycastHit hit;
-    KLD_Zombie hitZombie;
+    //KLD_Zombie hitZombie;
+    XL_IDamageable hitZombie;
     int bulletsToShoot = 0;
     Vector3 newDir = Vector3.zero;
 
@@ -45,17 +47,21 @@ public abstract class KLD_Bullet : ScriptableObject
             {
                 if (hit.collider.gameObject.CompareTag("Enemy"))
                 {
-                    hitZombie = hit.collider.gameObject.GetComponent<KLD_Zombie>();
+                    hitZombie = hit.collider.gameObject.GetComponent<XL_IDamageable>();
                     if (hitZombie != null)
                     {
                         OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage);
                     }
+                    DrawShot(_canonPos, hit.point, _weaponSO, true, true);
                 }
-                DrawShot(_canonPos, hit.point, _weaponSO, true);
+                else
+                {
+                    DrawShot(_canonPos, hit.point, _weaponSO, true, false);
+                }
             }
             else
             {
-                DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range), _weaponSO, false);
+                DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range), _weaponSO, false, false);
             }
         }
     }
@@ -65,7 +71,7 @@ public abstract class KLD_Bullet : ScriptableObject
     Vector3 shotDirection;
     Quaternion shotAngles;
 
-    void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted)
+    void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted, bool impactedEnemy)
     {
         //Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
 
@@ -82,7 +88,14 @@ public abstract class KLD_Bullet : ScriptableObject
             //XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_impact", impactPos);
             shotDirection = -shotDirection;
             shotAngles = Quaternion.LookRotation(shotDirection, Vector3.up);
-            XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_impact", impactPos, shotAngles);
+            if (impactedEnemy)
+            {
+                XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_impact", impactPos, shotAngles);
+            }
+            else
+            {
+                XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_wallImpact", impactPos, shotAngles);
+            }
         }
         lineRenderer = XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_lineRenderer", startPos);
 
@@ -98,6 +111,7 @@ public abstract class KLD_Bullet : ScriptableObject
     {
         XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_muzzle", weaponSO.muzzleFlashFX, weaponSO.fxPoolSize);
         XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_impact", weaponSO.impactFX, weaponSO.fxPoolSize);
+        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_wallImpact", weaponSO.wallImpactFX, weaponSO.fxPoolSize);
         XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_lineRenderer", weaponSO.lineRendererFX, weaponSO.fxPoolSize);
     }
 }
