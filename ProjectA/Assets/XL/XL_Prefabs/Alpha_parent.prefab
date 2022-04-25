@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &80650608525700750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1089717838616605843, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+  m_PrefabInstance: {fileID: 20138483756895179}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293631097746712034}
+  m_Layer: 7
+  m_Name: 'SK_Summoner (Missing Prefab with guid: ba713dc401759bd4d970d5f540726226)'
+  m_TagString: Enemy
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &293631097746712034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 312054823322545705, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+  m_PrefabInstance: {fileID: 20138483756895179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80650608525700750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5651373868645437874}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3999312325768421386
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,9 +43,9 @@ GameObject:
   - component: {fileID: 1447750550451168901}
   - component: {fileID: 3688438485610751149}
   - component: {fileID: 3353813555182458778}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Alpha_parent
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,7 +159,7 @@ GameObject:
   - component: {fileID: 2451986949777403977}
   - component: {fileID: 1223136655546317689}
   - component: {fileID: 5921496031567143216}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: healthbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +251,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2420655849288426681}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: healthbarscaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -252,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2677397662809998797}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: scaler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,6 +359,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Summoner
       objectReference: {fileID: 0}
+    - target: {fileID: 1089717838616605843, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089717838616605843, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3869053544842354484, guid: ba713dc401759bd4d970d5f540726226, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
@@ -347,8 +385,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba713dc401759bd4d970d5f540726226, type: 3}
---- !u!4 &293631097746712034 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 312054823322545705, guid: ba713dc401759bd4d970d5f540726226, type: 3}
-  m_PrefabInstance: {fileID: 20138483756895179}
-  m_PrefabAsset: {fileID: 0}

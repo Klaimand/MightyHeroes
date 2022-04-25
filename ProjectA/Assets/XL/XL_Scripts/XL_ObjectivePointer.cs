@@ -4,12 +4,22 @@ using UnityEngine;
 
 public class XL_ObjectivePointer : MonoBehaviour
 {
-    [SerializeField] Transform target;
+    [SerializeField] Transform player;
+    Transform target;
     [SerializeField] RectTransform pointerRectTransform;
+    [SerializeField] private float distanceAround;
+
+    [SerializeField] private float refreshTime;
+    private WaitForSeconds wait;
 
     private void Awake()
     {
-        target = GameObject.FindGameObjectWithTag("Objective").transform;
+        wait = new WaitForSeconds(refreshTime);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(FindNearestCoroutine());
     }
 
     Vector3 toPosition;
@@ -21,7 +31,8 @@ public class XL_ObjectivePointer : MonoBehaviour
     private void Update()
     {
         toPosition = Camera.main.WorldToScreenPoint(target.transform.position);
-        Debug.Log(toPosition + " -> toPosition ScreenSpace");
+        toPosition.x -= 740; //Screen resolution X
+        toPosition.y -= 339; //Screen resultion Y
         toPosition.z = 0f;
         fromPosition = Camera.main.transform.position;
         fromPosition.z = 0f;
@@ -29,7 +40,15 @@ public class XL_ObjectivePointer : MonoBehaviour
         angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
         pointerAngle.z = angle;
         pointerRectTransform.localEulerAngles = pointerAngle;
-        //pointerRectTransform.rotation = Quaternion.FromToRotation(fromPosition, toPosition);
-        //pointerRectTransform.eulerAngles = new Vector3(0, 0, pointerRectTransform.rotation.z);
+
+        pointerRectTransform.localPosition = dir.normalized * distanceAround;
+    }
+
+    IEnumerator FindNearestCoroutine() 
+    {
+        target = XL_GameModeManager.instance.GetNearestObjective(player.position);
+        
+        yield return wait;
+        StartCoroutine(FindNearestCoroutine());
     }
 }

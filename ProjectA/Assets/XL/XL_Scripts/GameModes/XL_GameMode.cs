@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface XL_GameMode
 {
-    bool GetGameState();
+    bool GetObjectiveState();
+    Transform GetTransform();
 }

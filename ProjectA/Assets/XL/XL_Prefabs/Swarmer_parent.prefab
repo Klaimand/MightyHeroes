@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8979922475347393350}
   - component: {fileID: 1159218035251262209}
   - component: {fileID: 2879602902991981408}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Swarmer_parent
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -61,10 +61,10 @@ MonoBehaviour:
   speed: 5
   pooler: {fileID: 0}
   healthBar: {fileID: 2879602902991981408}
+  model: {fileID: 2693101145594560947}
   attackRange: 1.5
   attackWidth: 0.5
   attackAnimationSpeed: 1
-  model: {fileID: 2693101145594560947}
   nbRaycast: 5
 --- !u!195 &901648824140653451
 NavMeshAgent:
@@ -132,6 +132,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1682744529569903027}
   ultBar: {fileID: 0}
+--- !u!1 &2693101145594560947
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+  m_PrefabInstance: {fileID: 6195681959000257688}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3552217699695049706}
+  m_Layer: 7
+  m_Name: Placeholder for referenced GameObject in Prefab instance (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3552217699695049706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 9223372036854775807, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+  m_PrefabInstance: {fileID: 6195681959000257688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693101145594560947}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2693101145594560944}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3397200270511556158
 GameObject:
   m_ObjectHideFlags: 0
@@ -143,7 +173,7 @@ GameObject:
   - component: {fileID: 3366245991025680292}
   - component: {fileID: 5527730231658470597}
   - component: {fileID: 6657564113887234398}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBarBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +248,7 @@ GameObject:
   - component: {fileID: 232414288286167888}
   - component: {fileID: 6952208508501738158}
   - component: {fileID: 1682744529569903027}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +325,7 @@ GameObject:
   - component: {fileID: 5787930245324638508}
   - component: {fileID: 1733175368375693332}
   - component: {fileID: 5996002651296951815}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -397,6 +427,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+--- !u!1 &8011157427834240480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+  m_PrefabInstance: {fileID: 6195681959000257688}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2693101145594560944}
+  m_Layer: 7
+  m_Name: 'SK_Swarmer (Missing Prefab with guid: 0fc1900d536251e4380962582cd85cd3)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2693101145594560944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8116800252798645544, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+  m_PrefabInstance: {fileID: 6195681959000257688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011157427834240480}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3552217699695049706}
+  m_Father: {fileID: 901648824140653449}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6195681959000257688
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -452,15 +513,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Swarmer
       objectReference: {fileID: 0}
+    - target: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
---- !u!1 &2693101145594560947 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-  m_PrefabInstance: {fileID: 6195681959000257688}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2693101145594560944 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8116800252798645544, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-  m_PrefabInstance: {fileID: 6195681959000257688}
-  m_PrefabAsset: {fileID: 0}
