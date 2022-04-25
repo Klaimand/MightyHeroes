@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 {
+
+
     [SerializeField] private KLD_ZombieAttributes attributes;
     protected float health;
 
@@ -23,7 +25,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [Header("Pooler")]
     [SerializeField] protected XL_Pooler pooler;
 
-    [SerializeField] Transform healthBar;
+    [SerializeField] XL_HealthBarUI healthBar;
 
     Vector3 scale = Vector3.one;
 
@@ -41,7 +43,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         health = attributes.maxHealth;
         agent.speed = speed;
         canAttack = true;
-        UpdateHealthBar();
+        //healthBar.UpdateHealthBar(health / attributes.maxHealth);
     }
 
     public abstract void Alert();
@@ -106,7 +108,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     public void TakeDamage(int damage)
     {
         health -= damage;
-        UpdateHealthBar();
+        healthBar.UpdateHealthBar(health / attributes.maxHealth);
         if (health < 1) Die();
     }
 
@@ -118,31 +120,13 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Initialize();
     }
 
-    void OnDisable()
-    {
-        //"ZombieList" things here
-    }
-
-    void OnValidate()
-    {
-        UpdateHealthBar();
-
-        if (gUIStyle == null) SetupGUIStyle();
-    }
-
-    void UpdateHealthBar()
-    {
-        scale.x = (health / 100f);
-
-        healthBar.localScale = scale;
-    }
 
     public KLD_ZombieAttributes GetZombieAttributes() 
     {
         return attributes;
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
 #if UNITY_EDITOR
         Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
@@ -160,5 +144,5 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
 
         gUIStyle = _gui;
-    }
+    }*/
 }
