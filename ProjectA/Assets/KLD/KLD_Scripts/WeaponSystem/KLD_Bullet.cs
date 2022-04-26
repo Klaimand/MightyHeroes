@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class KLD_Bullet : ScriptableObject
 {
     [Header("FX")]
-    [SerializeField] GameObject muzzleFlashFX;
-    [SerializeField] GameObject lineRendererFX;
-    [SerializeField] GameObject impactFX;
+    //[SerializeField] GameObject muzzleFlashFX;
+    //[SerializeField] GameObject lineRendererFX;
+    //[SerializeField] GameObject impactFX;
     [SerializeField] Color raysColor;
 
 
@@ -51,17 +51,40 @@ public abstract class KLD_Bullet : ScriptableObject
                         OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage);
                     }
                 }
-                DrawShot(_canonPos, hit.point);
+                DrawShot(_canonPos, hit.point, _weaponSO, true);
             }
             else
             {
-                DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range));
+                DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range), _weaponSO, false);
             }
         }
     }
 
-    void DrawShot(Vector3 startPos, Vector3 impactPos)
+    GameObject lineRenderer;
+    LineRenderer curLr;
+
+    void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted)
     {
-        Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
+        //Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
+        XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_muzzle", startPos);
+        if (impacted)
+        {
+            XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_impact", impactPos);
+        }
+        lineRenderer = XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_lineRenderer", startPos);
+
+        for (int i = 0; i < 2; i++)
+        {
+            curLr = lineRenderer.transform.GetChild(i).GetComponent<LineRenderer>();
+            curLr.SetPosition(0, startPos);
+            curLr.SetPosition(1, impactPos);
+        }
+    }
+
+    public void PoolBullets(KLD_WeaponSO weaponSO)
+    {
+        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_muzzle", weaponSO.muzzleFlashFX, weaponSO.fxPoolSize);
+        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_impact", weaponSO.impactFX, weaponSO.fxPoolSize);
+        XL_Pooler.instance.CreatePool(weaponSO.weaponName + "_lineRenderer", weaponSO.lineRendererFX, weaponSO.fxPoolSize);
     }
 }

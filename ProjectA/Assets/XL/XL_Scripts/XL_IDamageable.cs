@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface XL_IDamageable
 {
-    public void TakeDamage(int damage);
+    public void TakeDamage(float damage);
     public void Die();
 }

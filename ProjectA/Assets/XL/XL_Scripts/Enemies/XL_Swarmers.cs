@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class XL_Swarmers : XL_Enemy
 {
+    [SerializeField] private GameObject model;
+    protected Material shader;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackWidth;
+    [SerializeField] private float attackAnimationSpeed;
+    private bool attacking;
     private List<GameObject> playersHit = new List<GameObject>();
 
     [SerializeField] private int nbRaycast;
+
+    private void Awake()
+    {
+        shader = model.GetComponent<MeshRenderer>().material;
+    }
+
 
     private void Update()
     {
         Move();
         DebugRaycast();
+        //if (attacking) shader.SetFloat("_AtkSldr", Time.time - atkStartingTime);
     }
 
     private void DebugRaycast()
@@ -57,23 +68,22 @@ public class XL_Swarmers : XL_Enemy
     public override void Attack()
     {
         //Debug.Log("Attacking");
-        StartCoroutine(AttackCoroutine(1));
-        StartCoroutine(AttackCooldownCoroutine(2));
+        StartCoroutine(AttackCoroutine(attackAnimationSpeed));
+        StartCoroutine(AttackCooldownCoroutine(attackAnimationSpeed));
     }
 
-
+    float atkStartingTime;
     private RaycastHit[] hits;
     IEnumerator AttackCoroutine(float t) 
     {
+        attacking = true;
         transform.LookAt(targetedPlayer);
         playersHit.Clear();
+        //atkStartingTime = Time.time;
+        shader.SetFloat("_Reset", 0);
+        shader.SetFloat("_AtkSldr", 1);
         yield return new WaitForSeconds(t);
 
-        /*hits = Physics.BoxCastAll(transform.forward * attackRange * 0.6f, new Vector3(attackWidth/2, 0.2f, attackRange * 0.6f), transform.forward, Quaternion.identity, layer);
-        for (int i = 0; i < hits.Length; i++)
-        {
-            Debug.Log("Player " + hits[0].transform.name + "has been hit");
-        } */
 
         for (int i = 0; i < nbRaycast + 1; i++)
         {
@@ -82,12 +92,15 @@ public class XL_Swarmers : XL_Enemy
             {
                 if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject)) 
                 {
-                    //Debug.Log(transform.name + " damaged " + hits[j].transform.name);
                     playersHit.Add(hits[j].transform.gameObject);
                     if(hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage);
                 }
             }
         }
+        attacking = false;
+        
+        shader.SetFloat("_AtkSldr", 0);
+        shader.SetFloat("_Reset", 1);
     }
 
     private void OnTriggerStay(Collider other)

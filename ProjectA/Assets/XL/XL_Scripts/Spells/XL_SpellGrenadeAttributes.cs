@@ -7,7 +7,7 @@ public class XL_SpellGrenadeAttributes
 {
     public int level;
     public float throwingDistance;
-    public float explosionDamage;
+    public int explosionDamage;
     public float explosionRadius;
 
     [SerializeField] private float throwingDistanceGrowthF;
@@ -17,7 +17,7 @@ public class XL_SpellGrenadeAttributes
     public void Initialize()
     {
         throwingDistance = throwingDistance + level * throwingDistanceGrowthF;
-        explosionDamage = explosionDamage + level * explosionDamageGrowthF;
-        explosionRadius = explosionRadiusGrowthF + level * explosionRadiusGrowthF;
+        explosionDamage =(int)(explosionDamage + level * explosionDamageGrowthF);
+        explosionRadius = explosionRadius + level * explosionRadiusGrowthF;
     }
 }
