@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 {
+    public string objectiveString = "Capture the zones";
+
     [SerializeField] private XL_UICaptureZone ui;
 
     [SerializeField] private float tickTime;
@@ -69,5 +71,10 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
     public Transform GetTransform()
     {
         return this.transform;
+    }
+
+    public string GetObjectiveString() 
+    {
+        return objectiveString;
     }
 }

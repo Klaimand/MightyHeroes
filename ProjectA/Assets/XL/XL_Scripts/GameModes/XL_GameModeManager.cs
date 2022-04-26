@@ -11,9 +11,18 @@ public class XL_GameModeManager : MonoBehaviour
     private int nbObjectives;
     private int nbObjectivesCompleted;
 
+    [SerializeField] float missionMaxTime;
+    float missionTime;
+    WaitForSeconds wait;
+
+    [SerializeField] XL_UIMission uiMission;
+
     private void Awake()
     {
         instance = this;
+
+        wait = new WaitForSeconds(1);
+        missionTime = missionMaxTime;
 
         temp = GameObject.FindGameObjectsWithTag("Objective");
         foreach (GameObject go in temp) 
@@ -22,6 +31,12 @@ public class XL_GameModeManager : MonoBehaviour
         }
         nbObjectives = objectives.Count;
         nbObjectivesCompleted = 0;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(TimerCoroutine());
+        uiMission.UpdateObjective(nbObjectivesCompleted + "/" + nbObjectives + " : " + objectives[0].GetObjectiveString());
     }
 
     Transform nearestObjective;
@@ -49,6 +64,17 @@ public class XL_GameModeManager : MonoBehaviour
     public void CompleteObjective() 
     {
         nbObjectivesCompleted++;
+        uiMission.UpdateObjective(nbObjectivesCompleted + "/" + nbObjectives + " : " + objectives[0].GetObjectiveString());
         if (nbObjectivesCompleted >= nbObjectives) XL_GameManager.instance.WinGame();
+    }
+
+    IEnumerator TimerCoroutine() 
+    {
+        while (true)
+        {
+            missionTime--;
+            uiMission.UpdateTimer(missionTime);
+            yield return wait;
+        }
     }
 }
