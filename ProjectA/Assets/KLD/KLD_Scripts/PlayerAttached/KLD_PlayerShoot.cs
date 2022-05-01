@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using UnityEngine.Animations.Rigging;
 
 public class KLD_PlayerShoot : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] Text ammoText;
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
+    [SerializeField] Animator animator;
 
     [Header("Weapon"), Space(10)]
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
@@ -41,7 +43,6 @@ public class KLD_PlayerShoot : MonoBehaviour
 
     //animation
     //[HideInInspector] public bool isReloading;
-    [SerializeField] Animator animator;
     [ReadOnly] public bool isReloading = false;
     [HideInInspector] public bool isAiming = false;
     [HideInInspector] public bool isShooting;
@@ -51,10 +52,18 @@ public class KLD_PlayerShoot : MonoBehaviour
         HOLD,
         AIMING,
         SHOOTING,
-        RELOADING
+        RELOADING,
+        RELOADING_BPB
     }
     WeaponState weaponState = WeaponState.HOLD;
 
+
+    //weapon mesh and anims references
+    [Header("Weapon Mesh/Anims"), Space(10)]
+    [SerializeField] Transform weaponHolderParent;
+    [SerializeField] TwoBoneIKConstraint leftHandIK;
+    [SerializeField] TwoBoneIKConstraint rightHandIK;
+    [SerializeField] AnimatorOverrideController animatorOverrideController;
 
 
     void Awake()
@@ -208,7 +217,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         if (isReloading)
         {
-            weaponState = WeaponState.RELOADING;
+            weaponState = (weapon.reloadType == ReloadType.MAGAZINE ? WeaponState.RELOADING : WeaponState.RELOADING_BPB);
         }
         else if (!playerAim.GetIsPressingAimJoystick())
         {
@@ -227,9 +236,43 @@ public class KLD_PlayerShoot : MonoBehaviour
 
 
 
-
     public WeaponState GetWeaponState()
     {
         return weaponState;
     }
+
+
+
+    #region Weapon Mesh and anims Initialization
+
+    GameObject instantiedWH;
+    KLD_WeaponHolder weaponHolder;
+
+    void InitWeaponMesh()
+    {
+        if (weaponHolderParent.childCount > 3)
+        {
+            Destroy(weaponHolderParent.GetChild(3));
+        }
+
+        //weaponholder spawn
+        instantiedWH = Instantiate(weapon.weaponHolder,
+        Vector3.zero,
+        weapon.weaponHolder.transform.rotation,
+        weaponHolderParent
+        );
+
+        instantiedWH.transform.localPosition = weapon.weaponHolder.transform.localPosition;
+        weaponHolder = instantiedWH.GetComponent<KLD_WeaponHolder>();
+
+        leftHandIK.data.target = weaponHolder.leftHandle;
+        rightHandIK.data.target = weaponHolder.rightHandle;
+
+        canon = weaponHolder.canon;
+
+        animator.runtimeAnimatorController = weapon.animatorOverrideController;
+
+    }
+
+    #endregion
 }

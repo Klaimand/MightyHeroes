@@ -26,9 +26,9 @@ MonoBehaviour:
     rpm: 50
     reloadSpeed: 1.5
     magazineSize: 50000
-    bulletsPerShot: 5
+    bulletsPerShot: 1
     timeBetweenBullets: 0
-    isBuckshot: 1
+    isBuckshot: 0
     spread: 20
     range: 10
     activePointsPerKill: 5
@@ -100,10 +100,8 @@ MonoBehaviour:
     displayedName: Level 5
     isBPBReloading: 0
   shootDelay: 1.2
-  holdingAnim: {fileID: 0}
-  aimingAnim: {fileID: 0}
-  reloadAnim: {fileID: 0}
-  shootAnim: {fileID: 0}
+  weaponHolder: {fileID: 4601468427878313275, guid: e722b8234cbca384e9bd91de1e729d82, type: 3}
+  animatorOverrideController: {fileID: 22100000, guid: 4c9faf0317460af4d956f9b28ed00a23, type: 2}
   shootAnimDelay: 0.3
   muzzleFlashFX: {fileID: 4222129529927080166, guid: 302db041fbd22b64582d54745a6acca7, type: 3}
   lineRendererFX: {fileID: 5147150837283688741, guid: 8b6d66755807b1044abc78545f3144b9, type: 3}
