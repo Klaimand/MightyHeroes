@@ -61,14 +61,15 @@ public class KLD_PlayerShoot : MonoBehaviour
     //weapon mesh and anims references
     [Header("Weapon Mesh/Anims"), Space(10)]
     [SerializeField] Transform weaponHolderParent;
+    [SerializeField] RigBuilder rigBuilder;
     [SerializeField] TwoBoneIKConstraint leftHandIK;
     [SerializeField] TwoBoneIKConstraint rightHandIK;
-    [SerializeField] AnimatorOverrideController animatorOverrideController;
 
 
     void Awake()
     {
         playerAim = GetComponent<KLD_PlayerAim>();
+        InitWeaponMesh();
     }
 
     // Start is called before the first frame update
@@ -76,8 +77,10 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
+        playerAim.targetPosAngleOffset = weapon.angleOffset;
         StartCoroutine(DelayedStart());
         UpdateUI();
+        //InitWeaponMesh();
     }
 
     IEnumerator DelayedStart()
@@ -250,27 +253,40 @@ public class KLD_PlayerShoot : MonoBehaviour
 
     void InitWeaponMesh()
     {
-        if (weaponHolderParent.childCount > 3)
-        {
-            Destroy(weaponHolderParent.GetChild(3));
-        }
+        if (weaponHolderParent.childCount > 3) { Destroy(weaponHolderParent.GetChild(3).gameObject); }
 
-        //weaponholder spawn
-        instantiedWH = Instantiate(weapon.weaponHolder,
-        Vector3.zero,
-        weapon.weaponHolder.transform.rotation,
-        weaponHolderParent
-        );
+        //leftHandIK.enabled = false;
+        //rightHandIK.enabled = false;
 
-        instantiedWH.transform.localPosition = weapon.weaponHolder.transform.localPosition;
+        instantiedWH = Instantiate(weapon.weaponHolder, Vector3.zero, Quaternion.identity, weaponHolderParent);
+
+        instantiedWH.name = "WeaponHolder";
+
+        instantiedWH.transform.localPosition = weapon.weaponHolder.transform.position;
+        instantiedWH.transform.localRotation = weapon.weaponHolder.transform.rotation;
+
+
         weaponHolder = instantiedWH.GetComponent<KLD_WeaponHolder>();
 
-        leftHandIK.data.target = weaponHolder.leftHandle;
-        rightHandIK.data.target = weaponHolder.rightHandle;
+        rightHandIK.data.target = weaponHolder.leftHandle;
+        leftHandIK.data.target = weaponHolder.rightHandle;
 
         canon = weaponHolder.canon;
 
+
         animator.runtimeAnimatorController = weapon.animatorOverrideController;
+
+
+        animator.enabled = false;
+        animator.enabled = true;
+
+        rigBuilder.Build();
+
+        animator.enabled = false;
+        animator.enabled = true;
+
+        //leftHandIK.enabled = true;
+        //rightHandIK.enabled = true;
 
     }
 

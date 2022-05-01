@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &4615136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4518135287018490379, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &21286425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2277,6 +2288,11 @@ Transform:
   m_Father: {fileID: 1221715643}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1476666770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3509105872765016989, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1564434702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3094,6 +3110,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b21d08fca9becc4d9a4d3471981642a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1908149825 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 675755818237682215, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1911612010
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3299,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2111749002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 675755819295385431, guid: 161698de267580d438b30f394a10a37a, type: 3}
+  m_PrefabInstance: {fileID: 3458527931660393463}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeda7bfbf984f2a4da5ab4b8967b115d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3458527931660393463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3279,6 +3317,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 675755818237682215, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: m_SettingsGUIToggle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2755958450831084313, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -3347,6 +3389,10 @@ PrefabInstance:
       propertyPath: playerShoot
       value: 
       objectReference: {fileID: 1030932224}
+    - target: {fileID: 3458527931045175505, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: ammoText
       value: 
@@ -3356,6 +3402,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340877944}
     - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: leftHandIK
+      value: 
+      objectReference: {fileID: 1908149825}
+    - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: rigBuilder
+      value: 
+      objectReference: {fileID: 4615136}
+    - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: rightHandIK
+      value: 
+      objectReference: {fileID: 2111749002}
+    - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: touchInputs
       value: 
       objectReference: {fileID: 1907775921}
@@ -3363,6 +3421,10 @@ PrefabInstance:
       propertyPath: reloadButton
       value: 
       objectReference: {fileID: 1601531099}
+    - target: {fileID: 3458527931660393465, guid: 161698de267580d438b30f394a10a37a, type: 3}
+      propertyPath: weaponHolderParent
+      value: 
+      objectReference: {fileID: 1476666770}
     - target: {fileID: 4518135287018490378, guid: 161698de267580d438b30f394a10a37a, type: 3}
       propertyPath: m_Controller
       value: 
