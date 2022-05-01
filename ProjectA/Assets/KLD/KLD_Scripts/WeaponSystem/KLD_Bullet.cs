@@ -21,6 +21,7 @@ public abstract class KLD_Bullet : ScriptableObject
     XL_IDamageable hitZombie;
     int bulletsToShoot = 0;
     Vector3 newDir = Vector3.zero;
+    bool noMuzzle;
 
     public virtual void Shoot(KLD_WeaponSO _weaponSO, Vector3 _canonPos, Vector3 _dir, LayerMask _layerMask)
     {
@@ -29,6 +30,8 @@ public abstract class KLD_Bullet : ScriptableObject
 
         for (int i = 0; i < bulletsToShoot; i++)
         {
+            noMuzzle = _weaponSO.GetCurAttributes().isBuckshot && i != bulletsToShoot / 2;
+
             if (_weaponSO.GetCurAttributes().isBuckshot)
             {
                 spreadAngle = Mathf.Lerp(
@@ -52,16 +55,16 @@ public abstract class KLD_Bullet : ScriptableObject
                     {
                         OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage);
                     }
-                    DrawShot(_canonPos, hit.point, _weaponSO, true, true);
+                    DrawShot(_canonPos, hit.point, _weaponSO, true, true, noMuzzle);
                 }
                 else
                 {
-                    DrawShot(_canonPos, hit.point, _weaponSO, true, false);
+                    DrawShot(_canonPos, hit.point, _weaponSO, true, false, noMuzzle);
                 }
             }
             else
             {
-                DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range), _weaponSO, false, false);
+                DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range), _weaponSO, false, false, noMuzzle);
             }
         }
     }
@@ -71,7 +74,7 @@ public abstract class KLD_Bullet : ScriptableObject
     Vector3 shotDirection;
     Quaternion shotAngles;
 
-    void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted, bool impactedEnemy)
+    void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted, bool impactedEnemy, bool _noMuzzle)
     {
         //Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
 
@@ -79,7 +82,8 @@ public abstract class KLD_Bullet : ScriptableObject
 
         shotAngles = Quaternion.LookRotation(shotDirection, Vector3.up);
 
-        XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_muzzle", startPos, shotAngles);
+        if (!noMuzzle)
+        { XL_Pooler.instance.PopPosRot(_weaponSO.weaponName + "_muzzle", startPos, shotAngles); }
 
         //XL_Pooler.instance.PopPosition(_weaponSO.weaponName + "_muzzle", startPos);
 
