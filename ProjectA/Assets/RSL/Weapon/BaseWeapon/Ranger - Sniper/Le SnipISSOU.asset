@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366c70be5dfc8e8428a608f560d42e10, type: 3}
+  m_Name: Le SnipISSOU
+  m_EditorClassIdentifier: 
+  weaponName: Le SnipISSOU
+  description: 'Le issou qui tire vite
+
+'
+  type: 3
+  rarity: 0
+  reloadType: 0
+  bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
+  level: 0
+  experience: 0
+  weaponAttributes:
+  - experienceToReach: 0
+    bulletDamage: 100
+    rpm: 60
+    reloadSpeed: 1.5
+    magazineSize: 30000
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 0
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 0
+    isBPBReloading: 0
+  - experienceToReach: 800
+    bulletDamage: 25
+    rpm: 450
+    reloadSpeed: 1.4
+    magazineSize: 32
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 25
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 1
+    isBPBReloading: 0
+  shootDelay: 1
+  holdingAnim: {fileID: 7400000, guid: 538886c540100a14ba312d9d9c464e9f, type: 2}
+  aimingAnim: {fileID: 7400000, guid: 5ce3df3b49693984abe45dbccb1eebb9, type: 2}
+  reloadAnim: {fileID: 7400000, guid: fdef92712caac494795a64b35224dce0, type: 2}
+  shootAnim: {fileID: 7400000, guid: f18fdc11433d4094a95f9edebd62ca61, type: 2}
+  shootAnimDelay: 0.07
+  muzzleFlashFX: {fileID: 4493065256289968807, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
+  lineRendererFX: {fileID: 5147150837283688741, guid: 58128c18920931e4e8dc35aaad16a0eb, type: 3}
+  impactFX: {fileID: 4361285585771206714, guid: 81f43fc170286f949b867ce2381e6837, type: 3}
+  wallImpactFX: {fileID: 4361285585771206714, guid: 81f43fc170286f949b867ce2381e6837, type: 3}
+  fxPoolSize: 9
