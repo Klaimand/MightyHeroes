@@ -32,7 +32,7 @@ Transform:
   m_LocalPosition: {x: 7.702806, y: 1.0188553, z: -5.37}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2693101145594560944}
+  - {fileID: 6765556740270379893}
   - {fileID: 5451248701257200569}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,7 +61,7 @@ MonoBehaviour:
   speed: 5
   pooler: {fileID: 0}
   healthBar: {fileID: 2879602902991981408}
-  model: {fileID: 2693101145594560947}
+  model: {fileID: 6765556740270379894}
   attackRange: 1.5
   attackWidth: 0.5
   attackAnimationSpeed: 1
@@ -132,36 +132,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 1682744529569903027}
   ultBar: {fileID: 0}
---- !u!1 &2693101145594560947
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-  m_PrefabInstance: {fileID: 6195681959000257688}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3552217699695049706}
-  m_Layer: 7
-  m_Name: Placeholder for referenced GameObject in Prefab instance (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3552217699695049706
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 9223372036854775807, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-  m_PrefabInstance: {fileID: 6195681959000257688}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2693101145594560947}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2693101145594560944}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3397200270511556158
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,38 +397,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
---- !u!1 &8011157427834240480
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-  m_PrefabInstance: {fileID: 6195681959000257688}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2693101145594560944}
-  m_Layer: 7
-  m_Name: 'SK_Swarmer (Missing Prefab with guid: 0fc1900d536251e4380962582cd85cd3)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2693101145594560944
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 8116800252798645544, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-  m_PrefabInstance: {fileID: 6195681959000257688}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8011157427834240480}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 3552217699695049706}
-  m_Father: {fileID: 901648824140653449}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &6195681959000257688
+--- !u!1001 &3260813739394197085
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -513,9 +452,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: SK_Swarmer
       objectReference: {fileID: 0}
-    - target: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+--- !u!1 &6765556740270379894 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8116800252798645547, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+  m_PrefabInstance: {fileID: 3260813739394197085}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6765556740270379893 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8116800252798645544, guid: 0fc1900d536251e4380962582cd85cd3, type: 3}
+  m_PrefabInstance: {fileID: 3260813739394197085}
+  m_PrefabAsset: {fileID: 0}

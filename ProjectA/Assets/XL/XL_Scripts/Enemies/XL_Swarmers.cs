@@ -24,7 +24,7 @@ public class XL_Swarmers : XL_Enemy
     {
         Move();
         DebugRaycast();
-        //if (attacking) shader.SetFloat("_AtkSldr", Time.time - atkStartingTime);
+        if (attacking) shader.SetFloat("_AtkFloat", Time.time - atkStartingTime + 0.5f);
     }
 
     private void DebugRaycast()
@@ -79,8 +79,7 @@ public class XL_Swarmers : XL_Enemy
         attacking = true;
         transform.LookAt(targetedPlayer);
         playersHit.Clear();
-        //atkStartingTime = Time.time;
-        shader.SetFloat("_Reset", 0);
+        atkStartingTime = Time.time;
         shader.SetFloat("_AtkSldr", 1);
         yield return new WaitForSeconds(t);
 
@@ -100,7 +99,6 @@ public class XL_Swarmers : XL_Enemy
         attacking = false;
         
         shader.SetFloat("_AtkSldr", 0);
-        shader.SetFloat("_Reset", 1);
     }
 
     private void OnTriggerStay(Collider other)
