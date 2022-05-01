@@ -23,13 +23,13 @@ MonoBehaviour:
   weaponAttributes:
   - experienceToReach: 0
     bulletDamage: 20
-    rpm: 500
+    rpm: 50
     reloadSpeed: 1.5
     magazineSize: 50000
-    bulletsPerShot: 1
+    bulletsPerShot: 5
     timeBetweenBullets: 0
-    isBuckshot: 0
-    spread: 15
+    isBuckshot: 1
+    spread: 20
     range: 10
     activePointsPerKill: 5
     displayedName: Level 0
@@ -99,7 +99,7 @@ MonoBehaviour:
     activePointsPerKill: 5
     displayedName: Level 5
     isBPBReloading: 0
-  shootDelay: 0.12
+  shootDelay: 1.2
   holdingAnim: {fileID: 0}
   aimingAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
