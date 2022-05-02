@@ -183,6 +183,7 @@ public class KLD_PlayerShoot : MonoBehaviour
             for (int i = 0; i < missingBullets + 1; i++)
             {
                 curBullets++;
+                UpdateUI();
                 yield return new WaitForSeconds(weapon.GetCurAttributes().reloadSpeed);
             }
         }
