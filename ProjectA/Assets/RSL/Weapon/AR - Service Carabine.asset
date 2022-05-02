@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 366c70be5dfc8e8428a608f560d42e10, type: 3}
-  m_Name: AR - The Classic
+  m_Name: AR - Service Carabine
   m_EditorClassIdentifier: 
-  weaponName: The Classic
+  weaponName: Service Carabine
   description: This is a new weapon.
   type: 0
   rarity: 0
   reloadType: 0
-  bullet: {fileID: 0}
+  bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
   level: 0
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
     bulletDamage: 20
-    rpm: 450
+    rpm: 120
     reloadSpeed: 1.5
     magazineSize: 30
-    bulletsPerShot: 1
+    bulletsPerShot: 3
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 25
@@ -34,13 +34,13 @@ MonoBehaviour:
     activePointsPerKill: 5
     displayedName: Level 0
     isBPBReloading: 0
-  shootDelay: 0.13333334
-  weaponHolder: {fileID: 8543578069356729931, guid: c33b43286b180c1409cf9d2ae1d9da16, type: 3}
-  animatorOverrideController: {fileID: 22100000, guid: 584dd7ebb5c34984f8830acc8adc186b, type: 2}
+  shootDelay: 0.5
+  weaponHolder: {fileID: 8288448883617604384, guid: 47c95bd5462e0644b92948f5e0470b7a, type: 3}
+  animatorOverrideController: {fileID: 22100000, guid: e88e7c0a3179bb44cb07bb5a7551a527, type: 2}
   shootAnimDelay: 0.3
   angleOffset: 30
-  muzzleFlashFX: {fileID: 8362998561939701192, guid: d654d2507e3ddcd4ca56b215005e9d28, type: 3}
-  lineRendererFX: {fileID: 8685958594538611566, guid: a8ffd0db185f3644d81043833c9fdb23, type: 3}
-  impactFX: {fileID: 921483033988333306, guid: 06e686953c8600a499733386b61f3a34, type: 3}
-  wallImpactFX: {fileID: 921483033988333306, guid: 06e686953c8600a499733386b61f3a34, type: 3}
-  fxPoolSize: 9
+  muzzleFlashFX: {fileID: 4222129529927080166, guid: b971778a5be040c42812af29b172278f, type: 3}
+  lineRendererFX: {fileID: 5147150837283688741, guid: a91aab9d5067a71468e46febbfb075cb, type: 3}
+  impactFX: {fileID: 13722952917908546, guid: f277f2c9af45c3e41b9787ecc7cf8ea3, type: 3}
+  wallImpactFX: {fileID: 13722952917908546, guid: 7cded9ad7d5caa449a378c2da2618340, type: 3}
+  fxPoolSize: 10

@@ -125,9 +125,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 030c0ecbb41688e4889b66b6b1462c8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandle: {fileID: 0}
-  rightHandle: {fileID: 0}
-  canon: {fileID: 0}
+  leftHandle: {fileID: 1766325752351787189}
+  rightHandle: {fileID: 1766325751901363711}
+  canon: {fileID: 8947031419902053210}
 --- !u!1 &1661943466937589675
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,7 +156,8 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8947031419902053210}
   m_Father: {fileID: 5583384945852289219}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -333,6 +334,36 @@ Transform:
   m_Father: {fileID: 1766325751686132404}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3962203120305932172
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8947031419902053210}
+  m_Layer: 0
+  m_Name: canon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8947031419902053210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3962203120305932172}
+  m_LocalRotation: {x: 0.70710725, y: 0.000000073756986, z: 0.00000015805068, w: 0.7071064}
+  m_LocalPosition: {x: 0, y: -0.6067, z: 0.0669}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5420797273454214602}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &5059789414733597305
 GameObject:
   m_ObjectHideFlags: 0

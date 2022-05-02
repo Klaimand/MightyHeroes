@@ -188,6 +188,7 @@ public class KLD_PlayerShoot : MonoBehaviour
             }
         }
         isReloading = false;
+        UpdateUI();
     }
 
     void UpdateUI()
@@ -261,7 +262,8 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         instantiedWH = Instantiate(weapon.weaponHolder, Vector3.zero, Quaternion.identity, weaponHolderParent);
 
-        instantiedWH.name = "WeaponHolder";
+        //instantiedWH.name = "WeaponHolder";
+        instantiedWH.name = weapon.weaponHolder.name;
 
         instantiedWH.transform.localPosition = weapon.weaponHolder.transform.position;
         instantiedWH.transform.localRotation = weapon.weaponHolder.transform.rotation;
