@@ -10,38 +10,38 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 366c70be5dfc8e8428a608f560d42e10, type: 3}
-  m_Name: ShotgISSOU
+  m_Name: zServiceCarabISSOU_SO
   m_EditorClassIdentifier: 
-  weaponName: ShotgISSOU
+  weaponName: CarabISSOU
   description: This is a new weapon.
   type: 0
   rarity: 0
-  reloadType: 1
+  reloadType: 0
   bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
   level: 0
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
     bulletDamage: 20
-    rpm: 60
+    rpm: 120
     reloadSpeed: 1.5
     magazineSize: 3000
-    bulletsPerShot: 5
-    timeBetweenBullets: 0
-    isBuckshot: 1
-    spread: 25
+    bulletsPerShot: 3
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 5
     range: 15
     activePointsPerKill: 5
     displayedName: Level 0
-    isBPBReloading: 1
-  shootDelay: 1
+    isBPBReloading: 0
+  shootDelay: 0.5
   holdingAnim: {fileID: 0}
   aimingAnim: {fileID: 0}
   reloadAnim: {fileID: 0}
   shootAnim: {fileID: 0}
-  shootAnimDelay: 0.1
-  muzzleFlashFX: {fileID: 4222129529927080166, guid: 91f95d097b27cd749be999a7a6d15b69, type: 3}
-  lineRendererFX: {fileID: 5147150837283688741, guid: 5e100754e82112747bb8e6b96bce5ae4, type: 3}
-  impactFX: {fileID: 13722952917908546, guid: 71d6b49ab3c043543bd80b78cb9822f7, type: 3}
-  wallImpactFX: {fileID: 13722952917908546, guid: 71d6b49ab3c043543bd80b78cb9822f7, type: 3}
+  shootAnimDelay: 0.3
+  muzzleFlashFX: {fileID: 4222129529927080166, guid: b971778a5be040c42812af29b172278f, type: 3}
+  lineRendererFX: {fileID: 5147150837283688741, guid: a91aab9d5067a71468e46febbfb075cb, type: 3}
+  impactFX: {fileID: 13722952917908546, guid: f277f2c9af45c3e41b9787ecc7cf8ea3, type: 3}
+  wallImpactFX: {fileID: 13722952917908546, guid: f277f2c9af45c3e41b9787ecc7cf8ea3, type: 3}
   fxPoolSize: 9
