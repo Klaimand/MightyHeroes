@@ -10,30 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 430e6a2518cc88144a02093f5e3ccff3, type: 3}
-  m_Name: CharAtt
+  m_Name: CharacterAttributes
   m_EditorClassIdentifier: 
   level: 1
   healthMax: 430
   movementSpeed: 240
   armor: 260
   healingTick: 235
-  activeTick: 3
+  activeTick: 10
+  spellPrefab: {fileID: 9058692770089771513, guid: 26e000cea25306f4b8eb7d483486796e, type: 3}
+  spellGO: {fileID: 0}
+  parent: {fileID: 0}
+  spell: {fileID: 9058692770089771514, guid: 26e000cea25306f4b8eb7d483486796e, type: 3}
   isPercentageHealthGrowth: 0
-  healthGrowthP: 10
+  healthGrowth: 0
   isPercentageMovementSpeedGrowth: 0
-  movementSpeedGrowthF: 10
+  movementSpeedGrowth: 0
   isPercentageArmorGrowth: 0
-  armorGrowthF: 10
+  armorGrowth: 0
   isPercentageHealingTickGrowth: 0
-  healingTickGrowthP: 10
-  activeTickGrowthF:
-  - 3
-  - 3
-  - 3
-  - 3
-  - 4
-  - 4
-  - 4
-  - 4
-  - 4
-  - 5
+  healingTickGrowth: 0
+  activeTickGrowth:
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 0
+  - 0
+  - 0
+  - 0

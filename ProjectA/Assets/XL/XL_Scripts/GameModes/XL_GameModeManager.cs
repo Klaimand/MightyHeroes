@@ -77,4 +77,9 @@ public class XL_GameModeManager : MonoBehaviour
             yield return wait;
         }
     }
+
+    public float GetMissionTime() 
+    {
+        return this.missionTime;
+    }
 }

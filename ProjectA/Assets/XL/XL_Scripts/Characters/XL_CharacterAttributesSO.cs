@@ -14,32 +14,44 @@ public class XL_CharacterAttributesSO : ScriptableObject
     public float healingTick;
     public float activeTick;
 
-    [Header("Value growth per level : F = Flat / P = percentage")]
+    [Header("Spell")]
+    public GameObject spellPrefab;
+    private XL_Spells spell;
+
+    [Header("Growth Value")]
     [SerializeField] private bool isPercentageHealthGrowth;
-    [SerializeField] private float healthGrowthP;
+    [SerializeField] private float healthGrowth;
     [SerializeField] private bool isPercentageMovementSpeedGrowth;
-    [SerializeField] private float movementSpeedGrowthF;
+    [SerializeField] private float movementSpeedGrowth;
     [SerializeField] private bool isPercentageArmorGrowth;
-    [SerializeField] private float armorGrowthF;
+    [SerializeField] private float armorGrowth;
     [SerializeField] private bool isPercentageHealingTickGrowth;
-    [SerializeField] private float healingTickGrowthP;
-    [SerializeField] private float[] activeTickGrowthF = new float[10];
+    [SerializeField] private float healingTickGrowth;
+    [SerializeField] private float[] activeTickGrowth = new float[10];
 
     public void Initialize()
     {
-        if (isPercentageHealthGrowth) healthMax = healthMax * Mathf.Pow(healthGrowthP, level);
-        else healthMax = healthMax + healthGrowthP * level;
+        
+        spell = spellPrefab.GetComponent<XL_Spells>();
 
-        if (isPercentageMovementSpeedGrowth) movementSpeed = movementSpeed * Mathf.Pow(movementSpeedGrowthF, level);
-        else movementSpeed = movementSpeed + movementSpeedGrowthF * level;
+        if (isPercentageHealthGrowth) healthMax = healthMax * Mathf.Pow(healthGrowth, level);
+        else healthMax = healthMax + healthGrowth * level;
 
-        if (isPercentageArmorGrowth) armor = armor * Mathf.Pow(armorGrowthF, level);
-        else armor = armor + armorGrowthF * level;
+        if (isPercentageMovementSpeedGrowth) movementSpeed = movementSpeed * Mathf.Pow(movementSpeedGrowth, level);
+        else movementSpeed = movementSpeed + movementSpeedGrowth * level;
 
-        if (isPercentageHealingTickGrowth) healingTick = healingTick * Mathf.Pow(healingTickGrowthP, level);
-        else healingTick = healingTick + healingTickGrowthP * level;
+        if (isPercentageArmorGrowth) armor = armor * Mathf.Pow(armorGrowth, level);
+        else armor = armor + armorGrowth * level;
 
-        activeTick = activeTickGrowthF[level];
+        if (isPercentageHealingTickGrowth) healingTick = healingTick * Mathf.Pow(healingTickGrowth, level);
+        else healingTick = healingTick + healingTickGrowth * level;
+
+        activeTick = activeTickGrowth[level];
+    }
+
+    public void ActivateSpell(Vector3 direction, Transform pos)
+    {
+        spell.ActivateSpell(direction, pos);
     }
 
 }

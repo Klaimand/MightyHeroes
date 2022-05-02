@@ -20,6 +20,7 @@ public class XL_ObjectivePointer : MonoBehaviour
     private void Start()
     {
         StartCoroutine(FindNearestCoroutine());
+        player = XL_GameManager.instance.players[0].transform;
     }
 
     Vector3 toPosition;

@@ -41,6 +41,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         {
             Shoot();
         }
+        if (Input.GetKeyDown(KeyCode.T)) 
+        {
+            Debug.Log("SPELL");
+            ActivateSpell(transform.forward);
+        }
     }
 
     private RaycastHit hit;
@@ -77,7 +82,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             ultimateCharge = 0;
             isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
-            spell.ActivateSpell(direction);
+            characterAttributes.ActivateSpell(direction, transform);
 
             StopPassiveHeal();
             CancelInvoke("RestorePassiveHeal");
@@ -89,7 +94,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
 
         yield return new WaitForSeconds(t);
-
         ultimateCharge += characterAttributes.activeTick;
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
         if (ultimateCharge < 100)
