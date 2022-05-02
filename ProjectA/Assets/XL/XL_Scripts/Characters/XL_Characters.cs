@@ -75,9 +75,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         canFire = true;
     }
 
-    public void ActivateSpell(Vector3 direction)
+    public bool ActivateSpell(Vector3 direction)
     {
-        if (ultimateCharge == 100) 
+        if (ultimateCharge == 100)
         {
             ultimateCharge = 0;
             isUltimateCharged = false;
@@ -87,7 +87,10 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             StopPassiveHeal();
             CancelInvoke("RestorePassiveHeal");
             Invoke("RestorePassiveHeal", restorePassiveHealDuration);
+            
         }
+        else return false;
+        return true;
     }
 
     IEnumerator SpellCooldownCoroutine(float t) 
