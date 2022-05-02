@@ -49,6 +49,7 @@ public class KLD_TouchInputs : MonoBehaviour
     bool isPressingActiveSkillJoystick = false;
 
     public event Action onActiveSkillButton;
+    public event Action onReloadButton;
     public event Action<Vector2> onActiveSkillJoystickRelease;
 
     void Start()
@@ -139,7 +140,11 @@ public class KLD_TouchInputs : MonoBehaviour
                         joysticks[joyIndex].touchCircle.gameObject.SetActive(true);
                         joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
 
-                        if (joysticks[joyIndex].animator != null) joysticks[joyIndex].animator.SetTrigger("active");
+                        if (joysticks[joyIndex].animator != null)
+                        {
+                            joysticks[joyIndex].animator.ResetTrigger("respawn");
+                            joysticks[joyIndex].animator.SetTrigger("active");
+                        }
                         //joysticks[joyIndex].canvasGroup.alpha = 1f;
                     }
                 }
@@ -158,12 +163,16 @@ public class KLD_TouchInputs : MonoBehaviour
                 }
                 else if (curTouch.phase == TouchPhase.Ended)
                 {
+                    //if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    //{
                     CalculateOffset();
 
                     joysticks[joyIndex].rawPosition = offset;
                     joysticks[joyIndex].rawVector = Vector2.zero;
                     if (joysticks[joyIndex].animator != null && joysticks[joyIndex].floating)
-                    { joysticks[joyIndex].animator.SetTrigger("respawn"); }
+                    {
+                        joysticks[joyIndex].animator.SetTrigger("respawn");
+                    }
                     //joysticks[joyIndex].canvasGroup.alpha = 0.3f;
                     joysticks[joyIndex].touchCircle.gameObject.SetActive(false);
 
@@ -177,6 +186,7 @@ public class KLD_TouchInputs : MonoBehaviour
                         isPressingActiveSkillJoystick = false;
                         ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                     }
+                    //}
                 }
 
                 void CalculateOffset()
@@ -291,6 +301,11 @@ public class KLD_TouchInputs : MonoBehaviour
     public void PressActiveSkillButton()
     {
         onActiveSkillButton?.Invoke();
+    }
+
+    public void PressReloadButton()
+    {
+        onReloadButton?.Invoke();
     }
 
     public void DetectActiveSkillJoystick()

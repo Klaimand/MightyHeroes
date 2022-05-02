@@ -13,8 +13,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     private bool canFire;
 
     [SerializeField] private XL_ISpells spell;
-    private float ultimateCharge;
+    public float ultimateCharge;
+    public bool isUltimateCharged;
     [SerializeField] private float ultimateChargeTick;
+
+    //[SerializeField] private XL_HealthBarUI characterUI;
 
     private void Awake()
     {
@@ -35,11 +38,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             Shoot();
         }
     }
-
-    /*public void Move(Vector3 direction)
-    {
-        rb.velocity = direction * characterAttributes.movementSpeed;
-    }*/
 
     private RaycastHit hit;
     private XL_IDamageable target;
@@ -73,6 +71,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         if (ultimateCharge == 100) 
         {
             ultimateCharge = 0;
+            isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
             spell.ActivateSpell(direction);
 
@@ -88,10 +87,12 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         yield return new WaitForSeconds(t);
 
         ultimateCharge += characterAttributes.activeTick;
-        if (ultimateCharge < 100) 
+        //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+        if (ultimateCharge < 100)
         {
             StartCoroutine(SpellCooldownCoroutine(t));
         }
+        else isUltimateCharged = true;
     }
 
 
@@ -123,6 +124,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         {
             characterAttributes.health = characterAttributes.healthMax;
         }
+        //characterUI.UpdateHealthBar(characterAttributes.health / characterAttributes.healthMax);
         Debug.Log(gameObject.name + " : " + characterAttributes.health);
 
         StopPassiveHeal();

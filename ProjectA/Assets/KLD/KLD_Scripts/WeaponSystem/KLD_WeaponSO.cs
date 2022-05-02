@@ -56,15 +56,20 @@ public class KLD_WeaponSO : ScriptableObject
     [HideInInspector] public float shootDelay = 0f;
 
     [Header("Animations"), Space(10)]
-    public AnimationClip holdingAnim;
-    public AnimationClip aimingAnim;
-    public AnimationClip reloadAnim;
-    public AnimationClip shootAnim;
+    public GameObject weaponHolder;
+    //public AnimationClip holdingAnim;
+    //public AnimationClip aimingAnim;
+    //public AnimationClip reloadAnim;
+    //public AnimationClip shootAnim;
+    public AnimatorOverrideController animatorOverrideController;
+    public float shootAnimDelay = 0.3f;
+    [Range(0f, 30f)] public float angleOffset = 0f;
 
     [Header("FX"), Space(10)]
     public GameObject muzzleFlashFX;
     public GameObject lineRendererFX;
     public GameObject impactFX;
+    public GameObject wallImpactFX;
 
     [Header("Pooling")]
     public int fxPoolSize = 9;
