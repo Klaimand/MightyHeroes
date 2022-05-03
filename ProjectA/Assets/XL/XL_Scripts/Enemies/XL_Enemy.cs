@@ -23,7 +23,6 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [SerializeField] protected float speed;
 
     [Header("Pooler")]
-    [SerializeField] protected XL_Pooler pooler;
 
     [SerializeField] XL_HealthBarUI healthBar;
 

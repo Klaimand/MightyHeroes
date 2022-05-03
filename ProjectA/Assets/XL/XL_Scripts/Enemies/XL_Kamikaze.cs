@@ -42,7 +42,14 @@ public class XL_Kamikaze : XL_Enemy
         base.Die();
         StopAllCoroutines();
         XL_Pooler.instance.PopPosition("Explosion", transform.position).GetComponent<XL_Explosion>().StartExplosion(explosionDamage, explosionRange, detonationTime);
+        ResetAnimator();
         XL_Pooler.instance.DePop("Kamikaze", transform.gameObject);
+    }
+
+    private void ResetAnimator()
+    {
+        animator.ResetTrigger("Charging");
+        animator.SetBool("Attacking", false);
     }
 
     public override void Move()

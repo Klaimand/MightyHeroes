@@ -31,13 +31,6 @@ public class XL_Alpha : XL_Enemy
         projectile.GetComponent<XL_Projectile>().Initialize();
         //projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
         velocity = XL_Utilities.GetVelocity(h, distance - 1, projectileTravelTime); //-1 because the projectile is shoot 1 meter in front of the enemy
-        Debug.Log("vy = " + velocity[1] + "\n" +
-            "vx = " + velocity[0] + "\n" +
-            "multiplier x = " + (shootDirection.x / distance) + "\n" +
-            "multiplier z = " + (shootDirection.z / distance) + "\n" +
-            "vxx = " + velocity[0] * (shootDirection.x / distance) + "\n" +
-            "vxz = " + velocity[0] * (shootDirection.z / distance) + "\n" +
-            "distance = " + distance);
         projectile.GetComponent<Rigidbody>().velocity = new Vector3(velocity[0] * (shootDirection.x / distance), velocity[1], velocity[0] * (shootDirection.z / distance));
     }
 
@@ -45,12 +38,14 @@ public class XL_Alpha : XL_Enemy
     private float angleOffset;
     IEnumerator SummonCoroutine(float t) 
     {
-        yield return new WaitForSeconds(t-1);
+        yield return new WaitForSeconds(t-0.8f);
 
+        Debug.Log("Summon");
         animator.SetBool("Summoning", true);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.8f);
 
+        Debug.Log("Spawn");
         animator.SetBool("Spawning", true);
 
         angleOffset = 360 / nbEnemiesSummoned;
@@ -59,6 +54,11 @@ public class XL_Alpha : XL_Enemy
             summonPosition = Quaternion.Euler(0, angleOffset * i, 0) * transform.forward * summonDistance;
             XL_GameManager.instance.AddEnemyAttributes(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
         }
+
+        yield return new WaitForSeconds(0.5f);
+
+        animator.SetBool("Spawning", false);
+        animator.SetBool("Summoning", false);
         StartCoroutine(SummonCoroutine(t));
     }
 
@@ -77,8 +77,16 @@ public class XL_Alpha : XL_Enemy
 
     public override void TakeDamage(float damage)
     {
+        StartCoroutine(TakeDamageAnimationCoroutine());
         base.TakeDamage(damage);
-        animator.SetTrigger("Hit");
+        
+    }
+
+    IEnumerator TakeDamageAnimationCoroutine() 
+    {
+        animator.SetBool("Hit", true);
+        yield return new WaitForSeconds(0.4f);
+        animator.SetBool("Hit", false);
     }
 
     private Vector3 shootDirection;
