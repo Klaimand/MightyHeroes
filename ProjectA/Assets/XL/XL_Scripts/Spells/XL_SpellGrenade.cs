@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XL_SpellGrenade : MonoBehaviour, XL_ISpells
+public class XL_SpellGrenade : XL_Spells
 {
-    [SerializeField] private XL_SpellGrenadeAttributes grenadeAttributes;
-    [SerializeField] private float minThrowingDistance;
-    [SerializeField] private float travelTime;
+    
+    [SerializeField] private XL_SpellGrenadeAttributesSO grenadeAttributes;
+
     private GameObject grenade;
+    [SerializeField] private float startingHeight;
     private float[] startingVelocity;
 
     [SerializeField] private LineRenderer lineRenderer;
@@ -20,7 +21,7 @@ public class XL_SpellGrenade : MonoBehaviour, XL_ISpells
         grenadeAttributes.Initialize();
     }
 
-    private void Start()
+    public void Start()
     {
         //Debug.Log("throwing Distance : "+grenadeAttributes.throwingDistance);
         //curvePoints = XL_Utilities.GenerateCurve(6, grenadeAttributes.throwingDistance-1);
@@ -50,11 +51,11 @@ public class XL_SpellGrenade : MonoBehaviour, XL_ISpells
         lineRenderer.enabled = false;
     }
 
-    public void ActivateSpell(Vector3 throwingDirection)
+    public override void ActivateSpell(Vector3 throwingDirection, Transform pos)
     {
         Debug.Log("launchGrenade");
-        grenade = XL_Pooler.instance.PopPosition("BlastGrenade", transform.position + transform.forward);
-        startingVelocity = XL_Utilities.GetVelocity(0.5f, Mathf.Lerp(minThrowingDistance, grenadeAttributes.throwingDistance, throwingDirection.magnitude), travelTime);
+        grenade = XL_Pooler.instance.PopPosition("BlastGrenade", pos.position + pos.forward + pos.up);
+        startingVelocity = XL_Utilities.GetVelocity(0.5f, Mathf.Lerp(grenadeAttributes.minThrowingDistance, grenadeAttributes.throwingDistance, throwingDirection.magnitude), grenadeAttributes.travelTime);
         grenade.GetComponent<Rigidbody>().velocity = new Vector3(startingVelocity[0] * (throwingDirection.x), startingVelocity[1], startingVelocity[0] * (throwingDirection.z));
         grenade.GetComponent<XL_Grenade>().SetValue(grenadeAttributes.explosionDamage, grenadeAttributes.explosionRadius);
     }
