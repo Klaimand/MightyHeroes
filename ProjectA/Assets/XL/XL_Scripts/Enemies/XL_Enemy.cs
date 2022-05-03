@@ -105,7 +105,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         canAttack = true;
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         healthBar.UpdateHealthBar(health / attributes.maxHealth);

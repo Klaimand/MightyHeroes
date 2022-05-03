@@ -12,6 +12,8 @@ public class XL_Alpha : XL_Enemy
     [SerializeField] private float projectileTravelTime;
     [SerializeField] private float fireRate;
 
+    [SerializeField] private Animator animator;
+
     public override void Alert()
     {
         StartCoroutine(SummonCoroutine(summonCooldown));
@@ -43,7 +45,13 @@ public class XL_Alpha : XL_Enemy
     private float angleOffset;
     IEnumerator SummonCoroutine(float t) 
     {
-        yield return new WaitForSeconds(t);
+        yield return new WaitForSeconds(t-1);
+
+        animator.SetBool("Summoning", true);
+
+        yield return new WaitForSeconds(1);
+
+        animator.SetBool("Spawning", true);
 
         angleOffset = 360 / nbEnemiesSummoned;
         for (int i = 0; i < nbEnemiesSummoned; i++) 
@@ -67,6 +75,11 @@ public class XL_Alpha : XL_Enemy
         throw new System.NotImplementedException();
     }
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        animator.SetTrigger("Hit");
+    }
 
     private Vector3 shootDirection;
     private GameObject projectile;
