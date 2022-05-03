@@ -22,16 +22,19 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected float speed;
 
-    [Header("Pooler")]
-
     [SerializeField] XL_HealthBarUI healthBar;
 
     Vector3 scale = Vector3.one;
 
-    static GUIStyle gUIStyle;
+    //static GUIStyle gUIStyle;
+
+    bool firstInit = false;
+    bool didFirstDisable = false;
 
     private void Start()
     {
+        firstInit = true;
+        InitZombieList();
         Initialize();
         Alert();
     }
@@ -49,10 +52,10 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     public abstract void Move();
     public abstract void Attack();
 
-    public virtual void Die() 
+    public virtual void Die()
     {
         Debug.Log("Remove enemy : " + this.name);
-        XL_GameManager.instance.RemoveEnemyAttributes(attributes);
+        //XL_GameManager.instance.RemoveEnemyAttributes(attributes);
     }
 
     protected int targetedPlayerIdx = 0;
@@ -88,15 +91,16 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
                     targetedPlayerIdx = i;
                     targetedPlayerDistance = nextTargetedPlayerDistance;
                 }
-            } else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
-            
+            }
+            else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
+
             i++;
         }
 
-        if(i > 0) targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
+        if (i > 0) targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
     }
 
-    protected IEnumerator AttackCooldownCoroutine(float t) 
+    protected IEnumerator AttackCooldownCoroutine(float t)
     {
         canAttack = false;
         yield return new WaitForSeconds(t);
@@ -113,14 +117,36 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
     void OnEnable()
     {
-        //"ZombieList" things here
+        if (firstInit)
+        {
+            InitZombieList();
+            Initialize();
+            Alert();
+        }
 
-        attributes.maxHealth = Random.Range(10, 101);
-        Initialize();
+        //attributes.maxHealth = Random.Range(10, 101);
+    }
+
+    void OnDisable()
+    {
+        if (didFirstDisable)
+        {
+            KLD_ZombieList.Instance.RemoveZombie(attributes);
+        }
+        else
+        {
+            didFirstDisable = true;
+        }
+    }
+
+    void InitZombieList()
+    {
+        KLD_ZombieList.Instance.AddZombie(attributes);
+        attributes.transform = transform;
     }
 
 
-    public KLD_ZombieAttributes GetZombieAttributes() 
+    public KLD_ZombieAttributes GetZombieAttributes()
     {
         return attributes;
     }

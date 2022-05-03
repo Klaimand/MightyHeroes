@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class XL_Kamikaze : XL_Enemy
 {
-    [SerializeField] protected MeshRenderer[] meshRenderers;
-
     [SerializeField] protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
     [SerializeField] protected int explosionDamage;
     [SerializeField] protected float explosionRange;
@@ -70,7 +68,7 @@ public class XL_Kamikaze : XL_Enemy
         }
     }
 
-    IEnumerator ChargingCoroutine() 
+    IEnumerator ChargingCoroutine()
     {
         agent.isStopped = true;
         yield return new WaitForSeconds(chargingAnimationTime);

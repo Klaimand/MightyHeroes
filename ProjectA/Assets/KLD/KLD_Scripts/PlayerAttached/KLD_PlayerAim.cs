@@ -12,7 +12,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
     Rigidbody rb;
 
-    [SerializeField] KLD_ZombieList zombieList;
+    KLD_ZombieList zombieList;
     [SerializeField] Transform targetPosTransform = null;
 
     //offsets
@@ -64,6 +64,8 @@ public class KLD_PlayerAim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        zombieList = KLD_ZombieList.Instance;
+
         InitPlayerAttributes();
     }
 

@@ -88,6 +88,8 @@ GameObject:
   - component: {fileID: 3197964534007412140}
   - component: {fileID: 8499842767710951650}
   - component: {fileID: 5859837611035700993}
+  - component: {fileID: 7990526158014352329}
+  - component: {fileID: 581157773259435123}
   m_Layer: 7
   m_Name: Kamikaze_parent
   m_TagString: Enemy
@@ -155,8 +157,7 @@ MonoBehaviour:
   targetedPlayerUpdateRate: 0.5
   agent: {fileID: 3197964534007412139}
   speed: 3
-  pooler: {fileID: 0}
-  healthBar: {fileID: 0}
+  healthBar: {fileID: 581157773259435123}
   meshRenderers:
   - {fileID: 0}
   - {fileID: 0}
@@ -174,7 +175,7 @@ SphereCollider:
   m_GameObject: {fileID: 3197964534007412137}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.4
   m_Center: {x: 0, y: 0.4, z: 0}
@@ -194,6 +195,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &7990526158014352329
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197964534007412137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.0216734
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9996711, z: 0}
+--- !u!114 &581157773259435123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3197964534007412137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0bc532ae422cfe408e64b83db6a7660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 3688833471735846681}
+  ultBar: {fileID: 0}
 --- !u!1 &5220383718800005533
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,12 @@ using Sirenix.OdinInspector;
 
 public class KLD_ZombieList : MonoBehaviour
 {
+    public static KLD_ZombieList Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     [SerializeField, ReadOnly] List<KLD_ZombieAttributes> zombies = new List<KLD_ZombieAttributes>();
 

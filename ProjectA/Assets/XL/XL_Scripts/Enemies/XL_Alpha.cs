@@ -36,9 +36,9 @@ public class XL_Alpha : XL_Enemy
 
     private Vector3 summonPosition;
     private float angleOffset;
-    IEnumerator SummonCoroutine(float t) 
+    IEnumerator SummonCoroutine(float t)
     {
-        yield return new WaitForSeconds(t-0.7f);
+        yield return new WaitForSeconds(t - 0.7f);
 
         animator.SetBool("Summoning", true);
 
@@ -48,7 +48,7 @@ public class XL_Alpha : XL_Enemy
         animator.SetBool("Spawning", true);
 
 
-        
+
 
         yield return new WaitForSeconds(0.6f);
 
@@ -56,7 +56,8 @@ public class XL_Alpha : XL_Enemy
         for (int i = 0; i < nbEnemiesSummoned; i++)
         {
             summonPosition = Quaternion.Euler(0, angleOffset * i, 0) * transform.forward * summonDistance;
-            XL_GameManager.instance.AddEnemyAttributes(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
+            //XL_GameManager.instance.AddEnemyAttributes(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
+            XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position);
         }
 
         animator.SetBool("Spawning", false);
@@ -80,10 +81,10 @@ public class XL_Alpha : XL_Enemy
     {
         StartCoroutine(TakeDamageAnimationCoroutine());
         base.TakeDamage(damage);
-        
+
     }
 
-    IEnumerator TakeDamageAnimationCoroutine() 
+    IEnumerator TakeDamageAnimationCoroutine()
     {
         animator.SetBool("Hit", true);
         yield return new WaitForSeconds(0.4f);
