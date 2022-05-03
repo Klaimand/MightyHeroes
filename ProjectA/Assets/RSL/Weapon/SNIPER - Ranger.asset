@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: SNIPER - Ranger
   m_EditorClassIdentifier: 
   weaponName: Ranger
-  description: This is a new weapon.
+  description: "\u201CLe Ranger est un fusil de pr\xE9cision semi-automatique. Il
+    est l\xE9ger et facile \xE0 transporter. Sa durabilit\xE9 et son co\xFBt de fabrication
+    peu \xE9lev\xE9 le rendent une arme qui s\u2019adapte bien \xE0 un environnement
+    de combat constant. Equivalent MK14.\u201D\t\t\t\t\t\r"
   type: 3
   rarity: 0
   reloadType: 0
@@ -22,19 +25,84 @@ MonoBehaviour:
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
-    bulletDamage: 20
-    rpm: 50
-    reloadSpeed: 1.5
-    magazineSize: 30
+    bulletDamage: 51
+    rpm: 150
+    reloadSpeed: 2
+    magazineSize: 15
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
-    spread: 0
+    spread: 2
     range: 15
     activePointsPerKill: 5
     displayedName: Level 0
     isBPBReloading: 0
-  shootDelay: 1.2
+  - experienceToReach: 800
+    bulletDamage: 55
+    rpm: 150
+    reloadSpeed: 1.9
+    magazineSize: 16
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 2
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 1
+    isBPBReloading: 0
+  - experienceToReach: 1800
+    bulletDamage: 59
+    rpm: 150
+    reloadSpeed: 1.8
+    magazineSize: 17
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 2
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 2
+    isBPBReloading: 0
+  - experienceToReach: 3100
+    bulletDamage: 63
+    rpm: 150
+    reloadSpeed: 1.7
+    magazineSize: 18
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 2
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 3
+    isBPBReloading: 0
+  - experienceToReach: 4700
+    bulletDamage: 67
+    rpm: 150
+    reloadSpeed: 1.6
+    magazineSize: 19
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 2
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 4
+    isBPBReloading: 0
+  - experienceToReach: 6300
+    bulletDamage: 71
+    rpm: 150
+    reloadSpeed: 1.5
+    magazineSize: 20
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 2
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 5
+    isBPBReloading: 0
+  shootDelay: 0.4
   weaponHolder: {fileID: 2138789096679354538, guid: f81459ad605aacc4b8cbbe3375fb4d49, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: d928a21b50100b642bfcf3d5e29276b3, type: 2}
   shootAnimDelay: 0.3
