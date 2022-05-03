@@ -40,8 +40,12 @@ public class KLD_TouchInputs : MonoBehaviour
 
     [SerializeField] Joystick[] joysticks;
 
+    [SerializeField] Vector2Int referenceResolution = new Vector2Int(2260, 1080);
+    Vector2 resolutionRatio = Vector2.one;
     [SerializeField] bool overrideScreenSize = false;
     [SerializeField, ShowIf("overrideScreenSize")] Vector2Int overridenScreenSize = Vector2Int.zero;
+
+    Vector2 ratioedPos = Vector2.zero;
 
     int height;
     int width;
@@ -64,6 +68,8 @@ public class KLD_TouchInputs : MonoBehaviour
             height = overridenScreenSize.y;
             width = overridenScreenSize.x;
         }
+        resolutionRatio.x = (float)referenceResolution.x / (float)width;
+        resolutionRatio.y = (float)referenceResolution.y / (float)height;
 
         InitializeJoysticks();
         InitializeActiveJoystickOrButton();
@@ -73,7 +79,8 @@ public class KLD_TouchInputs : MonoBehaviour
     {
         for (int i = 0; i < joysticks.Length; i++)
         {
-            offset.x = (joysticks[i].offsetFromRightCorner ? width : 0) + joysticks[i].defaultOffset.x;
+            //offset.x = (joysticks[i].offsetFromRightCorner ? width : 0) + joysticks[i].defaultOffset.x;
+            offset.x = (joysticks[i].offsetFromRightCorner ? referenceResolution.x : 0) + joysticks[i].defaultOffset.x; //AAA_CHANGE
             offset.y = joysticks[i].defaultOffset.y;
 
             joysticks[i].rawPosition = offset;
@@ -104,6 +111,7 @@ public class KLD_TouchInputs : MonoBehaviour
     bool isLeftTouch;
     int joyIndex;
     Vector2 offset;
+    Vector2 curRatioedTouchPosition;
 
     void UpdateInputs()
     {
@@ -112,8 +120,12 @@ public class KLD_TouchInputs : MonoBehaviour
             for (int i = 0; i < Input.touchCount; i++)
             {
                 curTouch = Input.GetTouch(i);
+                curRatioedTouchPosition.x = curTouch.position.x * resolutionRatio.x;
+                curRatioedTouchPosition.y = curTouch.position.y * resolutionRatio.y;
+                //print($"curTouch Pos : {curTouch.position} \n ratioedPos : {curRatioedTouchPosition}");
 
-                isLeftTouch = curTouch.position.x < width / 2;
+                //isLeftTouch = curRatioedTouchPosition.x < width / 2;
+                isLeftTouch = curRatioedTouchPosition.x < referenceResolution.x / 2;
 
                 //joyIndex = isLeftTouch ? 0 : 2;
                 if (isLeftTouch) { joyIndex = 0; }
@@ -126,7 +138,10 @@ public class KLD_TouchInputs : MonoBehaviour
                     {
                         if (joysticks[joyIndex].floating)
                         {
-                            joysticks[joyIndex].rawPosition = curTouch.position;
+                            joysticks[joyIndex].rawPosition = curRatioedTouchPosition; //AAA_CHANGE
+                            //joysticks[joyIndex].rawPosition.x = curRatioedTouchPosition.x * resolutionRatio.x;
+                            //joysticks[joyIndex].rawPosition.y = curRatioedTouchPosition.y * resolutionRatio.y;
+
                             joysticks[joyIndex].drawed = true;
                         }
                         else
@@ -138,7 +153,11 @@ public class KLD_TouchInputs : MonoBehaviour
                             DoRawVectorCalculation();
                         }
                         joysticks[joyIndex].touchCircle.gameObject.SetActive(true);
-                        joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
+                        joysticks[joyIndex].touchCircle.anchoredPosition = curRatioedTouchPosition; //AAA_CHANGE
+                        //ratioedPos.x = curRatioedTouchPosition.x * resolutionRatio.x;
+                        //ratioedPos.y = curRatioedTouchPosition.y * resolutionRatio.y;
+                        //joysticks[joyIndex].touchCircle.anchoredPosition = ratioedPos;
+
 
                         if (joysticks[joyIndex].animator != null)
                         {
@@ -191,20 +210,28 @@ public class KLD_TouchInputs : MonoBehaviour
 
                 void CalculateOffset()
                 {
-                    offset.x = (joysticks[joyIndex].offsetFromRightCorner ? width : 0) + joysticks[joyIndex].defaultOffset.x;
+                    //AAA_CHANGE
+                    //offset.x = (joysticks[joyIndex].offsetFromRightCorner ? width : 0) + joysticks[joyIndex].defaultOffset.x;
+                    //offset.y = joysticks[joyIndex].defaultOffset.y;
+                    offset.x = (joysticks[joyIndex].offsetFromRightCorner ? referenceResolution.x : 0) + joysticks[joyIndex].defaultOffset.x;
                     offset.y = joysticks[joyIndex].defaultOffset.y;
                 }
 
                 void DoRawVectorCalculation()
                 {
-                    joysticks[joyIndex].rawVector = curTouch.position - joysticks[joyIndex].rawPosition;
+                    //ratioedPos.x = curRatioedTouchPosition.x * resolutionRatio.x;
+                    //ratioedPos.y = curRatioedTouchPosition.y * resolutionRatio.y;
+
+                    joysticks[joyIndex].rawVector = curRatioedTouchPosition - joysticks[joyIndex].rawPosition;
+                    //joysticks[joyIndex].rawVector = ratioedPos - joysticks[joyIndex].rawPosition;
 
                     if (joysticks[joyIndex].rawVector.magnitude < joysticks[joyIndex].deadzone)
                     {
                         joysticks[joyIndex].rawVector = Vector2.zero;
                     }
 
-                    joysticks[joyIndex].touchCircle.anchoredPosition = curTouch.position;
+                    joysticks[joyIndex].touchCircle.anchoredPosition = curRatioedTouchPosition;
+                    //joysticks[joyIndex].touchCircle.anchoredPosition = ratioedPos;
                 }
 
                 void DoDrag()
@@ -218,7 +245,7 @@ public class KLD_TouchInputs : MonoBehaviour
                                 break;
 
                             case Joystick.DragMode.LERP:
-                                Vector2 targetPos = curTouch.position - (joysticks[joyIndex].rawCappedVector * 1.1f);
+                                Vector2 targetPos = curRatioedTouchPosition - (joysticks[joyIndex].rawCappedVector * 1.1f);
                                 joysticks[joyIndex].rawPosition =
                                 Vector2.Lerp(joysticks[joyIndex].rawPosition, targetPos, joysticks[joyIndex].dragRatio);
                                 break;
