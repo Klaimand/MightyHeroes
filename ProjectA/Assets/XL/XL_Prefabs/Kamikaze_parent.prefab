@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 3197964534007412138}
   - component: {fileID: 3197964534007412139}
   - component: {fileID: 3197964534007412140}
-  - component: {fileID: 8499842767710951650}
   - component: {fileID: 5859837611035700993}
   - component: {fileID: 7990526158014352329}
   - component: {fileID: 581157773259435123}
@@ -158,27 +157,11 @@ MonoBehaviour:
   agent: {fileID: 3197964534007412139}
   speed: 3
   healthBar: {fileID: 581157773259435123}
-  meshRenderers:
-  - {fileID: 0}
-  - {fileID: 0}
   explosionDamage: 10
   explosionRange: 5
   detonationTime: 2
   chargingAnimationTime: 1
   animator: {fileID: 6455615582365055555}
---- !u!135 &8499842767710951650
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3197964534007412137}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.4
-  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!54 &5859837611035700993
 Rigidbody:
   m_ObjectHideFlags: 0
