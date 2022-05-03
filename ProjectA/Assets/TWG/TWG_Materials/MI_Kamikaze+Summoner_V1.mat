@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2528903477059090100
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_ToonShader_Blast_V1
+  m_Name: MI_Kamikaze+Summoner_V1
   m_Shader: {fileID: -6465566751694194690, guid: c7a5e567de32e1d41b40fdc9356fc95c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -48,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 702fd7c9d320c8545a4584d0832238ed, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -80,19 +93,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - DepthSensF: 1
-    - DepthSensF_1: 1
-    - HIGHLIGHT: 0
-    - HIGHLIGHT_GRADIENT: 1
-    - LIGHT: 0
-    - LINING_OVERLAY: 1
-    - OutlineThicknessF: 2.32
-    - SHADOW: 1
-    - SHADOW_GRADIENT: 0
-    - SKIN: 1
-    - X: 0
-    - Y: 0
-    - Z: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -100,7 +100,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthSens: 1.8
+    - _DepthSens: 0.4
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -122,39 +122,10 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - additive: 1
-    - glossiness: 0
-    - gradient_intensity: 2
-    - gradient_size: 1.5
-    - h_gradient_intensity: 1
-    - h_gradient_size: 1
-    - highlight_size: 0.47
-    - light_size: 0.465
-    - multiply_shadow: 1
-    - shadow_size: 1
-    - skin_hue_offset: 100
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - energy_color: {r: 0.7490196, g: 0.003921569, b: 0.003921569, a: 0}
-    - gradient_color: {r: 0.682353, g: 0.3333333, b: 0.7921569, a: 0}
-    - h_gradient_color: {r: 0.21306513, g: 0.7924528, b: 0.6572623, a: 0}
-    - highlight_color: {r: 1, g: 1, b: 1, a: 0}
-    - light_color: {r: 0.20265219, g: 0.32553568, b: 0.4339623, a: 0}
-    - shadow_color: {r: 0.23584908, g: 0, b: 0, a: 0}
+    - light_color: {r: 1, g: 0.7764706, b: 0.6, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &6628632303275703669
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 4
