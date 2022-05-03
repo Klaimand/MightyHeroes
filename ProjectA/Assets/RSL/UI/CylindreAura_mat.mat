@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4340317509026276954
+--- !u!114 &-3710604503160467470
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BackGroundUI_mat
-  m_Shader: {fileID: -6465566751694194690, guid: f3dacb44321f7314ca697d663acca9c5, type: 3}
+  m_Name: CylindreAura_mat
+  m_Shader: {fileID: -6465566751694194690, guid: 20cd48b912be0e34daaf309a14478042, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -32,10 +32,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_793effa4dd284c02a495a31950b9c9b1:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,34 +72,6 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_22446c16f99742a4b4ecb4a788faf082_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 22b96a4afd061a647a22b9445aa15f4b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_2f6da28c58a142cfbd83e798bb9aebc8_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 34b0aa03e7724cc49b5df7769a64336e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_48fe2fd233ea41d0a8e1f5f3940d7a45_Texture_1:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_a73a1017d8b4425ab9f892d22c8102be_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 0ecc4232043e59e44b5ac037c306907b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_b14be2d6b5c648abb084f51b53257550_Texture_1:
-        m_Texture: {fileID: 2800000, guid: 22b96a4afd061a647a22b9445aa15f4b, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_de4f6a6f44674fdb81c194a9248879c1_Texture_1:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _SampleTexture2D_efa4e270d9574653bda3bda800a9accf_Texture_1:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -121,9 +89,6 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_3b4b348d57974901bb541464ec092d2f: 31.57
-    - Vector1_ac774d7e0deb4194933f21a3cd4c3265: 5
-    - Vector1_b8bf0a81ecf8464280ed6743fda07c88: 100
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -151,12 +116,8 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_3877b2a630ef46838a98718f911ac44b: {r: 0.0754717, g: 0.026418842, b: 0.008899963, a: 0}
-    - Color_50f52b8c0dfc461cbba0d5c55245cf32: {r: 1.6976539, g: 3.901178, b: 0, a: 0}
-    - Color_77094f96d2434744980a8ee1baf60792: {r: 4, g: 1.1595638, b: 0.32075477, a: 0}
-    - Color_fdcb071333744ce6890a46c903b1950e: {r: 15.999998, g: 15.329842, b: 3.5183241, a: 0}
-    - Vector2_3f1a9b6dbb794d2297c3cb71478ef974: {r: 0, g: 0, b: 0, a: 0}
-    - Vector2_6c966bc8f1dd4b4386bc278c88022882: {r: 29.3, g: 0, b: 0, a: 0}
+    - Color_c9d8556d6d3e4a1abab361bc43d3529a: {r: 2.3436015, g: 0.7007963, b: 0.30675417, a: 0}
+    - Color_d3377be637814681b10f65fcebefb0a6: {r: 2, g: 0.11764706, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
