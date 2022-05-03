@@ -130,4 +130,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         characterAttributes.level = _characterLevel;
         characterAttributes.Initialize();
     }
+
+    public float GetCharacterSpeed()
+    {
+        return characterAttributes.movementSpeed;
+    }
 }

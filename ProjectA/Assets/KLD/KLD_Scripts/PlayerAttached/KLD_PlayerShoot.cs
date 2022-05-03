@@ -16,6 +16,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
     [SerializeField] Animator animator;
+    [SerializeField] KLD_PlayerController controller;
+    [SerializeField] XL_Characters character;
 
     [Header("Weapon"), Space(10)]
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
@@ -122,6 +124,12 @@ public class KLD_PlayerShoot : MonoBehaviour
         {
             Reload();
         }
+
+        controller.SetSpeed(
+            ((weaponState == WeaponState.AIMING || weaponState == WeaponState.SHOOTING) ?
+            character.GetCharacterSpeed() * weapon.GetCurAttributes().aimSpeedMultiplier :
+            character.GetCharacterSpeed()) / 3.34f
+        );
 
         curShootDelay += Time.deltaTime;
         curBurstDelay += Time.deltaTime;
