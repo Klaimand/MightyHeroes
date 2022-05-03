@@ -21,10 +21,11 @@ public class KLD_ZombieList : MonoBehaviour
 
     public void RemoveZombie(KLD_ZombieAttributes _zombieAttributes)
     {
-        if (!zombies.Remove(_zombieAttributes))
-        {
-            Debug.LogError("Wanted to remove zombie that is not in list");
-        }
+        //if (!zombies.Remove(_zombieAttributes))
+        //{
+        //    Debug.LogError("Wanted to remove zombie that is not in list");
+        //}
+        zombies.Remove(_zombieAttributes);
     }
 
     public List<KLD_ZombieAttributes> GetZombies()

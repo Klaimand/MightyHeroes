@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 [System.Serializable]
 public class WeaponAttributes
 {
+    [LabelText("Level Price")]
     public int experienceToReach = 0;
 
     public int bulletDamage = 20;

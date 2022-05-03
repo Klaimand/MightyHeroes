@@ -74,7 +74,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         transform.gameObject.SetActive(false);
     }
 
-    [ContextMenu("Take 1 Damage")]
+    [ContextMenu("Take 100 Damage")]
     public void Take100Damage() { TakeDamage(100); }
 
     public void TakeDamage(float damage)
@@ -123,5 +123,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
             if (passiveHealEnabled) TakeDamage(-characterAttributes.healingTick);
         }
+    }
+
+    public void InitializeCharacterStats(int _characterLevel)
+    {
+        characterAttributes.level = _characterLevel;
+        characterAttributes.Initialize();
     }
 }

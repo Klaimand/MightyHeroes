@@ -54,7 +54,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
     public virtual void Die()
     {
-        Debug.Log("Remove enemy : " + this.name);
+        //Debug.Log("Remove enemy : " + this.name);
         //XL_GameManager.instance.RemoveEnemyAttributes(attributes);
     }
 
@@ -129,9 +129,9 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
     void OnDisable()
     {
+        KLD_ZombieList.Instance.RemoveZombie(attributes);
         if (didFirstDisable)
         {
-            KLD_ZombieList.Instance.RemoveZombie(attributes);
         }
         else
         {

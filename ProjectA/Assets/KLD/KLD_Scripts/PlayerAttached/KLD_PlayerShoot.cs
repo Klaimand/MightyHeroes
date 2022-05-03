@@ -118,6 +118,10 @@ public class KLD_PlayerShoot : MonoBehaviour
                 curShootDelay = 0f;
             }
         }
+        else if (!isReloading && curBullets <= 0)
+        {
+            Reload();
+        }
 
         curShootDelay += Time.deltaTime;
         curBurstDelay += Time.deltaTime;
@@ -144,11 +148,16 @@ public class KLD_PlayerShoot : MonoBehaviour
         }
     }
 
+    KLD_ZombieAttributes selectedZombie;
+
     void DoShot()
     {
-        if (playerAim.GetSelectedZombie() != null)
+        selectedZombie = playerAim.GetSelectedZombie();
+        //if (playerAim.GetSelectedZombie() != null)
+        if (selectedZombie != null && selectedZombie.transform != null)
         {
-            selectedZombiePos = playerAim.GetSelectedZombie().transform.position;
+            //selectedZombiePos = playerAim.GetSelectedZombie().transform.position;
+            selectedZombiePos = selectedZombie.transform.position;
 
             selectedZombiePos.y += zombieVerticalOffset;
 
@@ -157,6 +166,7 @@ public class KLD_PlayerShoot : MonoBehaviour
         else
         {
             shootDirection = canon.forward;
+            shootDirection.y = 0f;
         }
         weapon.bullet.Shoot(weapon, canon.position, shootDirection, layerMask);
     }
