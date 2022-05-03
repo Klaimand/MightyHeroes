@@ -87,7 +87,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             StopPassiveHeal();
             CancelInvoke("RestorePassiveHeal");
             Invoke("RestorePassiveHeal", restorePassiveHealDuration);
-            
         }
         else return false;
         return true;

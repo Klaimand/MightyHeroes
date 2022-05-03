@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_ToonShader_FlatColor_V1
-  m_Shader: {fileID: -6465566751694194690, guid: 575dd0b9a896ddc4ebd34143e1ff87c9, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: c7a5e567de32e1d41b40fdc9356fc95c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -48,7 +48,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: ee12d2bc9f5c8554d97d5beb9dc4b275, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -100,7 +100,7 @@ Material:
     - _ClearCoatSmoothness: 0
     - _Cull: 2
     - _Cutoff: 0.5
-    - _DepthSens: 1.4
+    - _DepthSens: 0.3
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -109,9 +109,9 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NormalSens: 1
+    - _NormalSens: 0.5
     - _OcclusionStrength: 1
-    - _OutlineThk: 6
+    - _OutlineThk: 3
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
@@ -142,7 +142,7 @@ Material:
     - gradient_color: {r: 0.682353, g: 0.3333333, b: 0.7921569, a: 0}
     - h_gradient_color: {r: 0.21306513, g: 0.7924528, b: 0.6572623, a: 0}
     - highlight_color: {r: 1, g: 1, b: 1, a: 0}
-    - light_color: {r: 0.6023496, g: 0.8706275, b: 0.9056604, a: 0}
+    - light_color: {r: 1, g: 1, b: 1, a: 0}
     - shadow_color: {r: 0.23584908, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6628632303275703669
