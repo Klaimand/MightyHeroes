@@ -38,14 +38,12 @@ public class XL_Alpha : XL_Enemy
     private float angleOffset;
     IEnumerator SummonCoroutine(float t) 
     {
-        yield return new WaitForSeconds(t-0.8f);
+        yield return new WaitForSeconds(t-0.7f);
 
-        Debug.Log("Summon");
         animator.SetBool("Summoning", true);
 
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.7f);
 
-        Debug.Log("Spawn");
         animator.SetBool("Spawning", true);
 
         angleOffset = 360 / nbEnemiesSummoned;
@@ -55,7 +53,7 @@ public class XL_Alpha : XL_Enemy
             XL_GameManager.instance.AddEnemyAttributes(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
         }
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         animator.SetBool("Spawning", false);
         animator.SetBool("Summoning", false);

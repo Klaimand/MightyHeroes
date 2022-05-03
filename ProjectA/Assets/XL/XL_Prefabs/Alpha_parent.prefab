@@ -271,15 +271,14 @@ MonoBehaviour:
   targetedPlayerUpdateRate: 0.5
   agent: {fileID: 7635582431578136576}
   speed: 4
-  pooler: {fileID: 0}
   healthBar: {fileID: 7762896647357268889}
   summonCooldown: 10
   nbEnemiesSummoned: 1
-  summonDistance: 4
+  summonDistance: 3
   projectilespeed: 2
   projectileTravelTime: 1.3
   fireRate: 0.5
-  animator: {fileID: 7988223017662731153}
+  animator: {fileID: 3708816895282187125}
 --- !u!135 &3688438485610751149
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -479,24 +478,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba713dc401759bd4d970d5f540726226, type: 3}
---- !u!1 &1105914367024775000 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1089717838616605843, guid: ba713dc401759bd4d970d5f540726226, type: 3}
-  m_PrefabInstance: {fileID: 20138483756895179}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &293631097746712034 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 312054823322545705, guid: ba713dc401759bd4d970d5f540726226, type: 3}
   m_PrefabInstance: {fileID: 20138483756895179}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &7988223017662731153
+--- !u!1 &7168407671413380544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7150809198033542667, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+  m_PrefabInstance: {fileID: 20138483756895179}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &3708816895282187125
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105914367024775000}
+  m_GameObject: {fileID: 7168407671413380544}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: a833f0afbd731cc4c9d7347e129daa2b, type: 2}
