@@ -100,7 +100,7 @@ public class XL_Pooler : MonoBehaviour
 
     private void Start()
     {
-        InitRefreshCount();
+        //InitRefreshCount();
     }
 
     public GameObject Pop(string key)
@@ -184,6 +184,6 @@ public class XL_Pooler : MonoBehaviour
 
         PopulatePool(pools[poolKey]);
 
-        StartCoroutine(RefreshPool(pools[poolKey], pools[poolKey].baseRefreshSpeed));
+        //StartCoroutine(RefreshPool(pools[poolKey], pools[poolKey].baseRefreshSpeed));
     }
 }

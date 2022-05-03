@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
+using UnityEngine.Animations.Rigging;
 
 public class KLD_PlayerShoot : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] Text ammoText;
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
+    [SerializeField] Animator animator;
 
     [Header("Weapon"), Space(10)]
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
@@ -41,7 +43,6 @@ public class KLD_PlayerShoot : MonoBehaviour
 
     //animation
     //[HideInInspector] public bool isReloading;
-    [SerializeField] Animator animator;
     [ReadOnly] public bool isReloading = false;
     [HideInInspector] public bool isAiming = false;
     [HideInInspector] public bool isShooting;
@@ -51,15 +52,25 @@ public class KLD_PlayerShoot : MonoBehaviour
         HOLD,
         AIMING,
         SHOOTING,
-        RELOADING
+        RELOADING,
+        USING_ULTI,
+        RELOADING_BPB
     }
     WeaponState weaponState = WeaponState.HOLD;
 
+
+    //weapon mesh and anims references
+    [Header("Weapon Mesh/Anims"), Space(10)]
+    [SerializeField] Transform weaponHolderParent;
+    [SerializeField] RigBuilder rigBuilder;
+    [SerializeField] TwoBoneIKConstraint leftHandIK;
+    [SerializeField] TwoBoneIKConstraint rightHandIK;
 
 
     void Awake()
     {
         playerAim = GetComponent<KLD_PlayerAim>();
+        InitWeaponMesh();
     }
 
     // Start is called before the first frame update
@@ -67,8 +78,10 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
+        playerAim.targetPosAngleOffset = weapon.angleOffset;
         StartCoroutine(DelayedStart());
         UpdateUI();
+        //InitWeaponMesh();
     }
 
     IEnumerator DelayedStart()
@@ -168,13 +181,15 @@ public class KLD_PlayerShoot : MonoBehaviour
         else if (weapon.reloadType == ReloadType.BULLET_PER_BULLET)
         {
             missingBullets = weapon.GetCurAttributes().magazineSize - curBullets;
-            for (int i = 0; i < missingBullets + 1; i++)
+            for (int i = 0; i < missingBullets; i++)
             {
                 curBullets++;
+                UpdateUI();
                 yield return new WaitForSeconds(weapon.GetCurAttributes().reloadSpeed);
             }
         }
         isReloading = false;
+        UpdateUI();
     }
 
     void UpdateUI()
@@ -208,23 +223,23 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         if (isReloading)
         {
-            weaponState = WeaponState.RELOADING;
+            weaponState = (weapon.reloadType == ReloadType.MAGAZINE ? WeaponState.RELOADING : WeaponState.RELOADING_BPB);
         }
         else if (!playerAim.GetIsPressingAimJoystick())
         {
             weaponState = WeaponState.HOLD;
         }
-        else if (isAiming && !isShooting)
-        {
-            weaponState = WeaponState.AIMING;
-        }
-        else if (isAiming && isShooting)
+        else if (isAiming && isShooting && curBullets > 0)
         {
             weaponState = WeaponState.SHOOTING;
         }
+        //else if (isAiming && (!isShooting || isShooting && curBullets == 0))
+        else if (isAiming)
+        {
+            weaponState = WeaponState.AIMING;
+        }
         animator.SetInteger("weaponState", (int)weaponState);
     }
-
 
 
 
@@ -232,4 +247,53 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         return weaponState;
     }
+
+
+
+    #region Weapon Mesh and anims Initialization
+
+    GameObject instantiedWH;
+    KLD_WeaponHolder weaponHolder;
+
+    void InitWeaponMesh()
+    {
+        if (weaponHolderParent.childCount > 3) { Destroy(weaponHolderParent.GetChild(3).gameObject); }
+
+        //leftHandIK.enabled = false;
+        //rightHandIK.enabled = false;
+
+        instantiedWH = Instantiate(weapon.weaponHolder, Vector3.zero, Quaternion.identity, weaponHolderParent);
+
+        //instantiedWH.name = "WeaponHolder";
+        instantiedWH.name = weapon.weaponHolder.name;
+
+        instantiedWH.transform.localPosition = weapon.weaponHolder.transform.position;
+        instantiedWH.transform.localRotation = weapon.weaponHolder.transform.rotation;
+
+
+        weaponHolder = instantiedWH.GetComponent<KLD_WeaponHolder>();
+
+        rightHandIK.data.target = weaponHolder.leftHandle;
+        leftHandIK.data.target = weaponHolder.rightHandle;
+
+        canon = weaponHolder.canon;
+
+
+        animator.runtimeAnimatorController = weapon.animatorOverrideController;
+
+
+        animator.enabled = false;
+        animator.enabled = true;
+
+        rigBuilder.Build();
+
+        animator.enabled = false;
+        animator.enabled = true;
+
+        //leftHandIK.enabled = true;
+        //rightHandIK.enabled = true;
+
+    }
+
+    #endregion
 }

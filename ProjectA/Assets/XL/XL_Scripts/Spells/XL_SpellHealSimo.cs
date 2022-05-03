@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XL_SpellHealSimo : MonoBehaviour, XL_ISpells
+public class XL_SpellHealSimo : XL_Spells
 {
     List<GameObject> players;
-    [SerializeField] private XL_SpellHealSimoAttributes healAttributes;
+    Transform pos;
+    [SerializeField] private XL_SpellHealSimoAttributesSO healAttributes;
 
     private void Start()
     {
@@ -13,8 +14,9 @@ public class XL_SpellHealSimo : MonoBehaviour, XL_ISpells
         players = XL_GameManager.instance.players;
     }
 
-    public void ActivateSpell(Vector3 direction)
+    public override void ActivateSpell(Vector3 direction, Transform pos)
     {
+        this.pos = pos;
         StartCoroutine(HealCoroutine(healAttributes.duration));
     }
 
@@ -25,7 +27,7 @@ public class XL_SpellHealSimo : MonoBehaviour, XL_ISpells
             players = XL_GameManager.instance.players;
             foreach (GameObject player in players) 
             {
-                if ((player.transform.position - player.transform.position).magnitude < healAttributes.healingZoneRadius) player.GetComponent<XL_IDamageable>().TakeDamage(-healAttributes.healingAmount);
+                if ((player.transform.position - pos.position).magnitude < healAttributes.healingZoneRadius) player.GetComponent<XL_IDamageable>().TakeDamage(-healAttributes.healingAmount);
             }
 
             yield return new WaitForSeconds(1);

@@ -16,7 +16,7 @@ public class KLD_PlayerAim : MonoBehaviour
     [SerializeField] Transform targetPosTransform = null;
 
     //offsets
-    [SerializeField] float targetPosAngleOffset = 0f;
+    public float targetPosAngleOffset = 0f;
     Vector3 playerToTargetPos = Vector3.zero;
 
     [SerializeField] bool isPressingAimJoystick = false;

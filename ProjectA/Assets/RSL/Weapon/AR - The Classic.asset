@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366c70be5dfc8e8428a608f560d42e10, type: 3}
+  m_Name: AR - The Classic
+  m_EditorClassIdentifier: 
+  weaponName: The Classic
+  description: This is a new weapon.
+  type: 0
+  rarity: 0
+  reloadType: 0
+  bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
+  level: 0
+  experience: 0
+  weaponAttributes:
+  - experienceToReach: 0
+    bulletDamage: 20
+    rpm: 450
+    reloadSpeed: 1.5
+    magazineSize: 30
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 25
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 0
+    isBPBReloading: 0
+  shootDelay: 0.13333334
+  weaponHolder: {fileID: 8543578069356729931, guid: c33b43286b180c1409cf9d2ae1d9da16, type: 3}
+  animatorOverrideController: {fileID: 22100000, guid: 584dd7ebb5c34984f8830acc8adc186b, type: 2}
+  shootAnimDelay: 0.3
+  angleOffset: 30
+  muzzleFlashFX: {fileID: 8362998561939701192, guid: d654d2507e3ddcd4ca56b215005e9d28, type: 3}
+  lineRendererFX: {fileID: 8685958594538611566, guid: a8ffd0db185f3644d81043833c9fdb23, type: 3}
+  impactFX: {fileID: 921483033988333306, guid: 06e686953c8600a499733386b61f3a34, type: 3}
+  wallImpactFX: {fileID: 921483033988333306, guid: 9037783167575af4c97095ad5a0ec7d4, type: 3}
+  fxPoolSize: 12
