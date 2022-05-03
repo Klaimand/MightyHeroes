@@ -13,7 +13,10 @@ MonoBehaviour:
   m_Name: AR - Service Carabine
   m_EditorClassIdentifier: 
   weaponName: Service Carabine
-  description: This is a new weapon.
+  description: "\u201CLa Service Carbine est une arme d\xE9velopp\xE9e par le gouvernement
+    fran\xE7ais pour la F\xE9d\xE9ration. Elle utilise un syst\xE8me de tir en rafales
+    de 3 balles. C\u2019est une des armes pr\xE9f\xE9r\xE9es des soldats de la F\xE9d\xE9rations
+    gr\xE2ce \xE0 sa pr\xE9cision et son recul mod\xE9r\xE9.\u201D"
   type: 0
   rarity: 0
   reloadType: 0
@@ -22,19 +25,84 @@ MonoBehaviour:
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
-    bulletDamage: 20
-    rpm: 120
+    bulletDamage: 23
+    rpm: 150
     reloadSpeed: 1.5
-    magazineSize: 30
+    magazineSize: 27
     bulletsPerShot: 3
     timeBetweenBullets: 0.07
     isBuckshot: 0
-    spread: 25
+    spread: 1
     range: 15
     activePointsPerKill: 5
     displayedName: Level 0
     isBPBReloading: 0
-  shootDelay: 0.5
+  - experienceToReach: 800
+    bulletDamage: 25
+    rpm: 150
+    reloadSpeed: 1.4
+    magazineSize: 30
+    bulletsPerShot: 3
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 1
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 1
+    isBPBReloading: 0
+  - experienceToReach: 1800
+    bulletDamage: 28
+    rpm: 150
+    reloadSpeed: 1.3
+    magazineSize: 33
+    bulletsPerShot: 3
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 1
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 2
+    isBPBReloading: 0
+  - experienceToReach: 3100
+    bulletDamage: 32
+    rpm: 150
+    reloadSpeed: 1.2
+    magazineSize: 36
+    bulletsPerShot: 3
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 1
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 3
+    isBPBReloading: 0
+  - experienceToReach: 4700
+    bulletDamage: 36
+    rpm: 150
+    reloadSpeed: 1.1
+    magazineSize: 39
+    bulletsPerShot: 3
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 1
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 4
+    isBPBReloading: 0
+  - experienceToReach: 6300
+    bulletDamage: 40
+    rpm: 150
+    reloadSpeed: 1
+    magazineSize: 42
+    bulletsPerShot: 3
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 1
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 5
+    isBPBReloading: 0
+  shootDelay: 0.4
   weaponHolder: {fileID: 8288448883617604384, guid: 47c95bd5462e0644b92948f5e0470b7a, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: e88e7c0a3179bb44cb07bb5a7551a527, type: 2}
   shootAnimDelay: 0.3
