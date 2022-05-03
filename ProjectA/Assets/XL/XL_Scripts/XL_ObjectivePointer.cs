@@ -6,6 +6,8 @@ public class XL_ObjectivePointer : MonoBehaviour
 {
     [SerializeField] Transform player;
     Transform target;
+    [SerializeField] Transform refTransform;
+
     [SerializeField] RectTransform pointerRectTransform;
     [SerializeField] private float distanceAround;
 
@@ -31,13 +33,8 @@ public class XL_ObjectivePointer : MonoBehaviour
 
     private void Update()
     {
-        toPosition = Camera.main.WorldToScreenPoint(target.transform.position);
-        toPosition.x -= 740; //Screen resolution X
-        toPosition.y -= 339; //Screen resultion Y
-        toPosition.z = 0f;
-        fromPosition = Camera.main.transform.position;
-        fromPosition.z = 0f;
-        dir = (toPosition - fromPosition.normalized);
+        dir = Quaternion.Euler(refTransform.rotation.eulerAngles.x, -refTransform.rotation.eulerAngles.y, refTransform.rotation.eulerAngles.z) * (target.position - player.position);
+        dir.y = dir.z;
         angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
         pointerAngle.z = angle;
         pointerRectTransform.localEulerAngles = pointerAngle;
