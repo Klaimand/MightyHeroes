@@ -46,8 +46,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     //animation
     //[HideInInspector] public bool isReloading;
     [ReadOnly] public bool isReloading = false;
-    [HideInInspector] public bool isAiming = false;
-    [HideInInspector] public bool isShooting;
+    [ReadOnly] public bool isAiming = false;
+    [ReadOnly] public bool isShooting;
 
     public enum WeaponState
     {
@@ -218,8 +218,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     float curShootAnimDelay = 0f;
     void ProcessIsAimingAndShooting()
     {
-        isAiming = playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null ||
-         playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f;
+        isAiming = (playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null) ||
+         (playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f);
 
         if (!isAiming)
         {
