@@ -55,6 +55,12 @@ public abstract class KLD_Bullet : ScriptableObject
                     {
                         OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage);
                     }
+                    //Debug.Log(Vector3.Dot(newDir, (hit.point - _canonPos)));
+                    //if (Vector3.Dot(newDir, (hit.point - _canonPos)) < 0f)
+                    //{
+                    //hit.point = _canonPos;
+                    //Debug.Log("changed canon pos");
+                    //}
                     DrawShot(_canonPos, hit.point, _weaponSO, true, true, noMuzzle);
                 }
                 else

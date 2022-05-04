@@ -157,6 +157,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     }
 
     KLD_ZombieAttributes selectedZombie;
+    Vector3 canonOffset;
 
     void DoShot()
     {
@@ -170,13 +171,24 @@ public class KLD_PlayerShoot : MonoBehaviour
             selectedZombiePos.y += zombieVerticalOffset;
 
             shootDirection = selectedZombiePos - canon.position;
+
+            if (Vector3.Dot(canon.forward, shootDirection) < 0f || shootDirection.sqrMagnitude < 0.5f)
+            {
+                shootDirection = canon.forward;
+                shootDirection.y = -0.35f;
+                canonOffset = -canon.forward * 1f;
+            }
+            else
+            {
+                canonOffset = Vector3.zero;
+            }
         }
         else
         {
             shootDirection = canon.forward;
             shootDirection.y = 0f;
         }
-        weapon.bullet.Shoot(weapon, canon.position, shootDirection, layerMask);
+        weapon.bullet.Shoot(weapon, canon.position + canonOffset, shootDirection, layerMask);
     }
 
     public void Reload()
