@@ -125,7 +125,10 @@ public class KLD_PlayerAim : MonoBehaviour
         }
         else if (selectedZombie == null && isPressingAimJoystick)
         {
-            targetPos = transform.position + playerAttributes.worldAimDirection;
+            if (playerShoot.isAiming)
+            {
+                targetPos = transform.position + playerAttributes.worldAimDirection;
+            }
         }
         else if (rb.velocity.sqrMagnitude > 0.1f)
         {

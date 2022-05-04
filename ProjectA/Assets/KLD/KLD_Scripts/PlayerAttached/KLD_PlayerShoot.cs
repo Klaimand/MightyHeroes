@@ -256,6 +256,10 @@ public class KLD_PlayerShoot : MonoBehaviour
         {
             weaponState = WeaponState.AIMING;
         }
+        else
+        {
+            weaponState = WeaponState.HOLD;
+        }
         animator.SetInteger("weaponState", (int)weaponState);
     }
 
