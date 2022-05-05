@@ -49,14 +49,18 @@ public class KLD_SpawnerStep
     {
         for (int y = 0; y < 2; y++)
         {
-            for (int i = 0; i < enemiesProbas.Length; i++)
+            for (int i = enemiesProbas.Length - 1; i >= 0; i--)
             {
-                if (i != 0 && enemiesProbas[i - 1].proba > enemiesProbas[i].proba)
+                float minValue = i == 0 ? 0f : enemiesProbas[i - 1].proba - 0.05f;
+                float maxValue = i >= enemiesProbas.Length - 1 ? 1f : enemiesProbas[i + 1].proba;
+
+                enemiesProbas[i].proba = Mathf.Clamp(enemiesProbas[i].proba, minValue, maxValue);
+                /*
+                if (i != 0 && enemiesProbas[i].proba < enemiesProbas[i - 1].proba - 0.03f)
                 {
                     enemiesProbas[i].proba = enemiesProbas[i - 1].proba;
                 }
-                /*
-                if (i < enemiesProbas.Length - 1 && enemiesProbas[i + 1].proba < enemiesProbas[i].proba)
+                if (i < enemiesProbas.Length - 1 && enemiesProbas[i].proba > enemiesProbas[i + 1].proba)
                 {
                     enemiesProbas[i].proba = enemiesProbas[i + 1].proba;
                 }
