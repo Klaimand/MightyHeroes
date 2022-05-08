@@ -1171,7 +1171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 901648824140653450, guid: 1fb2b6b4002802d46be4aee8c72fed73, type: 3}
       propertyPath: attributes.maxHealth
-      value: 2000
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 901648824140653451, guid: 1fb2b6b4002802d46be4aee8c72fed73, type: 3}
       propertyPath: m_Enabled
@@ -2121,6 +2121,7 @@ GameObject:
   - component: {fileID: 1363405912}
   - component: {fileID: 1363405914}
   - component: {fileID: 1363405915}
+  - component: {fileID: 1363405916}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2221,6 +2222,19 @@ MonoBehaviour:
       baseCount: 10
       baseRefreshSpeed: 2
       refreshSpeed: 2
+--- !u!114 &1363405916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1363405911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7f6369ffb4473641ae892373c17c5a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxEnemiesAtOnce: 30
 --- !u!1 &1422993339
 GameObject:
   m_ObjectHideFlags: 0
@@ -3414,7 +3428,7 @@ GameObject:
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3430,20 +3444,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef35af88a95f1c2448edb9ec6258e676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnRadius: 3
+  playerMinDist: 10
   steps:
   - timeToActivate: 0
+    minMaxTimeBetweenSpawns: {x: 10, y: 15}
     enemiesProbas:
-    - proba: 0.264
-      enemy: Swarmer
-      enemyPerSpawn: 3
-    - proba: 0.633
-      enemy: Swarmer
-      enemyPerSpawn: 3
-    - proba: 0.95
+    - proba: 0.546
       enemy: Swarmer
       enemyPerSpawn: 3
     - proba: 1
+      enemy: Kamikaze
+      enemyPerSpawn: 2
+  - timeToActivate: 30
+    minMaxTimeBetweenSpawns: {x: 8, y: 12}
+    enemiesProbas:
+    - proba: 0.517
       enemy: Swarmer
+      enemyPerSpawn: 4
+    - proba: 1
+      enemy: Kamikaze
       enemyPerSpawn: 3
 --- !u!4 &2091840206
 Transform:

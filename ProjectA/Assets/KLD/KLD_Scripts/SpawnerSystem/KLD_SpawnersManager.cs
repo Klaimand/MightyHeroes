@@ -8,6 +8,16 @@ public class KLD_SpawnersManager : MonoBehaviour
 
     public float levelTime { get; private set; } = 0f;
 
+    public float enemiesCount
+    {
+        get { return KLD_ZombieList.Instance.GetZombies().Count; }
+        private set { }
+    }
+
+    [SerializeField] int maxEnemiesAtOnce = 30;
+
+    Vector3 spawnerToPlayer = Vector3.zero;
+
     void Awake()
     {
         Instance = this;
@@ -23,5 +33,13 @@ public class KLD_SpawnersManager : MonoBehaviour
     void Update()
     {
         levelTime += Time.deltaTime;
+    }
+
+    public bool CanSpawn(Vector3 spawnerPosition, float minDist)
+    {
+        spawnerToPlayer = XL_GameManager.instance.players[0].transform.position - spawnerPosition;
+
+        return enemiesCount < maxEnemiesAtOnce
+        && spawnerToPlayer.sqrMagnitude > minDist * minDist;
     }
 }
