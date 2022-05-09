@@ -12,7 +12,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
     Rigidbody rb;
 
-    [SerializeField] KLD_ZombieList zombieList;
+    KLD_ZombieList zombieList;
     [SerializeField] Transform targetPosTransform = null;
 
     //offsets
@@ -64,6 +64,8 @@ public class KLD_PlayerAim : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        zombieList = KLD_ZombieList.Instance;
+
         InitPlayerAttributes();
     }
 
@@ -123,7 +125,10 @@ public class KLD_PlayerAim : MonoBehaviour
         }
         else if (selectedZombie == null && isPressingAimJoystick)
         {
-            targetPos = transform.position + playerAttributes.worldAimDirection;
+            if (playerShoot.isAiming)
+            {
+                targetPos = transform.position + playerAttributes.worldAimDirection;
+            }
         }
         else if (rb.velocity.sqrMagnitude > 0.1f)
         {
@@ -136,7 +141,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
         targetPos.y = transform.position.y;
 
-        if (playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
+        if ((playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING && selectedZombie != null) || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
         {
             playerToTargetPos = (targetPos - transform.position);
 

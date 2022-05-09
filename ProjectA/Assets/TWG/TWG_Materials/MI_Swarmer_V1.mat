@@ -19,8 +19,12 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
+    - _LightMapTex:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: cb8c2d37a8e11c744a73c3119b78e8f6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_87ae1b85e3f34b1d8b89b727898585b5_Out_0:
@@ -54,15 +58,15 @@ Material:
     - _LegsAmp: 0.58
     - _LegsFreq: 10
     - _LegsPhaseOffset: 2
-    - _SDepthSens: 1.831
-    - _SOutlineThk: 3.23
+    - _SDepthSens: 0.7
+    - _SOutlineThk: 3
     - _S_NormalsSens: 1
     - _StrafeAmp: 0.25
     - _StrafeHorzOffset: 0.05
     - _TailAmpBoost: 0.8
     m_Colors:
     - Color_7fb52bc31edc4316b71d11804c401888: {r: 0.34013, g: 0.1066661, b: 0.4433962, a: 0}
-    - _SLightColor: {r: 0.6, g: 0.9588655, b: 1, a: 0}
+    - _SLightColor: {r: 1, g: 0.906528, b: 0.5990566, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6032822593583012800
 MonoBehaviour:

@@ -13,28 +13,95 @@ MonoBehaviour:
   m_Name: SMG - CQC Sweeper
   m_EditorClassIdentifier: 
   weaponName: CQC Sweeper
-  description: This is a new weapon.
+  description: "\u201CLa CQC Sweeper est l\u2019arme la plus utilis\xE9e par la f\xE9d\xE9ration
+    dans les environnements urbains. Sa cadence de tir \xE9lev\xE9e la rend particuli\xE8rement
+    l\xE9tale dans des situations de close combat. Equivalent UZI\u201D"
   type: 1
   rarity: 0
   reloadType: 0
   bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
-  level: 0
+  level: 5
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
-    bulletDamage: 20
-    rpm: 450
+    bulletDamage: 13
+    rpm: 650
     reloadSpeed: 1.5
     magazineSize: 30
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
-    spread: 25
+    spread: 8
     range: 15
     activePointsPerKill: 5
     displayedName: Level 0
     isBPBReloading: 0
-  shootDelay: 0.13333334
+  - experienceToReach: 800
+    bulletDamage: 15
+    rpm: 650
+    reloadSpeed: 1.4
+    magazineSize: 32
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 8
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 1
+    isBPBReloading: 0
+  - experienceToReach: 1800
+    bulletDamage: 17
+    rpm: 650
+    reloadSpeed: 1.3
+    magazineSize: 34
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 8
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 2
+    isBPBReloading: 0
+  - experienceToReach: 3100
+    bulletDamage: 19
+    rpm: 650
+    reloadSpeed: 1.2
+    magazineSize: 36
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 8
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 3
+    isBPBReloading: 0
+  - experienceToReach: 4700
+    bulletDamage: 21
+    rpm: 650
+    reloadSpeed: 1.1
+    magazineSize: 38
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 8
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 4
+    isBPBReloading: 0
+  - experienceToReach: 6300
+    bulletDamage: 23
+    rpm: 650
+    reloadSpeed: 1
+    magazineSize: 40
+    bulletsPerShot: 1
+    timeBetweenBullets: 0.07
+    isBuckshot: 0
+    spread: 8
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 5
+    isBPBReloading: 0
+  shootDelay: 0.092307694
   weaponHolder: {fileID: 8448994597956443654, guid: c3eda7ef7d05c154082ddf9b260c6a39, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: bd8d1c891a162c54e8753937eccafe8c, type: 2}
   shootAnimDelay: 0.3
@@ -43,4 +110,4 @@ MonoBehaviour:
   lineRendererFX: {fileID: 5147150837283688741, guid: cfda13cc004e06a41b9f3b322979ed23, type: 3}
   impactFX: {fileID: 13722952917908546, guid: a8ae7251378c4294cba9c8c5444bef7a, type: 3}
   wallImpactFX: {fileID: 13722952917908546, guid: 2e74034592d126d45a52f4ba3c54a288, type: 3}
-  fxPoolSize: 15
+  fxPoolSize: 10

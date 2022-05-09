@@ -146,5 +146,10 @@ public class KLD_PlayerController : MonoBehaviour
         animator.SetInteger("locomotionState", (int)locomotionState);
     }
 
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
+
 
 }
