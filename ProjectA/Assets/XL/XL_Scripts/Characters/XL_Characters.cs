@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
+    [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] protected XL_CharacterAttributesSO characterAttributes;
     private float health;
 
@@ -36,10 +37,27 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         }
     }
 
-    public bool ActivateSpell(Vector3 direction)
+    void OnEnable()
     {
-        if (ultimateCharge == 100)
+        touchInputs.onActiveSkillJoystickRelease += ActivateSpell;
+    }
+
+    void OnDisable()
+    {
+        touchInputs.onActiveSkillJoystickRelease -= ActivateSpell;
+    }
+
+    Vector3 direction;
+    public void ActivateSpell(Vector2 _direction)
+    {
+        if (ultimateCharge >= 100f)
         {
+            direction = Vector3.zero;
+            direction.x = _direction.x;
+            direction.z = _direction.y;
+
+            direction = Quaternion.Euler(0f, 45f, 0f) * direction;
+
             ultimateCharge = 0;
             isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
@@ -49,8 +67,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             CancelInvoke("RestorePassiveHeal");
             Invoke("RestorePassiveHeal", restorePassiveHealDuration);
         }
-        else return false;
-        return true;
+        //else return false;
+        //return true;
     }
 
     IEnumerator SpellCooldownCoroutine(float t)
@@ -129,6 +147,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         characterAttributes.level = _characterLevel;
         characterAttributes.Initialize();
+        health = characterAttributes.healthMax;
     }
 
     public float GetCharacterSpeed()
