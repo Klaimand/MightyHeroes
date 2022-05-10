@@ -178,9 +178,10 @@ GameObject:
   - component: {fileID: 4918749989807435229}
   - component: {fileID: 7763574474891127591}
   - component: {fileID: 7763574474891127590}
+  - component: {fileID: 3458527930148275957}
   m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,7 +193,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4918749990883480112}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -273,7 +274,6 @@ MonoBehaviour:
   inputs: {fileID: 0}
   controller: {fileID: 4918749990883480118}
   playerShoot: {fileID: 4918749989807435229}
-  zombieList: {fileID: 0}
   targetPosTransform: {fileID: 0}
   targetPosAngleOffset: 30
   isPressingAimJoystick: 0
@@ -306,8 +306,10 @@ MonoBehaviour:
   touchInputs: {fileID: 0}
   reloadButton: {fileID: 0}
   animator: {fileID: 6128948020503051310}
-  weapon: {fileID: 11400000, guid: a5683c25f68643748af52f8c5e9d0907, type: 2}
-  zombieVerticalOffset: 1.5
+  controller: {fileID: 4918749990883480118}
+  character: {fileID: 7763574474891127591}
+  weapon: {fileID: 11400000, guid: 442483801d895a44ea30b5cdbd403aa8, type: 2}
+  zombieVerticalOffset: 1.05
   layerMask:
     serializedVersion: 2
     m_Bits: 129
@@ -351,6 +353,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 7763574474759986275}
   ultBar: {fileID: 7763574475618055330}
+--- !u!114 &3458527930148275957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4918749990883480112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3be6ffc9a65eb74c9f6a5ca384013ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xl_character: {fileID: 7763574474891127591}
 --- !u!1 &4918749991401258338
 GameObject:
   m_ObjectHideFlags: 0
