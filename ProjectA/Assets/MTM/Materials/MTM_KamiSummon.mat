@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: blast mat RENAME
-  m_Shader: {fileID: -6465566751694194690, guid: 982c71d401181cf4888eb268869c8553, type: 3}
+  m_Name: MTM_KamiSummon
+  m_Shader: {fileID: -6465566751694194690, guid: 745ee3233b84bf842b5bb15d03b6bb87, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,24 +19,24 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_bcec8f44c78c4e84aa81ba6188dfaef0:
-        m_Texture: {fileID: 2800000, guid: e4e83f4105458df42a66bf4cb7b0c972, type: 3}
+    - _MTMEnemyEnergyV01_062cdb8fc81f4af19a929038ae3d8056_Texture2D40db241839254280bd2800c2ebd57798_3823998390:
+        m_Texture: {fileID: 2800000, guid: 7a394559e1c031c448bfe3faa5236e75, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - Texture2D_d6edc900c1c147ff9e6ee52f486e1fb6:
-        m_Texture: {fileID: 2800000, guid: 1c4b4c2927377b44b84fe536f024a858, type: 3}
+    - _MTMEnemyEnergyV01_062cdb8fc81f4af19a929038ae3d8056_Texture2D978c741c97774743833de05b329a7bc9_643562150:
+        m_Texture: {fileID: 2800000, guid: 3303b8d6340025b4ea32b0517d2e2a96, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 36b000fbf1048b4478f3b85f72a27af9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 93f5d8f57d69437478825b5e42f9973b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - light_mask:
-        m_Texture: {fileID: 2800000, guid: 1c4b4c2927377b44b84fe536f024a858, type: 3}
+        m_Texture: {fileID: 2800000, guid: 77218e20c842b4640ad18e887855c069, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - shadow_mask:
-        m_Texture: {fileID: 2800000, guid: e4e83f4105458df42a66bf4cb7b0c972, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9a280e9e4e98a824baec0cdfa643d559, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -52,11 +52,14 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_48a724aedd7142a2a693a93586ce2fb9: 1
+    - Vector1_5bce10ed53c7489a9c8194c25f399e16: 0
+    - Vector1_ec341b508d1242b590ddb9ce879f7750: 1
     - _DepthSens: 1
     - _NormalSens: 1
-    - _OutlineThk: 1
+    - _OutlineThk: 3
+    - noise_scale: 10
     m_Colors:
-    - Vector2_ad91df1aaa444780baf51c2e86635ea9: {r: 0, g: 2, b: 0, a: 0}
-    - energy_line_color: {r: 0.39215687, g: 0.39215687, b: 1, a: 0}
-    - light_color: {r: 1, g: 0.7764706, b: 0.6, a: 0}
+    - energy_line_color: {r: 1, g: 0.48627454, b: 0, a: 0}
+    - light_color: {r: 0.67058825, g: 0.5529412, b: 0.43137255, a: 0}
   m_BuildTextureStacks: []
