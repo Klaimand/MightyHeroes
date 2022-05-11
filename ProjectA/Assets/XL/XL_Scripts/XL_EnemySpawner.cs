@@ -13,13 +13,13 @@ public class XL_EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnCoroutine(spawnCooldown));
     }
 
-    IEnumerator SpawnCoroutine(float t) 
+    IEnumerator SpawnCoroutine(float t)
     {
         yield return new WaitForSeconds(t);
 
         enemy = XL_Pooler.instance.PopPosition(enemyName, transform.position);
         enemy.transform.LookAt(XL_GameManager.instance.players[0].transform);
-        XL_GameManager.instance.AddEnemy(enemy.GetComponent<XL_Enemy>());
+        //XL_GameManager.instance.AddEnemy(enemy.GetComponent<XL_Enemy>());
         StartCoroutine(SpawnCoroutine(t));
     }
 }

@@ -23,18 +23,18 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 
     private void Update()
     {
-        if (GetObjectiveState()) 
+        if (GetObjectiveState())
         {
             StopAllCoroutines();
             XL_GameModeManager.instance.CompleteObjective();
             Debug.Log("test");
             enabled = false;
-        } 
+        }
     }
 
-    IEnumerator CaptureZoneCoroutine(float t) 
+    IEnumerator CaptureZoneCoroutine(float t)
     {
-        while (true) 
+        while (true)
         {
             capturePercentage += playersInside.Count;
             ui.UpdateUI(capturePercentage);
@@ -46,7 +46,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player")) 
+        if (other.transform.CompareTag("Player"))
         {
             Debug.Log("Player : " + other.name + " has entered capture zone");
             playersInside.Add(other.gameObject);
@@ -64,8 +64,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 
     public bool GetObjectiveState()
     {
-        if (capturePercentage < 100) return false;
-        else return true;
+        return !(capturePercentage < 100);
     }
 
     public Transform GetTransform()
@@ -73,7 +72,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         return this.transform;
     }
 
-    public string GetObjectiveString() 
+    public string GetObjectiveString()
     {
         return objectiveString;
     }

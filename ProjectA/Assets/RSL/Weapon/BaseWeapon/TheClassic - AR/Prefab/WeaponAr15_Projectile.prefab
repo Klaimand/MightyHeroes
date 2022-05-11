@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8685958594538611560}
   - component: {fileID: 8685958594538611567}
+  - component: {fileID: 5515426964903044570}
   m_Layer: 0
   m_Name: WeaponAr15_Projectile
   m_TagString: Untagged
@@ -52,6 +53,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5515426964903044570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8685958594538611566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3e188b275147643a220b69efd1e10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depopAfter: 1
+  poolKey: The Classic_lineRenderer
 --- !u!1 &8685958594735533623
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +194,7 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0
 --- !u!1 &8685958595247027145
 GameObject:
@@ -317,5 +332,5 @@ LineRenderer:
     textureMode: 0
     shadowBias: 0.5
     generateLightingData: 0
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1
   m_Loop: 0

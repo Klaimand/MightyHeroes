@@ -43,10 +43,18 @@ public class XL_Pooler : MonoBehaviour
         PopulatePools();
     }
 
+    private void Start()
+    {
+        //InitPools();
+        //PopulatePools();
+        //InitRefreshCount();
+    }
+
     void PopulatePools()
     {
         foreach (var pool in pools)
         {
+            pool.Value.queue = new Queue<GameObject>();
             PopulatePool(pool.Value);
         }
     }
@@ -98,10 +106,7 @@ public class XL_Pooler : MonoBehaviour
     }
 
 
-    private void Start()
-    {
-        InitRefreshCount();
-    }
+
 
     public GameObject Pop(string key)
     {
@@ -184,6 +189,6 @@ public class XL_Pooler : MonoBehaviour
 
         PopulatePool(pools[poolKey]);
 
-        StartCoroutine(RefreshPool(pools[poolKey], pools[poolKey].baseRefreshSpeed));
+        //StartCoroutine(RefreshPool(pools[poolKey], pools[poolKey].baseRefreshSpeed));
     }
 }

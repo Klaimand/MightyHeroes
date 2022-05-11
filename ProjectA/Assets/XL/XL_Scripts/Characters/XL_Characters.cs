@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
+    [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] protected XL_CharacterAttributesSO characterAttributes;
     private float health;
-    [SerializeField] protected Rigidbody rb;
-    [SerializeField] protected KLD_PlayerAim playerAim;
-    [SerializeField] protected Transform shootDirection;
-
-    [SerializeField] protected float fireRate;
-    private bool canFire;
 
     private XL_ISpells spell;
     public float ultimateCharge;
@@ -27,8 +22,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     }
     private void Start()
     {
-        
-        canFire = true;
         ultimateCharge = 0;
         spell = transform.GetComponent<XL_ISpells>();
         StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
@@ -37,48 +30,34 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     private void Update()
     {
-        if (playerAim.isShooting) 
-        {
-            Shoot();
-        }
-        if (Input.GetKeyDown(KeyCode.T)) 
+        if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("SPELL");
             ActivateSpell(transform.forward);
         }
     }
 
-    private RaycastHit hit;
-    private XL_IDamageable target;
-    public void Shoot() 
+    void OnEnable()
     {
-        if (canFire) 
-        {
-            Debug.Log("Shoot");
-            if (Physics.Raycast(transform.position + Vector3.up * 1f, playerAim.GetSelectedZombie().transform.position - transform.position, out hit, 50/*, layer*/))
-            {
-                StartCoroutine(FireRateCooldown(fireRate));
-                if ((target = hit.transform.GetComponent<XL_IDamageable>()) != null) target.TakeDamage(10);
-            }
-            Debug.DrawRay(transform.position, playerAim.GetSelectedZombie().transform.position - transform.position, Color.black);
-
-            StopPassiveHeal();
-            CancelInvoke("RestorePassiveHeal");
-            Invoke("RestorePassiveHeal", restorePassiveHealDuration);
-        }
+        touchInputs.onActiveSkillJoystickRelease += ActivateSpell;
     }
 
-    IEnumerator FireRateCooldown(float t) 
+    void OnDisable()
     {
-        canFire = false;
-        yield return new WaitForSeconds(t);
-        canFire = true;
+        touchInputs.onActiveSkillJoystickRelease -= ActivateSpell;
     }
 
-    public bool ActivateSpell(Vector3 direction)
+    Vector3 direction;
+    public void ActivateSpell(Vector2 _direction)
     {
-        if (ultimateCharge == 100)
+        if (ultimateCharge >= 100f)
         {
+            direction = Vector3.zero;
+            direction.x = _direction.x;
+            direction.z = _direction.y;
+
+            direction = Quaternion.Euler(0f, 45f, 0f) * direction;
+
             ultimateCharge = 0;
             isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
@@ -88,11 +67,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             CancelInvoke("RestorePassiveHeal");
             Invoke("RestorePassiveHeal", restorePassiveHealDuration);
         }
-        else return false;
-        return true;
+        //else return false;
+        //return true;
     }
 
-    IEnumerator SpellCooldownCoroutine(float t) 
+    IEnumerator SpellCooldownCoroutine(float t)
     {
 
         yield return new WaitForSeconds(t);
@@ -109,11 +88,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     public void Die()
     {
         StopAllCoroutines();
-        XL_GameManager.instance.RemovePlayer(transform.gameObject);
+        //XL_GameManager.instance.RemovePlayer(transform.gameObject);
         transform.gameObject.SetActive(false);
     }
 
-    [ContextMenu("Take 1 Damage")]
+    [ContextMenu("Take 100 Damage")]
     public void Take100Damage() { TakeDamage(100); }
 
     public void TakeDamage(float damage)
@@ -130,7 +109,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             Die();
         }
 
-        if (health > characterAttributes.healthMax) 
+        if (health > characterAttributes.healthMax)
         {
             health = characterAttributes.healthMax;
         }
@@ -154,13 +133,25 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         passiveHealEnabled = false;
     }
 
-    IEnumerator OutOfCombatHealingCoroutine(float t) 
+    IEnumerator OutOfCombatHealingCoroutine(float t)
     {
-        while (true) 
+        while (true)
         {
             yield return new WaitForSeconds(t);
 
             if (passiveHealEnabled) TakeDamage(-characterAttributes.healingTick);
         }
+    }
+
+    public void InitializeCharacterStats(int _characterLevel)
+    {
+        characterAttributes.level = _characterLevel;
+        characterAttributes.Initialize();
+        health = characterAttributes.healthMax;
+    }
+
+    public float GetCharacterSpeed()
+    {
+        return characterAttributes.movementSpeed;
     }
 }
