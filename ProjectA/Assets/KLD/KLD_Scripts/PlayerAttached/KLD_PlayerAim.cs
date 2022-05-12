@@ -6,8 +6,9 @@ using Sirenix.OdinInspector;
 public class KLD_PlayerAim : MonoBehaviour
 {
     [SerializeField] KLD_TouchInputs inputs;
-    [SerializeField] Animator animator;
+    //[SerializeField] Animator animator;
     [SerializeField] KLD_PlayerController controller;
+    [SerializeField] KLD_PlayerShoot playerShoot;
 
     Rigidbody rb;
 
@@ -15,7 +16,7 @@ public class KLD_PlayerAim : MonoBehaviour
     [SerializeField] Transform targetPosTransform = null;
 
     //offsets
-    [SerializeField] float targetPosAngleOffset = 0f;
+    public float targetPosAngleOffset = 0f;
     Vector3 playerToTargetPos = Vector3.zero;
 
     [SerializeField] bool isPressingAimJoystick = false;
@@ -23,7 +24,8 @@ public class KLD_PlayerAim : MonoBehaviour
     Vector3 inputAimVector3 = Vector3.zero;
     Vector3 worldAimVector3 = Vector3.zero;
 
-
+    //FOR XL CHARACTERS
+    public bool isShooting;
 
 
     [SerializeField, ReadOnly] KLD_ZombieAttributes selectedZombie = null;
@@ -38,6 +40,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
     [SerializeField, ReadOnly] KLD_PlayerAttributes playerAttributes;
 
+    /*
     //shooting
     [HideInInspector] public bool isReloading;
     [HideInInspector] public bool isShooting;
@@ -51,6 +54,7 @@ public class KLD_PlayerAim : MonoBehaviour
         RELOADING
     }
     WeaponState weaponState = WeaponState.HOLD;
+    */
 
     void Awake()
     {
@@ -75,11 +79,10 @@ public class KLD_PlayerAim : MonoBehaviour
 
         DrawSelectedLine();
 
-        //isShooting = isPressingAimJoystick && selectedZombie != null;
-        isShooting = isPressingAimJoystick && selectedZombie != null ||
-         isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.1f;
+        //isShooting = isPressingAimJoystick && selectedZombie != null ||
+        // isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.1f;
 
-        AnimateWeaponState();
+        //AnimateWeaponState();
     }
 
     void ProcessPlayerAttributeAimVector()
@@ -133,7 +136,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
         targetPos.y = transform.position.y;
 
-        if (weaponState == WeaponState.AIMING || weaponState == WeaponState.SHOOTING)
+        if (playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
         {
             playerToTargetPos = (targetPos - transform.position);
 
@@ -181,6 +184,7 @@ public class KLD_PlayerAim : MonoBehaviour
         }
     }
 
+    /*
     void AnimateWeaponState()
     {
         if (isReloading)
@@ -200,7 +204,7 @@ public class KLD_PlayerAim : MonoBehaviour
             weaponState = WeaponState.SHOOTING;
         }
         animator.SetInteger("weaponState", (int)weaponState);
-    }
+    }*/
 
     #region Getters and Setters
 
@@ -216,7 +220,18 @@ public class KLD_PlayerAim : MonoBehaviour
 
     public Vector3 GetTargetPos() //debug la ptn de ta race
     {
+        Debug.LogError("TARGET POS IS NOT WORKING ITS A DEBUG FUNCTION");
         return Vector3.zero;
+    }
+
+    public Vector2 GetInputAimVector()
+    {
+        return inputAimVector;
+    }
+
+    public bool GetIsPressingAimJoystick()
+    {
+        return isPressingAimJoystick;
     }
 
 

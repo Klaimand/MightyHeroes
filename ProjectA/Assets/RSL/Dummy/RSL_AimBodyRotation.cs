@@ -5,7 +5,7 @@ using UnityEngine;
 public class RSL_AimBodyRotation : MonoBehaviour
 {
 
-    [SerializeField] Transform targetTransform;
+    /*[SerializeField] Transform targetTransform;
     [SerializeField] Transform aimTransform;
     [SerializeField] Transform bone;
 
@@ -31,4 +31,6 @@ public class RSL_AimBodyRotation : MonoBehaviour
         Quaternion aimTowards = Quaternion.FromToRotation(aimDirection, targetDirection);
         bone.rotation = aimTowards * bone.rotation;
     }
+    */
 }
+    

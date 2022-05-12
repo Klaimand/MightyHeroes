@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class XL_TestScriptDamage : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //public float[]
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        //XL_Utilities.GenerateCurve(curve, 15);
     }
 }

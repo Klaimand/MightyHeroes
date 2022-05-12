@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 {
-    [SerializeField] private XL_GameManager manager;
+    public string objectiveString = "Capture the zones";
+
+    [SerializeField] private XL_UICaptureZone ui;
+
     [SerializeField] private float tickTime;
     private int capturePercentage;
 
@@ -20,15 +23,13 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 
     private void Update()
     {
-        if (manager != null)
+        if (GetObjectiveState()) 
         {
-            if (GetGameState()) 
-            {
-                manager.WinGame();
-                Debug.Log("test");
-                enabled = false;
-            } 
-        }
+            StopAllCoroutines();
+            XL_GameModeManager.instance.CompleteObjective();
+            Debug.Log("test");
+            enabled = false;
+        } 
     }
 
     IEnumerator CaptureZoneCoroutine(float t) 
@@ -36,7 +37,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         while (true) 
         {
             capturePercentage += playersInside.Count;
-            Debug.Log("Capture percentage : " + capturePercentage);
+            ui.UpdateUI(capturePercentage);
             yield return new WaitForSeconds(t);
         }
     }
@@ -61,9 +62,19 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         }
     }
 
-    public bool GetGameState()
+    public bool GetObjectiveState()
     {
         if (capturePercentage < 100) return false;
         else return true;
+    }
+
+    public Transform GetTransform()
+    {
+        return this.transform;
+    }
+
+    public string GetObjectiveString() 
+    {
+        return objectiveString;
     }
 }

@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 {
+
+
     [SerializeField] private KLD_ZombieAttributes attributes;
     protected float health;
 
@@ -23,7 +25,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [Header("Pooler")]
     [SerializeField] protected XL_Pooler pooler;
 
-    [SerializeField] Transform healthBar;
+    [SerializeField] XL_HealthBarUI healthBar;
 
     Vector3 scale = Vector3.one;
 
@@ -41,7 +43,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         health = attributes.maxHealth;
         agent.speed = speed;
         canAttack = true;
-        UpdateHealthBar();
+        //healthBar.UpdateHealthBar(health / attributes.maxHealth);
     }
 
     public abstract void Alert();
@@ -53,7 +55,6 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Debug.Log("Remove enemy : " + this.name);
         XL_GameManager.instance.RemoveEnemyAttributes(attributes);
     }
-
 
     protected int targetedPlayerIdx = 0;
     protected float targetedPlayerDistance = 0;
@@ -68,24 +69,32 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         StartCoroutine(FindTargetedPlayerCoroutine(targetedPlayerUpdateRate));
     }
 
+
+    private int i;
     private void FindNearestPlayer()
     {
-        targetedPlayerIdx = 0;
-        //Debug.Log("player 0 : " + XL_GameManager.instance.GetPlayers());
-        targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude;    // distance between player 0 and the enemy
-        
 
-        for (int i = 1; i < XL_GameManager.instance.players.Count; i++)
+
+        targetedPlayerIdx = 0;
+        i = 0;
+        targetedPlayerDistance = 100000;
+
+        while (i < XL_GameManager.instance.players.Count)
         {
-            nextTargetedPlayerDistance = (transform.position - XL_GameManager.instance.players[i].transform.position).magnitude;    // distance between player i and the enemy
-            if (targetedPlayerDistance > nextTargetedPlayerDistance)
+            if (i > 0)
             {
-                targetedPlayerIdx = i;
-                targetedPlayerDistance = nextTargetedPlayerDistance;
-            }
+                nextTargetedPlayerDistance = (transform.position - XL_GameManager.instance.players[i].transform.position).magnitude;    // distance between player i and the enemy
+                if (targetedPlayerDistance > nextTargetedPlayerDistance)
+                {
+                    targetedPlayerIdx = i;
+                    targetedPlayerDistance = nextTargetedPlayerDistance;
+                }
+            } else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
+            
+            i++;
         }
 
-        targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
+        if(i > 0) targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
     }
 
     protected IEnumerator AttackCooldownCoroutine(float t) 
@@ -96,10 +105,10 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         canAttack = true;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
-        UpdateHealthBar();
+        healthBar.UpdateHealthBar(health / attributes.maxHealth);
         if (health < 1) Die();
     }
 
@@ -111,31 +120,13 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Initialize();
     }
 
-    void OnDisable()
-    {
-        //"ZombieList" things here
-    }
-
-    void OnValidate()
-    {
-        UpdateHealthBar();
-
-        if (gUIStyle == null) SetupGUIStyle();
-    }
-
-    void UpdateHealthBar()
-    {
-        scale.x = (health / 100f);
-
-        healthBar.localScale = scale;
-    }
 
     public KLD_ZombieAttributes GetZombieAttributes() 
     {
         return attributes;
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
 #if UNITY_EDITOR
         Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
@@ -153,5 +144,5 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
 
         gUIStyle = _gui;
-    }
+    }*/
 }
