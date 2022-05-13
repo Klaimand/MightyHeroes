@@ -127,6 +127,22 @@ public class XL_Pooler : MonoBehaviour
         return objectInstance;
     }
 
+    public GameObject PopPosition(string key, Vector3 position, Transform parent)
+    {
+        if (pools[key].queue.Count == 0)
+        {
+            Debug.LogWarning("pool of" + key + "is empty");
+            AddInstance(pools[key]);
+        }
+        objectInstance = pools[key].queue.Dequeue();
+        objectInstance.transform.position = position;
+        objectInstance.transform.parent = parent;
+        objectInstance.SetActive(true);
+
+        return objectInstance;
+    }
+
+
     public GameObject PopPosRot(string key, Vector3 position, Quaternion rotation)
     {
         if (pools[key].queue.Count == 0)

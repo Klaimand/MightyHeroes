@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class XL_Explosion : MonoBehaviour
 {
+    [SerializeField] private string poolerKey;
     private float radius;
     private int damage;
     //protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
@@ -34,5 +35,7 @@ public class XL_Explosion : MonoBehaviour
                 damageableObject.TakeDamage(damage);
             }
         }
+
+        XL_Pooler.instance.DelayedDePop(2, poolerKey, this.gameObject);
     }
 }
