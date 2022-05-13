@@ -53,6 +53,7 @@ public class KLD_PlayerShoot : MonoBehaviour
         AIMING,
         SHOOTING,
         RELOADING,
+        USING_ULTI,
         RELOADING_BPB
     }
     WeaponState weaponState = WeaponState.HOLD;
@@ -180,13 +181,15 @@ public class KLD_PlayerShoot : MonoBehaviour
         else if (weapon.reloadType == ReloadType.BULLET_PER_BULLET)
         {
             missingBullets = weapon.GetCurAttributes().magazineSize - curBullets;
-            for (int i = 0; i < missingBullets + 1; i++)
+            for (int i = 0; i < missingBullets; i++)
             {
                 curBullets++;
+                UpdateUI();
                 yield return new WaitForSeconds(weapon.GetCurAttributes().reloadSpeed);
             }
         }
         isReloading = false;
+        UpdateUI();
     }
 
     void UpdateUI()
@@ -226,13 +229,14 @@ public class KLD_PlayerShoot : MonoBehaviour
         {
             weaponState = WeaponState.HOLD;
         }
-        else if (isAiming && !isShooting)
-        {
-            weaponState = WeaponState.AIMING;
-        }
-        else if (isAiming && isShooting)
+        else if (isAiming && isShooting && curBullets > 0)
         {
             weaponState = WeaponState.SHOOTING;
+        }
+        //else if (isAiming && (!isShooting || isShooting && curBullets == 0))
+        else if (isAiming)
+        {
+            weaponState = WeaponState.AIMING;
         }
         animator.SetInteger("weaponState", (int)weaponState);
     }
@@ -260,7 +264,8 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         instantiedWH = Instantiate(weapon.weaponHolder, Vector3.zero, Quaternion.identity, weaponHolderParent);
 
-        instantiedWH.name = "WeaponHolder";
+        //instantiedWH.name = "WeaponHolder";
+        instantiedWH.name = weapon.weaponHolder.name;
 
         instantiedWH.transform.localPosition = weapon.weaponHolder.transform.position;
         instantiedWH.transform.localRotation = weapon.weaponHolder.transform.rotation;
