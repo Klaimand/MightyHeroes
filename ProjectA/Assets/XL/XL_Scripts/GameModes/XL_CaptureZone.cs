@@ -57,7 +57,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("Player : " + other.name + " has left capture zone");
+            //Debug.Log("Player : " + other.name + " has left capture zone");
             playersInside.Remove(other.gameObject);
         }
     }

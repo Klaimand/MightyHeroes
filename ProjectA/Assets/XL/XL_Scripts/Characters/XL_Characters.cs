@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
@@ -18,6 +19,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     [SerializeField] Animator ultJoystickAnimator;
     [SerializeField] Animator ultButtonAnimator;
+    [SerializeField] Button ultButton;
 
     enum UltState { NONE, DOWN, UP };
 
@@ -67,23 +69,37 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             ultJoystickAnimator.SetInteger("ultState", (int)ultState);
         }
 
-        touchInputs.SetJoystickInterractable(2, isUltimateCharged && !playerShoot.isReloading);
+        if (touchInputs.GetUseButtonForUltimate())
+        {
+            ultButton.interactable = isUltimateCharged && !playerShoot.isReloading;
+        }
+        else
+        {
+            touchInputs.SetJoystickInterractable(2, isUltimateCharged && !playerShoot.isReloading);
+        }
 
     }
 
     void OnEnable()
     {
         touchInputs.onActiveSkillJoystickRelease += ActivateSpell;
+        touchInputs.onActiveSkillButton += ActivateButtonSpell;
     }
 
     void OnDisable()
     {
         touchInputs.onActiveSkillJoystickRelease -= ActivateSpell;
+        touchInputs.onActiveSkillButton -= ActivateButtonSpell;
     }
 
     Vector3 direction;
 
     Vector2 spellDirection;
+
+    void ActivateButtonSpell()
+    {
+        ActivateSpell(Vector2.zero);
+    }
 
     public void ActivateSpell(Vector2 _direction)
     {
@@ -91,6 +107,12 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         {
             playerShoot.UseUltimate(characterAttributes.spellLaunchDuration);
             spellDirection = _direction;
+
+            ultimateCharge = 0;
+            characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+
+            isUltimateCharged = false;
+            StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
         }
     }
 
@@ -102,11 +124,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         direction = Quaternion.Euler(0f, 45f, 0f) * direction;
 
-        ultimateCharge = 0;
-        characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+        //ultimateCharge = 0;
+        //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
 
-        isUltimateCharged = false;
-        StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
+        //isUltimateCharged = false;
+        //StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
         characterAttributes.ActivateSpell(direction, transform);
 
         StopPassiveHeal();
