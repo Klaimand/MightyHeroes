@@ -23,10 +23,13 @@ public class XL_GameManager : MonoBehaviour
     public void WinGame()
     {
         //DeactivateAllEnemyScript();
+        Debug.Log("Game won !");
+        Debug.Break();
+        /*
         text.text = "Mission accomplished !";
         EndingScreen.SetActive(true);
-        Debug.Log("Game won !");
         StartCoroutine(ChangeSceneCoroutine(endingScreenTime));
+        */
     }
 
     public void LoseGame()
