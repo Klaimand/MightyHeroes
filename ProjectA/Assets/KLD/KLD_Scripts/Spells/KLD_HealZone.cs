@@ -9,7 +9,7 @@ public class KLD_HealZone : MonoBehaviour
     [SerializeField] float tickDuration = 0.2f;
     float curTickDuration = 0f;
     [SerializeField] int healingPerTick = 20;
-    [SerializeField] float radius = 3f;
+    //[SerializeField] float radius = 3f;
 
     XL_IDamageable playerDamageable;
     Transform playerTransform;
