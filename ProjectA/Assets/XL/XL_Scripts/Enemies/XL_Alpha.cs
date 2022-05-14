@@ -11,6 +11,7 @@ public class XL_Alpha : XL_Enemy
     [SerializeField] private float projectilespeed;
     [SerializeField] private float projectileTravelTime;
     [SerializeField] private float fireRate;
+    GameObject vfx;
 
     [SerializeField] private Animator animator;
 
@@ -41,13 +42,15 @@ public class XL_Alpha : XL_Enemy
         yield return new WaitForSeconds(t - 0.7f);
 
         animator.SetBool("Summoning", true);
+        vfx = XL_Pooler.instance.PopPosition("SummoningChargeVFX", transform.position);
 
         yield return new WaitForSeconds(0.7f);
 
         animator.SetBool("Summoning", false);
         animator.SetBool("Spawning", true);
 
-
+        XL_Pooler.instance.DePop("SummoningChargeVFX", vfx);
+        XL_Pooler.instance.PopPosition("SpawningVFX", transform.position);
 
 
         yield return new WaitForSeconds(0.6f);
@@ -61,6 +64,7 @@ public class XL_Alpha : XL_Enemy
         }
 
         animator.SetBool("Spawning", false);
+        XL_Pooler.instance.DePop("SpawningVFX", vfx);
         StartCoroutine(SummonCoroutine(t));
     }
 

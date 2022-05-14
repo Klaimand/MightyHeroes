@@ -9,6 +9,7 @@ public class XL_Swarmers : XL_Enemy
     [SerializeField] private float attackRange;
     [SerializeField] private float attackWidth;
     [SerializeField] private float attackAnimationSpeed;
+    private GameObject attackParticles;
     private bool attacking;
     private List<GameObject> playersHit = new List<GameObject>();
 
@@ -83,6 +84,8 @@ public class XL_Swarmers : XL_Enemy
         shader.SetFloat("_AtkSldr", 1);
         yield return new WaitForSeconds(t);
 
+        attackParticles = XL_Pooler.instance.PopPosition("SwarmerAttackVFX", transform.position, transform);
+        attackParticles.GetComponentInChildren<ParticleSystem>().Play();
 
         for (int i = 0; i < nbRaycast + 1; i++)
         {
@@ -97,6 +100,8 @@ public class XL_Swarmers : XL_Enemy
             }
         }
         attacking = false;
+
+        XL_Pooler.instance.DelayedDePop(2, "SwarmerAttackVFX", attackParticles);
 
         shader.SetFloat("_AtkSldr", 0);
     }

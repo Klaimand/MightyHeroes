@@ -37,6 +37,7 @@ public class KLD_TouchInputs : MonoBehaviour
     [SerializeField] bool useButtonForUltimate = false;
     [SerializeField] GameObject ultiButton = null;
     [SerializeField] GameObject ultiJoystick = null;
+    [SerializeField, Range(0.3f, 0.8f)] float leftTouchScreenRatio = 0.4f;
 
     [SerializeField] Joystick[] joysticks;
 
@@ -125,7 +126,7 @@ public class KLD_TouchInputs : MonoBehaviour
                 //print($"curTouch Pos : {curTouch.position} \n ratioedPos : {curRatioedTouchPosition}");
 
                 //isLeftTouch = curRatioedTouchPosition.x < width / 2;
-                isLeftTouch = curRatioedTouchPosition.x < referenceResolution.x / 2;
+                isLeftTouch = curRatioedTouchPosition.x < referenceResolution.x * leftTouchScreenRatio;
 
                 //joyIndex = isLeftTouch ? 0 : 2;
                 if (isLeftTouch) { joyIndex = 0; }
