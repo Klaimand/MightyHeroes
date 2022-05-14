@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XL_SpellGrenade : XL_Spells
 {
-    
+
     [SerializeField] private XL_SpellGrenadeAttributesSO grenadeAttributes;
 
     private GameObject grenade;
@@ -25,7 +25,7 @@ public class XL_SpellGrenade : XL_Spells
     {
         //Debug.Log("throwing Distance : "+grenadeAttributes.throwingDistance);
         //curvePoints = XL_Utilities.GenerateCurve(6, grenadeAttributes.throwingDistance-1);
-        
+
     }
 
     private void Update()
@@ -42,11 +42,11 @@ public class XL_SpellGrenade : XL_Spells
         }
         lineRenderer.enabled = true;
         circle.transform.localScale = new Vector3(grenadeAttributes.explosionRadius / 5, grenadeAttributes.explosionRadius / 5, 0);
-        circle.transform.position = new Vector3(curvePointsWS[curvePointsWS.Length-1].x, 0.51f, curvePointsWS[curvePointsWS.Length-1].z);
+        circle.transform.position = new Vector3(curvePointsWS[curvePointsWS.Length - 1].x, 0.51f, curvePointsWS[curvePointsWS.Length - 1].z);
         Debug.Log(curvePointsWS[curvePointsWS.Length - 1]);
     }
 
-    public void cancelCurvePrevisualisation() 
+    public void cancelCurvePrevisualisation()
     {
         lineRenderer.enabled = false;
     }

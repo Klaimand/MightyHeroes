@@ -15,6 +15,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] Text ammoText;
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
+    [SerializeField] GameObject reloadFlames;
     [SerializeField] Animator animator;
     [SerializeField] KLD_PlayerController controller;
     [SerializeField] XL_Characters character;
@@ -111,6 +112,7 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         canReload = !isReloading && curBullets < weapon.GetCurAttributes().magazineSize;
         reloadButton.interactable = canReload;
+        reloadFlames.SetActive(isReloading);
 
         if (isShooting && curBullets > 0 && !isReloading)
         {
