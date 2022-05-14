@@ -938,7 +938,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4431457832853377534, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 863
+      objectReference: {fileID: 0}
+    - target: {fileID: 4431457832853377535, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_SpriteState.m_SelectedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bb25d417de52e89478ea51b1649254bd, type: 3}
+    - target: {fileID: 4431457832853377535, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: bb25d417de52e89478ea51b1649254bd, type: 3}
+    - target: {fileID: 8856616023735127381, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8856616023735127386, guid: 6298ac49210278a41ae185654173baec, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6298ac49210278a41ae185654173baec, type: 3}
 --- !u!224 &3592941992684990967 stripped
 RectTransform:
@@ -967,6 +984,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7247227052013159541 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8856616023735127380, guid: 6298ac49210278a41ae185654173baec, type: 3}
+  m_PrefabInstance: {fileID: 2196164260627433761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &435847261
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7247227052013159541}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 045285e010be58b4abe27f002ce57488, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4329377362125334833
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -986,6 +1027,10 @@ PrefabInstance:
       propertyPath: reloadButton
       value: 
       objectReference: {fileID: 2523674584255977694}
+    - target: {fileID: 4918749989807435229, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
+      propertyPath: reloadFlames
+      value: 
+      objectReference: {fileID: 435847261}
     - target: {fileID: 4918749990883480112, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: m_Name
       value: Player
