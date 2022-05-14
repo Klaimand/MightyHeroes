@@ -37,6 +37,8 @@ public class KLD_Spawner : MonoBehaviour
 
     void SpawnEnemies(KLD_EnemyProba _proba)
     {
+        if (_proba.enemyPerSpawn == 0) return;
+
         spawnAngle = 360f / _proba.enemyPerSpawn;
         spawnVector = Vector3.right * spawnRadius;
         q = Quaternion.Euler(0f, spawnAngle, 0f);
