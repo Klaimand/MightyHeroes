@@ -101,7 +101,7 @@ public class KLD_PlayerAim : MonoBehaviour
         }
         else
         {
-            inputAimVector3 = controller.refTransform.forward;
+            //inputAimVector3 = controller.refTransform.forward;
         }
         playerAttributes.worldAimDirection = inputAimVector3;
         //Debug.DrawRay(transform.position, inputAimVector3, Color.magenta);
@@ -119,6 +119,7 @@ public class KLD_PlayerAim : MonoBehaviour
         {
             ultInputAimVector3 = Vector3.zero;
         }
+        playerAttributes.worldUltAimDirection = ultInputAimVector3;
     }
 
     void DoAim()
@@ -129,12 +130,11 @@ public class KLD_PlayerAim : MonoBehaviour
         //selectedZombie.transform.position :
         //transform.position + rb.velocity;
 
-        if (inputs.IsJoystickPressed(2))
+        if (!inputs.GetUseButtonForUltimate() && (inputs.IsJoystickPressed(2) || playerShoot.isUsingUltimate))
         {
-            //work here
+            targetPos = transform.position + playerAttributes.worldUltAimDirection;
         }
-
-        if (selectedZombie != null && isPressingAimJoystick)
+        else if (selectedZombie != null && isPressingAimJoystick)
         {
             targetPos = selectedZombie.transform.position;
         }
@@ -156,7 +156,8 @@ public class KLD_PlayerAim : MonoBehaviour
 
         targetPos.y = transform.position.y;
 
-        if ((playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING && selectedZombie != null) || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
+        if ((playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING && selectedZombie != null)
+        || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
         {
             playerToTargetPos = (targetPos - transform.position);
 

@@ -151,5 +151,9 @@ public class KLD_PlayerController : MonoBehaviour
         speed = newSpeed;
     }
 
+    public bool IsRunning()
+    {
+        return rawAxis != Vector2.zero;
+    }
 
 }

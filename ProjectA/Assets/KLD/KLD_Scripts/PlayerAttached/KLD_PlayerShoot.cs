@@ -49,6 +49,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [ReadOnly] public bool isReloading = false;
     [ReadOnly] public bool isAiming = false;
     [ReadOnly] public bool isShooting;
+    [ReadOnly] public bool isUsingUltimate = false;
 
     public enum WeaponState
     {
@@ -114,7 +115,7 @@ public class KLD_PlayerShoot : MonoBehaviour
         reloadButton.interactable = canReload;
         reloadFlames.SetBool("enabled", isReloading);
 
-        if (isShooting && curBullets > 0 && !isReloading)
+        if (isShooting && curBullets > 0 && !isReloading && !isUsingUltimate)
         {
             if (curShootDelay > weapon.shootDelay)
             {
@@ -250,10 +251,25 @@ public class KLD_PlayerShoot : MonoBehaviour
         }
     }
 
+    public void UseUltimate(float _time)
+    {
+        isUsingUltimate = true;
+        StartCoroutine(IUseUltimate(_time));
+    }
+
+    IEnumerator IUseUltimate(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        isUsingUltimate = false;
+    }
 
     void AnimateWeaponState()
     {
-        if (isReloading)
+        if (isUsingUltimate)
+        {
+            weaponState = WeaponState.USING_ULTI;
+        }
+        else if (isReloading)
         {
             weaponState = (weapon.reloadType == ReloadType.MAGAZINE ? WeaponState.RELOADING : WeaponState.RELOADING_BPB);
         }
@@ -283,7 +299,6 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         return weaponState;
     }
-
 
 
     #region Weapon Mesh and anims Initialization
