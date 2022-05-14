@@ -15,6 +15,13 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     [SerializeField] private XL_HealthBarUI characterUI;
 
+    [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Animator ultButtonAnimator;
+
+    enum UltState { NONE, DOWN, UP };
+
+    UltState ultState = UltState.NONE;
+
     private void Awake()
     {
         characterAttributes.Initialize();
@@ -30,11 +37,37 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("SPELL");
             ActivateSpell(transform.forward);
+        }*/
+
+        if (ultimateCharge >= 100f)
+        {
+            ultState = UltState.UP;
         }
+        else if (ultimateCharge > 50f)
+        {
+            ultState = UltState.DOWN;
+        }
+        else
+        {
+            ultState = UltState.NONE;
+        }
+
+        if (touchInputs.GetUseButtonForUltimate())
+        {
+            ultButtonAnimator.SetInteger("ultState", (int)ultState);
+        }
+        else
+        {
+            ultJoystickAnimator.SetInteger("ultState", (int)ultState);
+        }
+
+        touchInputs.SetJoystickInterractable(2, isUltimateCharged);
+
     }
 
     void OnEnable()

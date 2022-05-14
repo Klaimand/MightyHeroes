@@ -53,7 +53,7 @@ public class XL_SpellGrenade : XL_Spells
 
     public override void ActivateSpell(Vector3 throwingDirection, Transform pos)
     {
-        Debug.Log("launchGrenade");
+        //Debug.Log("launchGrenade");
         grenade = XL_Pooler.instance.PopPosition("BlastGrenade", pos.position + pos.forward + pos.up);
         startingVelocity = XL_Utilities.GetVelocity(0.5f, Mathf.Lerp(grenadeAttributes.minThrowingDistance, grenadeAttributes.throwingDistance, throwingDirection.magnitude), grenadeAttributes.travelTime);
         grenade.GetComponent<Rigidbody>().velocity = new Vector3(startingVelocity[0] * (throwingDirection.x), startingVelocity[1], startingVelocity[0] * (throwingDirection.z));
