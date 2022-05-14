@@ -163,7 +163,7 @@ MonoBehaviour:
       refreshSpeed: 2
   - key: Explosion
     pool:
-      prefab: {fileID: 8455790027220446884, guid: 874917c827dcc8f4baf19c76ec04159f, type: 3}
+      prefab: {fileID: 1992186937149842339, guid: 06e8b20a26fa01e4cae4d3cad81ed815, type: 3}
       baseCount: 5
       baseRefreshSpeed: 2
       refreshSpeed: 2
@@ -171,6 +171,18 @@ MonoBehaviour:
     pool:
       prefab: {fileID: 8510691000908304046, guid: e01c8894bd2f2c945b9b98ad47f0057a, type: 3}
       baseCount: 10
+      baseRefreshSpeed: 2
+      refreshSpeed: 2
+  - key: Kamikaze_Explosion
+    pool:
+      prefab: {fileID: 2013959284763692930, guid: be4a31dccb99ef34d9f5f75f700bb279, type: 3}
+      baseCount: 5
+      baseRefreshSpeed: 2
+      refreshSpeed: 2
+  - key: SwarmerAttackVFX
+    pool:
+      prefab: {fileID: 3219009012177644679, guid: fc5f4f796064f6c4f9f62993d9414743, type: 3}
+      baseCount: 6
       baseRefreshSpeed: 2
       refreshSpeed: 2
 --- !u!114 &8671646772427712702
@@ -937,6 +949,38 @@ PrefabInstance:
     - target: {fileID: 3433685163006621910, guid: 6298ac49210278a41ae185654173baec, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163006621911, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: joysticks.Array.data[2].defaultOffset.x
+      value: -950
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163146731978, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1310
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163181375372, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163551937673, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1310
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163551937674, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163551937674, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685163957697060, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433685164475798969, guid: 6298ac49210278a41ae185654173baec, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1310
       objectReference: {fileID: 0}
     - target: {fileID: 4431457832853377534, guid: 6298ac49210278a41ae185654173baec, type: 3}
       propertyPath: m_AnchoredPosition.y

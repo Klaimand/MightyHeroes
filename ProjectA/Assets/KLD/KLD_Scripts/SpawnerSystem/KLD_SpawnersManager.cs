@@ -42,4 +42,9 @@ public class KLD_SpawnersManager : MonoBehaviour
         return enemiesCount < maxEnemiesAtOnce
         && spawnerToPlayer.sqrMagnitude > minDist * minDist;
     }
+
+    public void ChangeMaxEnemies(int number)
+    {
+        maxEnemiesAtOnce = number;
+    }
 }
