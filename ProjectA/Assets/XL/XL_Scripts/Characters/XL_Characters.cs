@@ -59,6 +59,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             direction = Quaternion.Euler(0f, 45f, 0f) * direction;
 
             ultimateCharge = 0;
+            characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+
             isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
             characterAttributes.ActivateSpell(direction, transform);
@@ -74,8 +76,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     IEnumerator SpellCooldownCoroutine(float t)
     {
 
-        yield return new WaitForSeconds(t);
-        ultimateCharge += characterAttributes.activeTick;
+        yield return new WaitForEndOfFrame();
+        ultimateCharge += characterAttributes.activeTick * Time.deltaTime;
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
         if (ultimateCharge < 100)
         {
