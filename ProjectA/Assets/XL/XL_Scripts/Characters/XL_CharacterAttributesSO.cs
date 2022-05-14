@@ -37,6 +37,7 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [Header("Spell")]
     public GameObject spellPrefab;
     private XL_Spells spell;
+    public float spellLaunchDuration = 1.2f;
 
 
     public void Initialize()

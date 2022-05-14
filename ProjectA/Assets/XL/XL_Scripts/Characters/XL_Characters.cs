@@ -5,6 +5,7 @@ using UnityEngine;
 public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
     [SerializeField] KLD_TouchInputs touchInputs;
+    [SerializeField] KLD_PlayerShoot playerShoot;
     [SerializeField] protected XL_CharacterAttributesSO characterAttributes;
     private float health;
 
@@ -14,6 +15,13 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     [SerializeField] private float ultimateChargeTick;
 
     [SerializeField] private XL_HealthBarUI characterUI;
+
+    [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Animator ultButtonAnimator;
+
+    enum UltState { NONE, DOWN, UP };
+
+    UltState ultState = UltState.NONE;
 
     private void Awake()
     {
@@ -30,11 +38,37 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("SPELL");
             ActivateSpell(transform.forward);
+        }*/
+
+        if (ultimateCharge >= 100f)
+        {
+            ultState = UltState.UP;
         }
+        else if (ultimateCharge > 50f)
+        {
+            ultState = UltState.DOWN;
+        }
+        else
+        {
+            ultState = UltState.NONE;
+        }
+
+        if (touchInputs.GetUseButtonForUltimate())
+        {
+            ultButtonAnimator.SetInteger("ultState", (int)ultState);
+        }
+        else
+        {
+            ultJoystickAnimator.SetInteger("ultState", (int)ultState);
+        }
+
+        touchInputs.SetJoystickInterractable(2, isUltimateCharged && !playerShoot.isReloading);
+
     }
 
     void OnEnable()
@@ -48,29 +82,36 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     }
 
     Vector3 direction;
+
+    Vector2 spellDirection;
+
     public void ActivateSpell(Vector2 _direction)
     {
         if (ultimateCharge >= 100f)
         {
-            direction = Vector3.zero;
-            direction.x = _direction.x;
-            direction.z = _direction.y;
-
-            direction = Quaternion.Euler(0f, 45f, 0f) * direction;
-
-            ultimateCharge = 0;
-            characterUI.UpdateUltBar(ultimateCharge * 0.01f);
-
-            isUltimateCharged = false;
-            StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
-            characterAttributes.ActivateSpell(direction, transform);
-
-            StopPassiveHeal();
-            CancelInvoke("RestorePassiveHeal");
-            Invoke("RestorePassiveHeal", restorePassiveHealDuration);
+            playerShoot.UseUltimate(characterAttributes.spellLaunchDuration);
+            spellDirection = _direction;
         }
-        //else return false;
-        //return true;
+    }
+
+    public void DoSpell() //Activated by anim
+    {
+        direction = Vector3.zero;
+        direction.x = spellDirection.x;
+        direction.z = spellDirection.y;
+
+        direction = Quaternion.Euler(0f, 45f, 0f) * direction;
+
+        ultimateCharge = 0;
+        characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+
+        isUltimateCharged = false;
+        StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
+        characterAttributes.ActivateSpell(direction, transform);
+
+        StopPassiveHeal();
+        CancelInvoke("RestorePassiveHeal");
+        Invoke("RestorePassiveHeal", restorePassiveHealDuration);
     }
 
     IEnumerator SpellCooldownCoroutine(float t)
