@@ -4,90 +4,61 @@ using UnityEngine;
 
 public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
-    [SerializeField] protected XL_CharacterAttributes characterAttributes;
-    [SerializeField] protected Rigidbody rb;
-    [SerializeField] protected KLD_PlayerAim playerAim;
-    [SerializeField] protected Transform shootDirection;
+    [SerializeField] protected XL_CharacterAttributesSO characterAttributes;
+    private float health;
 
-    [SerializeField] protected float fireRate;
-    private bool canFire;
-
-    [SerializeField] private XL_ISpells spell;
+    private XL_ISpells spell;
     public float ultimateCharge;
     public bool isUltimateCharged;
     [SerializeField] private float ultimateChargeTick;
 
-    //[SerializeField] private XL_HealthBarUI characterUI;
+    [SerializeField] private XL_HealthBarUI characterUI;
 
     private void Awake()
     {
         characterAttributes.Initialize();
+        health = characterAttributes.healthMax;
     }
     private void Start()
     {
-        canFire = true;
-        ultimateCharge = 100;
+        ultimateCharge = 0;
         spell = transform.GetComponent<XL_ISpells>();
+        StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
         StartCoroutine(OutOfCombatHealingCoroutine(1f));
     }
 
     private void Update()
     {
-        if (playerAim.isShooting) 
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            Shoot();
+            Debug.Log("SPELL");
+            ActivateSpell(transform.forward);
         }
     }
 
-    private RaycastHit hit;
-    private XL_IDamageable target;
-    public void Shoot() 
+    public bool ActivateSpell(Vector3 direction)
     {
-        if (canFire) 
-        {
-            Debug.Log("Shoot");
-            if (Physics.Raycast(transform.position + Vector3.up * 1f, playerAim.GetSelectedZombie().transform.position - transform.position, out hit, 50/*, layer*/))
-            {
-                StartCoroutine(FireRateCooldown(fireRate));
-                if ((target = hit.transform.GetComponent<XL_IDamageable>()) != null) target.TakeDamage(10);
-            }
-            Debug.DrawRay(transform.position, playerAim.GetSelectedZombie().transform.position - transform.position, Color.black);
-
-            StopPassiveHeal();
-            CancelInvoke("RestorePassiveHeal");
-            Invoke("RestorePassiveHeal", restorePassiveHealDuration);
-        }
-    }
-
-    IEnumerator FireRateCooldown(float t) 
-    {
-        canFire = false;
-        yield return new WaitForSeconds(t);
-        canFire = true;
-    }
-
-    public void ActivateSpell(Vector3 direction)
-    {
-        if (ultimateCharge == 100) 
+        if (ultimateCharge == 100)
         {
             ultimateCharge = 0;
             isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
-            spell.ActivateSpell(direction);
+            characterAttributes.ActivateSpell(direction, transform);
 
             StopPassiveHeal();
             CancelInvoke("RestorePassiveHeal");
             Invoke("RestorePassiveHeal", restorePassiveHealDuration);
         }
+        else return false;
+        return true;
     }
 
-    IEnumerator SpellCooldownCoroutine(float t) 
+    IEnumerator SpellCooldownCoroutine(float t)
     {
 
         yield return new WaitForSeconds(t);
-
         ultimateCharge += characterAttributes.activeTick;
-        //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+        characterUI.UpdateUltBar(ultimateCharge * 0.01f);
         if (ultimateCharge < 100)
         {
             StartCoroutine(SpellCooldownCoroutine(t));
@@ -99,33 +70,32 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     public void Die()
     {
         StopAllCoroutines();
-        XL_GameManager.instance.RemovePlayer(transform.gameObject);
+        //XL_GameManager.instance.RemovePlayer(transform.gameObject);
         transform.gameObject.SetActive(false);
     }
 
-    [ContextMenu("Take 1 Damage")]
+    [ContextMenu("Take 100 Damage")]
     public void Take100Damage() { TakeDamage(100); }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (damage > 0) // if it takes damage, then reduce the damage taken
         {
             if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
         }
 
-        characterAttributes.health -= damage;
+        health -= damage;
 
-        if (characterAttributes.health < 1)
+        if (health < 1)
         {
             Die();
         }
 
-        if (characterAttributes.health > characterAttributes.healthMax) 
+        if (health > characterAttributes.healthMax)
         {
-            characterAttributes.health = characterAttributes.healthMax;
+            health = characterAttributes.healthMax;
         }
-        //characterUI.UpdateHealthBar(characterAttributes.health / characterAttributes.healthMax);
-        Debug.Log(gameObject.name + " : " + characterAttributes.health);
+        characterUI.UpdateHealthBar(health / characterAttributes.healthMax);
 
         StopPassiveHeal();
         CancelInvoke("RestorePassiveHeal");
@@ -145,13 +115,24 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         passiveHealEnabled = false;
     }
 
-    IEnumerator OutOfCombatHealingCoroutine(float t) 
+    IEnumerator OutOfCombatHealingCoroutine(float t)
     {
-        while (true) 
+        while (true)
         {
             yield return new WaitForSeconds(t);
 
             if (passiveHealEnabled) TakeDamage(-characterAttributes.healingTick);
         }
+    }
+
+    public void InitializeCharacterStats(int _characterLevel)
+    {
+        characterAttributes.level = _characterLevel;
+        characterAttributes.Initialize();
+    }
+
+    public float GetCharacterSpeed()
+    {
+        return characterAttributes.movementSpeed;
     }
 }

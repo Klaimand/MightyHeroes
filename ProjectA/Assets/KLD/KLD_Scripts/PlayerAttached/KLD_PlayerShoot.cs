@@ -16,6 +16,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
     [SerializeField] Animator animator;
+    [SerializeField] KLD_PlayerController controller;
+    [SerializeField] XL_Characters character;
 
     [Header("Weapon"), Space(10)]
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
@@ -44,8 +46,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     //animation
     //[HideInInspector] public bool isReloading;
     [ReadOnly] public bool isReloading = false;
-    [HideInInspector] public bool isAiming = false;
-    [HideInInspector] public bool isShooting;
+    [ReadOnly] public bool isAiming = false;
+    [ReadOnly] public bool isShooting;
 
     public enum WeaponState
     {
@@ -53,6 +55,7 @@ public class KLD_PlayerShoot : MonoBehaviour
         AIMING,
         SHOOTING,
         RELOADING,
+        USING_ULTI,
         RELOADING_BPB
     }
     WeaponState weaponState = WeaponState.HOLD;
@@ -117,6 +120,16 @@ public class KLD_PlayerShoot : MonoBehaviour
                 curShootDelay = 0f;
             }
         }
+        else if (!isReloading && curBullets <= 0)
+        {
+            Reload();
+        }
+
+        controller.SetSpeed(
+            ((weaponState == WeaponState.AIMING || weaponState == WeaponState.SHOOTING) ?
+            character.GetCharacterSpeed() * weapon.GetCurAttributes().aimSpeedMultiplier :
+            character.GetCharacterSpeed()) / 3.34f
+        );
 
         curShootDelay += Time.deltaTime;
         curBurstDelay += Time.deltaTime;
@@ -143,21 +156,39 @@ public class KLD_PlayerShoot : MonoBehaviour
         }
     }
 
+    KLD_ZombieAttributes selectedZombie;
+    Vector3 canonOffset;
+
     void DoShot()
     {
-        if (playerAim.GetSelectedZombie() != null)
+        selectedZombie = playerAim.GetSelectedZombie();
+        //if (playerAim.GetSelectedZombie() != null)
+        if (selectedZombie != null && selectedZombie.transform != null)
         {
-            selectedZombiePos = playerAim.GetSelectedZombie().transform.position;
+            //selectedZombiePos = playerAim.GetSelectedZombie().transform.position;
+            selectedZombiePos = selectedZombie.transform.position;
 
             selectedZombiePos.y += zombieVerticalOffset;
 
             shootDirection = selectedZombiePos - canon.position;
+
+            if (Vector3.Dot(canon.forward, shootDirection) < 0f || shootDirection.sqrMagnitude < 0.5f)
+            {
+                shootDirection = canon.forward;
+                shootDirection.y = -0.35f;
+                canonOffset = -canon.forward * 1f;
+            }
+            else
+            {
+                canonOffset = Vector3.zero;
+            }
         }
         else
         {
             shootDirection = canon.forward;
+            shootDirection.y = 0f;
         }
-        weapon.bullet.Shoot(weapon, canon.position, shootDirection, layerMask);
+        weapon.bullet.Shoot(weapon, canon.position + canonOffset, shootDirection, layerMask);
     }
 
     public void Reload()
@@ -180,13 +211,15 @@ public class KLD_PlayerShoot : MonoBehaviour
         else if (weapon.reloadType == ReloadType.BULLET_PER_BULLET)
         {
             missingBullets = weapon.GetCurAttributes().magazineSize - curBullets;
-            for (int i = 0; i < missingBullets + 1; i++)
+            for (int i = 0; i < missingBullets; i++)
             {
                 curBullets++;
+                UpdateUI();
                 yield return new WaitForSeconds(weapon.GetCurAttributes().reloadSpeed);
             }
         }
         isReloading = false;
+        UpdateUI();
     }
 
     void UpdateUI()
@@ -197,8 +230,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     float curShootAnimDelay = 0f;
     void ProcessIsAimingAndShooting()
     {
-        isAiming = playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null ||
-         playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f;
+        isAiming = (playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null) ||
+         (playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f);
 
         if (!isAiming)
         {
@@ -226,13 +259,18 @@ public class KLD_PlayerShoot : MonoBehaviour
         {
             weaponState = WeaponState.HOLD;
         }
-        else if (isAiming && !isShooting)
+        else if (isAiming && isShooting && curBullets > 0)
+        {
+            weaponState = WeaponState.SHOOTING;
+        }
+        //else if (isAiming && (!isShooting || isShooting && curBullets == 0))
+        else if (isAiming)
         {
             weaponState = WeaponState.AIMING;
         }
-        else if (isAiming && isShooting)
+        else
         {
-            weaponState = WeaponState.SHOOTING;
+            weaponState = WeaponState.HOLD;
         }
         animator.SetInteger("weaponState", (int)weaponState);
     }
@@ -260,7 +298,8 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         instantiedWH = Instantiate(weapon.weaponHolder, Vector3.zero, Quaternion.identity, weaponHolderParent);
 
-        instantiedWH.name = "WeaponHolder";
+        //instantiedWH.name = "WeaponHolder";
+        instantiedWH.name = weapon.weaponHolder.name;
 
         instantiedWH.transform.localPosition = weapon.weaponHolder.transform.position;
         instantiedWH.transform.localRotation = weapon.weaponHolder.transform.rotation;

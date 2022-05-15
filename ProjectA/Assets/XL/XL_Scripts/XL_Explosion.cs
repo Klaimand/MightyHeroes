@@ -22,13 +22,13 @@ public class XL_Explosion : MonoBehaviour
         yield return new WaitForSeconds(t);
 
         hitColliders = Physics.OverlapSphere(transform.position, radius);
-        foreach (var hitCollider in hitColliders) 
+        foreach (var hitCollider in hitColliders)
         {
-            Debug.Log(hitCollider.name + "is in sphere");
+            //Debug.Log(hitCollider.name + "is in sphere");
 
-            if ((damageableObject = hitCollider.GetComponent<XL_IDamageable>()) != null) 
+            if ((damageableObject = hitCollider.GetComponent<XL_IDamageable>()) != null)
             {
-                Debug.Log(hitCollider.name + "can be damaged");
+                //Debug.Log(hitCollider.name + "can be damaged");
                 damageableObject.TakeDamage(damage);
             }
         }

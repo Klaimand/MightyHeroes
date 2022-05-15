@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class XL_Swarmers : XL_Enemy
 {
+    [SerializeField] private GameObject model;
+    protected Material shader;
     [SerializeField] private float attackRange;
     [SerializeField] private float attackWidth;
+    [SerializeField] private float attackAnimationSpeed;
+    private bool attacking;
     private List<GameObject> playersHit = new List<GameObject>();
 
     [SerializeField] private int nbRaycast;
+
+    private void Awake()
+    {
+        shader = model.GetComponent<MeshRenderer>().material;
+    }
+
 
     private void Update()
     {
         Move();
         DebugRaycast();
+        if (attacking) shader.SetFloat("_AtkFloat", Time.time - atkStartingTime + 0.5f);
     }
 
     private void DebugRaycast()
@@ -39,9 +50,9 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Move()
     {
-        if (isAlerted) 
+        if (isAlerted)
         {
-            if (targetedPlayer != null) 
+            if (targetedPlayer != null)
             {
                 agent.destination = targetedPlayer.position;
                 if ((transform.position - targetedPlayer.position).magnitude < attackRange)
@@ -49,50 +60,50 @@ public class XL_Swarmers : XL_Enemy
                     agent.isStopped = true;
                     if (canAttack) Attack();
                 }
-            } 
+            }
         }
-            
+
     }
 
     public override void Attack()
     {
         //Debug.Log("Attacking");
-        StartCoroutine(AttackCoroutine(1));
-        StartCoroutine(AttackCooldownCoroutine(2));
+        StartCoroutine(AttackCoroutine(attackAnimationSpeed));
+        StartCoroutine(AttackCooldownCoroutine(attackAnimationSpeed));
     }
 
-
+    float atkStartingTime;
     private RaycastHit[] hits;
-    IEnumerator AttackCoroutine(float t) 
+    IEnumerator AttackCoroutine(float t)
     {
+        attacking = true;
         transform.LookAt(targetedPlayer);
         playersHit.Clear();
+        atkStartingTime = Time.time;
+        shader.SetFloat("_AtkSldr", 1);
         yield return new WaitForSeconds(t);
 
-        /*hits = Physics.BoxCastAll(transform.forward * attackRange * 0.6f, new Vector3(attackWidth/2, 0.2f, attackRange * 0.6f), transform.forward, Quaternion.identity, layer);
-        for (int i = 0; i < hits.Length; i++)
-        {
-            Debug.Log("Player " + hits[0].transform.name + "has been hit");
-        } */
 
         for (int i = 0; i < nbRaycast + 1; i++)
         {
-            hits = Physics.RaycastAll(transform.position - transform.right * 0.5f+ (transform.right / nbRaycast) * i + transform.up * 0.5f, attackRange * transform.forward * 1.2f); //Can add a layer but I didn't make it work
+            hits = Physics.RaycastAll(transform.position - transform.right * 0.5f + (transform.right / nbRaycast) * i + transform.up * 0.5f, attackRange * transform.forward * 1.2f); //Can add a layer but I didn't make it work
             for (int j = 0; j < hits.Length; j++)
             {
-                if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject)) 
+                if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject))
                 {
-                    //Debug.Log(transform.name + " damaged " + hits[j].transform.name);
                     playersHit.Add(hits[j].transform.gameObject);
-                    if(hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage);
+                    if (hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage); //PERF
                 }
             }
         }
+        attacking = false;
+
+        shader.SetFloat("_AtkSldr", 0);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.CompareTag("Player")) 
+        if (other.transform.CompareTag("Player"))
         {
             Debug.Log("Player was attacked");
         }

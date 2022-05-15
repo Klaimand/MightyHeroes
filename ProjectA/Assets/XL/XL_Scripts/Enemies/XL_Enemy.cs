@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 {
+
+
     [SerializeField] private KLD_ZombieAttributes attributes;
     protected float health;
 
@@ -20,17 +22,19 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [SerializeField] protected NavMeshAgent agent;
     [SerializeField] protected float speed;
 
-    [Header("Pooler")]
-    [SerializeField] protected XL_Pooler pooler;
-
-    [SerializeField] Transform healthBar;
+    [SerializeField] XL_HealthBarUI healthBar;
 
     Vector3 scale = Vector3.one;
 
-    static GUIStyle gUIStyle;
+    //static GUIStyle gUIStyle;
+
+    bool firstInit = false;
+    bool didFirstDisable = false;
 
     private void Start()
     {
+        firstInit = true;
+        InitZombieList();
         Initialize();
         Alert();
     }
@@ -41,17 +45,17 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         health = attributes.maxHealth;
         agent.speed = speed;
         canAttack = true;
-        UpdateHealthBar();
+        //healthBar.UpdateHealthBar(health / attributes.maxHealth);
     }
 
     public abstract void Alert();
     public abstract void Move();
     public abstract void Attack();
 
-    public virtual void Die() 
+    public virtual void Die()
     {
-        Debug.Log("Remove enemy : " + this.name);
-        XL_GameManager.instance.RemoveEnemyAttributes(attributes);
+        //Debug.Log("Remove enemy : " + this.name);
+        //XL_GameManager.instance.RemoveEnemyAttributes(attributes);
     }
 
     protected int targetedPlayerIdx = 0;
@@ -87,15 +91,16 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
                     targetedPlayerIdx = i;
                     targetedPlayerDistance = nextTargetedPlayerDistance;
                 }
-            } else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
-            
+            }
+            else targetedPlayerDistance = (transform.position - XL_GameManager.instance.players[targetedPlayerIdx].transform.position).magnitude; // distance between player i and the enemy
+
             i++;
         }
 
-        if(i > 0) targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
+        if (i > 0) targetedPlayer = XL_GameManager.instance.players[targetedPlayerIdx].transform;
     }
 
-    protected IEnumerator AttackCooldownCoroutine(float t) 
+    protected IEnumerator AttackCooldownCoroutine(float t)
     {
         canAttack = false;
         yield return new WaitForSeconds(t);
@@ -103,46 +108,50 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         canAttack = true;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
-        UpdateHealthBar();
+        healthBar.UpdateHealthBar(health / attributes.maxHealth);
         if (health < 1) Die();
     }
 
     void OnEnable()
     {
-        //"ZombieList" things here
+        if (firstInit)
+        {
+            InitZombieList();
+            Initialize();
+            Alert();
+        }
 
-        attributes.maxHealth = Random.Range(10, 101);
-        Initialize();
+        //attributes.maxHealth = Random.Range(10, 101);
     }
 
     void OnDisable()
     {
-        //"ZombieList" things here
+        KLD_ZombieList.Instance.RemoveZombie(attributes);
+        if (didFirstDisable)
+        {
+        }
+        else
+        {
+            didFirstDisable = true;
+        }
     }
 
-    void OnValidate()
+    void InitZombieList()
     {
-        UpdateHealthBar();
-
-        if (gUIStyle == null) SetupGUIStyle();
+        KLD_ZombieList.Instance.AddZombie(attributes);
+        attributes.transform = transform;
     }
 
-    void UpdateHealthBar()
-    {
-        scale.x = (health / 100f);
 
-        healthBar.localScale = scale;
-    }
-
-    public KLD_ZombieAttributes GetZombieAttributes() 
+    public KLD_ZombieAttributes GetZombieAttributes()
     {
         return attributes;
     }
 
-    void OnDrawGizmos()
+    /*void OnDrawGizmos()
     {
 #if UNITY_EDITOR
         Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString(), gUIStyle);
@@ -160,5 +169,5 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
 
         gUIStyle = _gui;
-    }
+    }*/
 }
