@@ -50,7 +50,7 @@ public class XL_MainMenu : MonoBehaviour
             if (!PlayerPrefs.HasKey(ca.characterName))
             {
                 Debug.Log("Test");
-                PlayerPrefs.SetInt(ca.characterName, 5);
+                PlayerPrefs.SetInt(ca.characterName, 1);
             }
             ca.level = PlayerPrefs.GetInt(ca.characterName);
         }
@@ -58,7 +58,7 @@ public class XL_MainMenu : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey(wa.weaponName))
             {
-                PlayerPrefs.SetInt(wa.weaponName, 0);
+                PlayerPrefs.SetInt(wa.weaponName, 1);
             }
             wa.level = PlayerPrefs.GetInt(wa.weaponName);
         }
