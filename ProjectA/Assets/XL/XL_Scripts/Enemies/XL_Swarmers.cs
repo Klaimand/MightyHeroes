@@ -9,6 +9,7 @@ public class XL_Swarmers : XL_Enemy
     [SerializeField] private float attackRange;
     [SerializeField] private float attackWidth;
     [SerializeField] private float attackAnimationSpeed;
+    private GameObject attackParticles;
     private bool attacking;
     private List<GameObject> playersHit = new List<GameObject>();
 
@@ -50,9 +51,9 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Move()
     {
-        if (isAlerted) 
+        if (isAlerted)
         {
-            if (targetedPlayer != null) 
+            if (targetedPlayer != null)
             {
                 agent.destination = targetedPlayer.position;
                 if ((transform.position - targetedPlayer.position).magnitude < attackRange)
@@ -60,9 +61,9 @@ public class XL_Swarmers : XL_Enemy
                     agent.isStopped = true;
                     if (canAttack) Attack();
                 }
-            } 
+            }
         }
-            
+
     }
 
     public override void Attack()
@@ -74,7 +75,7 @@ public class XL_Swarmers : XL_Enemy
 
     float atkStartingTime;
     private RaycastHit[] hits;
-    IEnumerator AttackCoroutine(float t) 
+    IEnumerator AttackCoroutine(float t)
     {
         attacking = true;
         transform.LookAt(targetedPlayer);
@@ -83,27 +84,31 @@ public class XL_Swarmers : XL_Enemy
         shader.SetFloat("_AtkSldr", 1);
         yield return new WaitForSeconds(t);
 
+        attackParticles = XL_Pooler.instance.PopPosition("SwarmerAttackVFX", transform.position, transform);
+        attackParticles.GetComponentInChildren<ParticleSystem>().Play();
 
         for (int i = 0; i < nbRaycast + 1; i++)
         {
-            hits = Physics.RaycastAll(transform.position - transform.right * 0.5f+ (transform.right / nbRaycast) * i + transform.up * 0.5f, attackRange * transform.forward * 1.2f); //Can add a layer but I didn't make it work
+            hits = Physics.RaycastAll(transform.position - transform.right * 0.5f + (transform.right / nbRaycast) * i + transform.up * 0.5f, attackRange * transform.forward * 1.2f); //Can add a layer but I didn't make it work
             for (int j = 0; j < hits.Length; j++)
             {
-                if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject)) 
+                if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject))
                 {
                     playersHit.Add(hits[j].transform.gameObject);
-                    if(hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage);
+                    if (hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage); //PERF
                 }
             }
         }
         attacking = false;
-        
+
+        XL_Pooler.instance.DelayedDePop(2, "SwarmerAttackVFX", attackParticles);
+
         shader.SetFloat("_AtkSldr", 0);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.CompareTag("Player")) 
+        if (other.transform.CompareTag("Player"))
         {
             Debug.Log("Player was attacked");
         }

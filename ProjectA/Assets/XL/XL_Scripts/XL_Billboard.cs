@@ -11,7 +11,7 @@ public class XL_Billboard : MonoBehaviour
         cam = Camera.main.transform;
     }
 
-    void Update()
+    void LateUpdate()
     {
         transform.LookAt(transform.position + cam.forward);
     }

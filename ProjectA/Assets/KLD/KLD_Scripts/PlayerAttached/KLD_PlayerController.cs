@@ -146,5 +146,20 @@ public class KLD_PlayerController : MonoBehaviour
         animator.SetInteger("locomotionState", (int)locomotionState);
     }
 
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 
+    public bool IsRunning()
+    {
+        return rawAxis != Vector2.zero;
+    }
+
+
+    public void SetCharacterMeshComponents(Animator _animator, Transform _scaler)
+    {
+        animator = _animator;
+        scaler = _scaler;
+    }
 }
