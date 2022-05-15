@@ -12,29 +12,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430e6a2518cc88144a02093f5e3ccff3, type: 3}
   m_Name: Character_Blast
   m_EditorClassIdentifier: 
+  base_healthMax: 300
+  base_movementSpeed: 20
+  base_armor: 30
+  base_healingTick: 30
+  activeTickGrowth:
+  - 3
+  - 3
+  - 3
+  - 4
+  - 4
+  - 4
+  - 5
+  - 5
+  - 5
+  - 6
   level: 0
-  healthMax: 430
+  healthMax: 300
   movementSpeed: 20
   armor: 30
-  healingTick: 235
-  activeTick: 10
-  spellPrefab: {fileID: 9058692770089771513, guid: 26e000cea25306f4b8eb7d483486796e, type: 3}
-  isPercentageHealthGrowth: 0
-  healthGrowth: 0
+  healingTick: 30
+  activeTick: 50
+  isPercentageHealthGrowth: 1
+  healthGrowth: 1.05
   isPercentageMovementSpeedGrowth: 0
   movementSpeedGrowth: 1
   isPercentageArmorGrowth: 0
-  armorGrowth: 0
-  isPercentageHealingTickGrowth: 0
-  healingTickGrowth: 0
-  activeTickGrowth:
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 10
-  - 0
-  - 0
-  - 0
-  - 0
+  armorGrowth: 2
+  isPercentageHealingTickGrowth: 1
+  healingTickGrowth: 1.08
+  spellSO: {fileID: 11400000, guid: 0e2347a0eefa66a47b20ca279ef2f993, type: 2}
+  spellLaunchDuration: 0.5
+  spellIsButton: 0
+  characterMesh: {fileID: 6050656808467317075, guid: 5eda5fa80f9103b4c90cad7dcdbe7128, type: 3}
