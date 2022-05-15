@@ -26,7 +26,7 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     [Header("Level")]
     [SerializeField] private TMP_Text levelText;
 
-    
+    public int selectedPlayer;
 
     /*private void OnEnable()
     {
@@ -44,9 +44,7 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
             ci.Deactivate();
         }
 
-        PlayerPrefs.SetInt("SelectedHero", idx);
-
-
+        selectedPlayer = idx;
 
         //initialise Text
         characterInfos[idx].DisplayLevel();

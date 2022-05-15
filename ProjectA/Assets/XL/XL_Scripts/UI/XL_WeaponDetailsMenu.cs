@@ -23,10 +23,7 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     [SerializeField] private Transform magazineSizeXScaler;
     [SerializeField] private float scalerMagazineSizeMax;
 
-    private void Awake()
-    {
-        
-    }
+    public int selectedWeapon;
 
     public void Select(int idx)
     {
@@ -34,6 +31,8 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
         {
             wi.Deactivate();
         }
+
+        selectedWeapon = idx;
 
         //Initialise Text
         weaponInfos[idx].DisplayLevel();

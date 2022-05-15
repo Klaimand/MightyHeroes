@@ -11,6 +11,7 @@ public class XL_MainMenu : MonoBehaviour
     [SerializeField] private GameObject characterDetailsMenu;
     [SerializeField] private GameObject weaponSelectMenu;
     [SerializeField] private GameObject weaponDetailsMenu;
+    [SerializeField] private GameObject MapSelectMenu;
 
     [Header("Save Characters and Weapons")]
     [SerializeField] private XL_CharacterAttributesSO[] characterAttributes;
@@ -26,6 +27,9 @@ public class XL_MainMenu : MonoBehaviour
 
     [Header("Hard Currency")]
     [SerializeField] private TMP_Text hardCurrencyText;
+
+    [Header("Mission Type")]
+    [SerializeField] private GameObject[] missionTypes;
 
     //[Header("Loadout")]
 
@@ -106,6 +110,7 @@ public class XL_MainMenu : MonoBehaviour
         characterDetailsMenu.SetActive(false);
         weaponSelectMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
+        MapSelectMenu.SetActive(false);
     }
 
     public void SwitchCharaSelectMenu()
@@ -136,5 +141,22 @@ public class XL_MainMenu : MonoBehaviour
         weaponDetailsMenu.SetActive(true);
 
         weaponSelectMenu.SetActive(false);
+    }
+
+    public void SwitchMapSelectMenu()
+    {
+        MapSelectMenu.SetActive(true);
+
+        mainMenu.SetActive(false);
+    }
+
+    public void SelectMissionType(int idx)
+    {
+        foreach (GameObject go in missionTypes)
+        {
+            go.SetActive(false);
+        }
+
+        missionTypes[idx].SetActive(true);
     }
 }
