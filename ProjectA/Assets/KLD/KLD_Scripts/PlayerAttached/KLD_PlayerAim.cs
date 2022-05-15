@@ -117,7 +117,7 @@ public class KLD_PlayerAim : MonoBehaviour
         }
         else
         {
-            ultInputAimVector3 = Vector3.zero;
+            //ultInputAimVector3 = Vector3.zero;
         }
         playerAttributes.worldUltAimDirection = ultInputAimVector3;
     }

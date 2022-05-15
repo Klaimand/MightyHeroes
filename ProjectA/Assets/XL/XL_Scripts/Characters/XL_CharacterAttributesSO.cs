@@ -69,6 +69,11 @@ public class XL_CharacterAttributesSO : ScriptableObject
         spellSO.ActivateSpell(direction, pos);
     }
 
+    public void CallOnSpellLaunch()
+    {
+        spellSO.OnSpellLaunch();
+    }
+
     public void CallUltJoystickDown(Vector2 _joyDirection, Transform _player)
     {
         spellSO.OnUltJoystickDown(_joyDirection, _player);

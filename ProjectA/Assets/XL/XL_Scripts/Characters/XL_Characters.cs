@@ -131,6 +131,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        characterAttributes.CallOnSpellLaunch();
+
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
 
         direction = Vector3.zero;

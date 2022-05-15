@@ -55,6 +55,11 @@ public class KLD_SpellGrenade : KLD_Spell
         impactZoneTransform.position = impactPos;
     }
 
+    public override void OnSpellLaunch()
+    {
+        DepopImpactZone();
+    }
+
     void DepopImpactZone()
     {
         isAiming = false;

@@ -10,4 +10,9 @@ public abstract class KLD_Spell : ScriptableObject
     {
 
     }
+
+    public virtual void OnSpellLaunch()
+    {
+
+    }
 }
