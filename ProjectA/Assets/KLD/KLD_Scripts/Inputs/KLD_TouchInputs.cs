@@ -58,6 +58,7 @@ public class KLD_TouchInputs : MonoBehaviour
     public event Action onActiveSkillButton;
     public event Action onReloadButton;
     public event Action<Vector2> onActiveSkillJoystickRelease;
+    public event Action<Vector2> onActiveSkillJoystickDown;
 
     void Start()
     {
@@ -178,16 +179,26 @@ public class KLD_TouchInputs : MonoBehaviour
                 }
                 else if (curTouch.phase == TouchPhase.Moved && joysticks[joyIndex].interractable)
                 {
-                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
-                    {
-                        DoRawVectorCalculation();
+                    //if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    //{
+                    DoRawVectorCalculation();
 
-                        DoDrag();
+                    DoDrag();
+                    //}
+
+                    if (joyIndex == 2)
+                    {
+                        CallActiveSkillJoystickDown(joysticks[joyIndex].normalizedVector);
                     }
                 }
                 else if (curTouch.phase == TouchPhase.Stationary && joysticks[joyIndex].interractable)
                 {
                     DoDrag();
+
+                    if (joyIndex == 2)
+                    {
+                        CallActiveSkillJoystickDown(joysticks[joyIndex].normalizedVector);
+                    }
                 }
                 else if (curTouch.phase == TouchPhase.Ended ||
                 (!joysticks[joyIndex].interractable && !joysticks[joyIndex].endedInterractivity))
@@ -217,6 +228,7 @@ public class KLD_TouchInputs : MonoBehaviour
                     if (joyIndex == 2)
                     {
                         isPressingActiveSkillJoystick = false;
+                        //ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                         ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                     }
                     //}
@@ -359,6 +371,11 @@ public class KLD_TouchInputs : MonoBehaviour
     public void DetectActiveSkillJoystick()
     {
         isPressingActiveSkillJoystick = true;
+    }
+
+    void CallActiveSkillJoystickDown(Vector2 _input)
+    {
+        onActiveSkillJoystickDown?.Invoke(_input);
     }
 
     void ReleaseActiveSkillJoystick(Vector2 _input)

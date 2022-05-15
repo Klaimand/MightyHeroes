@@ -1428,7 +1428,7 @@ MonoBehaviour:
     enemiesProbas:
     - proba: 1
       enemy: Swarmer
-      enemyPerSpawn: 3
+      enemyPerSpawn: 0
 --- !u!4 &2091840206
 Transform:
   m_ObjectHideFlags: 0
@@ -1450,6 +1450,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8671646772427712697, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: poolKeys.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671646772427712697, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: poolKeys.Array.data[9].key
+      value: BlastGrenadeZone
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671646772427712697, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: poolKeys.Array.data[9].pool.prefab
+      value: 
+      objectReference: {fileID: 1275500737019771150, guid: 4cf4fd5970bc1e74d9c4227105df8535, type: 3}
+    - target: {fileID: 8671646772427712697, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: poolKeys.Array.data[9].pool.baseCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671646772427712697, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: poolKeys.Array.data[9].pool.refreshSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671646772427712697, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: poolKeys.Array.data[9].pool.baseRefreshSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8671646773670392588, guid: 683f14f283869454489ac31322d6c303, type: 3}
       propertyPath: m_RootOrder
       value: 3
