@@ -156,4 +156,10 @@ public class KLD_PlayerController : MonoBehaviour
         return rawAxis != Vector2.zero;
     }
 
+
+    public void SetCharacterMeshComponents(Animator _animator, Transform _scaler)
+    {
+        animator = _animator;
+        scaler = _scaler;
+    }
 }

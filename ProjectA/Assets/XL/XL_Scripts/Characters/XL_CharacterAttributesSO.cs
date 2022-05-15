@@ -40,6 +40,8 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [SerializeField] KLD_Spell spellSO;
     public float spellLaunchDuration = 1.2f;
 
+    [Header("Mesh")]
+    public GameObject characterMesh;
 
     public void Initialize()
     {
