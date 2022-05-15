@@ -6,9 +6,9 @@ public class KLD_PlayerInitializer : MonoBehaviour
 {
     [Header("Character & Weapon")]
     [SerializeField] Character character;
-    [SerializeField, Range(0, 9)] int characterLevel = 0;
+    [SerializeField, Range(0, 9)] int seri_characterLevel = 0;
     [SerializeField] Weapon weapon;
-    [SerializeField, Range(0, 5)] int weaponLevel = 0;
+    [SerializeField, Range(0, 5)] int seri_weaponLevel = 0;
 
     [SerializeField] List<XL_CharacterAttributesSO> charactersList = new List<XL_CharacterAttributesSO>();
     [SerializeField] List<KLD_WeaponSO> weaponsList = new List<KLD_WeaponSO>();
@@ -32,9 +32,7 @@ public class KLD_PlayerInitializer : MonoBehaviour
 
     void Start()
     {
-        print("touch inputs not inited (button/joystick)");
-
-        InitPlayer(weapon, character, 0, 0);
+        InitPlayer(weapon, character, seri_weaponLevel, seri_characterLevel);
     }
 
     void InitPlayer(Weapon _weapon, Character _character, int _weaponLevel, int _characterLevel)
@@ -42,31 +40,25 @@ public class KLD_PlayerInitializer : MonoBehaviour
         curCharacter = charactersList[(int)_character];
         curWeapon = weaponsList[(int)_weapon];
 
-        InitCharacterStats();
+        InitCharacterStats(_characterLevel);
+
+        touchInputs.InitializeActiveJoystickOrButton(curCharacter.spellIsButton);
 
         InitCharacterMesh();
 
-        playerShoot.Init(curWeapon, weaponLevel);
+        playerShoot.Init(curWeapon, _weaponLevel);
     }
 
-    void InitCharacterStats()
+    void InitCharacterStats(int _characterLevel)
     {
-        xl_character.InitializeCharacter(curCharacter, characterLevel);
+        xl_character.InitializeCharacter(curCharacter, _characterLevel);
     }
 
     void InitCharacterMesh()
     {
-        nbChild = transform.childCount;
-        if (nbChild > 3)
+        if (transform.childCount > 1)
         {
-            nbChild = 3;
-        }
-        if (nbChild > 0)
-        {
-            for (int i = nbChild - 1; i >= 0; i--)
-            {
-                Destroy(transform.GetChild(i).gameObject);
-            }
+            Destroy(transform.GetChild(0).gameObject);
         }
 
         instanciatedCharacterMesh = Instantiate(curCharacter.characterMesh, transform.position, Quaternion.identity, transform);

@@ -36,7 +36,7 @@ public class KLD_TouchInputs : MonoBehaviour
 
     [SerializeField] bool useDebugControls = false;
 
-    [SerializeField] bool useButtonForUltimate = false;
+    [SerializeField, ReadOnly] bool useButtonForUltimate = false;
     [SerializeField] GameObject ultiButton = null;
     [SerializeField] GameObject ultiJoystick = null;
     [SerializeField, Range(0.3f, 0.8f)] float leftTouchScreenRatio = 0.4f;
@@ -75,7 +75,7 @@ public class KLD_TouchInputs : MonoBehaviour
         resolutionRatio.y = (float)referenceResolution.y / (float)height;
 
         InitializeJoysticks();
-        InitializeActiveJoystickOrButton();
+        //InitializeActiveJoystickOrButton();
     }
 
     void InitializeJoysticks()
@@ -97,8 +97,9 @@ public class KLD_TouchInputs : MonoBehaviour
         }
     }
 
-    void InitializeActiveJoystickOrButton()
+    public void InitializeActiveJoystickOrButton(bool _isButton)
     {
+        useButtonForUltimate = _isButton;
         ultiButton.SetActive(useButtonForUltimate);
         ultiJoystick.SetActive(!useButtonForUltimate);
     }
