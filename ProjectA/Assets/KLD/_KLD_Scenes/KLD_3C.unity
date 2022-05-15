@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 967158c74604afa4aa8f87c03120cacc, type: 2}
---- !u!4 &14171630 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8671646772547897263, guid: 683f14f283869454489ac31322d6c303, type: 3}
-  m_PrefabInstance: {fileID: 8671646773253801186}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &21286425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1396,28 +1391,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905827799}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1926833430 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8671646773253801196, guid: 683f14f283869454489ac31322d6c303, type: 3}
-  m_PrefabInstance: {fileID: 8671646773253801186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 002ca19db7c227c46aa1bc9f0144334a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1926833431 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8671646772181465863, guid: 683f14f283869454489ac31322d6c303, type: 3}
-  m_PrefabInstance: {fileID: 8671646773253801186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 580ed4f048ed4534eb3048bccc7d0fee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2091840204
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1428,7 @@ MonoBehaviour:
     enemiesProbas:
     - proba: 1
       enemy: Swarmer
-      enemyPerSpawn: 0
+      enemyPerSpawn: 3
 --- !u!4 &2091840206
 Transform:
   m_ObjectHideFlags: 0
@@ -10252,66 +10225,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weapon
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: character
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: controller
-      value: 
-      objectReference: {fileID: 1926833431}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: playerShoot
-      value: 
-      objectReference: {fileID: 1926833430}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: targetPosSmooth
-      value: 
-      objectReference: {fileID: 14171630}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weaponsList.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: charactersList.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weaponsList.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: aba25dde72e48d245bcb88957417abb0, type: 2}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weaponsList.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: a8b8d70eea9548642888ffbab16f066b, type: 2}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weaponsList.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: 442483801d895a44ea30b5cdbd403aa8, type: 2}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weaponsList.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: a5683c25f68643748af52f8c5e9d0907, type: 2}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: weaponsList.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: 97e84cd235c466545b1f217bd6f7987a, type: 2}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: charactersList.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: a064d8ce9fe3dd643970fe81c5b3b02d, type: 2}
-    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: charactersList.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 94d834fce1bb46e42a274dac626e01ef, type: 2}
-    - target: {fileID: 3592941992684990966, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: useButtonForUltimate
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8671646773670392588, guid: 683f14f283869454489ac31322d6c303, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -10359,10 +10272,6 @@ PrefabInstance:
     - target: {fileID: 8671646773670392591, guid: 683f14f283869454489ac31322d6c303, type: 3}
       propertyPath: m_Name
       value: --CORE--
-      objectReference: {fileID: 0}
-    - target: {fileID: 8671646773670392591, guid: 683f14f283869454489ac31322d6c303, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 683f14f283869454489ac31322d6c303, type: 3}
