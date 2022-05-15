@@ -15,6 +15,16 @@ public class XL_PlayerInfo : MonoBehaviour
             menuData = new KLD_MenuData();
         }
         DontDestroyOnLoad(this.gameObject);
+
+        InitialiseMenuData();
+    }
+
+    private void InitialiseMenuData()
+    {
+        menuData.character = 0;
+        menuData.weapon = 0;
+        menuData.map = 0;
+        menuData.difficulty = 0;
     }
 
     public void SelectPlayer()

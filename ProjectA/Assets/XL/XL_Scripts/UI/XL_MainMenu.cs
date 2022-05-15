@@ -50,7 +50,7 @@ public class XL_MainMenu : MonoBehaviour
             if (!PlayerPrefs.HasKey(ca.characterName))
             {
                 Debug.Log("Test");
-                PlayerPrefs.SetInt(ca.characterName, 0);
+                PlayerPrefs.SetInt(ca.characterName, 5);
             }
             ca.level = PlayerPrefs.GetInt(ca.characterName);
         }
