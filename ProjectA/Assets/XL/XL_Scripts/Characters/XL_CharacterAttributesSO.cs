@@ -6,6 +6,9 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(fileName = "Character Attributes", menuName = "XL/CharacterAttributesSO", order = 2)]
 public class XL_CharacterAttributesSO : ScriptableObject
 {
+    [Header("Name")]
+    [SerializeField] public string characterName;
+
     [Header("Base Values")]
     [SerializeField] float base_healthMax;
     [SerializeField] float base_movementSpeed;
@@ -41,19 +44,18 @@ public class XL_CharacterAttributesSO : ScriptableObject
 
     public void Initialize()
     {
-
         spell = spellPrefab.GetComponent<XL_Spells>();
 
-        if (isPercentageHealthGrowth) healthMax = base_healthMax * Mathf.Pow(healthGrowth, level);
+        if (isPercentageHealthGrowth) healthMax = Mathf.Round(base_healthMax * Mathf.Pow(healthGrowth, level));
         else healthMax = base_healthMax + healthGrowth * level;
 
-        if (isPercentageMovementSpeedGrowth) movementSpeed = base_movementSpeed * Mathf.Pow(movementSpeedGrowth, level);
+        if (isPercentageMovementSpeedGrowth) movementSpeed = Mathf.Round(base_movementSpeed * Mathf.Pow(movementSpeedGrowth, level));
         else movementSpeed = base_movementSpeed + movementSpeedGrowth * level;
 
-        if (isPercentageArmorGrowth) armor = base_armor * Mathf.Pow(armorGrowth, level);
+        if (isPercentageArmorGrowth) armor = Mathf.Round(base_armor * Mathf.Pow(armorGrowth, level));
         else armor = base_armor + armorGrowth * level;
 
-        if (isPercentageHealingTickGrowth) healingTick = base_healingTick * Mathf.Pow(healingTickGrowth, level);
+        if (isPercentageHealingTickGrowth) healingTick = Mathf.Round(base_healingTick * Mathf.Pow(healingTickGrowth, level));
         else healingTick = base_healingTick + healingTickGrowth * level;
 
         activeTick = activeTickGrowth[level];
