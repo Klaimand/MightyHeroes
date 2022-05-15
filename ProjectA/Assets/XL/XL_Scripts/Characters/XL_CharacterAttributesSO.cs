@@ -6,6 +6,9 @@ using Sirenix.OdinInspector;
 [CreateAssetMenu(fileName = "Character Attributes", menuName = "XL/CharacterAttributesSO", order = 2)]
 public class XL_CharacterAttributesSO : ScriptableObject
 {
+    [Header("Name")]
+    [SerializeField] public string characterName;
+
     [Header("Base Values")]
     [SerializeField] float base_healthMax;
     [SerializeField] float base_movementSpeed;
@@ -35,30 +38,24 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [SerializeField] private float healingTickGrowth;
 
     [Header("Spell")]
-    //public GameObject spellPrefab;
-    //private XL_Spells spell;
-    [SerializeField] KLD_Spell spellSO;
-    public float spellLaunchDuration = 1.2f;
-    public bool spellIsButton = true;
+    public GameObject spellPrefab;
+    private XL_Spells spell;
 
-    [Header("Mesh")]
-    public GameObject characterMesh;
 
     public void Initialize()
     {
+        spell = spellPrefab.GetComponent<XL_Spells>();
 
-        //spell = spellPrefab.GetComponent<XL_Spells>();
-
-        if (isPercentageHealthGrowth) healthMax = base_healthMax * Mathf.Pow(healthGrowth, level);
+        if (isPercentageHealthGrowth) healthMax = Mathf.Round(base_healthMax * Mathf.Pow(healthGrowth, level));
         else healthMax = base_healthMax + healthGrowth * level;
 
-        if (isPercentageMovementSpeedGrowth) movementSpeed = base_movementSpeed * Mathf.Pow(movementSpeedGrowth, level);
+        if (isPercentageMovementSpeedGrowth) movementSpeed = Mathf.Round(base_movementSpeed * Mathf.Pow(movementSpeedGrowth, level));
         else movementSpeed = base_movementSpeed + movementSpeedGrowth * level;
 
-        if (isPercentageArmorGrowth) armor = base_armor * Mathf.Pow(armorGrowth, level);
+        if (isPercentageArmorGrowth) armor = Mathf.Round(base_armor * Mathf.Pow(armorGrowth, level));
         else armor = base_armor + armorGrowth * level;
 
-        if (isPercentageHealingTickGrowth) healingTick = base_healingTick * Mathf.Pow(healingTickGrowth, level);
+        if (isPercentageHealingTickGrowth) healingTick = Mathf.Round(base_healingTick * Mathf.Pow(healingTickGrowth, level));
         else healingTick = base_healingTick + healingTickGrowth * level;
 
         activeTick = activeTickGrowth[level];
@@ -66,16 +63,7 @@ public class XL_CharacterAttributesSO : ScriptableObject
 
     public void ActivateSpell(Vector3 direction, Transform pos)
     {
-        spellSO.ActivateSpell(direction, pos);
+        spell.ActivateSpell(direction, pos);
     }
 
-    public void CallOnSpellLaunch()
-    {
-        spellSO.OnSpellLaunch();
-    }
-
-    public void CallUltJoystickDown(Vector2 _joyDirection, Transform _player)
-    {
-        spellSO.OnUltJoystickDown(_joyDirection, _player);
-    }
 }
