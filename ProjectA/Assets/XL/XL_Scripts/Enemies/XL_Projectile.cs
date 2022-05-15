@@ -24,13 +24,11 @@ public class XL_Projectile : MonoBehaviour
 
     IEnumerator CheckRangeCoroutine(float t)
     {
-        /*Debug.Log("StartPosition : " + startPosition + "\n" +
-            "TransformPosition : " + transform.position + "\n" +
-            "Magnitude : " + (transform.position - startPosition).magnitude);*/
+        
         yield return new WaitForSeconds(t);
         if ((transform.position - startPosition).magnitude > projectileSO.range)
         {
-            //Debug.Log("Depoped because of range");
+            Debug.Log("Depoped because of range");
             XL_Pooler.instance.DePop(projectileSO.projectileName, transform.gameObject);
             StopAllCoroutines();
         }
@@ -44,14 +42,18 @@ public class XL_Projectile : MonoBehaviour
     XL_IDamageable objectHit;
     private void OnCollisionEnter(Collision collision)
     {
-        destroyed = true;
-        objectHit = collision.transform.GetComponent<XL_IDamageable>();
-        if (objectHit != null)
+        if (!collision.transform.CompareTag("Enemy")) 
         {
-            objectHit.TakeDamage(projectileSO.damage);
+            destroyed = true;
+            objectHit = collision.transform.GetComponent<XL_IDamageable>();
+            if (objectHit != null)
+            {
+                objectHit.TakeDamage(projectileSO.damage);
+            }
+            Debug.Log("Depoped because of collision");
+            StopAllCoroutines();
+            XL_Pooler.instance.DePop(projectileSO.projectileName, transform.gameObject);
         }
-        //Debug.Log("Depoped because of collision");
-        StopAllCoroutines();
-        XL_Pooler.instance.DePop(projectileSO.projectileName, transform.gameObject);
+        
     }
 }

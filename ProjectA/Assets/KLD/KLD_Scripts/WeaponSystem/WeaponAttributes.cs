@@ -6,6 +6,7 @@ using Sirenix.OdinInspector;
 [System.Serializable]
 public class WeaponAttributes
 {
+    [LabelText("Level Price")]
     public int experienceToReach = 0;
 
     public int bulletDamage = 20;
@@ -28,12 +29,13 @@ public class WeaponAttributes
     [ReadOnly, HideIf("bulletsPerShot", 1)]
     public bool isBuckshot = false;
 
-
-
     [LabelText("$spreadLabel"), Range(0, 90)]
     public int spread = 25;
 
     public float range = 15f;
+
+    [Header("Aim Speed")]
+    public float aimSpeedMultiplier = 0.5f;
 
     [Space(10)]
     public int activePointsPerKill = 5;

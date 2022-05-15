@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: SHOTGUN - Old-Reliable
   m_EditorClassIdentifier: 
   weaponName: Old-Reliable
-  description: This is a new weapon.
+  description: "\u201CLe Old Reliable est un fusil \xE0 pompe produit par la F\xE9d\xE9ration
+    pour le close combat. Il est facile \xE0 prendre en main et permet \xE0 son utilisateur
+    d\u2019infliger des d\xE9g\xE2ts consid\xE9rables \xE0 son adversaire en tr\xE8s
+    peu de temps gr\xE2ce \xE0 ses munitions de calibre 12. \xC9quivalent du Remington
+    870.\u201D"
   type: 2
   rarity: 0
   reloadType: 1
@@ -22,19 +26,84 @@ MonoBehaviour:
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
-    bulletDamage: 20
-    rpm: 300
-    reloadSpeed: 0.5
-    magazineSize: 500000
+    bulletDamage: 15
+    rpm: 55
+    reloadSpeed: 0.4375
+    magazineSize: 8
     bulletsPerShot: 5
     timeBetweenBullets: 0
     isBuckshot: 1
-    spread: 10
+    spread: 5
     range: 15
     activePointsPerKill: 5
     displayedName: Level 0
     isBPBReloading: 1
-  shootDelay: 0.2
+  - experienceToReach: 800
+    bulletDamage: 17
+    rpm: 55
+    reloadSpeed: 0.425
+    magazineSize: 8
+    bulletsPerShot: 5
+    timeBetweenBullets: 0
+    isBuckshot: 1
+    spread: 5
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 1
+    isBPBReloading: 1
+  - experienceToReach: 1800
+    bulletDamage: 19
+    rpm: 55
+    reloadSpeed: 0.4125
+    magazineSize: 8
+    bulletsPerShot: 5
+    timeBetweenBullets: 0
+    isBuckshot: 1
+    spread: 5
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 2
+    isBPBReloading: 1
+  - experienceToReach: 3100
+    bulletDamage: 21
+    rpm: 55
+    reloadSpeed: 0.4
+    magazineSize: 8
+    bulletsPerShot: 5
+    timeBetweenBullets: 0
+    isBuckshot: 1
+    spread: 5
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 3
+    isBPBReloading: 1
+  - experienceToReach: 4700
+    bulletDamage: 23
+    rpm: 55
+    reloadSpeed: 0.3875
+    magazineSize: 8
+    bulletsPerShot: 5
+    timeBetweenBullets: 0
+    isBuckshot: 1
+    spread: 5
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 4
+    isBPBReloading: 1
+  - experienceToReach: 6300
+    bulletDamage: 25
+    rpm: 55
+    reloadSpeed: 0.375
+    magazineSize: 8
+    bulletsPerShot: 5
+    timeBetweenBullets: 0
+    isBuckshot: 1
+    spread: 5
+    range: 15
+    activePointsPerKill: 5
+    displayedName: Level 5
+    isBPBReloading: 1
+  shootDelay: 1.0909091
   weaponHolder: {fileID: 660786425802636352, guid: 15daed1dad8109f45a9a5641daa12691, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: 6e3c70ee48c699a4bb617f582be701e1, type: 2}
   shootAnimDelay: 0
