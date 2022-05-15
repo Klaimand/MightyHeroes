@@ -7,10 +7,10 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] KLD_PlayerShoot playerShoot;
-    [SerializeField] protected XL_CharacterAttributesSO characterAttributes;
+    protected XL_CharacterAttributesSO characterAttributes;
     private float health;
 
-    private XL_ISpells spell;
+    //private XL_ISpells spell;
     public float ultimateCharge;
     public bool isUltimateCharged;
     [SerializeField] private float ultimateChargeTick;
@@ -25,6 +25,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     UltState ultState = UltState.NONE;
 
+    /*
     private void Awake()
     {
         characterAttributes.Initialize();
@@ -37,6 +38,21 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
         StartCoroutine(OutOfCombatHealingCoroutine(1f));
     }
+    */
+
+    public void InitializeCharacter(XL_CharacterAttributesSO _character, int _characterLevel)
+    {
+        characterAttributes = _character;
+        characterAttributes.level = _characterLevel;
+
+        characterAttributes.Initialize();
+        health = characterAttributes.healthMax;
+
+        ultimateCharge = 0f;
+        StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
+        StartCoroutine(OutOfCombatHealingCoroutine(1f));
+    }
+
 
     private void Update()
     {
@@ -109,7 +125,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             spellDirection = _direction;
 
             ultimateCharge = 0;
-            characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+            //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
 
             isUltimateCharged = false;
             StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
@@ -118,6 +134,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        characterUI.UpdateUltBar(ultimateCharge * 0.01f);
+
         direction = Vector3.zero;
         direction.x = spellDirection.x;
         direction.z = spellDirection.y;
@@ -208,15 +226,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         }
     }
 
-    public void InitializeCharacterStats(int _characterLevel)
-    {
-        characterAttributes.level = _characterLevel;
-        characterAttributes.Initialize();
-        health = characterAttributes.healthMax;
-    }
-
     public float GetCharacterSpeed()
     {
         return characterAttributes.movementSpeed;
     }
+
 }

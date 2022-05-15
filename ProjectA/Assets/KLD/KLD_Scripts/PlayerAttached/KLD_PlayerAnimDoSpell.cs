@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KLD_PlayerAnimDoSpell : MonoBehaviour
 {
-    [SerializeField] XL_Characters character;
+    public XL_Characters character;
 
     public void DoSpell()
     {
