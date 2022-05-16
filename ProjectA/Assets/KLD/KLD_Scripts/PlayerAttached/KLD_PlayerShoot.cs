@@ -11,17 +11,18 @@ public class KLD_PlayerShoot : MonoBehaviour
     KLD_PlayerAim playerAim;
 
     [Header("Public References")]
-    [SerializeField] Transform canon;
+    Transform canon;
     [SerializeField] Text ammoText;
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] Button reloadButton;
+    [SerializeField] Animator reloadFlames;
     [SerializeField] Animator animator;
     [SerializeField] KLD_PlayerController controller;
     [SerializeField] XL_Characters character;
 
-    [Header("Weapon"), Space(10)]
-    [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
-    [SerializeField] KLD_WeaponSO weapon;
+    //[Header("Weapon"), Space(10)]
+    //[InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+    KLD_WeaponSO weapon;
 
     [Header("Shooting Parameters"), Space(10)]
     [SerializeField] float zombieVerticalOffset = 1.5f;
@@ -48,6 +49,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     [ReadOnly] public bool isReloading = false;
     [ReadOnly] public bool isAiming = false;
     [ReadOnly] public bool isShooting;
+    [ReadOnly] public bool isUsingUltimate = false;
 
     public enum WeaponState
     {
@@ -72,18 +74,31 @@ public class KLD_PlayerShoot : MonoBehaviour
     void Awake()
     {
         playerAim = GetComponent<KLD_PlayerAim>();
-        InitWeaponMesh();
+        //InitWeaponMesh();
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        //weapon.ValidateValues();
+        //curBullets = weapon.GetCurAttributes().magazineSize;
+        //playerAim.targetPosAngleOffset = weapon.angleOffset;
+        //StartCoroutine(DelayedStart());
+        //UpdateUI();
+    }
+
+    public void Init(KLD_WeaponSO _weapon, int _weaponLevel)
+    {
+        weapon = _weapon;
+        weapon.level = _weaponLevel;
+
+        InitWeaponMesh();
+
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
         playerAim.targetPosAngleOffset = weapon.angleOffset;
         StartCoroutine(DelayedStart());
         UpdateUI();
-        //InitWeaponMesh();
     }
 
     IEnumerator DelayedStart()
@@ -111,8 +126,9 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         canReload = !isReloading && curBullets < weapon.GetCurAttributes().magazineSize;
         reloadButton.interactable = canReload;
+        reloadFlames.SetBool("enabled", isReloading);
 
-        if (isShooting && curBullets > 0 && !isReloading)
+        if (isShooting && curBullets > 0 && !isReloading && !isUsingUltimate)
         {
             if (curShootDelay > weapon.shootDelay)
             {
@@ -248,10 +264,25 @@ public class KLD_PlayerShoot : MonoBehaviour
         }
     }
 
+    public void UseUltimate(float _time)
+    {
+        isUsingUltimate = true;
+        StartCoroutine(IUseUltimate(_time));
+    }
+
+    IEnumerator IUseUltimate(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        isUsingUltimate = false;
+    }
 
     void AnimateWeaponState()
     {
-        if (isReloading)
+        if (isUsingUltimate)
+        {
+            weaponState = WeaponState.USING_ULTI;
+        }
+        else if (isReloading)
         {
             weaponState = (weapon.reloadType == ReloadType.MAGAZINE ? WeaponState.RELOADING : WeaponState.RELOADING_BPB);
         }
@@ -282,6 +313,25 @@ public class KLD_PlayerShoot : MonoBehaviour
         return weaponState;
     }
 
+    public void SetCharacterMeshComponents(
+    Animator _animator,
+    Transform _weaponHolderParent,
+    RigBuilder _rigBuilder,
+    TwoBoneIKConstraint _leftHandIK,
+    TwoBoneIKConstraint _rightHandIK
+    )
+    {
+        animator = _animator;
+        weaponHolderParent = _weaponHolderParent;
+        rigBuilder = _rigBuilder;
+        leftHandIK = _leftHandIK;
+        rightHandIK = _rightHandIK;
+    }
+
+    public float GetWeaponUltChargeOnKill()
+    {
+        return weapon.GetCurAttributes().activePointsPerKill;
+    }
 
 
     #region Weapon Mesh and anims Initialization

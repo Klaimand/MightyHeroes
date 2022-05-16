@@ -1,22 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 [CreateAssetMenu(fileName = "Character Attributes", menuName = "XL/CharacterAttributesSO", order = 2)]
 public class XL_CharacterAttributesSO : ScriptableObject
 {
+    [Header("Name")]
+    [SerializeField] public string characterName;
 
     [Header("Base Values")]
-    public int level;
-    public float healthMax;
-    public float movementSpeed;
-    public float armor;
-    public float healingTick;
-    public float activeTick;
+    [SerializeField] float base_healthMax;
+    [SerializeField] float base_movementSpeed;
+    [SerializeField] float base_armor;
+    [SerializeField] float base_healingTick;
+    //[SerializeField] float base_activeTick;
+    [SerializeField] private float[] activeTickGrowth = new float[10];
 
-    [Header("Spell")]
-    public GameObject spellPrefab;
-    private XL_Spells spell;
+    [Header("Level")]
+    public int level;
+
+    [Header("Scaled Values")]
+    [ReadOnly] public float healthMax;
+    [ReadOnly] public float movementSpeed;
+    [ReadOnly] public float armor;
+    [ReadOnly] public float healingTick;
+    [ReadOnly] public float activeTick;
 
     [Header("Growth Value")]
     [SerializeField] private bool isPercentageHealthGrowth;
@@ -27,31 +36,46 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [SerializeField] private float armorGrowth;
     [SerializeField] private bool isPercentageHealingTickGrowth;
     [SerializeField] private float healingTickGrowth;
-    [SerializeField] private float[] activeTickGrowth = new float[10];
+
+    [Header("Spell")]
+    //public GameObject spellPrefab;
+    //private XL_Spells spell;
+    [SerializeField] KLD_Spell spellSO;
+    public float spellLaunchDuration = 1.2f;
+    public bool spellIsButton = true;
+
+    [Header("Mesh")]
+    public GameObject characterMesh;
 
     public void Initialize()
     {
-        
-        spell = spellPrefab.GetComponent<XL_Spells>();
+        if (isPercentageHealthGrowth) healthMax = Mathf.Round(base_healthMax * Mathf.Pow(healthGrowth, level));
+        else healthMax = base_healthMax + healthGrowth * level;
 
-        if (isPercentageHealthGrowth) healthMax = healthMax * Mathf.Pow(healthGrowth, level);
-        else healthMax = healthMax + healthGrowth * level;
+        if (isPercentageMovementSpeedGrowth) movementSpeed = Mathf.Round(base_movementSpeed * Mathf.Pow(movementSpeedGrowth, level));
+        else movementSpeed = base_movementSpeed + movementSpeedGrowth * level;
 
-        if (isPercentageMovementSpeedGrowth) movementSpeed = movementSpeed * Mathf.Pow(movementSpeedGrowth, level);
-        else movementSpeed = movementSpeed + movementSpeedGrowth * level;
+        if (isPercentageArmorGrowth) armor = Mathf.Round(base_armor * Mathf.Pow(armorGrowth, level));
+        else armor = base_armor + armorGrowth * level;
 
-        if (isPercentageArmorGrowth) armor = armor * Mathf.Pow(armorGrowth, level);
-        else armor = armor + armorGrowth * level;
-
-        if (isPercentageHealingTickGrowth) healingTick = healingTick * Mathf.Pow(healingTickGrowth, level);
-        else healingTick = healingTick + healingTickGrowth * level;
+        if (isPercentageHealingTickGrowth) healingTick = Mathf.Round(base_healingTick * Mathf.Pow(healingTickGrowth, level));
+        else healingTick = base_healingTick + healingTickGrowth * level;
 
         activeTick = activeTickGrowth[level];
     }
 
     public void ActivateSpell(Vector3 direction, Transform pos)
     {
-        spell.ActivateSpell(direction, pos);
+        spellSO.ActivateSpell(direction, pos);
     }
 
+    public void CallOnSpellLaunch()
+    {
+        spellSO.OnSpellLaunch();
+    }
+
+    public void CallUltJoystickDown(Vector2 _joyDirection, Transform _player)
+    {
+        spellSO.OnUltJoystickDown(_joyDirection, _player);
+    }
 }

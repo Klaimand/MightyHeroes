@@ -30,13 +30,16 @@ public class KLD_TouchInputs : MonoBehaviour
         [HideInInspector] public Vector2 rawCappedVector;
         [HideInInspector] public bool drawed = false;
         [ReadOnly] public Vector2 normalizedVector;
+        public bool interractable = true;
+        public bool endedInterractivity = true;
     }
 
     [SerializeField] bool useDebugControls = false;
 
-    [SerializeField] bool useButtonForUltimate = false;
+    [SerializeField, ReadOnly] bool useButtonForUltimate = false;
     [SerializeField] GameObject ultiButton = null;
     [SerializeField] GameObject ultiJoystick = null;
+    [SerializeField, Range(0.3f, 0.8f)] float leftTouchScreenRatio = 0.4f;
 
     [SerializeField] Joystick[] joysticks;
 
@@ -55,6 +58,7 @@ public class KLD_TouchInputs : MonoBehaviour
     public event Action onActiveSkillButton;
     public event Action onReloadButton;
     public event Action<Vector2> onActiveSkillJoystickRelease;
+    public event Action<Vector2> onActiveSkillJoystickDown;
 
     void Start()
     {
@@ -72,7 +76,7 @@ public class KLD_TouchInputs : MonoBehaviour
         resolutionRatio.y = (float)referenceResolution.y / (float)height;
 
         InitializeJoysticks();
-        InitializeActiveJoystickOrButton();
+        //InitializeActiveJoystickOrButton();
     }
 
     void InitializeJoysticks()
@@ -94,8 +98,9 @@ public class KLD_TouchInputs : MonoBehaviour
         }
     }
 
-    void InitializeActiveJoystickOrButton()
+    public void InitializeActiveJoystickOrButton(bool _isButton)
     {
+        useButtonForUltimate = _isButton;
         ultiButton.SetActive(useButtonForUltimate);
         ultiJoystick.SetActive(!useButtonForUltimate);
     }
@@ -125,22 +130,27 @@ public class KLD_TouchInputs : MonoBehaviour
                 //print($"curTouch Pos : {curTouch.position} \n ratioedPos : {curRatioedTouchPosition}");
 
                 //isLeftTouch = curRatioedTouchPosition.x < width / 2;
-                isLeftTouch = curRatioedTouchPosition.x < referenceResolution.x / 2;
+                isLeftTouch = curRatioedTouchPosition.x < referenceResolution.x * leftTouchScreenRatio;
 
                 //joyIndex = isLeftTouch ? 0 : 2;
                 if (isLeftTouch) { joyIndex = 0; }
                 else if (!isPressingActiveSkillJoystick) { joyIndex = 1; }
                 else if (!useButtonForUltimate) { joyIndex = 2; }
 
-                if (curTouch.phase == TouchPhase.Began)
+                if (joyIndex == 2 && !joysticks[2].interractable)
+                {
+                    joyIndex = 1;
+                }
+
+                if (curTouch.phase == TouchPhase.Began && joysticks[joyIndex].interractable)
                 {
                     if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId) || joyIndex == 2)
                     {
                         if (joysticks[joyIndex].floating)
                         {
                             joysticks[joyIndex].rawPosition = curRatioedTouchPosition; //AAA_CHANGE
-                            //joysticks[joyIndex].rawPosition.x = curRatioedTouchPosition.x * resolutionRatio.x;
-                            //joysticks[joyIndex].rawPosition.y = curRatioedTouchPosition.y * resolutionRatio.y;
+                                                                                       //joysticks[joyIndex].rawPosition.x = curRatioedTouchPosition.x * resolutionRatio.x;
+                                                                                       //joysticks[joyIndex].rawPosition.y = curRatioedTouchPosition.y * resolutionRatio.y;
 
                             joysticks[joyIndex].drawed = true;
                         }
@@ -154,9 +164,9 @@ public class KLD_TouchInputs : MonoBehaviour
                         }
                         joysticks[joyIndex].touchCircle.gameObject.SetActive(true);
                         joysticks[joyIndex].touchCircle.anchoredPosition = curRatioedTouchPosition; //AAA_CHANGE
-                        //ratioedPos.x = curRatioedTouchPosition.x * resolutionRatio.x;
-                        //ratioedPos.y = curRatioedTouchPosition.y * resolutionRatio.y;
-                        //joysticks[joyIndex].touchCircle.anchoredPosition = ratioedPos;
+                                                                                                    //ratioedPos.x = curRatioedTouchPosition.x * resolutionRatio.x;
+                                                                                                    //ratioedPos.y = curRatioedTouchPosition.y * resolutionRatio.y;
+                                                                                                    //joysticks[joyIndex].touchCircle.anchoredPosition = ratioedPos;
 
 
                         if (joysticks[joyIndex].animator != null)
@@ -167,21 +177,36 @@ public class KLD_TouchInputs : MonoBehaviour
                         //joysticks[joyIndex].canvasGroup.alpha = 1f;
                     }
                 }
-                else if (curTouch.phase == TouchPhase.Moved)
+                else if (curTouch.phase == TouchPhase.Moved && joysticks[joyIndex].interractable)
                 {
-                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
-                    {
-                        DoRawVectorCalculation();
+                    //if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
+                    //{
+                    DoRawVectorCalculation();
 
-                        DoDrag();
+                    DoDrag();
+                    //}
+
+                    if (joyIndex == 2)
+                    {
+                        CallActiveSkillJoystickDown(joysticks[joyIndex].normalizedVector);
                     }
                 }
-                else if (curTouch.phase == TouchPhase.Stationary)
+                else if (curTouch.phase == TouchPhase.Stationary && joysticks[joyIndex].interractable)
                 {
                     DoDrag();
+
+                    if (joyIndex == 2)
+                    {
+                        CallActiveSkillJoystickDown(joysticks[joyIndex].normalizedVector);
+                    }
                 }
-                else if (curTouch.phase == TouchPhase.Ended)
+                else if (curTouch.phase == TouchPhase.Ended ||
+                (!joysticks[joyIndex].interractable && !joysticks[joyIndex].endedInterractivity))
                 {
+                    if (!joysticks[joyIndex].interractable)
+                    {
+                        joysticks[joyIndex].endedInterractivity = true;
+                    }
                     //if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
                     //{
                     CalculateOffset();
@@ -203,6 +228,7 @@ public class KLD_TouchInputs : MonoBehaviour
                     if (joyIndex == 2)
                     {
                         isPressingActiveSkillJoystick = false;
+                        //ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                         ReleaseActiveSkillJoystick(joysticks[joyIndex].normalizedVector);
                     }
                     //}
@@ -310,7 +336,14 @@ public class KLD_TouchInputs : MonoBehaviour
     {
         if (!useDebugControls)
         {
-            return joysticks[_joystickID].drawed;
+            if (joysticks[_joystickID].floating)
+            {
+                return joysticks[_joystickID].drawed;
+            }
+            else
+            {
+                return joysticks[_joystickID].normalizedVector.sqrMagnitude > 0.05f * 0.05f;
+            }
         }
         else
         {
@@ -340,9 +373,28 @@ public class KLD_TouchInputs : MonoBehaviour
         isPressingActiveSkillJoystick = true;
     }
 
+    void CallActiveSkillJoystickDown(Vector2 _input)
+    {
+        onActiveSkillJoystickDown?.Invoke(_input);
+    }
+
     void ReleaseActiveSkillJoystick(Vector2 _input)
     {
         onActiveSkillJoystickRelease?.Invoke(_input);
+    }
+
+    public bool GetUseButtonForUltimate()
+    {
+        return useButtonForUltimate;
+    }
+
+    public void SetJoystickInterractable(int _joyIndex, bool _interractable)
+    {
+        joysticks[_joyIndex].interractable = _interractable;
+        if (!_interractable)
+        {
+            joysticks[_joyIndex].endedInterractivity = false;
+        }
     }
 
     #region Debug

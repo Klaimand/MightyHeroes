@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class XL_SpellGrenade : XL_Spells
 {
-    
+
     [SerializeField] private XL_SpellGrenadeAttributesSO grenadeAttributes;
 
     private GameObject grenade;
@@ -25,7 +25,7 @@ public class XL_SpellGrenade : XL_Spells
     {
         //Debug.Log("throwing Distance : "+grenadeAttributes.throwingDistance);
         //curvePoints = XL_Utilities.GenerateCurve(6, grenadeAttributes.throwingDistance-1);
-        
+
     }
 
     private void Update()
@@ -42,21 +42,27 @@ public class XL_SpellGrenade : XL_Spells
         }
         lineRenderer.enabled = true;
         circle.transform.localScale = new Vector3(grenadeAttributes.explosionRadius / 5, grenadeAttributes.explosionRadius / 5, 0);
-        circle.transform.position = new Vector3(curvePointsWS[curvePointsWS.Length-1].x, 0.51f, curvePointsWS[curvePointsWS.Length-1].z);
-        Debug.Log(curvePointsWS[curvePointsWS.Length - 1]);
+        circle.transform.position = new Vector3(curvePointsWS[curvePointsWS.Length - 1].x, 0.51f, curvePointsWS[curvePointsWS.Length - 1].z);
+        //Debug.Log(curvePointsWS[curvePointsWS.Length - 1]);
     }
 
-    public void cancelCurvePrevisualisation() 
+    public void cancelCurvePrevisualisation()
     {
         lineRenderer.enabled = false;
     }
 
+    Vector3 grenadeVel;
+
     public override void ActivateSpell(Vector3 throwingDirection, Transform pos)
     {
-        Debug.Log("launchGrenade");
+        //Debug.Log("launchGrenade");
         grenade = XL_Pooler.instance.PopPosition("BlastGrenade", pos.position + pos.forward + pos.up);
         startingVelocity = XL_Utilities.GetVelocity(0.5f, Mathf.Lerp(grenadeAttributes.minThrowingDistance, grenadeAttributes.throwingDistance, throwingDirection.magnitude), grenadeAttributes.travelTime);
-        grenade.GetComponent<Rigidbody>().velocity = new Vector3(startingVelocity[0] * (throwingDirection.x), startingVelocity[1], startingVelocity[0] * (throwingDirection.z));
+        grenadeVel.x = startingVelocity[0] * (throwingDirection.x);
+        grenadeVel.y = startingVelocity[1];
+        grenadeVel.z = startingVelocity[0] * (throwingDirection.z);
+        grenade.GetComponent<Rigidbody>().velocity = grenadeVel;
+        //grenade.GetComponent<Rigidbody>().velocity = new Vector3(startingVelocity[0] * (throwingDirection.x), startingVelocity[1], startingVelocity[0] * (throwingDirection.z));
         grenade.GetComponent<XL_Grenade>().SetValue(grenadeAttributes.explosionDamage, grenadeAttributes.explosionRadius);
     }
 }
