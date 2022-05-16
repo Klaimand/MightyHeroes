@@ -328,6 +328,11 @@ public class KLD_PlayerShoot : MonoBehaviour
         rightHandIK = _rightHandIK;
     }
 
+    public float GetWeaponUltChargeOnKill()
+    {
+        return weapon.GetCurAttributes().activePointsPerKill;
+    }
+
 
     #region Weapon Mesh and anims Initialization
 
