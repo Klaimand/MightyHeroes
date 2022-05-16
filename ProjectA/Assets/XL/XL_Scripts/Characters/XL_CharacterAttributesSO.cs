@@ -43,6 +43,7 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [SerializeField] KLD_Spell spellSO;
     public float spellLaunchDuration = 1.2f;
     public bool spellIsButton = true;
+    public bool canUseSpellWhenReloading = false;
 
     [Header("Mesh")]
     public GameObject characterMesh;
@@ -66,7 +67,7 @@ public class XL_CharacterAttributesSO : ScriptableObject
 
     public void ActivateSpell(Vector3 direction, Transform pos)
     {
-        spellSO.ActivateSpell(direction, pos);
+        spellSO.ActivateSpell(direction, pos, level);
     }
 
     public void CallOnSpellLaunch()
