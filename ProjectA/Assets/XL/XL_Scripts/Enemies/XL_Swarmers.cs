@@ -45,6 +45,7 @@ public class XL_Swarmers : XL_Enemy
     public override void Die()
     {
         base.Die();
+        KLD_EventsManager.instance.InvokeEnemyKill(Enemy.SWARMER);
         XL_Pooler.instance.DePop("Swarmer", transform.gameObject);
         StopAllCoroutines();
     }
