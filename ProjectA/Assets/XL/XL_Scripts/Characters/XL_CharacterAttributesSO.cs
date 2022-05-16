@@ -38,14 +38,17 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [SerializeField] private float healingTickGrowth;
 
     [Header("Spell")]
-    public GameObject spellPrefab;
-    private XL_Spells spell;
+    //public GameObject spellPrefab;
+    //private XL_Spells spell;
+    [SerializeField] KLD_Spell spellSO;
+    public float spellLaunchDuration = 1.2f;
+    public bool spellIsButton = true;
 
+    [Header("Mesh")]
+    public GameObject characterMesh;
 
     public void Initialize()
     {
-        spell = spellPrefab.GetComponent<XL_Spells>();
-
         if (isPercentageHealthGrowth) healthMax = Mathf.Round(base_healthMax * Mathf.Pow(healthGrowth, level));
         else healthMax = base_healthMax + healthGrowth * level;
 
@@ -63,7 +66,16 @@ public class XL_CharacterAttributesSO : ScriptableObject
 
     public void ActivateSpell(Vector3 direction, Transform pos)
     {
-        spell.ActivateSpell(direction, pos);
+        spellSO.ActivateSpell(direction, pos);
     }
 
+    public void CallOnSpellLaunch()
+    {
+        spellSO.OnSpellLaunch();
+    }
+
+    public void CallUltJoystickDown(Vector2 _joyDirection, Transform _player)
+    {
+        spellSO.OnUltJoystickDown(_joyDirection, _player);
+    }
 }

@@ -48,7 +48,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("Player : " + other.name + " has entered capture zone");
+            //Debug.Log("Player : " + other.name + " has entered capture zone");
             playersInside.Add(other.gameObject);
         }
     }
@@ -57,7 +57,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
     {
         if (other.transform.CompareTag("Player"))
         {
-            Debug.Log("Player : " + other.name + " has left capture zone");
+            //Debug.Log("Player : " + other.name + " has left capture zone");
             playersInside.Remove(other.gameObject);
         }
     }

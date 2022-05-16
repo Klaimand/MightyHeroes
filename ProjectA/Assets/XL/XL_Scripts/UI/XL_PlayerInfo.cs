@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class XL_PlayerInfo : MonoBehaviour
 {
+    public static XL_PlayerInfo instance;
+
     public KLD_MenuData menuData;
     [SerializeField] private XL_CharacterDetailsMenu characterMenu;
     [SerializeField] private XL_WeaponDetailsMenu weaponMenu;
 
     public void Awake()
     {
+        instance = this;
+
         if (menuData == null)
         {
             menuData = new KLD_MenuData();

@@ -39,14 +39,14 @@ public class XL_Pooler : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        InitPools();
-        PopulatePools();
+        //InitPools();
+        //PopulatePools();
     }
 
     private void Start()
     {
-        //InitPools();
-        //PopulatePools();
+        InitPools();
+        PopulatePools();
         //InitRefreshCount();
     }
 

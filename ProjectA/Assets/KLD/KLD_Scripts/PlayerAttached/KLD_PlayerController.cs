@@ -151,5 +151,15 @@ public class KLD_PlayerController : MonoBehaviour
         speed = newSpeed;
     }
 
+    public bool IsRunning()
+    {
+        return rawAxis != Vector2.zero;
+    }
 
+
+    public void SetCharacterMeshComponents(Animator _animator, Transform _scaler)
+    {
+        animator = _animator;
+        scaler = _scaler;
+    }
 }
