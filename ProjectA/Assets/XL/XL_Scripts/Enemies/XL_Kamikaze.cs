@@ -55,6 +55,7 @@ public class XL_Kamikaze : XL_Enemy
     public override void Die()
     {
         base.Die();
+        KLD_EventsManager.instance.InvokeEnemyKill(Enemy.KAMIKAZE);
         foreach (ParticleSystem ps in chargeParticles)
         {
             ps.Stop();
@@ -104,6 +105,6 @@ public class XL_Kamikaze : XL_Enemy
         }
         animator.SetBool("Attacking", true);
         agent.isStopped = false;
-        
+
     }
 }
