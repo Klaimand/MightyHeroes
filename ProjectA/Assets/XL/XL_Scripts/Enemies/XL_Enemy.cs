@@ -39,13 +39,13 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Alert();
     }
 
-    protected void Initialize()
+    protected virtual void Initialize()
     {
         //Debug.Log("Initialized");
         health = attributes.maxHealth;
         agent.speed = speed;
         canAttack = true;
-        //healthBar.UpdateHealthBar(health / attributes.maxHealth);
+        healthBar.UpdateHealthBar(health / attributes.maxHealth);
     }
 
     public abstract void Alert();

@@ -21,6 +21,13 @@ public class XL_Kamikaze : XL_Enemy
         isCharged = false;
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        isCharged = false;
+        ResetAnimator();
+    }
+
     private void OnEnable()
     {
         foreach (ParticleSystem ps in chillParticles)

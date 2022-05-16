@@ -20,12 +20,18 @@ public class XL_Swarmers : XL_Enemy
         shader = model.GetComponent<MeshRenderer>().material;
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        attacking = false;
+        shader.SetFloat("_AtkSldr", 0);
+    }
 
     private void Update()
     {
         Move();
         DebugRaycast();
-        if (attacking) shader.SetFloat("_AtkFloat", Time.time - atkStartingTime + 0.5f);
+        if (attacking) shader.SetFloat("_AtkFloat", (Time.time - atkStartingTime) / attackAnimationSpeed + 0.5f);
     }
 
     private void DebugRaycast()
