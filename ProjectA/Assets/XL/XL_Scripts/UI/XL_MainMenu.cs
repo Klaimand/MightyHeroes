@@ -68,7 +68,7 @@ public class XL_MainMenu : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("SoftCurrency"))
         {
-            PlayerPrefs.SetInt("SoftCurrency", 10000);
+            PlayerPrefs.SetInt("SoftCurrency", 20000);
         }
         if (!PlayerPrefs.HasKey("HardCurrency"))
         {

@@ -19,6 +19,7 @@ public class XL_CharacterAttributesSO : ScriptableObject
 
     [Header("Level")]
     public int level;
+    public int[] experienceToReach;
 
     [Header("Scaled Values")]
     [ReadOnly] public float healthMax;

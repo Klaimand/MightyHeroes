@@ -23,7 +23,7 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     [SerializeField] private Transform magazineSizeXScaler;
     [SerializeField] private float scalerMagazineSizeMax;
 
-    [Header("Upgrade Button")]
+    [Header("Upgrade Text")]
     [SerializeField] private TMP_Text upgradeText;
 
     public int selectedWeapon;
@@ -62,10 +62,9 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("SoftCurrency") > weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach) 
         {
-            PlayerPrefs.SetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName, weaponInfos[selectedWeapon].weaponAttributes.level + 1);
+            PlayerPrefs.SetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName, weaponInfos[selectedWeapon].GetLevel() + 1);
             weaponInfos[selectedWeapon].weaponAttributes.level++;
             PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
-            Debug.Log("Currency left : " + PlayerPrefs.GetInt("SoftCurrency"));
             DisplayWeaponInfo(selectedWeapon);
         }
     }
