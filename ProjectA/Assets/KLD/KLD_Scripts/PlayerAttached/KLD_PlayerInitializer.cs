@@ -32,6 +32,13 @@ public class KLD_PlayerInitializer : MonoBehaviour
 
     void Start()
     {
+        if (XL_PlayerInfo.instance != null)
+        {
+            weapon = XL_PlayerInfo.instance.menuData.weapon;
+            character = XL_PlayerInfo.instance.menuData.character;
+        }
+
+
         InitPlayer(weapon, character, seri_weaponLevel, seri_characterLevel);
     }
 
@@ -39,6 +46,9 @@ public class KLD_PlayerInitializer : MonoBehaviour
     {
         curCharacter = charactersList[(int)_character];
         curWeapon = weaponsList[(int)_weapon];
+
+        _characterLevel = curCharacter.level;
+        _weaponLevel = curWeapon.level;
 
         InitCharacterStats(_characterLevel);
 

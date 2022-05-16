@@ -56,13 +56,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     private void Update()
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("SPELL");
-            ActivateSpell(transform.forward);
-        }*/
-
         if (ultimateCharge >= 100f)
         {
             ultState = UltState.UP;
@@ -100,12 +93,16 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         touchInputs.onActiveSkillJoystickRelease += ActivateSpell;
         touchInputs.onActiveSkillButton += ActivateButtonSpell;
+
+        touchInputs.onActiveSkillJoystickDown += CallSpellJoystickDown;
     }
 
     void OnDisable()
     {
         touchInputs.onActiveSkillJoystickRelease -= ActivateSpell;
         touchInputs.onActiveSkillButton -= ActivateButtonSpell;
+
+        touchInputs.onActiveSkillJoystickDown -= CallSpellJoystickDown;
     }
 
     Vector3 direction;
@@ -134,6 +131,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        characterAttributes.CallOnSpellLaunch();
+
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
 
         direction = Vector3.zero;
@@ -173,6 +172,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         StopAllCoroutines();
         //XL_GameManager.instance.RemovePlayer(transform.gameObject);
         transform.gameObject.SetActive(false);
+        XL_GameManager.instance.LoseGame();
     }
 
     [ContextMenu("Take 100 Damage")]
@@ -231,4 +231,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         return characterAttributes.movementSpeed;
     }
 
+    void CallSpellJoystickDown(Vector2 _joyDirection)
+    {
+        characterAttributes.CallUltJoystickDown(_joyDirection, transform);
+    }
 }
