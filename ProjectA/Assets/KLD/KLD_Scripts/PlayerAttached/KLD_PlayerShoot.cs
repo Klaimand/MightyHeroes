@@ -362,6 +362,17 @@ public class KLD_PlayerShoot : MonoBehaviour
         if (curReloadCoroutine != null)
         {
             StopCoroutine(curReloadCoroutine);
+
+            if (weapon.reloadType == ReloadType.MAGAZINE)
+            {
+                animator.Play("(3) RELOAD ANIMATION FULL", 1, 1f);
+            }
+            else
+            {
+                animator.Play("(5) RELOAD POSITION", 1, 1f);
+                animator.Play("(5) Weapon_Shotgun_ReloadAnimAloop", 2, 1f);
+            }
+
             isReloading = false;
             curReloadCoroutine = null;
         }
