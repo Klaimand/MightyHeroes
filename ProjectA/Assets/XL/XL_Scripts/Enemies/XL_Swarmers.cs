@@ -25,7 +25,7 @@ public class XL_Swarmers : XL_Enemy
     {
         Move();
         DebugRaycast();
-        if (attacking) shader.SetFloat("_AtkFloat", Time.time - atkStartingTime + 0.5f);
+        if (attacking) shader.SetFloat("_AtkFloat", (Time.time - atkStartingTime) / attackAnimationSpeed + 0.5f);
     }
 
     private void DebugRaycast()
