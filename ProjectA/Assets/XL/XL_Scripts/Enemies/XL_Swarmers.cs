@@ -20,6 +20,12 @@ public class XL_Swarmers : XL_Enemy
         shader = model.GetComponent<MeshRenderer>().material;
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        attacking = false;
+        shader.SetFloat("_AtkSldr", 0);
+    }
 
     private void Update()
     {
