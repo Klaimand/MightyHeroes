@@ -8,6 +8,7 @@ public class KLD_PiercingBullet : KLD_Bullet
 
     [SerializeField] int piercingPower = 3;
     int curPiercedEnemies = 0;
+    int lastPiercedEnemyIndex = 0;
 
     //float spreadAngle = 0f;
     RaycastHit[] hits;
@@ -15,6 +16,7 @@ public class KLD_PiercingBullet : KLD_Bullet
     //int bulletsToShoot = 0;
     //Vector3 newDir = Vector3.zero;
     //bool noMuzzle;
+    bool isLastImpact;
 
     public override void Shoot(KLD_WeaponSO _weaponSO, Vector3 _canonPos, Vector3 _dir, LayerMask _layerMask)
     {
@@ -47,7 +49,9 @@ public class KLD_PiercingBullet : KLD_Bullet
 
             if (hits != null && hits.Length > 0)
             {
-                for (int y = 0; y < Mathf.Min(piercingPower, hits.Length); y++)
+                isLastImpact = false;
+                curPiercedEnemies = 0;
+                for (int y = 0; y < hits.Length; y++)
                 {
                     if (hits[y].collider.gameObject.CompareTag("Enemy"))
                     {
@@ -60,6 +64,7 @@ public class KLD_PiercingBullet : KLD_Bullet
                         {
                             DrawImpact(_canonPos, hits[y].point, _weaponSO, true);
                         }
+                        curPiercedEnemies++;
                     }
                     else
                     {
@@ -67,13 +72,32 @@ public class KLD_PiercingBullet : KLD_Bullet
                         {
                             DrawImpact(_canonPos, hits[y].point, _weaponSO, false);
                         }
+                        lastPiercedEnemyIndex = y - 1;
+                        curPiercedEnemies += 999;
+                    }
+
+                    if (curPiercedEnemies >= piercingPower)
+                    {
+                        isLastImpact = true;
+                        break;
                     }
                 }
-                DrawShot(_canonPos, hits[Mathf.Min(piercingPower, hits.Length - 1)].point, _weaponSO,
-                true,
-                hits[hits.Length - 1].collider.gameObject.CompareTag("Enemy"),
-                noMuzzle
-                );
+
+                if (isLastImpact)
+                {
+                    /*
+                    DrawShot(_canonPos, hits[hits.Length - 1].point, _weaponSO,
+                    true,
+                    hits[lastPiercedEnemyIndex].collider.gameObject.CompareTag("Enemy"),
+                    noMuzzle
+                    );
+                    */
+                }
+                else
+                {
+                    DrawShot(_canonPos, _canonPos + (newDir.normalized * _weaponSO.GetCurAttributes().range),
+                    _weaponSO, false, false, noMuzzle);
+                }
             }
             else
             {
