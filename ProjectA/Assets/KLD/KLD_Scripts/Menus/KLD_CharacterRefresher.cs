@@ -20,6 +20,7 @@ public class KLD_CharacterRefresher : MonoBehaviour
     #endregion
 
     [SerializeField] XL_MainMenu mainMenu;
+    [SerializeField] KLD_RotateMenuCharacter rotateMenuCharacter;
 
     //billboard
     [SerializeField] Renderer billboardRenderer;
@@ -50,6 +51,7 @@ public class KLD_CharacterRefresher : MonoBehaviour
 
     void ChangeCharacter(Character _character) //called by event
     {
+        rotateMenuCharacter.ResetVelAndAngle();
         for (int i = 0; i < characterBillboardReferences.Length; i++)
         {
             billboardRenderer.material.SetInt(characterBillboardReferences[i], (i == (int)_character) ? 1 : 0);
@@ -68,6 +70,7 @@ public class KLD_CharacterRefresher : MonoBehaviour
 
     void ChangeWeapon(Weapon _weapon) //called by event
     {
+        rotateMenuCharacter.ResetVelAndAngle();
         curWeaponIndex = (int)_weapon;
 
         if (weaponHolderParent.childCount > 3) { Destroy(weaponHolderParent.GetChild(3).gameObject); }
