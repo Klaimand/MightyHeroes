@@ -15,13 +15,12 @@ public abstract class KLD_Bullet : ScriptableObject
     public abstract void OnHit(XL_IDamageable _damageable, int _damage);
 
 
-    float spreadAngle = 0f;
+    protected float spreadAngle = 0f;
     RaycastHit hit;
-    //KLD_Zombie hitZombie;
-    XL_IDamageable hitZombie;
-    int bulletsToShoot = 0;
-    Vector3 newDir = Vector3.zero;
-    bool noMuzzle;
+    protected XL_IDamageable hitZombie;
+    protected int bulletsToShoot = 0;
+    protected Vector3 newDir = Vector3.zero;
+    protected bool noMuzzle;
 
     public virtual void Shoot(KLD_WeaponSO _weaponSO, Vector3 _canonPos, Vector3 _dir, LayerMask _layerMask)
     {
@@ -77,10 +76,10 @@ public abstract class KLD_Bullet : ScriptableObject
 
     GameObject lineRenderer;
     LineRenderer curLr;
-    Vector3 shotDirection;
-    Quaternion shotAngles;
+    protected Vector3 shotDirection;
+    protected Quaternion shotAngles;
 
-    void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted, bool impactedEnemy, bool _noMuzzle)
+    protected void DrawShot(Vector3 startPos, Vector3 impactPos, KLD_WeaponSO _weaponSO, bool impacted, bool impactedEnemy, bool _noMuzzle)
     {
         //Debug.DrawLine(startPos, impactPos, raysColor, 0.2f);
 
