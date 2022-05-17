@@ -20,12 +20,18 @@ public class XL_Swarmers : XL_Enemy
         shader = model.GetComponent<MeshRenderer>().material;
     }
 
+    protected override void Initialize()
+    {
+        base.Initialize();
+        attacking = false;
+        shader.SetFloat("_AtkSldr", 0);
+    }
 
     private void Update()
     {
         Move();
         DebugRaycast();
-        if (attacking) shader.SetFloat("_AtkFloat", Time.time - atkStartingTime + 0.5f);
+        if (attacking) shader.SetFloat("_AtkFloat", (Time.time - atkStartingTime) / attackAnimationSpeed + 0.5f);
     }
 
     private void DebugRaycast()
@@ -39,6 +45,7 @@ public class XL_Swarmers : XL_Enemy
     public override void Die()
     {
         base.Die();
+        KLD_EventsManager.instance.InvokeEnemyKill(Enemy.SWARMER);
         XL_Pooler.instance.DePop("Swarmer", transform.gameObject);
         StopAllCoroutines();
     }
