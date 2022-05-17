@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 430e6a2518cc88144a02093f5e3ccff3, type: 3}
+  m_Name: Character_Sayuri
+  m_EditorClassIdentifier: 
+  characterName: 
+  base_healthMax: 300
+  base_movementSpeed: 20
+  base_armor: 30
+  base_healingTick: 30
+  activeTickGrowth:
+  - 50
+  - 3
+  - 3
+  - 4
+  - 4
+  - 4
+  - 5
+  - 5
+  - 5
+  - 6
+  level: 0
+  healthMax: 300
+  movementSpeed: 20
+  armor: 30
+  healingTick: 30
+  activeTick: 50
+  isPercentageHealthGrowth: 1
+  healthGrowth: 1.05
+  isPercentageMovementSpeedGrowth: 0
+  movementSpeedGrowth: 1
+  isPercentageArmorGrowth: 0
+  armorGrowth: 2
+  isPercentageHealingTickGrowth: 1
+  healingTickGrowth: 1.08
+  spellSO: {fileID: 11400000, guid: 184cf575ded4ddc47bd4dcb0024d4ac9, type: 2}
+  spellLaunchDuration: 0.5
+  spellIsButton: 1
+  canUseSpellWhenReloading: 1
+  characterMesh: {fileID: 4841260659364101630, guid: 8b45ec789de43b2478e706b38bba68de, type: 3}

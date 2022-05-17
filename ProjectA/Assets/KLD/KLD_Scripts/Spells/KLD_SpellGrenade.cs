@@ -18,7 +18,7 @@ public class KLD_SpellGrenade : KLD_Spell
     Vector3 impactPos;
     Vector3 impactZoneWorldDir;
 
-    public override void ActivateSpell(Vector3 direction, Transform pos)
+    public override void ActivateSpell(Vector3 direction, Transform pos, int characterLevel)
     {
         instGrenade = XL_Pooler.instance.PopPosition("BlastGrenade", pos.position + pos.forward + pos.up);
         startingVelocity = XL_Utilities.GetVelocity(0.5f, Mathf.Lerp(grenadeAttributes.minThrowingDistance, grenadeAttributes.throwingDistance, direction.magnitude), grenadeAttributes.travelTime);
