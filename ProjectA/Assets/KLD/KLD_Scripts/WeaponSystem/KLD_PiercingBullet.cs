@@ -64,6 +64,7 @@ public class KLD_PiercingBullet : KLD_Bullet
                         {
                             DrawImpact(_canonPos, hits[y].point, _weaponSO, true);
                         }
+                        lastPiercedEnemyIndex = curPiercedEnemies;
                         curPiercedEnemies++;
                     }
                     else
@@ -72,26 +73,25 @@ public class KLD_PiercingBullet : KLD_Bullet
                         {
                             DrawImpact(_canonPos, hits[y].point, _weaponSO, false);
                         }
-                        lastPiercedEnemyIndex = y - 1;
+                        lastPiercedEnemyIndex = y;
                         curPiercedEnemies += 999;
                     }
 
                     if (curPiercedEnemies >= piercingPower)
                     {
                         isLastImpact = true;
+                        //lastPiercedEnemyIndex = piercingPower - 1;
                         break;
                     }
                 }
 
                 if (isLastImpact)
                 {
-                    /*
-                    DrawShot(_canonPos, hits[hits.Length - 1].point, _weaponSO,
+                    DrawShot(_canonPos, hits[lastPiercedEnemyIndex].point, _weaponSO,
                     true,
                     hits[lastPiercedEnemyIndex].collider.gameObject.CompareTag("Enemy"),
                     noMuzzle
                     );
-                    */
                 }
                 else
                 {
