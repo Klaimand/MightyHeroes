@@ -47,7 +47,7 @@ public class KLD_PlayerInitializer : MonoBehaviour
         curCharacter = charactersList[(int)_character];
         curWeapon = weaponsList[(int)_weapon];
 
-        //_characterLevel = curCharacter.level;
+        _characterLevel = curCharacter.level;
         _weaponLevel = curWeapon.level;
 
         InitCharacterStats(_characterLevel);
