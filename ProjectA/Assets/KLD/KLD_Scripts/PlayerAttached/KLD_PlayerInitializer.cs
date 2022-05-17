@@ -56,6 +56,8 @@ public class KLD_PlayerInitializer : MonoBehaviour
 
         InitCharacterMesh();
 
+        charIniter.animator.SetInteger("heroIndex", (int)_character);
+
         playerShoot.Init(curWeapon, _weaponLevel);
     }
 

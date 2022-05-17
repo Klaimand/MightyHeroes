@@ -36,6 +36,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     Vector3 selectedZombiePos = Vector3.zero;
     int bulletsToShoot = 0;
     int missingBullets = 0;
+    Coroutine curReloadCoroutine;
 
     //weapon delays
     float curShootDelay = 0f;
@@ -50,6 +51,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     [ReadOnly] public bool isAiming = false;
     [ReadOnly] public bool isShooting;
     [ReadOnly] public bool isUsingUltimate = false;
+    //[ReadOnly] public bool canUseUltimateWhenReloading = false;
+
 
     public enum WeaponState
     {
@@ -70,6 +73,10 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] TwoBoneIKConstraint leftHandIK;
     [SerializeField] TwoBoneIKConstraint rightHandIK;
 
+    //sayuri active spell
+    bool isInSayuriUlt = false;
+    bool canFreeShoot = false;
+    [SerializeField, ReadOnly] float rpmRatio = 1f;
 
     void Awake()
     {
@@ -130,7 +137,7 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         if (isShooting && curBullets > 0 && !isReloading && !isUsingUltimate)
         {
-            if (curShootDelay > weapon.shootDelay)
+            if (curShootDelay > weapon.shootDelay * (1f / rpmRatio))
             {
                 StartCoroutine(ShootCoroutine());
                 curShootDelay = 0f;
@@ -162,9 +169,11 @@ public class KLD_PlayerShoot : MonoBehaviour
             {
                 DoShot();
 
-                curBullets--;
-
-                UpdateUI();
+                if (!canFreeShoot)
+                {
+                    curBullets--;
+                    UpdateUI();
+                }
 
                 if (i < bulletsToShoot - 1)
                     yield return new WaitForSeconds(weapon.GetCurAttributes().timeBetweenBullets);
@@ -211,7 +220,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         if (canReload)
         {
-            StartCoroutine(ReloadCoroutine());
+            curReloadCoroutine = StartCoroutine(ReloadCoroutine());
         }
     }
 
@@ -236,6 +245,8 @@ public class KLD_PlayerShoot : MonoBehaviour
         }
         isReloading = false;
         UpdateUI();
+
+        curReloadCoroutine = null;
     }
 
     void UpdateUI()
@@ -328,6 +339,62 @@ public class KLD_PlayerShoot : MonoBehaviour
         rightHandIK = _rightHandIK;
     }
 
+    public float GetWeaponUltChargeOnKill()
+    {
+        return weapon.GetCurAttributes().activePointsPerKill;
+    }
+
+    #region Sayuri Ult
+
+    Coroutine curSayuriUltCoroutine;
+
+    public void LaunchSayuriUlt(float _duration, float _rpmRatio)
+    {
+        if (curSayuriUltCoroutine != null)
+        {
+            StopCoroutine(curSayuriUltCoroutine);
+        }
+        rpmRatio = _rpmRatio;
+        canFreeShoot = true;
+        isInSayuriUlt = true;
+
+
+        if (curReloadCoroutine != null)
+        {
+            StopCoroutine(curReloadCoroutine);
+
+            if (weapon.reloadType == ReloadType.MAGAZINE)
+            {
+                animator.Play("(3) RELOAD ANIMATION FULL", 1, 1f);
+            }
+            else
+            {
+                animator.Play("(5) RELOAD POSITION", 1, 1f);
+                animator.Play("(5) Weapon_Shotgun_ReloadAnimAloop", 2, 1f);
+            }
+
+            isReloading = false;
+            curReloadCoroutine = null;
+        }
+
+        curBullets = weapon.GetCurAttributes().magazineSize;
+        UpdateUI();
+
+        curSayuriUltCoroutine = StartCoroutine(ILaunchSayuriUlt(_duration, _rpmRatio));
+    }
+
+    IEnumerator ILaunchSayuriUlt(float _duration, float _rpmRatio)
+    {
+        yield return new WaitForSeconds(_duration);
+
+        rpmRatio = 1f;
+        canFreeShoot = false;
+        isInSayuriUlt = false;
+        curSayuriUltCoroutine = null;
+    }
+
+
+    #endregion
 
     #region Weapon Mesh and anims Initialization
 
