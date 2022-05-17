@@ -18,6 +18,12 @@ public class KLD_SpellGrenade : KLD_Spell
     Vector3 impactPos;
     Vector3 impactZoneWorldDir;
 
+    public override void Initialize(int characterLevel)
+    {
+        grenadeAttributes.level = characterLevel;
+        grenadeAttributes.Initialize();
+    }
+
     public override void ActivateSpell(Vector3 direction, Transform pos, int characterLevel)
     {
         instGrenade = XL_Pooler.instance.PopPosition("BlastGrenade", pos.position + pos.forward + pos.up);
@@ -34,6 +40,7 @@ public class KLD_SpellGrenade : KLD_Spell
 
     public override void OnUltJoystickDown(Vector2 _joyDirection, Transform _player)
     {
+
         if (!isAiming)
         {
             isAiming = true;

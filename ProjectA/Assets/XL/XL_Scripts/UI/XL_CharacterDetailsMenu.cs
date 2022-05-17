@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class XL_CharacterDetailsMenu : MonoBehaviour
 {
+    public static XL_CharacterDetailsMenu instance;
+
     [Header("Character Info")]
     [SerializeField] private XL_UICharacterInfo[] characterInfos;
 
@@ -26,7 +28,12 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     [Header("Upgrade Text")]
     [SerializeField] private TMP_Text upgradeText;
 
-    public int selectedPlayer;
+    public int selectedPlayer = 0;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     /*private void OnEnable()
     {
@@ -72,9 +79,10 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
         if (PlayerPrefs.GetInt("SoftCurrency") > characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()])
         {
             PlayerPrefs.SetInt(characterInfos[selectedPlayer].characterAttributes.characterName, characterInfos[selectedPlayer].GetLevel() + 1);
-            characterInfos[selectedPlayer].characterAttributes.level++;
             characterInfos[selectedPlayer].characterAttributes.Initialize();
             PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
+            XL_MainMenu.instance.RefreshTopOverlay();
+            characterInfos[selectedPlayer].characterAttributes.level++;
             DisplayCharacterInfo(selectedPlayer);
         }
     }
