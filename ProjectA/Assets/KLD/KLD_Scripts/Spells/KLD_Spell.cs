@@ -9,4 +9,6 @@ public abstract class KLD_Spell : ScriptableObject
     public virtual void OnUltJoystickDown(Vector2 _joyDirection, Transform _player) { }
 
     public virtual void OnSpellLaunch() { }
+
+    public virtual void Initialize(int characterLevel) { }
 }

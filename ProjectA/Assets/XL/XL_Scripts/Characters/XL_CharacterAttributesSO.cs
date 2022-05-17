@@ -64,6 +64,8 @@ public class XL_CharacterAttributesSO : ScriptableObject
         else healingTick = base_healingTick + healingTickGrowth * level;
 
         activeTick = activeTickGrowth[level];
+
+        spellSO.Initialize(level);
     }
 
     public void ActivateSpell(Vector3 direction, Transform pos)
