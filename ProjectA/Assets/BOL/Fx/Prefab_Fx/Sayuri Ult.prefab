@@ -4906,7 +4906,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8580638651209206923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.29, y: 0, z: -0.67}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8580638651755099048}
@@ -4921,7 +4921,7 @@ Transform:
   - {fileID: 8580638652620210110}
   m_Father: {fileID: 8580638652148561023}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &8580638651209207030
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -38908,6 +38908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8580638652148561023}
+  - component: {fileID: 1845426716257181587}
   m_Layer: 0
   m_Name: Sayuri Ult
   m_TagString: Untagged
@@ -38923,13 +38924,27 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8580638652148561022}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 0, z: 2.72}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8580638651209207028}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1845426716257181587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8580638652148561022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3e188b275147643a220b69efd1e10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depopAfter: 2
+  poolKey: SayuriUltFX
 --- !u!1 &8580638652274254328
 GameObject:
   m_ObjectHideFlags: 0
@@ -43836,7 +43851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8580638652620210109}
   m_LocalRotation: {x: -0.70710576, y: -0, z: -0, w: 0.7071079}
-  m_LocalPosition: {x: -0.01, y: 2.07, z: -0.24}
+  m_LocalPosition: {x: 0, y: 2.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8580638651209207028}

@@ -56,6 +56,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         //StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
 
         curOutOfCombatTime = 99f;
+
+        //playerShoot.canUseUltimateWhenReloading = characterAttributes.canUseSpellWhenReloading;
+
         //StartCoroutine(OutOfCombatHealingCoroutine(1f));
     }
 
@@ -89,7 +92,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         if (touchInputs.GetUseButtonForUltimate())
         {
-            ultButton.interactable = isUltimateCharged && !playerShoot.isReloading;
+            ultButton.interactable = isUltimateCharged && (!playerShoot.isReloading || characterAttributes.canUseSpellWhenReloading);
         }
         else
         {

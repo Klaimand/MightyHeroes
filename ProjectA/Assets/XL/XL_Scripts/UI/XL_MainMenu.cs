@@ -6,6 +6,8 @@ using TMPro;
 
 public class XL_MainMenu : MonoBehaviour
 {
+    public static XL_MainMenu instance;
+
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject characterSelectMenu;
     [SerializeField] private GameObject characterDetailsMenu;
@@ -31,18 +33,25 @@ public class XL_MainMenu : MonoBehaviour
     [Header("Mission Type")]
     [SerializeField] private GameObject[] missionTypes;
 
+    [Header("Loader Bars")]
+    [SerializeField] private TMP_Text characterXP;
+    [SerializeField] private TMP_Text weaponXP;
+
     //[Header("Loadout")]
 
 
     private void Awake()
     {
+        instance = this;
+
         InitPlayerPrefs();
         RefreshMainMenuUI();
+        RefreshTopOverlay();
     }
 
     private void InitPlayerPrefs()
     {
-        //DELETE PLAYERPREFS
+        //---DELETE PLAYERPREFS---
         PlayerPrefs.DeleteAll();
 
         foreach (XL_CharacterAttributesSO ca in characterAttributes)
@@ -68,11 +77,11 @@ public class XL_MainMenu : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("SoftCurrency"))
         {
-            PlayerPrefs.SetInt("SoftCurrency", 0);
+            PlayerPrefs.SetInt("SoftCurrency", 20000);
         }
         if (!PlayerPrefs.HasKey("HardCurrency"))
         {
-            PlayerPrefs.SetInt("HardCurrency", 0);
+            PlayerPrefs.SetInt("HardCurrency", 1000);
         }
         if (!PlayerPrefs.HasKey("SelectedHero"))
         {
@@ -86,15 +95,8 @@ public class XL_MainMenu : MonoBehaviour
 
     private void RefreshMainMenuUI()
     {
-        //Energy
-        energyText.text = PlayerPrefs.GetInt("Energy").ToString();
-        energyMaxText.text = energyMax.ToString();
-
-        //SoftCurrency
-        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString();
-
-        //HardCurrency
-        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
+        characterXP.text = characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level.ToString();
+        weaponXP.text = weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level.ToString();
     } 
 
     public void StartMission()
@@ -104,6 +106,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SwitchMainMenu()
     {
+        RefreshMainMenuUI();
         mainMenu.SetActive(true);
 
         characterSelectMenu.SetActive(false);
@@ -158,5 +161,18 @@ public class XL_MainMenu : MonoBehaviour
         }
 
         missionTypes[idx].SetActive(true);
+    }
+
+    public void RefreshTopOverlay() 
+    {
+        //Energy
+        energyText.text = PlayerPrefs.GetInt("Energy").ToString();
+        energyMaxText.text = energyMax.ToString();
+
+        //SoftCurrency
+        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString();
+
+        //HardCurrency
+        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
     }
 }
