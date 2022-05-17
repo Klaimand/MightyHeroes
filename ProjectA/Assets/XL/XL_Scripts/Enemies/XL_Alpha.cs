@@ -71,6 +71,7 @@ public class XL_Alpha : XL_Enemy
     public override void Die()
     {
         base.Die();
+        KLD_EventsManager.instance.InvokeEnemyKill(Enemy.ALPHA);
         StopAllCoroutines();
         Debug.Log("Alpha has died");
         XL_Pooler.instance.DePop("Alpha", transform.gameObject);
