@@ -19,6 +19,8 @@ public class KLD_CharacterRefresher : MonoBehaviour
     }
     #endregion
 
+    [SerializeField] XL_MainMenu mainMenu;
+
     //billboard
     [SerializeField] Renderer billboardRenderer;
     string[] characterBillboardReferences = { "_Blast", "_Simo", "_Sayuri" };
@@ -28,15 +30,22 @@ public class KLD_CharacterRefresher : MonoBehaviour
     int curCharIndex = 0;
 
     //weapon
-    [Header("Weapon Mesh/Anims"), Space(10)]
+    //[Header("Weapon Mesh/Anims"), Space(10)]
+    int curWeaponIndex = 0;
+    Animator animator;
     Transform weaponHolderParent;
     RigBuilder rigBuilder;
     TwoBoneIKConstraint leftHandIK;
     TwoBoneIKConstraint rightHandIK;
+    GameObject instantiedWH;
+    KLD_WeaponHolder weaponHolder;
+    KLD_WeaponSO weapon;
 
     void Start()
     {
+        curWeaponIndex = (int)Weapon.THE_CLASSIC;
         ChangeCharacter(Character.BLAST);
+        //ChangeWeapon(Weapon.THE_CLASSIC);
     }
 
     void ChangeCharacter(Character _character) //called by event
@@ -47,11 +56,51 @@ public class KLD_CharacterRefresher : MonoBehaviour
             characters[i].gameObject.SetActive(i == (int)_character);
         }
         curCharIndex = (int)_character;
+
+        animator = characters[curCharIndex].animator;
+        weaponHolderParent = characters[curCharIndex].weaponHolderParent;
+        rigBuilder = characters[curCharIndex].rigBuilder;
+        leftHandIK = characters[curCharIndex].leftHandIK;
+        rightHandIK = characters[curCharIndex].rightHandIK;
+
+        ChangeWeapon((Weapon)curWeaponIndex);
     }
 
     void ChangeWeapon(Weapon _weapon) //called by event
     {
+        curWeaponIndex = (int)_weapon;
 
+        if (weaponHolderParent.childCount > 3) { Destroy(weaponHolderParent.GetChild(3).gameObject); }
+
+        weapon = mainMenu.GetWeaponSO(_weapon);
+
+        instantiedWH = Instantiate(weapon.weaponHolder, Vector3.zero, Quaternion.identity, weaponHolderParent);
+
+        //instantiedWH.name = "WeaponHolder";
+        instantiedWH.name = weapon.weaponHolder.name;
+
+        instantiedWH.transform.localPosition = weapon.weaponHolder.transform.position;
+        instantiedWH.transform.localRotation = weapon.weaponHolder.transform.rotation;
+
+
+        weaponHolder = instantiedWH.GetComponent<KLD_WeaponHolder>();
+
+        rightHandIK.data.target = weaponHolder.leftHandle;
+        leftHandIK.data.target = weaponHolder.rightHandle;
+
+        //canon = weaponHolder.canon;
+
+
+        animator.runtimeAnimatorController = weapon.animatorOverrideController;
+
+
+        animator.enabled = false;
+        animator.enabled = true;
+
+        rigBuilder.Build();
+
+        animator.enabled = false;
+        animator.enabled = true;
 
 
     }
