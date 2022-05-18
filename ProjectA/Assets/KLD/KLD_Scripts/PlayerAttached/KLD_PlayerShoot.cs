@@ -214,6 +214,7 @@ public class KLD_PlayerShoot : MonoBehaviour
             shootDirection.y = 0f;
         }
         weapon.bullet.Shoot(weapon, canon.position + canonOffset, shootDirection, layerMask);
+        animator.Play("(2) Weapon_ShootingAnim", 2);
     }
 
     public void Reload()
