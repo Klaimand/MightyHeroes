@@ -57,6 +57,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         characterAttributes.Initialize(passiveSpellInitializer);
 
+        controller.SetBaseSpeed(characterAttributes.movementSpeed);
+
         health = characterAttributes.healthMax;
 
         ultimateCharge = 0f;

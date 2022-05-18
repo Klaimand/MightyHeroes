@@ -148,11 +148,11 @@ public class KLD_PlayerShoot : MonoBehaviour
             Reload();
         }
 
-        controller.SetSpeed(
-            ((weaponState == WeaponState.AIMING || weaponState == WeaponState.SHOOTING) ?
-            character.GetCharacterSpeed() * weapon.GetCurAttributes().aimSpeedMultiplier :
-            character.GetCharacterSpeed()) / 3.34f
-        );
+        //controller.SetSpeed(
+        //    ((weaponState == WeaponState.AIMING || weaponState == WeaponState.SHOOTING) ?
+        //    character.GetCharacterSpeed() * weapon.GetCurAttributes().aimSpeedMultiplier :
+        //    character.GetCharacterSpeed()) / 3.34f
+        //);
 
         curShootDelay += Time.deltaTime;
         curBurstDelay += Time.deltaTime;
@@ -274,6 +274,8 @@ public class KLD_PlayerShoot : MonoBehaviour
                 isShooting = true;
             }
         }
+
+        controller.SetSpeedRatio(isAiming || isShooting ? weapon.GetCurAttributes().aimSpeedMultiplier : 1f);
     }
 
     public void UseUltimate(float _time)
