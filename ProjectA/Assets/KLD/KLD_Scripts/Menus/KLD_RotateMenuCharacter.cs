@@ -5,8 +5,8 @@ using Sirenix.OdinInspector;
 
 public class KLD_RotateMenuCharacter : MonoBehaviour
 {
-    [SerializeField] Vector2Int referenceResolution = new Vector2Int(2260, 1080);
-    Vector2 resolutionRatio = Vector2.one;
+    //[SerializeField] Vector2Int referenceResolution = new Vector2Int(2260, 1080);
+    //Vector2 resolutionRatio = Vector2.one;
     [SerializeField] bool overrideScreenSize = false;
     [SerializeField, ShowIf("overrideScreenSize")] Vector2Int overridenScreenSize = Vector2Int.zero;
 
@@ -33,8 +33,8 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
             height = overridenScreenSize.y;
             width = overridenScreenSize.x;
         }
-        resolutionRatio.x = (float)referenceResolution.x / (float)width;
-        resolutionRatio.y = (float)referenceResolution.y / (float)height;
+        //resolutionRatio.x = (float)referenceResolution.x / (float)width;
+        //resolutionRatio.y = (float)referenceResolution.y / (float)height;
 
 
         rectMin.x = Mathf.RoundToInt(width * horizontalBounds.x);
@@ -66,7 +66,7 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
     }
 
     Touch curTouch;
-    Vector2 curRatioedTouchPosition;
+    //Vector2 curRatioedTouchPosition;
     Vector2Int curIntedTouchPosition;
     bool inZone = false;
 
@@ -83,11 +83,9 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
         if (Input.touchCount > 0)
         {
             curTouch = Input.GetTouch(0);
-            curRatioedTouchPosition.x = curTouch.position.x * resolutionRatio.x;
-            curRatioedTouchPosition.y = curTouch.position.y * resolutionRatio.y;
 
-            curIntedTouchPosition.x = Mathf.RoundToInt(curRatioedTouchPosition.x);
-            curIntedTouchPosition.y = Mathf.RoundToInt(curRatioedTouchPosition.y);
+            curIntedTouchPosition.x = Mathf.RoundToInt(curTouch.position.x);
+            curIntedTouchPosition.y = Mathf.RoundToInt(curTouch.position.y);
 
             if (curTouch.phase == TouchPhase.Began)
             {
