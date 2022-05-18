@@ -97,7 +97,7 @@ public class XL_MainMenu : MonoBehaviour
     {
         characterXP.text = characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level.ToString();
         weaponXP.text = weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level.ToString();
-    } 
+    }
 
     public void StartMission()
     {
@@ -163,7 +163,7 @@ public class XL_MainMenu : MonoBehaviour
         missionTypes[idx].SetActive(true);
     }
 
-    public void RefreshTopOverlay() 
+    public void RefreshTopOverlay()
     {
         //Energy
         energyText.text = PlayerPrefs.GetInt("Energy").ToString();
@@ -174,5 +174,10 @@ public class XL_MainMenu : MonoBehaviour
 
         //HardCurrency
         hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
+    }
+
+    public KLD_WeaponSO GetWeaponSO(Weapon _weapon)
+    {
+        return weaponAttributes[(int)_weapon];
     }
 }
