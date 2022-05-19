@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 public class XL_GameModeManager : MonoBehaviour
 {
     public static XL_GameModeManager instance;
 
-    List<XL_GameMode> objectives = new List<XL_GameMode>();
+    [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
+    [SerializeField] KLD_GameModeSO gameMode;
+
+    List<KLD_IObjective> objectives = new List<KLD_IObjective>();
     GameObject[] temp;
     private int nbObjectives;
     private int nbObjectivesCompleted;
 
-    [SerializeField] float missionMaxTime;
     float missionTime;
     WaitForSeconds wait;
 
@@ -22,12 +25,12 @@ public class XL_GameModeManager : MonoBehaviour
         instance = this;
 
         wait = new WaitForSeconds(1);
-        missionTime = missionMaxTime;
+        missionTime = gameMode.missionMaxTime;
 
         temp = GameObject.FindGameObjectsWithTag("Objective");
         foreach (GameObject go in temp)
         {
-            objectives.Add(go.GetComponent<XL_GameMode>());
+            objectives.Add(go.GetComponent<KLD_IObjective>());
         }
         nbObjectives = objectives.Count;
         nbObjectivesCompleted = 0;
@@ -36,7 +39,7 @@ public class XL_GameModeManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(TimerCoroutine());
-        uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {objectives[0].GetObjectiveString()}");
+        uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {gameMode.objectiveString}");
     }
 
     Transform nearestObjective;
@@ -64,7 +67,7 @@ public class XL_GameModeManager : MonoBehaviour
     public void CompleteObjective()
     {
         nbObjectivesCompleted++;
-        uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {objectives[0].GetObjectiveString()}");
+        uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {gameMode.objectiveString}");
         if (nbObjectivesCompleted >= nbObjectives) XL_GameManager.instance.WinGame();
     }
 
