@@ -21,84 +21,90 @@ MonoBehaviour:
   rarity: 0
   reloadType: 0
   bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
-  level: 0
+  level: 1
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
     bulletDamage: 23
     rpm: 450
-    reloadSpeed: 1.5
+    reloadSpeed: 0.75
     magazineSize: 30
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 2
     range: 15
+    aimSpeedMultiplier: 0.5
     activePointsPerKill: 5
     displayedName: Level 0
     isBPBReloading: 0
   - experienceToReach: 800
     bulletDamage: 25
     rpm: 450
-    reloadSpeed: 1.4
+    reloadSpeed: 0.7
     magazineSize: 32
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 2
     range: 15
+    aimSpeedMultiplier: 0.5
     activePointsPerKill: 5
     displayedName: Level 1
     isBPBReloading: 0
   - experienceToReach: 1800
     bulletDamage: 28
     rpm: 450
-    reloadSpeed: 1.3
+    reloadSpeed: 0.65
     magazineSize: 34
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 2
     range: 15
+    aimSpeedMultiplier: 0.5
     activePointsPerKill: 5
     displayedName: Level 2
     isBPBReloading: 0
   - experienceToReach: 3100
     bulletDamage: 32
     rpm: 450
-    reloadSpeed: 1.2
+    reloadSpeed: 0.6
     magazineSize: 36
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 2
     range: 15
+    aimSpeedMultiplier: 0.5
     activePointsPerKill: 5
     displayedName: Level 3
     isBPBReloading: 0
   - experienceToReach: 4700
     bulletDamage: 36
     rpm: 450
-    reloadSpeed: 1.1
+    reloadSpeed: 0.55
     magazineSize: 38
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 2
     range: 15
+    aimSpeedMultiplier: 0.5
     activePointsPerKill: 5
     displayedName: Level 4
     isBPBReloading: 0
   - experienceToReach: 6300
     bulletDamage: 40
     rpm: 450
-    reloadSpeed: 1.1
+    reloadSpeed: 0.5
     magazineSize: 40
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
     spread: 2
     range: 15
+    aimSpeedMultiplier: 0.5
     activePointsPerKill: 5
     displayedName: Level 5
     isBPBReloading: 0
@@ -111,4 +117,4 @@ MonoBehaviour:
   lineRendererFX: {fileID: 8685958594538611566, guid: a8ffd0db185f3644d81043833c9fdb23, type: 3}
   impactFX: {fileID: 921483033988333306, guid: 06e686953c8600a499733386b61f3a34, type: 3}
   wallImpactFX: {fileID: 921483033988333306, guid: 9037783167575af4c97095ad5a0ec7d4, type: 3}
-  fxPoolSize: 12
+  fxPoolSize: 20

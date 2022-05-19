@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class XL_PlayerInfo : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class XL_PlayerInfo : MonoBehaviour
     public KLD_MenuData menuData;
     [SerializeField] private XL_CharacterDetailsMenu characterMenu;
     [SerializeField] private XL_WeaponDetailsMenu weaponMenu;
+
+    public Action<Weapon> onWeaponChange;
+    public Action<Character> onCharacterChange;
 
     public void Awake()
     {
@@ -34,11 +38,13 @@ public class XL_PlayerInfo : MonoBehaviour
     public void SelectPlayer()
     {
         menuData.character = (Character)characterMenu.selectedPlayer;
+        onCharacterChange?.Invoke(menuData.character);
     }
 
     public void SelectWeapon()
     {
         menuData.weapon = (Weapon)weaponMenu.selectedWeapon;
+        onWeaponChange?.Invoke(menuData.weapon);
     }
 
     public void SelectMap(int idx)

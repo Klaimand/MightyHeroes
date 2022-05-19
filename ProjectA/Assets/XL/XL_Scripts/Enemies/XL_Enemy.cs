@@ -8,6 +8,9 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 {
 
 
+    [SerializeField] Animator hitAnimator;
+    [SerializeField] int hitAnimatorLayer = 0;
+
     [SerializeField] private KLD_ZombieAttributes attributes;
     protected float health;
 
@@ -39,13 +42,13 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Alert();
     }
 
-    protected void Initialize()
+    protected virtual void Initialize()
     {
         //Debug.Log("Initialized");
         health = attributes.maxHealth;
         agent.speed = speed;
         canAttack = true;
-        //healthBar.UpdateHealthBar(health / attributes.maxHealth);
+        healthBar.UpdateHealthBar(health / attributes.maxHealth);
     }
 
     public abstract void Alert();
@@ -112,6 +115,8 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     {
         health -= damage;
         healthBar.UpdateHealthBar(health / attributes.maxHealth);
+        hitAnimator?.Play("Hit", hitAnimatorLayer);
+        KLD_EventsManager.instance.InvokeEnemyHit();
         if (health < 1) Die();
     }
 
