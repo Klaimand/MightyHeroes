@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 {
@@ -12,6 +13,8 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     [SerializeField] private LayerMask layer;
     List<GameObject> playersInside = new List<GameObject>();
+
+    [SerializeField] UnityEvent onZoneCaptured;
 
     private void Start()
     {
@@ -26,6 +29,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
         {
             StopAllCoroutines();
             XL_GameModeManager.instance.CompleteObjective(index);
+            onZoneCaptured.Invoke();
             //Debug.Log("test");
             enabled = false;
         }
@@ -36,7 +40,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
         while (true)
         {
             capturePercentage += playersInside.Count;
-            ui.UpdateUI(capturePercentage);
+            ui.UpdateUI(capturePercentage, playersInside.Count);
             yield return new WaitForSeconds(t);
         }
     }
