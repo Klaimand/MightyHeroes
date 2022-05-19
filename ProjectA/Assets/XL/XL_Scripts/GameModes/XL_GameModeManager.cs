@@ -14,9 +14,12 @@ public class XL_GameModeManager : MonoBehaviour
     [SerializeField] RectTransform topLeftCorner;
 
     List<KLD_IObjective> objectives = new List<KLD_IObjective>();
+    List<KLD_IObjective> totalObjectives = new List<KLD_IObjective>();
+    KLD_IObjective drawedObjective;
     GameObject[] temp;
     private int nbObjectives;
     private int nbObjectivesCompleted;
+    int nbObjsToDraw;
 
     float missionTime;
     WaitForSeconds wait;
@@ -48,10 +51,23 @@ public class XL_GameModeManager : MonoBehaviour
         temp = GameObject.FindGameObjectsWithTag("Objective");
         foreach (GameObject go in temp)
         {
-            objectives.Add(go.GetComponent<KLD_IObjective>());
+            totalObjectives.Add(go.GetComponent<KLD_IObjective>());
         }
 
-        objectives = objectives.OrderBy(x => Random.value).ToList();
+        nbObjsToDraw = Mathf.Min(totalObjectives.Count, gameMode.maxObjectiveNb);
+        for (int i = 0; i < nbObjsToDraw; i++)
+        {
+            drawedObjective = totalObjectives[Random.Range(0, totalObjectives.Count)];
+            totalObjectives.Remove(drawedObjective);
+            objectives.Add(drawedObjective);
+        }
+
+        for (int i = 0; i < totalObjectives.Count; i++)
+        {
+            totalObjectives[i].GetTransform().gameObject.SetActive(false);
+        }
+
+        //objectives = objectives.OrderBy(x => Random.value).ToList();
 
         for (int i = 0; i < objectives.Count; i++)
         {

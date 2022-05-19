@@ -7,6 +7,7 @@ public abstract class KLD_GameModeSO : ScriptableObject
 {
     public float missionMaxTime = 300f;
     [SerializeField] protected string objectiveString = "CAPTURE THE ZONES";
+    public int maxObjectiveNb = 3;
 
 
 

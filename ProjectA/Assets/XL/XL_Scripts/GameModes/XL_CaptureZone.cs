@@ -26,7 +26,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
         {
             StopAllCoroutines();
             XL_GameModeManager.instance.CompleteObjective(index);
-            Debug.Log("test");
+            //Debug.Log("test");
             enabled = false;
         }
     }

@@ -9,17 +9,21 @@ public class KLD_DataObjective : MonoBehaviour, KLD_IObjective
     bool collected = false;
     int index;
 
-    // Start is called before the first frame update
-    void Start()
+    private void OnTriggerEnter(Collider other)
     {
-
+        if (other.gameObject.CompareTag("Player"))
+        {
+            XL_GameModeManager.instance.CompleteObjective(index);
+            DespawnObjective();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void DespawnObjective()
     {
-
+        gameObject.SetActive(false);
     }
+
+    #region Interface Implementation
 
     public bool GetObjectiveState()
     {
@@ -40,4 +44,6 @@ public class KLD_DataObjective : MonoBehaviour, KLD_IObjective
     {
         index = _index;
     }
+
+    #endregion
 }
