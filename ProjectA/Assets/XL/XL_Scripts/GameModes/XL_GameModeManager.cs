@@ -25,7 +25,7 @@ public class XL_GameModeManager : MonoBehaviour
         missionTime = missionMaxTime;
 
         temp = GameObject.FindGameObjectsWithTag("Objective");
-        foreach (GameObject go in temp) 
+        foreach (GameObject go in temp)
         {
             objectives.Add(go.GetComponent<XL_GameMode>());
         }
@@ -43,10 +43,10 @@ public class XL_GameModeManager : MonoBehaviour
     float distance;
     float nextDistance;
 
-    public Transform GetNearestObjective(Vector3 position) 
+    public Transform GetNearestObjective(Vector3 position)
     {
         distance = 100000;
-        foreach (XL_GameMode go in objectives) 
+        foreach (XL_GameMode go in objectives)
         {
             if (!go.GetObjectiveState())
             {
@@ -61,14 +61,14 @@ public class XL_GameModeManager : MonoBehaviour
         return nearestObjective;
     }
 
-    public void CompleteObjective() 
+    public void CompleteObjective()
     {
         nbObjectivesCompleted++;
         uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {objectives[0].GetObjectiveString()}");
         if (nbObjectivesCompleted >= nbObjectives) XL_GameManager.instance.WinGame();
     }
 
-    IEnumerator TimerCoroutine() 
+    IEnumerator TimerCoroutine()
     {
         while (true)
         {
@@ -78,7 +78,7 @@ public class XL_GameModeManager : MonoBehaviour
         }
     }
 
-    public float GetMissionTime() 
+    public float GetMissionTime()
     {
         return this.missionTime;
     }
