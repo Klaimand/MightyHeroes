@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class XL_CaptureZone : MonoBehaviour, XL_GameMode
+public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 {
-    public string objectiveString = "Capture the zones";
-
+    [SerializeField] string objectiveName = "newCaptureZone";
     [SerializeField] private XL_UICaptureZone ui;
 
     [SerializeField] private float tickTime;
@@ -26,8 +25,8 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         if (GetObjectiveState())
         {
             StopAllCoroutines();
-            XL_GameModeManager.instance.CompleteObjective();
-            Debug.Log("test");
+            XL_GameModeManager.instance.CompleteObjective(index);
+            //Debug.Log("test");
             enabled = false;
         }
     }
@@ -72,8 +71,15 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         return this.transform;
     }
 
-    public string GetObjectiveString()
+    public string GetObjectiveName()
     {
-        return objectiveString;
+        return objectiveName;
+    }
+
+    int index = 0;
+
+    public void SetIndex(int _index)
+    {
+        index = _index;
     }
 }
