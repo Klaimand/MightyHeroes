@@ -10,6 +10,8 @@ public class XL_GameModeManager : MonoBehaviour
     [InlineEditor(InlineEditorObjectFieldModes.Foldout)]
     [SerializeField] KLD_GameModeSO gameMode;
 
+    [SerializeField] RectTransform topLeftCorner;
+
     List<KLD_IObjective> objectives = new List<KLD_IObjective>();
     GameObject[] temp;
     private int nbObjectives;
@@ -27,6 +29,18 @@ public class XL_GameModeManager : MonoBehaviour
         wait = new WaitForSeconds(1);
         missionTime = gameMode.missionMaxTime;
 
+    }
+
+    private void Start()
+    {
+        InitializeObjectives();
+        StartCoroutine(TimerCoroutine());
+        gameMode.InitGameModeUI(topLeftCorner, nbObjectives);
+        uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
+    }
+
+    void InitializeObjectives()
+    {
         temp = GameObject.FindGameObjectsWithTag("Objective");
         foreach (GameObject go in temp)
         {
@@ -34,12 +48,6 @@ public class XL_GameModeManager : MonoBehaviour
         }
         nbObjectives = objectives.Count;
         nbObjectivesCompleted = 0;
-    }
-
-    private void Start()
-    {
-        StartCoroutine(TimerCoroutine());
-        uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
     }
 
     Transform nearestObjective;
