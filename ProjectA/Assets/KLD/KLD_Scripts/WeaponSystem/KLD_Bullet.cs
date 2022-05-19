@@ -12,7 +12,7 @@ public abstract class KLD_Bullet : ScriptableObject
 
 
     //public abstract void OnHit(KLD_Zombie _zombie, int _damage);
-    public abstract void OnHit(XL_IDamageable _damageable, int _damage);
+    public abstract void OnHit(XL_IDamageable _damageable, float _damage);
 
 
     protected float spreadAngle = 0f;

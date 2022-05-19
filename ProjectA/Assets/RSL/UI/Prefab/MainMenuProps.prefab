@@ -87,10 +87,18 @@ MonoBehaviour:
   mainMenu: {fileID: 0}
   rotateMenuCharacter: {fileID: 1299693266}
   billboardRenderer: {fileID: 7048913608844987470}
+  auraRenderer: {fileID: 5883739559876284466}
   characters:
   - {fileID: 6050656808787809433}
   - {fileID: 364533188510037639}
   - {fileID: 4841260657777037536}
+  characterAuraColors:
+  - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    _FadeColor: {r: 1, g: 0, b: 0, a: 1}
+  - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    _FadeColor: {r: 0, g: 1, b: 0, a: 1}
+  - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    _FadeColor: {r: 1, g: 0, b: 1, a: 1}
 --- !u!114 &1299693266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,9 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f34653075bc8048878f7f944b13830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  referenceResolution: {x: 2260, y: 1080}
   overrideScreenSize: 1
-  overridenScreenSize: {x: 2260, y: 1080}
+  overridenScreenSize: {x: 1480, y: 720}
   horizontalBounds: {x: 0.36, y: 0.64}
   verticalBounds: {x: 0.15, y: 0.75}
   objToRotate: {fileID: 123489584}

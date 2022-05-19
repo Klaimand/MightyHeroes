@@ -26,4 +26,12 @@ public class KLD_EventsManager : MonoBehaviour
     {
         onEnemyKill?.Invoke(_enemy);
     }
+
+
+    public Action onEnemyHit;
+
+    public void InvokeEnemyHit()
+    {
+        onEnemyHit?.Invoke();
+    }
 }

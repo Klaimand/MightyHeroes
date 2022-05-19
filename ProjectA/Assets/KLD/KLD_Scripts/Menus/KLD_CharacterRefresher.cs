@@ -24,11 +24,21 @@ public class KLD_CharacterRefresher : MonoBehaviour
 
     //billboard
     [SerializeField] Renderer billboardRenderer;
+    [SerializeField] Renderer auraRenderer;
     string[] characterBillboardReferences = { "_Blast", "_Simo", "_Sayuri" };
 
     //character
     [SerializeField] KLD_CharacterInitializer[] characters;
     int curCharIndex = 0;
+
+    [System.Serializable]
+    class CharacterAuraColor
+    {
+        [ColorUsage(true, true)] public Color _BaseColor;
+        [ColorUsage(true, true)] public Color _FadeColor;
+    }
+
+    [SerializeField] CharacterAuraColor[] characterAuraColors;
 
     //weapon
     //[Header("Weapon Mesh/Anims"), Space(10)]
@@ -51,6 +61,9 @@ public class KLD_CharacterRefresher : MonoBehaviour
 
     void ChangeCharacter(Character _character) //called by event
     {
+        auraRenderer.material.SetColor("_BaseColor", characterAuraColors[(int)_character]._BaseColor);
+        auraRenderer.material.SetColor("_FadeColor", characterAuraColors[(int)_character]._FadeColor);
+
         rotateMenuCharacter.ResetVelAndAngle();
         for (int i = 0; i < characterBillboardReferences.Length; i++)
         {
