@@ -4,13 +4,7 @@
     "m_ObjectId": "f1bdc9f4178643a18382697be8426c75",
     "m_Properties": [
         {
-            "m_Id": "77094f96d2434744980a8ee1baf60792"
-        },
-        {
             "m_Id": "3877b2a630ef46838a98718f911ac44b"
-        },
-        {
-            "m_Id": "50f52b8c0dfc461cbba0d5c55245cf32"
         },
         {
             "m_Id": "e3c282dd4d94489fa22e2ea66b0daf62"
@@ -89,9 +83,6 @@
         },
         {
             "m_Id": "b8a0b4f9edc4474eb8d27e6e382c7b2a"
-        },
-        {
-            "m_Id": "b70dfef7b90f4492a4fd45599d22a320"
         },
         {
             "m_Id": "214594143bd24e449d4d0794f4699a5a"
@@ -404,6 +395,9 @@
         },
         {
             "m_Id": "ac318a0774f145799e7f769e2b66b00e"
+        },
+        {
+            "m_Id": "b9ad0457b33a4447a08814d856b0dfab"
         }
     ],
     "m_GroupDatas": [],
@@ -2175,7 +2169,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "0297d2658bde417c9676937e9d73e394",
     "m_Id": 0,
-    "m_DisplayName": "TextureMove",
+    "m_DisplayName": "TextureSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2370,7 +2364,7 @@
     },
     "m_Name": "Blast",
     "m_DefaultReferenceName": "Boolean_05fbaffb5dbb4a299c805c607e56252b",
-    "m_OverrideReferenceName": "Boolean_01",
+    "m_OverrideReferenceName": "_Blast",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -2386,9 +2380,9 @@
     "m_Guid": {
         "m_GuidSerialized": "74e0a7a1-a24d-4365-a652-e1614328f927"
     },
-    "m_Name": "Sayori",
+    "m_Name": "Simo",
     "m_DefaultReferenceName": "Boolean_066b132942494beb93d4c654f12cb019",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Simo",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -2671,7 +2665,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "0be30ce3fb6f4e49a22515e385fa2fa6",
     "m_Id": 0,
-    "m_DisplayName": "SayoriTexColor",
+    "m_DisplayName": "SimoTextureColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -3012,7 +3006,7 @@
     "m_Guid": {
         "m_GuidSerialized": "7972ebdd-9230-44f9-82e4-e015a84782cc"
     },
-    "m_Name": "SayoriTexture",
+    "m_Name": "SimoTexture",
     "m_DefaultReferenceName": "Texture2D_12c363c3573f499b9866a10b2ecd061f",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -3617,7 +3611,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "1fe129a808e5475d959f7c99c8ab29f9",
     "m_Id": 0,
-    "m_DisplayName": "Simo",
+    "m_DisplayName": "Sayuri",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -4339,7 +4333,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "303b8f676bf04c69958c1e85a4ff0dab",
     "m_Id": 0,
-    "m_DisplayName": "TextureMove",
+    "m_DisplayName": "TextureSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -4781,9 +4775,9 @@
     "m_Guid": {
         "m_GuidSerialized": "ad4a2438-02e7-4540-90ad-91c935614bb8"
     },
-    "m_Name": "Simo",
+    "m_Name": "Sayuri",
     "m_DefaultReferenceName": "Boolean_3e01a708f38649bebe8e7de0c156a12c",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_Sayuri",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
@@ -5115,7 +5109,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "43be4fcc6c8b4894999458e51376f26e",
     "m_Id": 0,
-    "m_DisplayName": "Simo",
+    "m_DisplayName": "Sayuri",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -5690,30 +5684,6 @@
 }
 
 {
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "50f52b8c0dfc461cbba0d5c55245cf32",
-    "m_Guid": {
-        "m_GuidSerialized": "1c0a46ab-af24-481c-8b77-e7eaea6f3823"
-    },
-    "m_Name": "DotColor",
-    "m_DefaultReferenceName": "Color_50f52b8c0dfc461cbba0d5c55245cf32",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 1.0,
-        "g": 0.4520508646965027,
-        "b": 0.37264150381088259,
-        "a": 0.0
-    },
-    "m_ColorMode": 1
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "51553d55663945ce9b27b70fcaba0bee",
@@ -6050,7 +6020,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "5665b531f7ec4d96ad6c0b863c76266e",
     "m_Id": 0,
-    "m_DisplayName": "SimoTexColor",
+    "m_DisplayName": "SayuriTexColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -6172,7 +6142,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "57f25bd0c7374c89ae05dad0ad2e430a",
     "m_Id": 0,
-    "m_DisplayName": "SimoDotColor",
+    "m_DisplayName": "SayuriDotColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -7233,7 +7203,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "6f3c4034e587482ead6bcfa99748da04",
     "m_Id": 0,
-    "m_DisplayName": "SayoriDotColor",
+    "m_DisplayName": "SimoDotColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -7350,7 +7320,7 @@
     "m_Guid": {
         "m_GuidSerialized": "e5ef2134-c398-4a98-9d43-930e7033c1d3"
     },
-    "m_Name": "SimoTexColor",
+    "m_Name": "SayuriTexColor",
     "m_DefaultReferenceName": "Color_73e52492a7e246d2ace67d868ef86016",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -7428,30 +7398,6 @@
         "z": 0.0,
         "w": 0.0
     }
-}
-
-{
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "77094f96d2434744980a8ee1baf60792",
-    "m_Guid": {
-        "m_GuidSerialized": "49b4c9cc-4b1a-4cef-bf13-bc18483881fc"
-    },
-    "m_Name": "BackGroundColor",
-    "m_DefaultReferenceName": "Color_77094f96d2434744980a8ee1baf60792",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 0.2688679099082947,
-        "g": 1.0,
-        "b": 0.9630942940711975,
-        "a": 0.0
-    },
-    "m_ColorMode": 1
 }
 
 {
@@ -8906,7 +8852,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "9f63a2e5a4e84149980c0dbe910c9bef",
     "m_Id": 0,
-    "m_DisplayName": "Sayori",
+    "m_DisplayName": "Simo",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -9112,7 +9058,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "a258c62cfd254e8a85ad245b907c9687",
     "m_Id": 0,
-    "m_DisplayName": "CharaTex",
+    "m_DisplayName": "BlastTexture",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -9182,7 +9128,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a3243ef13dfc4fbbbe731df8290a5dd8",
     "m_Id": 0,
-    "m_DisplayName": "TextureMove",
+    "m_DisplayName": "TextureSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -9526,7 +9472,7 @@
     "m_Guid": {
         "m_GuidSerialized": "8b9fb5d5-a0f1-4f18-b5d6-9ea9fbe92450"
     },
-    "m_Name": "SayoriTexColor",
+    "m_Name": "SimoTextureColor",
     "m_DefaultReferenceName": "Color_a8cd5bc55dcb44f9a63fdfc8b5c08858",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -9673,7 +9619,7 @@
     "m_Guid": {
         "m_GuidSerialized": "992c9a56-c240-4665-8c5e-dcf943147383"
     },
-    "m_Name": "SimoDotColor",
+    "m_Name": "SayuriDotColor",
     "m_DefaultReferenceName": "Color_ab45a8617fb24328b9494506435e5bd0",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -10249,41 +10195,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
-    "m_ObjectId": "b70dfef7b90f4492a4fd45599d22a320",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Property",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 905.0000610351563,
-            "y": 1670.0001220703125,
-            "width": 126.00000762939453,
-            "height": 34.000003814697269
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "c7e0a3f6e7b14cb6a8ced764c3cf9b7e"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Property": {
-        "m_Id": "50f52b8c0dfc461cbba0d5c55245cf32"
-    }
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "b79327432fae4e9db218fb5df0cab6ce",
     "m_Group": {
@@ -10411,6 +10322,47 @@
     },
     "m_TextureType": 0,
     "m_NormalMapSpace": 0
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.ColorNode",
+    "m_ObjectId": "b9ad0457b33a4447a08814d856b0dfab",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Color",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 905.0000610351563,
+            "y": 1670.0001220703125,
+            "width": 126.00000762939453,
+            "height": 34.000003814697269
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "d44be90464e74f49bf7af1b58df97151"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Color": {
+        "color": {
+            "r": 1.0,
+            "g": 0.4520508646965027,
+            "b": 0.37264150381088259,
+            "a": 0.0
+        },
+        "mode": 1
+    }
 }
 
 {
@@ -10621,7 +10573,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "be04ead60a7f41859a30af523900478d",
     "m_Id": 0,
-    "m_DisplayName": "SimoTexture",
+    "m_DisplayName": "SayuriTexture",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -11000,31 +10952,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
-    "m_ObjectId": "c7e0a3f6e7b14cb6a8ced764c3cf9b7e",
-    "m_Id": 0,
-    "m_DisplayName": "DotColor",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0,
-        "w": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "c7f1d2a07d454acb90192770dca3b7d9",
     "m_Id": 2,
@@ -11376,7 +11303,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "cbee6ac0a76940d081a8187b3c4eeb4f",
     "m_Id": 0,
-    "m_DisplayName": "Sayori",
+    "m_DisplayName": "Simo",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -11612,7 +11539,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "d0803b06f20b44aeb73306a157325aec",
     "m_Id": 0,
-    "m_DisplayName": "Simo",
+    "m_DisplayName": "Sayuri",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -11740,7 +11667,7 @@
     "m_Type": "UnityEditor.ShaderGraph.BooleanMaterialSlot",
     "m_ObjectId": "d1861371d38241ad85c33450971516c2",
     "m_Id": 0,
-    "m_DisplayName": "Sayori",
+    "m_DisplayName": "Simo",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -11822,6 +11749,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "d44be90464e74f49bf7af1b58df97151",
+    "m_Id": 0,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "d4666a4a60864553ac9cac3d033bd752",
     "m_Id": 3,
@@ -11864,7 +11816,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "d47619dc4add40ba92b8371c1416419b",
     "m_Id": 0,
-    "m_DisplayName": "TexColor",
+    "m_DisplayName": "BlastTexColor",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -12003,7 +11955,7 @@
     "m_Guid": {
         "m_GuidSerialized": "a4b152c5-f969-4411-bdac-665dc91671a7"
     },
-    "m_Name": "SayoriDotColor",
+    "m_Name": "SimoDotColor",
     "m_DefaultReferenceName": "Color_d5e2a246235a4a449a1f8858af44921b",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -12647,7 +12599,7 @@
     "m_Guid": {
         "m_GuidSerialized": "b5bb019e-7702-4362-a748-655e332f3f7b"
     },
-    "m_Name": "TextureMove",
+    "m_Name": "TextureSpeed",
     "m_DefaultReferenceName": "Vector1_e3c282dd4d94489fa22e2ea66b0daf62",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -13527,7 +13479,7 @@
     "m_Guid": {
         "m_GuidSerialized": "1480e965-8889-40c0-90f2-ff0b4016ef58"
     },
-    "m_Name": "SimoTexture",
+    "m_Name": "SayuriTexture",
     "m_DefaultReferenceName": "Texture2D_f172a6a53d514ff0a6b010405ebed114",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -13797,7 +13749,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
     "m_ObjectId": "f7752003220f40e88ca96d3764b8d265",
     "m_Id": 0,
-    "m_DisplayName": "SayoriTexture",
+    "m_DisplayName": "SimoTexture",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",

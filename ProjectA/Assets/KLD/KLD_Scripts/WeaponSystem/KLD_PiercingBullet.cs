@@ -6,9 +6,10 @@ using UnityEngine;
 public class KLD_PiercingBullet : KLD_Bullet
 {
 
-    [SerializeField] int piercingPower = 3;
+    [SerializeField, Range(0, 10)] int piercingPower = 3;
     int curPiercedEnemies = 0;
     int lastPiercedEnemyIndex = 0;
+    [SerializeField, Range(0.1f, 1f)] float piercingRatio = 1f;
 
     //float spreadAngle = 0f;
     RaycastHit[] hits;
@@ -58,7 +59,7 @@ public class KLD_PiercingBullet : KLD_Bullet
                         hitZombie = hits[y].collider.gameObject.GetComponent<XL_IDamageable>();
                         if (hitZombie != null)
                         {
-                            OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage);
+                            OnHit(hitZombie, _weaponSO.GetCurAttributes().bulletDamage * Mathf.Pow(piercingRatio, curPiercedEnemies));
                         }
                         if (y < hits.Length - 1)
                         {
@@ -130,7 +131,7 @@ public class KLD_PiercingBullet : KLD_Bullet
 
 
 
-    public override void OnHit(XL_IDamageable _damageable, int _damage)
+    public override void OnHit(XL_IDamageable _damageable, float _damage)
     {
         _damageable.TakeDamage(_damage);
     }

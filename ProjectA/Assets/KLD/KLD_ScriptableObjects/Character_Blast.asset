@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 430e6a2518cc88144a02093f5e3ccff3, type: 3}
   m_Name: Character_Blast
   m_EditorClassIdentifier: 
+  characterName: Blast
   base_healthMax: 300
   base_movementSpeed: 20
   base_armor: 30
@@ -28,11 +29,12 @@ MonoBehaviour:
   - 5
   - 6
   level: 0
-  healthMax: 300
-  movementSpeed: 20
-  armor: 30
-  healingTick: 30
-  activeTick: 50
+  experienceToReach: 2003000014050000c4090000a00f0000401f0000983a0000a8610000409c000070110100c0d40100
+  healthMax: 383
+  movementSpeed: 25
+  armor: 40
+  healingTick: 44
+  activeTick: 4
   isPercentageHealthGrowth: 1
   healthGrowth: 1.05
   isPercentageMovementSpeedGrowth: 0
@@ -44,4 +46,6 @@ MonoBehaviour:
   spellSO: {fileID: 11400000, guid: 0e2347a0eefa66a47b20ca279ef2f993, type: 2}
   spellLaunchDuration: 0.5
   spellIsButton: 0
+  canUseSpellWhenReloading: 0
+  passiveSpell: {fileID: 11400000, guid: b37d836175c64ea459d6c1cbe1e4b424, type: 2}
   characterMesh: {fileID: 6050656808467317075, guid: 5eda5fa80f9103b4c90cad7dcdbe7128, type: 3}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "newSpellHeal", menuName = "KLD/Spell/Heal", order = 0)]
+[CreateAssetMenu(fileName = "newSpellHeal", menuName = "KLD/Spell/Heal", order = 2)]
 public class KLD_SpellHeal : KLD_Spell
 {
     [System.Serializable]

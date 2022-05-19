@@ -112,6 +112,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     {
         health -= damage;
         healthBar.UpdateHealthBar(health / attributes.maxHealth);
+        KLD_EventsManager.instance.InvokeEnemyHit();
         if (health < 1) Die();
     }
 

@@ -7,6 +7,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] KLD_PlayerShoot playerShoot;
+    [SerializeField] KLD_PlayerController controller;
     protected XL_CharacterAttributesSO characterAttributes;
     private float health;
 
@@ -29,6 +30,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     bool outOfCombat = true;
     float curOutOfCombatTime = 0f;
 
+    PassiveSpellInitializer passiveSpellInitializer;
     /*
     private void Awake()
     {
@@ -49,7 +51,14 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         characterAttributes = _character;
         characterAttributes.level = _characterLevel;
 
-        characterAttributes.Initialize();
+        passiveSpellInitializer = new PassiveSpellInitializer();
+        passiveSpellInitializer.character = this;
+        passiveSpellInitializer.controller = controller;
+
+        characterAttributes.Initialize(passiveSpellInitializer);
+
+        controller.SetBaseSpeed(characterAttributes.movementSpeed);
+
         health = characterAttributes.healthMax;
 
         ultimateCharge = 0f;
