@@ -13,7 +13,6 @@ public class CaptureZonesGameModeSO : KLD_GameModeSO
     List<GameObject> objectiveLines;
     int verticalSpacing = -75;
 
-
     RectTransform curLineTransform;
     Vector2 curLinePosition;
 
@@ -21,9 +20,9 @@ public class CaptureZonesGameModeSO : KLD_GameModeSO
     {
         for (int i = 0; i < _nbLines; i++)
         {
-            curLineTransform = Instantiate(objectiveLine, Vector3.zero, Quaternion.identity).GetComponent<RectTransform>();
+            curLineTransform = Instantiate(objectiveLine, Vector3.zero, Quaternion.identity, topLeftCorner).GetComponent<RectTransform>();
             curLinePosition.x = 50;
-            curLinePosition.y = 50 + verticalSpacing * i;
+            curLinePosition.y = -50 + verticalSpacing * i;
 
             curLineTransform.anchoredPosition = curLinePosition;
         }

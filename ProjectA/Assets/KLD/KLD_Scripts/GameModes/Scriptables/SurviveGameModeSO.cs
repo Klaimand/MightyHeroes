@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "KLD_SurviveGameModeSO", menuName = "KLD/GameModes/SurviveSO", order = 0)]
 public class SurviveGameModeSO : KLD_GameModeSO
 {
-    public override string GetGameModeHeader(int _nbObjectivesCompleted, int _nbObjectives)
+    public override void InitGameModeUI(RectTransform topLeftCorner, int _nbLines)
     {
-        return objectiveString;
+        throw new System.NotImplementedException();
     }
 }
