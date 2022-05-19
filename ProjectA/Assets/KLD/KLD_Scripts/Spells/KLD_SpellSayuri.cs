@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "newSayuriSpell", menuName = "KLD/Spell/Sayuri", order = 1)]
+[CreateAssetMenu(fileName = "newSayuriSpell", menuName = "KLD/Spell/Sayuri", order = 3)]
 public class KLD_SpellSayuri : KLD_Spell
 {
     [System.Serializable]

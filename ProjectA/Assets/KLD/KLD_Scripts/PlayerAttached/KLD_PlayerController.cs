@@ -18,7 +18,7 @@ public class KLD_PlayerController : MonoBehaviour
 
     //controller
     public Transform refTransform = null;
-    [SerializeField] float speed = 10f;
+    //[SerializeField] float speed = 10f;
     [SerializeField] float axisDeadzone = 0.1f;
 
     [SerializeField] float accelerationTime = 0.3f;
@@ -41,6 +41,11 @@ public class KLD_PlayerController : MonoBehaviour
 
     Vector3 worldLookAtPos = Vector3.zero;
 
+    float realSpeed = 0f;
+    float baseSpeed = 0f;
+    float bonusSpeed = 0f;
+    float speedRatio = 0f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,7 +61,9 @@ public class KLD_PlayerController : MonoBehaviour
     {
         ProcessAxis();
 
-        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
+        ProcessBonusSpeed();
+
+        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
         //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
         //(runningBackward ? -1f : 1f);
 
@@ -146,20 +153,65 @@ public class KLD_PlayerController : MonoBehaviour
         animator.SetInteger("locomotionState", (int)locomotionState);
     }
 
-    public void SetSpeed(float newSpeed)
-    {
-        speed = newSpeed;
-    }
-
     public bool IsRunning()
     {
         return rawAxis != Vector2.zero;
     }
 
-
     public void SetCharacterMeshComponents(Animator _animator, Transform _scaler)
     {
         animator = _animator;
         scaler = _scaler;
+    }
+
+    void CalculateRealSpeed()
+    {
+        realSpeed = ((baseSpeed + bonusSpeed) * speedRatio) / 3.34f;
+        //realSpeed = ((baseSpeed * speedRatio) + bonusSpeed) / 3.34f;
+    }
+
+    public void SetBaseSpeed(float _baseSpeed)
+    {
+        baseSpeed = _baseSpeed;
+        CalculateRealSpeed();
+    }
+
+    //public void SetBonusSpeed(float _bonusSpeed)
+    //{
+    //    bonusSpeed = _bonusSpeed;
+    //    CalculateRealSpeed();
+    //}
+
+    public void SetSpeedRatio(float _speedRatio)
+    {
+        if (_speedRatio != speedRatio)
+        {
+            speedRatio = _speedRatio;
+            CalculateRealSpeed();
+        }
+    }
+
+    float bonusSpeedDuration = 0f;
+    bool isBonusSpeeded = false;
+    public void AddBonusSpeedFor(float _bonusSpeed, float _duration)
+    {
+        isBonusSpeeded = true;
+        bonusSpeed = _bonusSpeed;
+        bonusSpeedDuration = _duration;
+        CalculateRealSpeed();
+    }
+
+    void ProcessBonusSpeed()
+    {
+        if (isBonusSpeeded)
+        {
+            bonusSpeedDuration -= Time.deltaTime;
+        }
+        if (bonusSpeedDuration <= 0f)
+        {
+            isBonusSpeeded = false;
+            bonusSpeed = 0f;
+            CalculateRealSpeed();
+        }
     }
 }
