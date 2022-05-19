@@ -31,6 +31,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     float curOutOfCombatTime = 0f;
 
     PassiveSpellInitializer passiveSpellInitializer;
+
+    Animator animator;
+
     /*
     private void Awake()
     {
@@ -241,6 +244,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         {
             if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
+            animator?.Play("Hit", 3, 0f);
         }
 
         health -= damage;
@@ -302,5 +306,10 @@ while (true)
         {
             ultimateCharge += playerShoot.GetWeaponUltChargeOnKill();
         }
+    }
+
+    public void SetAnimator(Animator _animator)
+    {
+        animator = _animator;
     }
 }

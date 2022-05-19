@@ -115,7 +115,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     {
         health -= damage;
         healthBar.UpdateHealthBar(health / attributes.maxHealth);
-        hitAnimator?.Play("Hit", hitAnimatorLayer);
+        hitAnimator?.Play("Hit", hitAnimatorLayer, 0f);
         KLD_EventsManager.instance.InvokeEnemyHit();
         if (health < 1) Die();
     }
