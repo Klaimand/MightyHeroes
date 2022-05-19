@@ -39,7 +39,7 @@ public class XL_GameModeManager : MonoBehaviour
     private void Start()
     {
         StartCoroutine(TimerCoroutine());
-        uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {gameMode.objectiveString}");
+        uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
     }
 
     Transform nearestObjective;
@@ -67,7 +67,7 @@ public class XL_GameModeManager : MonoBehaviour
     public void CompleteObjective()
     {
         nbObjectivesCompleted++;
-        uiMission.UpdateObjective($"{nbObjectivesCompleted}  / {nbObjectives}  : {gameMode.objectiveString}");
+        uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
         if (nbObjectivesCompleted >= nbObjectives) XL_GameManager.instance.WinGame();
     }
 
