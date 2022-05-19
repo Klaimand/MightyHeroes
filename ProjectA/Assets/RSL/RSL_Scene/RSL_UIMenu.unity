@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45127547, g: 0.50095433, b: 0.57332104, a: 1}
+  m_IndirectSpecularColor: {r: 0.45127672, g: 0.5009557, b: 0.57332265, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -130,6 +130,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1299693264, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
+      propertyPath: characterAuraColors.Array.data[0]._FadeColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299693264, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
+      propertyPath: characterAuraColors.Array.data[0]._FadeColor.g
+      value: 0.020870956
+      objectReference: {fileID: 0}
+    - target: {fileID: 1299693264, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
+      propertyPath: characterAuraColors.Array.data[0]._FadeColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2929993930099064198, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: m_RootOrder
       value: 0
