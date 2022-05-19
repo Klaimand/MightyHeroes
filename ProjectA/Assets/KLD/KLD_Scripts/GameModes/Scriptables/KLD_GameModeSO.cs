@@ -6,13 +6,21 @@ using UnityEngine;
 public abstract class KLD_GameModeSO : ScriptableObject
 {
     public float missionMaxTime = 300f;
-    [SerializeField] protected string objectiveString = "Capture the zones";
+    [SerializeField] protected string objectiveString = "CAPTURE THE ZONES";
+
+
 
     public virtual string GetGameModeHeader(int _nbObjectivesCompleted, int _nbObjectives)
     {
-        return $"{_nbObjectivesCompleted}  / {_nbObjectives}  : {objectiveString}";
+        //return $"{_nbObjectivesCompleted}  / {_nbObjectives}  : {objectiveString}";
+        return objectiveString;
     }
 
-    public abstract void InitGameModeUI(RectTransform topLeftCorner, int _nbLines);
+    public abstract void InitGameModeUI(RectTransform topLeftCorner, int _nbLines, string[] _objectivesNames);
+
+    public virtual void CompleteObjective(int _index, int _nbObjectivesCompleted, int _nbObjectives)
+    {
+
+    }
 
 }

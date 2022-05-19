@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class KLD_DataObjective : MonoBehaviour, KLD_IObjective
 {
+    [SerializeField] string objectiveName = "newDataObjective";
+
     bool collected = false;
+    int index;
 
     // Start is called before the first frame update
     void Start()
@@ -28,4 +31,13 @@ public class KLD_DataObjective : MonoBehaviour, KLD_IObjective
         return transform;
     }
 
+    string KLD_IObjective.GetObjectiveName()
+    {
+        return objectiveName;
+    }
+
+    void KLD_IObjective.SetIndex(int _index)
+    {
+        index = _index;
+    }
 }
