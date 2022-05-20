@@ -13,7 +13,8 @@ public class XL_MainMenu : MonoBehaviour
     [SerializeField] private GameObject characterDetailsMenu;
     [SerializeField] private GameObject weaponSelectMenu;
     [SerializeField] private GameObject weaponDetailsMenu;
-    [SerializeField] private GameObject MapSelectMenu;
+    [SerializeField] private GameObject mapSelectMenu;
+    [SerializeField] private GameObject shopMenu;
 
     [Header("Save Characters and Weapons")]
     [SerializeField] private XL_CharacterAttributesSO[] characterAttributes;
@@ -88,8 +89,6 @@ public class XL_MainMenu : MonoBehaviour
             PlayerPrefs.SetInt("SelectedHero", 0);
         }
 
-        Debug.Log(PlayerPrefs.GetInt("Blast"));
-
         PlayerPrefs.Save();
     }
 
@@ -109,11 +108,24 @@ public class XL_MainMenu : MonoBehaviour
         RefreshMainMenuUI();
         mainMenu.SetActive(true);
 
+        shopMenu.SetActive(false);
         characterSelectMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
         weaponSelectMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
-        MapSelectMenu.SetActive(false);
+        mapSelectMenu.SetActive(false);
+    }
+
+    public void SwitchShopMenu() 
+    {
+        shopMenu.SetActive(true);
+
+        mainMenu.SetActive(false);
+        characterSelectMenu.SetActive(false);
+        characterDetailsMenu.SetActive(false);
+        weaponSelectMenu.SetActive(false);
+        weaponDetailsMenu.SetActive(false);
+        mapSelectMenu.SetActive(false);
     }
 
     public void SwitchCharaSelectMenu()
@@ -148,7 +160,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SwitchMapSelectMenu()
     {
-        MapSelectMenu.SetActive(true);
+        mapSelectMenu.SetActive(true);
 
         mainMenu.SetActive(false);
     }
