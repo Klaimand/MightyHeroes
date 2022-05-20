@@ -121,6 +121,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown += CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -131,6 +133,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown -= CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;

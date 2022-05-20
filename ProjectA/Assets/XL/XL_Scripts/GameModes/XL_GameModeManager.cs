@@ -99,7 +99,7 @@ public class XL_GameModeManager : MonoBehaviour
             if (!go.GetObjectiveState())
             {
                 nextDistance = (position - go.GetTransform().position).sqrMagnitude;
-                if (nextDistance < distance)
+                if (!go.GetObjectiveState() && nextDistance < distance)
                 {
                     distance = nextDistance;
                     nearestObjective = go.GetTransform();
