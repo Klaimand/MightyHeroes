@@ -14,14 +14,16 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     //private XL_ISpells spell;
     public float ultimateCharge;
     public bool isUltimateCharged;
+    bool ultimateLaunched = false;
 
     [SerializeField] private XL_HealthBarUI characterUI;
 
     [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Image ultCircleImage;
     [SerializeField] Animator ultButtonAnimator;
     [SerializeField] Button ultButton;
 
-    enum UltState { NONE, DOWN, UP };
+    enum UltState { NONE, DOWN, UP, PRESSED };
 
     UltState ultState = UltState.NONE;
 
@@ -80,9 +82,21 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         DoSpellCoolDown();
         DoOutOfCombatHealing();
 
+        if (ultimateLaunched)
+        {
+            characterAttributes.CallOnUltLaunched(transform);
+        }
+
         if (ultimateCharge >= 100f)
         {
-            ultState = UltState.UP;
+            if (touchInputs.IsJoystickPressed(2))
+            {
+                ultState = UltState.PRESSED;
+            }
+            else
+            {
+                ultState = UltState.UP;
+            }
         }
         else if (ultimateCharge > 50f)
         {
@@ -100,6 +114,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         else
         {
             ultJoystickAnimator.SetInteger("ultState", (int)ultState);
+            ultCircleImage.fillAmount = ultimateCharge * 0.01f;
         }
 
         if (touchInputs.GetUseButtonForUltimate())
@@ -121,6 +136,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown += CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -131,6 +148,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown -= CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;
@@ -178,6 +197,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (ultimateCharge >= 100f)
         {
+            ultimateLaunched = true;
             playerShoot.UseUltimate(characterAttributes.spellLaunchDuration);
             spellDirection = _direction;
 
@@ -191,6 +211,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        ultimateLaunched = false;
         characterAttributes.CallOnSpellLaunch();
 
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
@@ -242,9 +263,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (damage > 0) // if it takes damage, then reduce the damage taken
         {
-            if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
+            damage = Mathf.Max(damage - characterAttributes.armor, 1f);
+            //if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
             animator?.Play("Hit", 3, 0f);
+            KLD_EventsManager.instance.InvokeLooseHealth(damage);
         }
 
         health -= damage;
