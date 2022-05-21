@@ -28,12 +28,16 @@ public class XL_GameModeManager : MonoBehaviour
 
     List<string> objectivesNames = new List<string>();
 
+    bool initialized = false;
+
     private void Awake()
     {
         instance = this;
 
         wait = new WaitForSeconds(1);
         missionTime = gameMode.missionMaxTime;
+
+        //InitializeObjectives();
 
     }
 
@@ -47,6 +51,10 @@ public class XL_GameModeManager : MonoBehaviour
 
     void InitializeObjectives()
     {
+        if (initialized) return;
+
+        initialized = true;
+
         objectivesNames.Clear();
         temp = GameObject.FindGameObjectsWithTag("Objective");
         foreach (GameObject go in temp)
@@ -84,13 +92,14 @@ public class XL_GameModeManager : MonoBehaviour
 
     public Transform GetNearestObjective(Vector3 position)
     {
+        if (!initialized) InitializeObjectives();
         distance = 100000;
-        foreach (XL_GameMode go in objectives)
+        foreach (KLD_IObjective go in objectives)
         {
             if (!go.GetObjectiveState())
             {
                 nextDistance = (position - go.GetTransform().position).sqrMagnitude;
-                if (nextDistance < distance)
+                if (!go.GetObjectiveState() && nextDistance < distance)
                 {
                     distance = nextDistance;
                     nearestObjective = go.GetTransform();

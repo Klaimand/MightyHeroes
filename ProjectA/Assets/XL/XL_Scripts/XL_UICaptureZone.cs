@@ -6,12 +6,23 @@ public class XL_UICaptureZone : MonoBehaviour
 {
     [SerializeField] private Image captureCircle;
     [SerializeField] private TMP_Text captureText;
+    [SerializeField] Gradient captureGradient;
+    [SerializeField] GameObject canvasGO;
 
     int ticks = 0;
     int points = 0;
 
+    bool startedCapture;
+
     public void UpdateUI(float percentage, int _playersInside)
     {
+        if (!startedCapture && percentage > 0f)
+        {
+            startedCapture = true;
+            canvasGO.SetActive(true);
+        }
+
+        captureCircle.color = captureGradient.Evaluate(percentage * 0.01f);
         captureCircle.fillAmount = percentage * 0.01f;
         if (percentage >= 100f)
         {
