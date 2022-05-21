@@ -30,6 +30,8 @@ public class XL_GameModeManager : MonoBehaviour
 
     bool initialized = false;
 
+    Coroutine timerCoroutine;
+
     private void Awake()
     {
         instance = this;
@@ -44,7 +46,7 @@ public class XL_GameModeManager : MonoBehaviour
     private void Start()
     {
         InitializeObjectives();
-        StartCoroutine(TimerCoroutine());
+        timerCoroutine = StartCoroutine(TimerCoroutine());
         gameMode.InitGameModeUI(topLeftCorner, nbObjectives, objectivesNames.ToArray());
         uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
     }
@@ -125,6 +127,13 @@ public class XL_GameModeManager : MonoBehaviour
         {
             missionTime--;
             uiMission.UpdateTimer(missionTime);
+
+            if (missionTime <= 0)
+            {
+                XL_GameManager.instance.LoseGame();
+                StopCoroutine(timerCoroutine);
+            }
+
             yield return wait;
         }
     }
@@ -132,5 +141,10 @@ public class XL_GameModeManager : MonoBehaviour
     public float GetMissionTime()
     {
         return this.missionTime;
+    }
+
+    public int GetMissionRemainingTime()
+    {
+        return Mathf.RoundToInt(gameMode.missionMaxTime - missionTime);
     }
 }

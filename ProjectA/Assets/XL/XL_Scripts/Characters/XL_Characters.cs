@@ -246,9 +246,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (damage > 0) // if it takes damage, then reduce the damage taken
         {
-            if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
+            damage = Mathf.Max(damage - characterAttributes.armor, 1f);
+            //if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
             animator?.Play("Hit", 3, 0f);
+            KLD_EventsManager.instance.InvokeLooseHealth(damage);
         }
 
         health -= damage;
