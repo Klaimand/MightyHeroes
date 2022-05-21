@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba2a68516e7ebb41acb6df4b2251e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameMode: {fileID: 11400000, guid: b64f85af0053cb34facfe6819dfae9f5, type: 2}
+  gameMode: {fileID: 11400000, guid: a7f17f21dbd6d6d489a46e2caa3a4d95, type: 2}
   topLeftCorner: {fileID: 1934128344837377368}
   uiMission: {fileID: 5157148056202347479}
 --- !u!114 &1756737187398407877
@@ -1141,29 +1141,23 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3592941992684990966}
     - target: {fileID: 7763574474891127591, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
+      propertyPath: ultCircleImage
+      value: 
+      objectReference: {fileID: 3592941992272764059}
+    - target: {fileID: 7763574474891127591, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: ultButtonAnimator
       value: 
       objectReference: {fileID: 4837654313385056002}
     - target: {fileID: 7763574474891127591, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: ultJoystickAnimator
       value: 
-      objectReference: {fileID: 2196164259447726521}
+      objectReference: {fileID: 3592941993597023919}
     - target: {fileID: 7763574476375477531, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 8671646774170855830}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
---- !u!4 &8671646772181465862 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4918749990883480119, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
-  m_PrefabInstance: {fileID: 4329377362125334833}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &8671646772181465857 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4918749990883480112, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
-  m_PrefabInstance: {fileID: 4329377362125334833}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8671646772181465863 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4918749990883480118, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
@@ -1175,6 +1169,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 580ed4f048ed4534eb3048bccc7d0fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &8671646772181465862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4918749990883480119, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
+  m_PrefabInstance: {fileID: 4329377362125334833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8671646772181465857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4918749990883480112, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
+  m_PrefabInstance: {fileID: 4329377362125334833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6951309568245893535
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1279,11 +1283,22 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 2547577025256873629, guid: 55e11c168c0984347906c886890ae1c7, type: 3}
   m_PrefabInstance: {fileID: 6951309568245893535}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2196164259447726521 stripped
+--- !u!95 &3592941993597023919 stripped
 Animator:
-  m_CorrespondingSourceObject: {fileID: 9079913236213032998, guid: 55e11c168c0984347906c886890ae1c7, type: 3}
+  m_CorrespondingSourceObject: {fileID: 5883023336106966832, guid: 55e11c168c0984347906c886890ae1c7, type: 3}
   m_PrefabInstance: {fileID: 6951309568245893535}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3592941992272764059 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5883023334850073860, guid: 55e11c168c0984347906c886890ae1c7, type: 3}
+  m_PrefabInstance: {fileID: 6951309568245893535}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &2523674584255977694 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4863297781786235201, guid: 55e11c168c0984347906c886890ae1c7, type: 3}

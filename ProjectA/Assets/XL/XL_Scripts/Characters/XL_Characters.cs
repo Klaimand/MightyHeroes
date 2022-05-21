@@ -18,10 +18,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     [SerializeField] private XL_HealthBarUI characterUI;
 
     [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Image ultCircleImage;
     [SerializeField] Animator ultButtonAnimator;
     [SerializeField] Button ultButton;
 
-    enum UltState { NONE, DOWN, UP };
+    enum UltState { NONE, DOWN, UP, PRESSED };
 
     UltState ultState = UltState.NONE;
 
@@ -82,7 +83,14 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         if (ultimateCharge >= 100f)
         {
-            ultState = UltState.UP;
+            if (touchInputs.IsJoystickPressed(2))
+            {
+                ultState = UltState.PRESSED;
+            }
+            else
+            {
+                ultState = UltState.UP;
+            }
         }
         else if (ultimateCharge > 50f)
         {
@@ -100,6 +108,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         else
         {
             ultJoystickAnimator.SetInteger("ultState", (int)ultState);
+            ultCircleImage.fillAmount = ultimateCharge * 0.01f;
         }
 
         if (touchInputs.GetUseButtonForUltimate())
