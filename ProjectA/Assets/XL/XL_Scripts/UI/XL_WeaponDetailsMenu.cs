@@ -25,7 +25,8 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     [SerializeField] private Transform magazineSizeXScaler;
     [SerializeField] private float scalerMagazineSizeMax;
 
-    [Header("Upgrade Text")]
+    [Header("Upgrade")]
+    [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMP_Text upgradeText;
 
     public int selectedWeapon = 0;
@@ -44,24 +45,31 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
 
         selectedWeapon = idx;
 
-        DisplayWeaponInfo(idx);
+        CheckHasUpgrade();
+        DisplayWeaponInfo();
 
         weaponInfos[idx].Activate();
     }
 
-    private void DisplayWeaponInfo(int idx)
+    private void CheckHasUpgrade()
+    {
+        if (weaponInfos[selectedWeapon].GetLevel() + 1 >= weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes.Length) upgradeButton.SetActive(false);
+        else upgradeButton.SetActive(true);
+    }
+
+    private void DisplayWeaponInfo()
     {
         //Initialise Text
-        weaponInfos[idx].DisplayLevel();
-        damageText.text = weaponInfos[idx].GetDamage().ToString();
-        rpmText.text = weaponInfos[idx].GetRPM().ToString();
-        magazineSizeText.text = weaponInfos[idx].GetMagazine().ToString();
-        upgradeText.text = weaponInfos[idx].weaponAttributes.weaponAttributes[weaponInfos[idx].GetLevel()].experienceToReach.ToString(); //Aled
+        weaponInfos[selectedWeapon].DisplayLevel();
+        damageText.text = weaponInfos[selectedWeapon].GetDamage().ToString();
+        rpmText.text = weaponInfos[selectedWeapon].GetRPM().ToString();
+        magazineSizeText.text = weaponInfos[selectedWeapon].GetMagazine().ToString();
+        upgradeText.text = weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach.ToString(); //Aled
 
         //Initialise Bar
-        damageXScaler.localScale = new Vector3(weaponInfos[idx].GetDamage() / scalerDamageMax, damageXScaler.localScale.y, damageXScaler.localScale.z);
-        rpmXScaler.localScale = new Vector3(weaponInfos[idx].GetRPM() / scalerRPMMax, rpmXScaler.localScale.y, rpmXScaler.localScale.z);
-        magazineSizeXScaler.localScale = new Vector3(weaponInfos[idx].GetMagazine() / scalerMagazineSizeMax, magazineSizeXScaler.localScale.y, magazineSizeXScaler.localScale.z);
+        damageXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetDamage() / scalerDamageMax, damageXScaler.localScale.y, damageXScaler.localScale.z);
+        rpmXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetRPM() / scalerRPMMax, rpmXScaler.localScale.y, rpmXScaler.localScale.z);
+        magazineSizeXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetMagazine() / scalerMagazineSizeMax, magazineSizeXScaler.localScale.y, magazineSizeXScaler.localScale.z);
 
     }
 
@@ -74,7 +82,9 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
             PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
             XL_MainMenu.instance.RefreshTopOverlay();
             weaponInfos[selectedWeapon].weaponAttributes.level++;
-            DisplayWeaponInfo(selectedWeapon);
+
+            CheckHasUpgrade();
+            DisplayWeaponInfo();
         }
     }
 }

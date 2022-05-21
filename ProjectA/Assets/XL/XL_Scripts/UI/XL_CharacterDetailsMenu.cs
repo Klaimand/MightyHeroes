@@ -25,7 +25,8 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     [SerializeField] private Transform regenXScaler;
     [SerializeField] private float scalerRegenMax;
 
-    [Header("Upgrade Text")]
+    [Header("Upgrade")]
+    [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMP_Text upgradeText;
 
     public int selectedPlayer = 0;
@@ -34,14 +35,6 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     {
         instance = this;
     }
-
-    /*private void OnEnable()
-    {
-        foreach(XL_UICharacterInfo ci in characterInfos)
-        {
-            ci.characterAttributes.Initialize();
-        }
-    }*/
 
     public void Select(int idx)
     {
@@ -53,24 +46,31 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
 
         selectedPlayer = idx;
 
-        DisplayCharacterInfo(idx);
+        CheckHasUpgrade();
+        DisplayCharacterInfo();
 
         characterInfos[idx].Activate();
     }
 
-    private void DisplayCharacterInfo(int idx)
+    private void CheckHasUpgrade()
+    {
+        if (characterInfos[selectedPlayer].GetLevel() + 1 >= characterInfos[selectedPlayer].characterAttributes.experienceToReach.Length) upgradeButton.SetActive(false);
+        else upgradeButton.SetActive(true);
+    }
+
+    private void DisplayCharacterInfo()
     {
         //initialise Text
-        characterInfos[idx].DisplayLevel();
-        healthText.text = characterInfos[idx].GetHealth().ToString();
-        armorText.text = characterInfos[idx].GetArmor().ToString();
-        regenText.text = characterInfos[idx].GetRegen().ToString();
-        upgradeText.text = characterInfos[idx].characterAttributes.experienceToReach[characterInfos[idx].GetLevel()].ToString(); //Aled
+        characterInfos[selectedPlayer].DisplayLevel();
+        healthText.text = characterInfos[selectedPlayer].GetHealth().ToString();
+        armorText.text = characterInfos[selectedPlayer].GetArmor().ToString();
+        regenText.text = characterInfos[selectedPlayer].GetRegen().ToString();
+        upgradeText.text = characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()].ToString(); //Aled
 
         //Initialise Bar
-        healthXScaler.localScale = new Vector3(characterInfos[idx].GetHealth() / scalerHealthMax, healthXScaler.localScale.y, healthXScaler.localScale.z);
-        armorXScaler.localScale = new Vector3(characterInfos[idx].GetArmor() / scalerArmorMax, armorXScaler.localScale.y, armorXScaler.localScale.z);
-        regenXScaler.localScale = new Vector3(characterInfos[idx].GetRegen() / scalerRegenMax, regenXScaler.localScale.y, regenXScaler.localScale.z);
+        healthXScaler.localScale = new Vector3(characterInfos[selectedPlayer].GetHealth() / scalerHealthMax, healthXScaler.localScale.y, healthXScaler.localScale.z);
+        armorXScaler.localScale = new Vector3(characterInfos[selectedPlayer].GetArmor() / scalerArmorMax, armorXScaler.localScale.y, armorXScaler.localScale.z);
+        regenXScaler.localScale = new Vector3(characterInfos[selectedPlayer].GetRegen() / scalerRegenMax, regenXScaler.localScale.y, regenXScaler.localScale.z);
     }
 
     public void UpgradeCharacter()
@@ -78,12 +78,23 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
         Debug.Log(characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
         if (PlayerPrefs.GetInt("SoftCurrency") > characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()])
         {
+            //Save new level
             PlayerPrefs.SetInt(characterInfos[selectedPlayer].characterAttributes.characterName, characterInfos[selectedPlayer].GetLevel() + 1);
-            characterInfos[selectedPlayer].characterAttributes.Initialize();
-            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
-            XL_MainMenu.instance.RefreshTopOverlay();
+
+            //Increments character level
             characterInfos[selectedPlayer].characterAttributes.level++;
-            DisplayCharacterInfo(selectedPlayer);
+
+            //Initialise stats for the current level
+            characterInfos[selectedPlayer].characterAttributes.Initialize();
+
+            //Save new currency amount
+            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
+
+            //Refresh currency overlay
+            XL_MainMenu.instance.RefreshTopOverlay();
+
+            DisplayCharacterInfo();
+            CheckHasUpgrade();
         }
     }
 }
