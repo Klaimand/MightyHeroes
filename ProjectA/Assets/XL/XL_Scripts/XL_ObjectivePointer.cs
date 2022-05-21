@@ -31,21 +31,29 @@ public class XL_ObjectivePointer : MonoBehaviour
     float angle;
     Vector3 pointerAngle = new Vector3();
 
+    Vector3 flattedEuler;
+
     private void Update()
     {
         dir = Quaternion.Euler(refTransform.rotation.eulerAngles.x, -refTransform.rotation.eulerAngles.y, refTransform.rotation.eulerAngles.z) * (target.position - player.position);
         dir.y = dir.z;
         angle = (Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg) % 360;
         pointerAngle.z = angle;
-        pointerRectTransform.localEulerAngles = pointerAngle;
+
+        flattedEuler.x = 0f;
+        flattedEuler.y = pointerAngle.z;
+        flattedEuler.z = 0f;
+
+        pointerRectTransform.eulerAngles = pointerAngle;
+
 
         pointerRectTransform.localPosition = dir.normalized * distanceAround;
     }
 
-    IEnumerator FindNearestCoroutine() 
+    IEnumerator FindNearestCoroutine()
     {
         target = XL_GameModeManager.instance.GetNearestObjective(player.position);
-        
+
         yield return wait;
         StartCoroutine(FindNearestCoroutine());
     }
