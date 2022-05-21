@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class XL_Alpha : XL_Enemy
 {
@@ -10,7 +11,8 @@ public class XL_Alpha : XL_Enemy
     [SerializeField] private float summonDistance;
 
     [Header("Missile Launchers")]
-    [SerializeField] private Transform[] cannonPos;
+    [SerializeField] private Transform cannon;
+    [SerializeField] private Transform[] cannonEdgesPos;
     private int missileLaunched = 0;
 
     [Header("Projectile")]
@@ -21,9 +23,21 @@ public class XL_Alpha : XL_Enemy
     [SerializeField] private float projectileExplosionRadius;
     private GameObject impactZone;
 
+    [Header("VFX")]
     GameObject vfx;
+    GameObject deathVFX; //Second GameObject because some vfx might still be active when the summoner dies
 
     [SerializeField] private Animator animator;
+
+    [SerializeField] private LookAtConstraint lookAtConstraint;
+    private ConstraintSource source = new ConstraintSource();
+   protected override void Start()
+   {
+        base.Start();
+        source.sourceTransform = XL_GameManager.instance.players[0].transform;
+        source.weight = 1;
+        lookAtConstraint.AddSource(source);
+   }
 
     public override void Alert()
     {
@@ -38,8 +52,8 @@ public class XL_Alpha : XL_Enemy
 
     public override void Attack()
     {
-        h = cannonPos[missileLaunched % cannonPos.Length].position.y;
-        projectile = XL_Pooler.instance.PopPosition("Summoner_Projectile", cannonPos[missileLaunched % cannonPos.Length].position);
+        h = cannonEdgesPos[missileLaunched % cannonEdgesPos.Length].position.y;
+        projectile = XL_Pooler.instance.PopPosition("Summoner_Projectile", cannonEdgesPos[missileLaunched % cannonEdgesPos.Length].position);
         projectile.GetComponent<XL_Projectile>().Initialize(projectileDamage, projectileExplosionRadius);
         //projectile.GetComponent<Rigidbody>().velocity = shootDirection * projectilespeed;
         velocity = XL_Utilities.GetVelocity(h, distance, projectileTravelTime);
@@ -90,8 +104,12 @@ public class XL_Alpha : XL_Enemy
         base.Die();
         KLD_EventsManager.instance.InvokeEnemyKill(Enemy.ALPHA);
         StopAllCoroutines();
-        Debug.Log("Alpha has died");
-        XL_Pooler.instance.DePop("Alpha", transform.gameObject);
+        canAttack = false;
+
+        deathVFX = XL_Pooler.instance.PopPosition("Summoner_DeathVFX", transform.position);
+        XL_Pooler.instance.DelayedDePop(2, "Summoner_DeathVFX", deathVFX);
+
+        XL_Pooler.instance.DelayedDePop(1.6f, "Alpha", transform.gameObject);
     }
 
     public override void Move()
@@ -122,8 +140,8 @@ public class XL_Alpha : XL_Enemy
             //Debug.Log("Alpha is attacking");
             impactZone = XL_Pooler.instance.PopPosition("Summoner_ImpactZone", other.transform.position);
             StartCoroutine(AttackCooldownCoroutine(fireRate));
-            shootDirection = (other.transform.position - cannonPos[missileLaunched % cannonPos.Length].position);
-            distance = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(cannonPos[missileLaunched % (cannonPos.Length - 1)].position.x, 0, cannonPos[missileLaunched % (cannonPos.Length - 1)].position.z)).magnitude;
+            shootDirection = (other.transform.position - cannonEdgesPos[missileLaunched % cannonEdgesPos.Length].position);
+            distance = (new Vector3(other.transform.position.x, 0, other.transform.position.z) - new Vector3(cannonEdgesPos[missileLaunched % (cannonEdgesPos.Length - 1)].position.x, 0, cannonEdgesPos[missileLaunched % (cannonEdgesPos.Length - 1)].position.z)).magnitude;
             XL_Pooler.instance.DelayedDePop(projectileTravelTime, "Summoner_ImpactZone", impactZone);
             Attack();
         }

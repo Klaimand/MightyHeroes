@@ -31,7 +31,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     bool firstInit = false;
     bool didFirstDisable = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         firstInit = true;
         InitZombieList();
