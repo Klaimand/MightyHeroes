@@ -16,12 +16,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     public bool isUltimateCharged;
     bool ultimateLaunched = false;
 
-    [SerializeField] private XL_HealthBarUI characterUI;
-
-    [SerializeField] Animator ultJoystickAnimator;
-    [SerializeField] Image ultCircleImage;
-    [SerializeField] Animator ultButtonAnimator;
-    [SerializeField] Button ultButton;
 
     enum UltState { NONE, DOWN, UP, PRESSED };
 
@@ -35,6 +29,16 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     PassiveSpellInitializer passiveSpellInitializer;
 
     Animator animator;
+
+    [Header("UI")]
+    [SerializeField] private XL_HealthBarUI characterUI;
+
+    [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Image ultCircleImage;
+    [SerializeField] Animator ultButtonAnimator;
+    [SerializeField] Button ultButton;
+
+    [SerializeField] Image[] ultButtonImages;
 
     /*
     private void Awake()
@@ -110,6 +114,10 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         if (touchInputs.GetUseButtonForUltimate())
         {
             ultButtonAnimator.SetInteger("ultState", (int)ultState);
+            foreach (var image in ultButtonImages)
+            {
+                image.fillAmount = ultimateCharge * 0.01f;
+            }
         }
         else
         {
