@@ -30,7 +30,7 @@ public class KLD_MissionData
     public int GetSoftCurrency()
     {
         return Mathf.RoundToInt(
-            (remainingTime * remainingTimeRatio + killedEnemies) * (difficulty * difficultyRatio + difficultyOffset)
+            (remainingTime * remainingTimeRatio + killedEnemies * killedEnemiesRatio) * (difficulty * difficultyRatio + difficultyOffset)
             );
     }
 
