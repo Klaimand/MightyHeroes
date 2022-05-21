@@ -94,8 +94,8 @@ public class XL_MainMenu : MonoBehaviour
 
     private void RefreshMainMenuUI()
     {
-        characterXP.text = characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level.ToString();
-        weaponXP.text = weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level.ToString();
+        characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString();
+        weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level+1).ToString();
     }
 
     public void StartMission()
