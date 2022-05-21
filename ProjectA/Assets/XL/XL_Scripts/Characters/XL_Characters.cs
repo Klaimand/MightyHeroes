@@ -14,6 +14,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     //private XL_ISpells spell;
     public float ultimateCharge;
     public bool isUltimateCharged;
+    bool ultimateLaunched = false;
 
     [SerializeField] private XL_HealthBarUI characterUI;
 
@@ -80,6 +81,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         DoSpellCoolDown();
         DoOutOfCombatHealing();
+
+        if (ultimateLaunched)
+        {
+            characterAttributes.CallOnUltLaunched(transform);
+        }
 
         if (ultimateCharge >= 100f)
         {
@@ -191,6 +197,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (ultimateCharge >= 100f)
         {
+            ultimateLaunched = true;
             playerShoot.UseUltimate(characterAttributes.spellLaunchDuration);
             spellDirection = _direction;
 
@@ -204,6 +211,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        ultimateLaunched = false;
         characterAttributes.CallOnSpellLaunch();
 
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
