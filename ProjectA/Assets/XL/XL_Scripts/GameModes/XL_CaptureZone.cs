@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
-public class XL_CaptureZone : MonoBehaviour, XL_GameMode
+public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 {
-    public string objectiveString = "Capture the zones";
-
+    [SerializeField] string objectiveName = "newCaptureZone";
     [SerializeField] private XL_UICaptureZone ui;
 
     [SerializeField] private float tickTime;
@@ -13,6 +13,8 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
 
     [SerializeField] private LayerMask layer;
     List<GameObject> playersInside = new List<GameObject>();
+
+    [SerializeField] UnityEvent onZoneCaptured;
 
     private void Start()
     {
@@ -26,8 +28,9 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         if (GetObjectiveState())
         {
             StopAllCoroutines();
-            XL_GameModeManager.instance.CompleteObjective();
-            Debug.Log("test");
+            XL_GameModeManager.instance.CompleteObjective(index);
+            onZoneCaptured.Invoke();
+            //Debug.Log("test");
             enabled = false;
         }
     }
@@ -37,7 +40,7 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         while (true)
         {
             capturePercentage += playersInside.Count;
-            ui.UpdateUI(capturePercentage);
+            ui.UpdateUI(capturePercentage, playersInside.Count);
             yield return new WaitForSeconds(t);
         }
     }
@@ -72,8 +75,15 @@ public class XL_CaptureZone : MonoBehaviour, XL_GameMode
         return this.transform;
     }
 
-    public string GetObjectiveString()
+    public string GetObjectiveName()
     {
-        return objectiveString;
+        return objectiveName;
+    }
+
+    int index = 0;
+
+    public void SetIndex(int _index)
+    {
+        index = _index;
     }
 }

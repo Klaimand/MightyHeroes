@@ -267,7 +267,7 @@ MonoBehaviour:
     health: 100
     transform: {fileID: 5651373868645437874}
     score: 0
-  damage: 0
+  damage: 80
   isAlerted: 1
   targetedPlayerUpdateRate: 0.5
   agent: {fileID: 7635582431578136576}
@@ -279,6 +279,9 @@ MonoBehaviour:
   projectilespeed: 2
   projectileTravelTime: 1.3
   fireRate: 0.5
+  projectileDamage: 80
+  projectileRange: 20
+  projectileExplosionRadius: 5
   animator: {fileID: 3708816895282187125}
 --- !u!135 &3688438485610751149
 SphereCollider:

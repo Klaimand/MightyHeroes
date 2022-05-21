@@ -31,6 +31,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     float curOutOfCombatTime = 0f;
 
     PassiveSpellInitializer passiveSpellInitializer;
+
+    Animator animator;
+
     /*
     private void Awake()
     {
@@ -118,6 +121,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown += CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -128,6 +133,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown -= CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;
@@ -239,8 +246,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (damage > 0) // if it takes damage, then reduce the damage taken
         {
-            if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
+            damage = Mathf.Max(damage - characterAttributes.armor, 1f);
+            //if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
+            animator?.Play("Hit", 3, 0f);
+            KLD_EventsManager.instance.InvokeLooseHealth(damage);
         }
 
         health -= damage;
@@ -302,5 +312,10 @@ while (true)
         {
             ultimateCharge += playerShoot.GetWeaponUltChargeOnKill();
         }
+    }
+
+    public void SetAnimator(Animator _animator)
+    {
+        animator = _animator;
     }
 }

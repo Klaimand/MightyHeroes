@@ -34,7 +34,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     bool firstInit = false;
     bool didFirstDisable = false;
 
-    private void Start()
+    protected virtual void Start()
     {
         firstInit = true;
         InitZombieList();
@@ -115,7 +115,10 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     {
         health -= damage;
         healthBar.UpdateHealthBar(health / attributes.maxHealth);
-        hitAnimator?.Play("Hit", hitAnimatorLayer);
+        if (hitAnimator != null)
+        {
+            hitAnimator.Play("Hit", hitAnimatorLayer, 0f);
+        }
         KLD_EventsManager.instance.InvokeEnemyHit();
         if (health < 1) Die();
     }
@@ -127,6 +130,10 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
             InitZombieList();
             Initialize();
             Alert();
+        }
+        if (hitAnimator != null)
+        {
+            hitAnimator.Play("Hit", hitAnimatorLayer, 1f);
         }
 
         //attributes.maxHealth = Random.Range(10, 101);

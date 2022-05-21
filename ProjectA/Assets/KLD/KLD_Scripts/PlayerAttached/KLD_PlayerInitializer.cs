@@ -88,5 +88,6 @@ public class KLD_PlayerInitializer : MonoBehaviour
             charIniter.leftHandIK,
             charIniter.rightHandIK);
 
+        xl_character.SetAnimator(charIniter.animator);
     }
 }

@@ -22,6 +22,7 @@ public class KLD_SpellGrenade : KLD_Spell
     {
         grenadeAttributes.level = characterLevel;
         grenadeAttributes.Initialize();
+        isAiming = false;
     }
 
     public override void ActivateSpell(Vector3 direction, Transform pos, int characterLevel)
@@ -69,7 +70,7 @@ public class KLD_SpellGrenade : KLD_Spell
 
     void DepopImpactZone()
     {
-        isAiming = false;
         XL_Pooler.instance.DePop("BlastGrenadeZone", impactZoneTransform.gameObject);
+        isAiming = false;
     }
 }
