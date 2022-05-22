@@ -446,5 +446,17 @@ public class KLD_PlayerShoot : MonoBehaviour
 
     }
 
+    [ContextMenu("Rebuild Rig")]
+    public void RebuildRig()
+    {
+        animator.enabled = false;
+        animator.enabled = true;
+
+        rigBuilder.Build();
+
+        animator.enabled = false;
+        animator.enabled = true;
+    }
+
     #endregion
 }
