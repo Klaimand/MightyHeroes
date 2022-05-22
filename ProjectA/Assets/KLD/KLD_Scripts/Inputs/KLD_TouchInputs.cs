@@ -77,6 +77,8 @@ public class KLD_TouchInputs : MonoBehaviour
 
         InitializeJoysticks();
         //InitializeActiveJoystickOrButton();
+
+        Vibrate(1f);
     }
 
     void InitializeJoysticks()
@@ -394,6 +396,22 @@ public class KLD_TouchInputs : MonoBehaviour
         if (!_interractable)
         {
             joysticks[_joyIndex].endedInterractivity = false;
+        }
+    }
+
+    void Vibrate(float _time)
+    {
+        StartCoroutine(VibrateCoroutine(_time));
+    }
+
+    float t;
+    IEnumerator VibrateCoroutine(float _time)
+    {
+        while (t < _time)
+        {
+            Handheld.Vibrate();
+            yield return null;
+            t += Time.deltaTime;
         }
     }
 
