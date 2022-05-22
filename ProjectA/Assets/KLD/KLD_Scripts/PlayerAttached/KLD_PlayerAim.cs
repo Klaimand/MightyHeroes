@@ -41,6 +41,8 @@ public class KLD_PlayerAim : MonoBehaviour
 
     [SerializeField, ReadOnly] KLD_PlayerAttributes playerAttributes;
 
+    [ReadOnly] public bool isAimingForNothing;
+
     /*
     //shooting
     [HideInInspector] public bool isReloading;

@@ -148,13 +148,14 @@ public class KLD_PlayerController : MonoBehaviour
             */
             #endregion
 
-            if (!playerShoot.isAiming)
+
+            if (playerShoot.isAiming)
             {
-                transform.LookAt(transform.position + rb.velocity);
+                transform.LookAt(playerAim.GetTargetPos());
             }
             else
             {
-                transform.LookAt(playerAim.GetTargetPos());
+                transform.LookAt(transform.position + rb.velocity);
             }
 
             if (Vector3.Angle(transform.forward, rb.velocity) > 90f)
