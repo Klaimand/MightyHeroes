@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class XL_MainMenu : MonoBehaviour
 {
@@ -38,6 +39,11 @@ public class XL_MainMenu : MonoBehaviour
     [SerializeField] private TMP_Text characterXP;
     [SerializeField] private TMP_Text weaponXP;
 
+    [Header("Go Button")]
+    [SerializeField] private Button goButton;
+    [SerializeField] private Image goImage;
+    [SerializeField] private Image arrowGoImage;
+
     //[Header("Loadout")]
 
 
@@ -53,7 +59,14 @@ public class XL_MainMenu : MonoBehaviour
     private void InitPlayerPrefs()
     {
         //---DELETE PLAYERPREFS---
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
+
+        if (KLD_MissionInfos.instance != null)
+        {
+            PlayerPrefs.SetInt("Energy", KLD_MissionInfos.instance.missionData.GetEnergy() + PlayerPrefs.GetInt("Energy"));
+            PlayerPrefs.SetInt("SoftCurrency", KLD_MissionInfos.instance.missionData.GetSoftCurrency() + PlayerPrefs.GetInt("SoftCurrency"));
+            PlayerPrefs.SetInt("HardCurrency", KLD_MissionInfos.instance.missionData.GetHardCurrency() + PlayerPrefs.GetInt("HardCurrency"));
+        }
 
         foreach (XL_CharacterAttributesSO ca in characterAttributes)
         {
@@ -96,10 +109,26 @@ public class XL_MainMenu : MonoBehaviour
     {
         characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString();
         weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString();
+
+        if (XL_PlayerInfo.instance.menuData.missionEnergyCost > PlayerPrefs.GetInt("Energy"))
+        {
+            goButton.interactable = false;
+            goImage.color = Color.red;
+            arrowGoImage.color = Color.red;
+        }
+        else
+        {
+            goButton.interactable = true;
+            goImage.color = Color.white;
+            arrowGoImage.color = Color.white;
+        }
     }
 
     public void StartMission()
     {
+        if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
+        PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
+        
         SceneManager.LoadScene(1);
     }
 
@@ -191,5 +220,10 @@ public class XL_MainMenu : MonoBehaviour
     public KLD_WeaponSO GetWeaponSO(Weapon _weapon)
     {
         return weaponAttributes[(int)_weapon];
+    }
+
+    public int GetEnergyMaxAmount()
+    {
+        return energyMax;
     }
 }
