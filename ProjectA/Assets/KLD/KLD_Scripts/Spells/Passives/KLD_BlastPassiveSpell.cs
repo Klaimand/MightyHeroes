@@ -28,5 +28,6 @@ public class KLD_BlastPassiveSpell : KLD_PassiveSpell
     void HealOnKill(Enemy enemy)
     {
         character.TakeDamage(-levels[curLevel].healPerKill);
+        XL_Pooler.instance.PopPosition("BlastPassiveFX", transform.position, transform);
     }
 }
