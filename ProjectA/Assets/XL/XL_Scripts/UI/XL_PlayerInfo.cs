@@ -64,4 +64,9 @@ public class XL_PlayerInfo : MonoBehaviour
     {
         menuData.difficulty = (Difficulty)idx;
     }
+
+    public void SetEnergyCost(int energyCost)
+    {
+        menuData.missionEnergyCost = energyCost;
+    }
 }
