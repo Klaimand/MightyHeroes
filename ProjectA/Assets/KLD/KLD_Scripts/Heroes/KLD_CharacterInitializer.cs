@@ -15,7 +15,7 @@ public class KLD_CharacterInitializer : MonoBehaviour
 
     [Header("Set References")]
     [SerializeField] KLD_PlayerAnimDoSpell playerAnimDoSpell;
-    [SerializeField] MultiAimConstraint multiAimConstraint;
+    public MultiAimConstraint multiAimConstraint;
 
     WeightedTransformArray newData;
 
