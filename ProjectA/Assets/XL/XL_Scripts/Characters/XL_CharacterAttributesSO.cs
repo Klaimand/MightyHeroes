@@ -90,4 +90,9 @@ public class XL_CharacterAttributesSO : ScriptableObject
     {
         spellSO.OnUltJoystickDown(_joyDirection, _player);
     }
+
+    public void CallOnUltLaunched(Transform _player)
+    {
+        spellSO.OnUltlaunched(_player);
+    }
 }
