@@ -147,6 +147,10 @@ public class KLD_PlayerAim : MonoBehaviour
             {
                 targetPos = transform.position + playerAttributes.worldAimDirection * targetPosDistanceOffset;
             }
+            else
+            {
+                targetPos = transform.position + rb.velocity * targetPosDistanceOffset;
+            }
         }
         else if (rb.velocity.sqrMagnitude > 0.1f)
         {

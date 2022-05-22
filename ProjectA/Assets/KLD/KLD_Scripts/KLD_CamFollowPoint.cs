@@ -11,6 +11,7 @@ public class KLD_CamFollowPoint : MonoBehaviour
     [Header("Parameters")]
     [SerializeField] Transform player;
     //[SerializeField] Transform smoothTargetPos;
+    [Range(0f, 10f)]
     [SerializeField] float distanceFromPlayerOnAim = 4f;
 
     Vector3 playerToTargetPos;
