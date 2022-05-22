@@ -2314,26 +2314,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1905827799}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1961764071 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1816673919, guid: 683f14f283869454489ac31322d6c303, type: 3}
-  m_PrefabInstance: {fileID: 8671646773253801186}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1961764072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1961764071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00b2d199b96b516448144ab30fb26aed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ChannelMask: 1
-  m_Gain: 1
-  m_Use2DDistance: 0
 --- !u!1 &1976635886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2446,7 +2426,7 @@ MonoBehaviour:
   playerMinDist: 10
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 3, y: 4}
+    minMaxTimeBetweenSpawns: {x: 5, y: 8}
     enemiesProbas:
     - proba: 1
       enemy: Swarmer

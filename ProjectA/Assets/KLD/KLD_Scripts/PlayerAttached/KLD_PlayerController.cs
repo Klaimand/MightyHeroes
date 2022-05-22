@@ -98,8 +98,8 @@ public class KLD_PlayerController : MonoBehaviour
         //Debug.DrawRay(transform.position + Vector3.up, transform.forward * 5f, Color.magenta);
 
         forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerToLookAtTransform, Vector3.up);
-        forwardToAimAngle -= 30f;
-        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle) + 30f;
+        //forwardToAimAngle -= 30f;
+        //absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle) + 30f;
 
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {

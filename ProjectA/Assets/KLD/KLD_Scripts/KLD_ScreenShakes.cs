@@ -36,6 +36,11 @@ public class KLD_ScreenShakes : MonoBehaviour
 
     void DoShake()
     {
+        if (shakePower < 0f)
+        {
+            shakePower = 0f;
+        }
+
         if (shakeTime > 0)
         {
             shakeTime -= Time.deltaTime;

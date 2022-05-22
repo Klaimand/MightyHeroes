@@ -30,6 +30,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     Animator animator;
 
+    [Header("Screen Shakes")]
+    [SerializeField] float takeDamage_shakeLenght = 1f;
+    [SerializeField] float takeDamage_shakePower = 8f;
+    [SerializeField] float takeDamage_shakeFrequency = 3f;
+
     [Header("UI")]
     [SerializeField] private XL_HealthBarUI characterUI;
 
@@ -228,7 +233,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         direction.x = spellDirection.x;
         direction.z = spellDirection.y;
 
-        direction = Quaternion.Euler(0f, 45f, 0f) * direction;
+        //direction = Quaternion.Euler(0f, 45f, 0f) * direction;
 
         //ultimateCharge = 0;
         //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
@@ -276,6 +281,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             StopPassiveHeal();
             animator?.Play("Hit", 3, 0f);
             KLD_EventsManager.instance.InvokeLooseHealth(damage);
+
+            KLD_ScreenShakes.instance.StartShake(takeDamage_shakeLenght, takeDamage_shakePower, takeDamage_shakeFrequency);
         }
 
         health -= damage;
