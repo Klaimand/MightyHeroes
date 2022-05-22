@@ -50,6 +50,8 @@ public class KLD_PlayerController : MonoBehaviour
 
     [HideInInspector] public float curAngleOffset = 0f;
 
+    [HideInInspector] public GameObject trailGO;
+
     //RigBuilder builder;
     //MultiAimConstraint multiAimConstraint;
 
@@ -238,6 +240,7 @@ public class KLD_PlayerController : MonoBehaviour
     bool isBonusSpeeded = false;
     public void AddBonusSpeedFor(float _bonusSpeed, float _duration)
     {
+        if (trailGO != null) { trailGO.SetActive(true); }
         isBonusSpeeded = true;
         bonusSpeed = _bonusSpeed;
         bonusSpeedDuration = _duration;
@@ -252,6 +255,7 @@ public class KLD_PlayerController : MonoBehaviour
         }
         if (bonusSpeedDuration <= 0f)
         {
+            if (trailGO != null) { trailGO.SetActive(false); }
             isBonusSpeeded = false;
             bonusSpeed = 0f;
             CalculateRealSpeed();
