@@ -215,6 +215,7 @@ public class KLD_PlayerShoot : MonoBehaviour
         }
         weapon.bullet.Shoot(weapon, canon.position + canonOffset, shootDirection, layerMask);
         animator.Play("(2) Weapon_ShootingAnim", 2);
+        KLD_ScreenShakes.instance.StartShake(weapon.shakeLenght, weapon.shakePower, weapon.shakeFrequency);
     }
 
     public void Reload()
@@ -244,6 +245,7 @@ public class KLD_PlayerShoot : MonoBehaviour
                 yield return new WaitForSeconds(weapon.GetCurAttributes().reloadSpeed);
             }
         }
+
         isReloading = false;
         UpdateUI();
 
@@ -261,7 +263,7 @@ public class KLD_PlayerShoot : MonoBehaviour
         isAiming = (playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null) ||
          (playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f);
 
-        if (!isAiming)
+        if (!isAiming || isReloading)
         {
             isShooting = false;
             curShootAnimDelay = 0f;
@@ -442,6 +444,18 @@ public class KLD_PlayerShoot : MonoBehaviour
         //leftHandIK.enabled = true;
         //rightHandIK.enabled = true;
 
+    }
+
+    [ContextMenu("Rebuild Rig")]
+    public void RebuildRig()
+    {
+        animator.enabled = false;
+        animator.enabled = true;
+
+        rigBuilder.Build();
+
+        animator.enabled = false;
+        animator.enabled = true;
     }
 
     #endregion
