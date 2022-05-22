@@ -905,7 +905,6 @@ Transform:
   - {fileID: 1166590039657386484}
   - {fileID: 1166590039840647968}
   - {fileID: 1166590038832206379}
-  - {fileID: 2342968024863231371}
   m_Father: {fileID: 127793756745166351}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1226,7 +1225,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2342968025340350622}
   - {fileID: 1166590039012856570}
   - {fileID: 1166590038549381974}
   - {fileID: 2342968024562471271}
@@ -2485,7 +2483,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 127793757193656161}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8864271517468073564
 MonoBehaviour:
@@ -2598,58 +2596,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162996679189126906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef35af88a95f1c2448edb9ec6258e676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnRadius: 4
-  playerMinDist: 10
-  steps:
-  - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 5000, y: 5000}
-    enemiesProbas:
-    - proba: 1
-      enemy: Kamikaze
-      enemyPerSpawn: 1
---- !u!1 &162996679376152272
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2342968024863231371}
-  - component: {fileID: 8864271516095431344}
-  m_Layer: 0
-  m_Name: SpawnerKamikaze [Shops]
-  m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2342968024863231371
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162996679376152272}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 57, y: 0, z: -121.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 127793756629350425}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8864271516095431344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162996679376152272}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef35af88a95f1c2448edb9ec6258e676, type: 3}
@@ -2910,58 +2856,6 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 162996679950715834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef35af88a95f1c2448edb9ec6258e676, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnRadius: 4
-  playerMinDist: 10
-  steps:
-  - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 5000, y: 5000}
-    enemiesProbas:
-    - proba: 1
-      enemy: Kamikaze
-      enemyPerSpawn: 1
---- !u!1 &162996679972780997
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2342968025340350622}
-  - component: {fileID: 8864271516438339493}
-  m_Layer: 0
-  m_Name: 'SpawnerKamikaze [Shops] '
-  m_TagString: Untagged
-  m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2342968025340350622
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162996679972780997}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 43, y: 0, z: -85}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 127793757193656161}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8864271516438339493
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 162996679972780997}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef35af88a95f1c2448edb9ec6258e676, type: 3}
@@ -3319,7 +3213,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238755022612179133}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 22, y: 0, z: -113}
+  m_LocalPosition: {x: 33, y: 0, z: -92.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1848948193041864836}
@@ -3338,7 +3232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRadius: 3
-  playerMinDist: 10
+  playerMinDist: 15
   steps:
   - timeToActivate: 0
     minMaxTimeBetweenSpawns: {x: 6, y: 8}
@@ -3527,7 +3421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238755022934458540}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 109.5, y: 0, z: -94.5}
+  m_LocalPosition: {x: 109.5, y: 0, z: -101.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1848948193041864836}
@@ -3669,7 +3563,7 @@ GameObject:
   - component: {fileID: 2418657237023593419}
   - component: {fileID: 8797527930269932784}
   m_Layer: 2
-  m_Name: SpawnerMix (20 - 25 secondes)
+  m_Name: SpawnerKamikaze (20 - 25 secondes)
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3683,7 +3577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238755023463577744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.5, y: 0, z: -94.5}
+  m_LocalPosition: {x: 66, y: 0, z: -86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1848948193041864836}
@@ -3705,25 +3599,10 @@ MonoBehaviour:
   playerMinDist: 35
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 10, y: 15}
-    enemiesProbas:
-    - proba: 1
-      enemy: Swarmer
-      enemyPerSpawn: 0
-  - timeToActivate: 25
-    minMaxTimeBetweenSpawns: {x: 8, y: 12}
-    enemiesProbas:
-    - proba: 0.7
-      enemy: Swarmer
-      enemyPerSpawn: 1
-    - proba: 1
-      enemy: Kamikaze
-      enemyPerSpawn: 1
-  - timeToActivate: 2
     minMaxTimeBetweenSpawns: {x: 10, y: 12}
     enemiesProbas:
     - proba: 1
-      enemy: Swarmer
+      enemy: Kamikaze
       enemyPerSpawn: 1
 --- !u!1 &238755023500838950
 GameObject:
@@ -3840,7 +3719,7 @@ GameObject:
   - component: {fileID: 2418657237196512933}
   - component: {fileID: 8797527930112545182}
   m_Layer: 2
-  m_Name: SpawnerMix (20 - 25 secondes)
+  m_Name: SpawnerSwarmer (20 - 25 secondes)
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3854,7 +3733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238755023823861246}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20, y: 0, z: -99.5}
+  m_LocalPosition: {x: 58.5, y: 0, z: -111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1848948193041864836}
@@ -3876,20 +3755,11 @@ MonoBehaviour:
   playerMinDist: 28
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 10, y: 15}
-    enemiesProbas:
-    - proba: 1
-      enemy: Swarmer
-      enemyPerSpawn: 0
-  - timeToActivate: 3
     minMaxTimeBetweenSpawns: {x: 10, y: 12}
     enemiesProbas:
-    - proba: 0.5
+    - proba: 1
       enemy: Swarmer
       enemyPerSpawn: 2
-    - proba: 1
-      enemy: Kamikaze
-      enemyPerSpawn: 1
 --- !u!1 &238755023904738706
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,7 +3941,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238755024166115400}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21, y: 0, z: -86.5}
+  m_LocalPosition: {x: 90.5, y: 0, z: -84.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1848948193041864836}
@@ -4093,7 +3963,7 @@ MonoBehaviour:
   playerMinDist: 10
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 10, y: 12}
+    minMaxTimeBetweenSpawns: {x: 6, y: 8}
     enemiesProbas:
     - proba: 1
       enemy: Swarmer
@@ -5228,7 +5098,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 127793757193656161}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5455932339548310637
 MonoBehaviour:
@@ -5748,7 +5618,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 127793757193656161}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5455932340175363521
 MonoBehaviour:
@@ -7516,7 +7386,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 127793757193656161}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5455932338629982377
 MonoBehaviour:
@@ -10574,7 +10444,7 @@ GameObject:
   - component: {fileID: 5754646517546569456}
   - component: {fileID: 1466852413039460811}
   m_Layer: 2
-  m_Name: SpawnerMix (20 - 25 secondes)
+  m_Name: SpawnerSwarmer (20 - 25 secondes)
   m_TagString: Untagged
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -10610,17 +10480,8 @@ MonoBehaviour:
   playerMinDist: 25
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 5000, y: 5000}
+    minMaxTimeBetweenSpawns: {x: 10, y: 12}
     enemiesProbas:
     - proba: 1
       enemy: Swarmer
-      enemyPerSpawn: 0
-  - timeToActivate: 15
-    minMaxTimeBetweenSpawns: {x: 8, y: 12}
-    enemiesProbas:
-    - proba: 0.6
-      enemy: Swarmer
-      enemyPerSpawn: 2
-    - proba: 1
-      enemy: Kamikaze
       enemyPerSpawn: 1
