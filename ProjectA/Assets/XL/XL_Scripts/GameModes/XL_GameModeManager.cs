@@ -147,4 +147,14 @@ public class XL_GameModeManager : MonoBehaviour
     {
         return Mathf.RoundToInt(gameMode.missionMaxTime - missionTime);
     }
+
+    public string GetGamemodeName()
+    {
+        return gameMode.gamemodeName;
+    }
+
+    public string GetMapName()
+    {
+        return gameMode.mapName;
+    }
 }
