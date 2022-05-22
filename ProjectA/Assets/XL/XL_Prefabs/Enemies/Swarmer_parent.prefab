@@ -51,22 +51,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitAnimator: {fileID: 6169334705641701006}
+  hitAnimatorLayer: 0
   attributes:
     maxHealth: 100
     health: 50
     transform: {fileID: 901648824140653449}
     score: 0
-  damage: 60
+  damage: 70
   isAlerted: 0
   targetedPlayerUpdateRate: 2
   agent: {fileID: 901648824140653451}
-  speed: 6
+  speed: 7.18
   healthBar: {fileID: 2879602902991981408}
   model: {fileID: 6765556740270379894}
   attackRange: 2
   attackWidth: 0.5
   attackAnimationSpeed: 1
   nbRaycast: 5
+  deathVFX: {fileID: 0}
 --- !u!195 &901648824140653451
 NavMeshAgent:
   m_ObjectHideFlags: 0

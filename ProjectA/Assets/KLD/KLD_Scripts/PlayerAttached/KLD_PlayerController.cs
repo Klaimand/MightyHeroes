@@ -8,6 +8,7 @@ public class KLD_PlayerController : MonoBehaviour
 {
     //refs
     [SerializeField] KLD_TouchInputs inputs;
+    [SerializeField] KLD_PlayerShoot playerShoot;
     KLD_PlayerAim playerAim;
     Rigidbody rb;
     [SerializeField] Transform scaler = null;
@@ -48,6 +49,8 @@ public class KLD_PlayerController : MonoBehaviour
     float speedRatio = 0f;
 
     [HideInInspector] public float curAngleOffset = 0f;
+
+    [HideInInspector] public GameObject trailGO;
 
     //RigBuilder builder;
     //MultiAimConstraint multiAimConstraint;
@@ -101,6 +104,9 @@ public class KLD_PlayerController : MonoBehaviour
          timedAxis.normalized * timedMagnitude;
     }
 
+    float rigOffset;
+    MultiAimConstraint aimConstraint;
+
     void DoFeetRotation()
     {
         playerToLookAtTransform = lookAtTransform.position - transform.position;
@@ -120,8 +126,9 @@ public class KLD_PlayerController : MonoBehaviour
 
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {
+            #region old buggy scaler
             //if its > 90 change scaler direction
-
+            /*
             if (absoluteForwardToAimAngle > 90f)
             {
                 runningBackward = true;
@@ -140,16 +147,36 @@ public class KLD_PlayerController : MonoBehaviour
             transform.LookAt((transform.position + worldLookAtPos)); //* (runningBackward ? -1f : 1f));
 
             //scaler.rotation = scalerRotation;
+            */
+            #endregion
+
+            if (!playerShoot.isAiming)
+            {
+                transform.LookAt(transform.position + rb.velocity);
+            }
+            else
+            {
+                transform.LookAt(playerAim.GetTargetPos());
+            }
+
+            if (Vector3.Angle(transform.forward, rb.velocity) > 90f)
+            {
+                runningBackward = true;
+            }
+            else
+            {
+                runningBackward = false;
+            }
         }
         else //we are not moving
         {
             runningBackward = false;
-            scaler.localRotation = Quaternion.identity;
+            //scaler.localRotation = Quaternion.identity;
 
-            if (absoluteForwardToAimAngle > 90f)
+            if (absoluteForwardToAimAngle > 60f)
             {
                 eulerRotationToDo.x = 0f;
-                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 90f) * Mathf.Sign(forwardToAimAngle));
+                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 60f) * Mathf.Sign(forwardToAimAngle));
                 eulerRotationToDo.z = 0f;
                 transform.Rotate(eulerRotationToDo);
             }
@@ -213,6 +240,7 @@ public class KLD_PlayerController : MonoBehaviour
     bool isBonusSpeeded = false;
     public void AddBonusSpeedFor(float _bonusSpeed, float _duration)
     {
+        if (trailGO != null) { trailGO.SetActive(true); }
         isBonusSpeeded = true;
         bonusSpeed = _bonusSpeed;
         bonusSpeedDuration = _duration;
@@ -227,6 +255,7 @@ public class KLD_PlayerController : MonoBehaviour
         }
         if (bonusSpeedDuration <= 0f)
         {
+            if (trailGO != null) { trailGO.SetActive(false); }
             isBonusSpeeded = false;
             bonusSpeed = 0f;
             CalculateRealSpeed();
