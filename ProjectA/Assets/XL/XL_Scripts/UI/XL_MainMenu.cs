@@ -88,7 +88,7 @@ public class XL_MainMenu : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("Energy"))
         {
-            PlayerPrefs.SetInt("Energy", 10);
+            PlayerPrefs.SetInt("Energy", 100);
         }
         if (!PlayerPrefs.HasKey("SoftCurrency"))
         {
@@ -120,6 +120,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void RefreshGOButton()
     {
+        Debug.Log("Energy needed : " + XL_PlayerInfo.instance.menuData.missionEnergyCost);
         if (XL_PlayerInfo.instance.menuData.missionEnergyCost > PlayerPrefs.GetInt("Energy"))
         {
             goButton.interactable = false;

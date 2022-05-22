@@ -63,7 +63,6 @@ public class XL_PlayerSession : MonoBehaviour
         if (XL_MainMenu.instance != null)
         {
             
-            Debug.Log("Energy : " + PlayerPrefs.GetInt("Energy"));
             if (XL_MainMenu.instance.GetEnergyMaxAmount() <= PlayerPrefs.GetInt("Energy"))
             {
                 PlayerPrefs.SetInt("Energy", XL_MainMenu.instance.GetEnergyMaxAmount());
@@ -81,7 +80,6 @@ public class XL_PlayerSession : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        Debug.Log("Quit");
         PlayerPrefs.SetString("DateQuit", DateTime.Now.ToString());
     }
 }
