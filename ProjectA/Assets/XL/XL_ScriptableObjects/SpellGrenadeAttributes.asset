@@ -12,12 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dc837559d3e7024cb5996cc110c904d, type: 3}
   m_Name: SpellGrenadeAttributes
   m_EditorClassIdentifier: 
-  level: 1
+  level: 0
+  base_throwingDistance: 12
+  base_explosionDamage: 50
+  base_explosionRadius: 3
+  minThrowingDistance: 5
+  travelTime: 1.2
+  throwingDistanceGrowthF: 1.025
+  explosionDamageGrowthF: 1.1
+  explosionRadiusGrowthF: 1.1
   throwingDistance: 12
   explosionDamage: 50
   explosionRadius: 3
-  minThrowingDistance: 5
-  travelTime: 1.2
-  throwingDistanceGrowthF: 1
-  explosionDamageGrowthF: 1
-  explosionRadiusGrowthF: 1

@@ -29,6 +29,11 @@ public class XL_GameManager : MonoBehaviour
         text.text = "Mission accomplished !";
         EndingScreen.SetActive(true);
         */
+        KLD_MissionInfos.instance.RefreshMissionInfos(true);
+
+        print("Soft Currency : " + KLD_MissionInfos.instance.missionData.GetSoftCurrency() +
+        "\n Hard currency : " + KLD_MissionInfos.instance.missionData.GetHardCurrency());
+
         StartCoroutine(ChangeSceneCoroutine(endingScreenTime));
     }
 
@@ -38,6 +43,11 @@ public class XL_GameManager : MonoBehaviour
         //text.text = "Mission failed !";
         //EndingScreen.SetActive(true);
         Debug.Log("Game Lost !");
+        KLD_MissionInfos.instance.RefreshMissionInfos(false);
+
+        print("Soft Currency : " + KLD_MissionInfos.instance.missionData.GetSoftCurrency() +
+        "\n Hard currency : " + KLD_MissionInfos.instance.missionData.GetSoftCurrency());
+
         StartCoroutine(ChangeSceneCoroutine(endingScreenTime));
     }
 

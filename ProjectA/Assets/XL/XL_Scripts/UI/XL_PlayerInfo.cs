@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class XL_PlayerInfo : MonoBehaviour
 {
@@ -10,15 +11,25 @@ public class XL_PlayerInfo : MonoBehaviour
     [SerializeField] private XL_CharacterDetailsMenu characterMenu;
     [SerializeField] private XL_WeaponDetailsMenu weaponMenu;
 
+    public Action<Weapon> onWeaponChange;
+    public Action<Character> onCharacterChange;
+
     public void Awake()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
 
         if (menuData == null)
         {
             menuData = new KLD_MenuData();
         }
-        DontDestroyOnLoad(this.gameObject);
 
         InitialiseMenuData();
     }
@@ -29,16 +40,19 @@ public class XL_PlayerInfo : MonoBehaviour
         menuData.weapon = 0;
         menuData.map = 0;
         menuData.difficulty = 0;
+        menuData.missionEnergyCost = 0;
     }
 
     public void SelectPlayer()
     {
         menuData.character = (Character)characterMenu.selectedPlayer;
+        onCharacterChange?.Invoke(menuData.character);
     }
 
     public void SelectWeapon()
     {
         menuData.weapon = (Weapon)weaponMenu.selectedWeapon;
+        onWeaponChange?.Invoke(menuData.weapon);
     }
 
     public void SelectMap(int idx)
@@ -49,5 +63,10 @@ public class XL_PlayerInfo : MonoBehaviour
     public void SelectDifficulty(int idx)
     {
         menuData.difficulty = (Difficulty)idx;
+    }
+
+    public void SetEnergyCost(int energyCost)
+    {
+        menuData.missionEnergyCost = energyCost;
     }
 }

@@ -4,56 +4,33 @@ using UnityEngine;
 
 public class XL_Projectile : MonoBehaviour
 {
+    private int damage;
+    private float radius;
 
-    [SerializeField] private XL_ProjectileSO projectileSO;
-    private Vector3 startPosition;
-    [SerializeField] private float refreshCheck;
-    private bool destroyed;
 
-    public void Initialize()
+
+    public void Initialize(int damage, float radius)
     {
-        destroyed = false;
-        startPosition = transform.position;
-        StartCoroutine(CheckRangeCoroutine(refreshCheck));
+        this.damage = damage;
+        this.radius = radius;
     }
 
-    public void Initialize(Vector3 startPosition)
-    {
-        this.startPosition = startPosition;
-    }
-
-    IEnumerator CheckRangeCoroutine(float t)
-    {
-        
-        yield return new WaitForSeconds(t);
-        if ((transform.position - startPosition).magnitude > projectileSO.range)
-        {
-            Debug.Log("Depoped because of range");
-            XL_Pooler.instance.DePop(projectileSO.projectileName, transform.gameObject);
-            StopAllCoroutines();
-        }
-        else if(!destroyed)
-        {
-            StartCoroutine(CheckRangeCoroutine(t));
-        }
-        
-    }
 
     XL_IDamageable objectHit;
     private void OnCollisionEnter(Collision collision)
     {
-        if (!collision.transform.CompareTag("Enemy")) 
+        if (!collision.transform.CompareTag("Enemy"))
         {
-            destroyed = true;
             objectHit = collision.transform.GetComponent<XL_IDamageable>();
             if (objectHit != null)
             {
-                objectHit.TakeDamage(projectileSO.damage);
+                objectHit.TakeDamage(damage);
             }
-            Debug.Log("Depoped because of collision");
+            //Debug.Log("Depoped because of collision");
             StopAllCoroutines();
-            XL_Pooler.instance.DePop(projectileSO.projectileName, transform.gameObject);
+            XL_Pooler.instance.PopPosition("Summoner_Explosion", transform.position).GetComponent<XL_Explosion>().StartExplosion(damage, radius, 0.1f);
+            XL_Pooler.instance.DePop("Summoner_Projectile", transform.gameObject);
         }
-        
+
     }
 }

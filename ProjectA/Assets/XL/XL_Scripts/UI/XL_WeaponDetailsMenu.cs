@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class XL_WeaponDetailsMenu : MonoBehaviour
 {
+    public static XL_WeaponDetailsMenu instance;
+
     [Header("Weapon Info")]
     [SerializeField] private XL_UIWeaponInfo[] weaponInfos;
 
@@ -23,7 +25,16 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     [SerializeField] private Transform magazineSizeXScaler;
     [SerializeField] private float scalerMagazineSizeMax;
 
-    public int selectedWeapon;
+    [Header("Upgrade")]
+    [SerializeField] private GameObject upgradeButton;
+    [SerializeField] private TMP_Text upgradeText;
+
+    public int selectedWeapon = 0;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     public void Select(int idx)
     {
@@ -34,18 +45,46 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
 
         selectedWeapon = idx;
 
-        //Initialise Text
-        weaponInfos[idx].DisplayLevel();
-        damageText.text = weaponInfos[idx].GetDamage().ToString();
-        rpmText.text = weaponInfos[idx].GetRPM().ToString();
-        magazineSizeText.text = weaponInfos[idx].GetMagazine().ToString();
-
-        //Initialise Bar
-        damageXScaler.localScale = new Vector3(weaponInfos[idx].GetDamage() / scalerDamageMax, damageXScaler.localScale.y, damageXScaler.localScale.z);
-        rpmXScaler.localScale = new Vector3(weaponInfos[idx].GetRPM() / scalerRPMMax, rpmXScaler.localScale.y, rpmXScaler.localScale.z);
-        magazineSizeXScaler.localScale = new Vector3(weaponInfos[idx].GetMagazine() / scalerMagazineSizeMax, magazineSizeXScaler.localScale.y, magazineSizeXScaler.localScale.z);
+        CheckHasUpgrade();
+        DisplayWeaponInfo();
 
         weaponInfos[idx].Activate();
+    }
 
+    private void CheckHasUpgrade()
+    {
+        if (weaponInfos[selectedWeapon].GetLevel() + 1 >= weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes.Length) upgradeButton.SetActive(false);
+        else upgradeButton.SetActive(true);
+    }
+
+    private void DisplayWeaponInfo()
+    {
+        //Initialise Text
+        weaponInfos[selectedWeapon].DisplayLevel();
+        damageText.text = weaponInfos[selectedWeapon].GetDamage().ToString();
+        rpmText.text = weaponInfos[selectedWeapon].GetRPM().ToString();
+        magazineSizeText.text = weaponInfos[selectedWeapon].GetMagazine().ToString();
+        upgradeText.text = weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach.ToString(); //Aled
+
+        //Initialise Bar
+        damageXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetDamage() / scalerDamageMax, damageXScaler.localScale.y, damageXScaler.localScale.z);
+        rpmXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetRPM() / scalerRPMMax, rpmXScaler.localScale.y, rpmXScaler.localScale.z);
+        magazineSizeXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetMagazine() / scalerMagazineSizeMax, magazineSizeXScaler.localScale.y, magazineSizeXScaler.localScale.z);
+
+    }
+
+    public void UpgradeWeapon() 
+    {
+        Debug.Log(weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
+        if (PlayerPrefs.GetInt("SoftCurrency") > weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach) 
+        {
+            PlayerPrefs.SetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName, weaponInfos[selectedWeapon].GetLevel() + 1);
+            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
+            XL_MainMenu.instance.RefreshTopOverlay();
+            weaponInfos[selectedWeapon].weaponAttributes.level++;
+
+            CheckHasUpgrade();
+            DisplayWeaponInfo();
+        }
     }
 }

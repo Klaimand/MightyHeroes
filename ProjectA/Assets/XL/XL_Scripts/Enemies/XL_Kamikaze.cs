@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class XL_Kamikaze : XL_Enemy
 {
+
+    [SerializeField] protected float chargeSpeedRatio = 2;
     [SerializeField] protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
     [SerializeField] protected int explosionDamage;
     [SerializeField] protected float explosionRange;
@@ -19,6 +21,13 @@ public class XL_Kamikaze : XL_Enemy
     {
         animator.ResetTrigger("Charging");
         isCharged = false;
+    }
+
+    protected override void Initialize()
+    {
+        base.Initialize();
+        isCharged = false;
+        ResetAnimator();
     }
 
     private void OnEnable()
@@ -48,6 +57,7 @@ public class XL_Kamikaze : XL_Enemy
     public override void Die()
     {
         base.Die();
+        KLD_EventsManager.instance.InvokeEnemyKill(Enemy.KAMIKAZE);
         foreach (ParticleSystem ps in chargeParticles)
         {
             ps.Stop();
@@ -73,7 +83,7 @@ public class XL_Kamikaze : XL_Enemy
             {
                 animator.SetBool("Charging", true);
                 if (!isCharged) StartCoroutine(ChargingCoroutine());
-                agent.speed = speed * 2;
+                agent.speed = speed * chargeSpeedRatio;
             }
             if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 0.5f)
             {
@@ -97,6 +107,6 @@ public class XL_Kamikaze : XL_Enemy
         }
         animator.SetBool("Attacking", true);
         agent.isStopped = false;
-        
+
     }
 }

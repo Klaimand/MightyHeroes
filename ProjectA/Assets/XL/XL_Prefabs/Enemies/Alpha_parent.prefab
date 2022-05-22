@@ -261,12 +261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b98d64bcef78e4da0b9acbb799ff60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitAnimator: {fileID: 0}
+  hitAnimatorLayer: 0
   attributes:
     maxHealth: 100
     health: 100
     transform: {fileID: 5651373868645437874}
     score: 0
-  damage: 0
+  damage: 80
   isAlerted: 1
   targetedPlayerUpdateRate: 0.5
   agent: {fileID: 7635582431578136576}
@@ -275,10 +277,15 @@ MonoBehaviour:
   summonCooldown: 10
   nbEnemiesSummoned: 1
   summonDistance: 3
+  cannon: {fileID: 0}
+  cannonEdgesPos: []
   projectilespeed: 2
   projectileTravelTime: 1.3
   fireRate: 0.5
+  projectileDamage: 80
+  projectileExplosionRadius: 5
   animator: {fileID: 3708816895282187125}
+  lookAtConstraint: {fileID: 0}
 --- !u!135 &3688438485610751149
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -459,6 +466,10 @@ PrefabInstance:
     - target: {fileID: 1089717838616605843, guid: ba713dc401759bd4d970d5f540726226, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694413525864801783, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3869053544842354484, guid: ba713dc401759bd4d970d5f540726226, type: 3}
       propertyPath: m_LocalRotation.w

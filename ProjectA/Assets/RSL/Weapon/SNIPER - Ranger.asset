@@ -20,15 +20,15 @@ MonoBehaviour:
   type: 3
   rarity: 0
   reloadType: 0
-  bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
-  level: 0
+  bullet: {fileID: 11400000, guid: d9af93118cb16734e894f64b02e30c88, type: 2}
+  level: 1
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
-    bulletDamage: 51
+    bulletDamage: 105
     rpm: 150
-    reloadSpeed: 2
-    magazineSize: 15
+    reloadSpeed: 1.5
+    magazineSize: 6
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
@@ -39,10 +39,10 @@ MonoBehaviour:
     displayedName: Level 0
     isBPBReloading: 0
   - experienceToReach: 800
-    bulletDamage: 55
+    bulletDamage: 105
     rpm: 150
-    reloadSpeed: 1.9
-    magazineSize: 16
+    reloadSpeed: 1.5
+    magazineSize: 6
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
@@ -53,10 +53,10 @@ MonoBehaviour:
     displayedName: Level 1
     isBPBReloading: 0
   - experienceToReach: 1800
-    bulletDamage: 59
+    bulletDamage: 110
     rpm: 150
-    reloadSpeed: 1.8
-    magazineSize: 17
+    reloadSpeed: 1.45
+    magazineSize: 7
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
@@ -67,10 +67,10 @@ MonoBehaviour:
     displayedName: Level 2
     isBPBReloading: 0
   - experienceToReach: 3100
-    bulletDamage: 63
+    bulletDamage: 115
     rpm: 150
-    reloadSpeed: 1.7
-    magazineSize: 18
+    reloadSpeed: 1.4
+    magazineSize: 8
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
@@ -81,10 +81,10 @@ MonoBehaviour:
     displayedName: Level 3
     isBPBReloading: 0
   - experienceToReach: 4700
-    bulletDamage: 67
+    bulletDamage: 120
     rpm: 150
-    reloadSpeed: 1.6
-    magazineSize: 19
+    reloadSpeed: 1.35
+    magazineSize: 9
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
@@ -95,10 +95,10 @@ MonoBehaviour:
     displayedName: Level 4
     isBPBReloading: 0
   - experienceToReach: 6300
-    bulletDamage: 71
+    bulletDamage: 125
     rpm: 150
-    reloadSpeed: 1.5
-    magazineSize: 20
+    reloadSpeed: 1.3
+    magazineSize: 10
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
     isBuckshot: 0
@@ -109,9 +109,12 @@ MonoBehaviour:
     displayedName: Level 5
     isBPBReloading: 0
   shootDelay: 0.4
+  shakeLenght: 0.4
+  shakePower: 3
+  shakeFrequency: 2
   weaponHolder: {fileID: 2138789096679354538, guid: f81459ad605aacc4b8cbbe3375fb4d49, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: d928a21b50100b642bfcf3d5e29276b3, type: 2}
-  shootAnimDelay: 0.3
+  shootAnimDelay: 0.5
   angleOffset: 0
   muzzleFlashFX: {fileID: 4493065256289968807, guid: b11ce3d374d3aa048853ebce17cbbdf2, type: 3}
   lineRendererFX: {fileID: 5147150837283688741, guid: 58128c18920931e4e8dc35aaad16a0eb, type: 3}

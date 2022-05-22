@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Animations.Rigging;
 
 public class KLD_PlayerController : MonoBehaviour
 {
     //refs
     [SerializeField] KLD_TouchInputs inputs;
+    [SerializeField] KLD_PlayerShoot playerShoot;
     KLD_PlayerAim playerAim;
     Rigidbody rb;
     [SerializeField] Transform scaler = null;
@@ -18,7 +20,7 @@ public class KLD_PlayerController : MonoBehaviour
 
     //controller
     public Transform refTransform = null;
-    [SerializeField] float speed = 10f;
+    //[SerializeField] float speed = 10f;
     [SerializeField] float axisDeadzone = 0.1f;
 
     [SerializeField] float accelerationTime = 0.3f;
@@ -41,6 +43,16 @@ public class KLD_PlayerController : MonoBehaviour
 
     Vector3 worldLookAtPos = Vector3.zero;
 
+    float realSpeed = 0f;
+    float baseSpeed = 0f;
+    float bonusSpeed = 0f;
+    float speedRatio = 0f;
+
+    [HideInInspector] public float curAngleOffset = 0f;
+
+    //RigBuilder builder;
+    //MultiAimConstraint multiAimConstraint;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -56,13 +68,20 @@ public class KLD_PlayerController : MonoBehaviour
     {
         ProcessAxis();
 
-        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * speed;
+        ProcessBonusSpeed();
+
+        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
         //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
         //(runningBackward ? -1f : 1f);
 
-        DoFeetRotation();
+        //DoFeetRotation();
 
         AnimateLocomotionState();
+    }
+
+    void FixedUpdate()
+    {
+        DoFeetRotation();
     }
 
     void ProcessAxis()
@@ -83,6 +102,9 @@ public class KLD_PlayerController : MonoBehaviour
          timedAxis.normalized * timedMagnitude;
     }
 
+    float rigOffset;
+    MultiAimConstraint aimConstraint;
+
     void DoFeetRotation()
     {
         playerToLookAtTransform = lookAtTransform.position - transform.position;
@@ -91,12 +113,20 @@ public class KLD_PlayerController : MonoBehaviour
         //Debug.DrawRay(transform.position + Vector3.up, transform.forward * 5f, Color.magenta);
 
         forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerToLookAtTransform, Vector3.up);
-        forwardToAimAngle -= 30f;
-        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle) + 30f;
+        //forwardToAimAngle -= 30f;
+        forwardToAimAngle -= curAngleOffset;
+        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle); //+ curAngleOffset;
+
+        //if (forwardToAimAngle > 0f)
+        //{
+        //    absoluteForwardToAimAngle -= curAngleOffset;
+        //}
 
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {
+            #region old buggy scaler
             //if its > 90 change scaler direction
+            /*
             if (absoluteForwardToAimAngle > 90f)
             {
                 runningBackward = true;
@@ -115,16 +145,36 @@ public class KLD_PlayerController : MonoBehaviour
             transform.LookAt((transform.position + worldLookAtPos)); //* (runningBackward ? -1f : 1f));
 
             //scaler.rotation = scalerRotation;
+            */
+            #endregion
+
+            if (!playerShoot.isAiming)
+            {
+                transform.LookAt(transform.position + rb.velocity);
+            }
+            else
+            {
+                transform.LookAt(playerAim.GetTargetPos());
+            }
+
+            if (Vector3.Angle(transform.forward, rb.velocity) > 90f)
+            {
+                runningBackward = true;
+            }
+            else
+            {
+                runningBackward = false;
+            }
         }
         else //we are not moving
         {
             runningBackward = false;
-            scaler.localRotation = Quaternion.identity;
+            //scaler.localRotation = Quaternion.identity;
 
-            if (absoluteForwardToAimAngle > 90f)
+            if (absoluteForwardToAimAngle > 60f)
             {
                 eulerRotationToDo.x = 0f;
-                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 90f) * Mathf.Sign(forwardToAimAngle));
+                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 60f) * Mathf.Sign(forwardToAimAngle));
                 eulerRotationToDo.z = 0f;
                 transform.Rotate(eulerRotationToDo);
             }
@@ -146,20 +196,65 @@ public class KLD_PlayerController : MonoBehaviour
         animator.SetInteger("locomotionState", (int)locomotionState);
     }
 
-    public void SetSpeed(float newSpeed)
-    {
-        speed = newSpeed;
-    }
-
     public bool IsRunning()
     {
         return rawAxis != Vector2.zero;
     }
 
-
     public void SetCharacterMeshComponents(Animator _animator, Transform _scaler)
     {
         animator = _animator;
         scaler = _scaler;
+    }
+
+    void CalculateRealSpeed()
+    {
+        realSpeed = ((baseSpeed + bonusSpeed) * speedRatio) / 3.34f;
+        //realSpeed = ((baseSpeed * speedRatio) + bonusSpeed) / 3.34f;
+    }
+
+    public void SetBaseSpeed(float _baseSpeed)
+    {
+        baseSpeed = _baseSpeed;
+        CalculateRealSpeed();
+    }
+
+    //public void SetBonusSpeed(float _bonusSpeed)
+    //{
+    //    bonusSpeed = _bonusSpeed;
+    //    CalculateRealSpeed();
+    //}
+
+    public void SetSpeedRatio(float _speedRatio)
+    {
+        if (_speedRatio != speedRatio)
+        {
+            speedRatio = _speedRatio;
+            CalculateRealSpeed();
+        }
+    }
+
+    float bonusSpeedDuration = 0f;
+    bool isBonusSpeeded = false;
+    public void AddBonusSpeedFor(float _bonusSpeed, float _duration)
+    {
+        isBonusSpeeded = true;
+        bonusSpeed = _bonusSpeed;
+        bonusSpeedDuration = _duration;
+        CalculateRealSpeed();
+    }
+
+    void ProcessBonusSpeed()
+    {
+        if (isBonusSpeeded)
+        {
+            bonusSpeedDuration -= Time.deltaTime;
+        }
+        if (bonusSpeedDuration <= 0f)
+        {
+            isBonusSpeeded = false;
+            bonusSpeed = 0f;
+            CalculateRealSpeed();
+        }
     }
 }
