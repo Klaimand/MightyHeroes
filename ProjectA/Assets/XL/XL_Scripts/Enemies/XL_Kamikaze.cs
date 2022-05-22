@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class XL_Kamikaze : XL_Enemy
 {
+
+    [SerializeField] protected float chargeSpeedRatio = 2;
     [SerializeField] protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
     [SerializeField] protected int explosionDamage;
     [SerializeField] protected float explosionRange;
@@ -81,7 +83,7 @@ public class XL_Kamikaze : XL_Enemy
             {
                 animator.SetBool("Charging", true);
                 if (!isCharged) StartCoroutine(ChargingCoroutine());
-                agent.speed = speed * 2;
+                agent.speed = speed * chargeSpeedRatio;
             }
             if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 0.5f)
             {
