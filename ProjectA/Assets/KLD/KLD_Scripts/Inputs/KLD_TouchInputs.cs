@@ -41,6 +41,8 @@ public class KLD_TouchInputs : MonoBehaviour
     [SerializeField] GameObject ultiJoystick = null;
     [SerializeField, Range(0.3f, 0.8f)] float leftTouchScreenRatio = 0.4f;
 
+    [SerializeField] float vibrationLength = 0.4f;
+
     [SerializeField] Joystick[] joysticks;
 
     [SerializeField] Vector2Int referenceResolution = new Vector2Int(2260, 1080);
@@ -60,6 +62,8 @@ public class KLD_TouchInputs : MonoBehaviour
     public event Action<Vector2> onActiveSkillJoystickRelease;
     public event Action<Vector2> onActiveSkillJoystickDown;
 
+    Vector2 lastRawVector;
+
     void Start()
     {
         if (!overrideScreenSize)
@@ -77,6 +81,7 @@ public class KLD_TouchInputs : MonoBehaviour
 
         InitializeJoysticks();
         //InitializeActiveJoystickOrButton();
+
     }
 
     void InitializeJoysticks()
@@ -247,6 +252,7 @@ public class KLD_TouchInputs : MonoBehaviour
                 {
                     //ratioedPos.x = curRatioedTouchPosition.x * resolutionRatio.x;
                     //ratioedPos.y = curRatioedTouchPosition.y * resolutionRatio.y;
+                    lastRawVector = joysticks[joyIndex].rawVector;
 
                     joysticks[joyIndex].rawVector = curRatioedTouchPosition - joysticks[joyIndex].rawPosition;
                     //joysticks[joyIndex].rawVector = ratioedPos - joysticks[joyIndex].rawPosition;
@@ -254,6 +260,11 @@ public class KLD_TouchInputs : MonoBehaviour
                     if (joysticks[joyIndex].rawVector.magnitude < joysticks[joyIndex].deadzone)
                     {
                         joysticks[joyIndex].rawVector = Vector2.zero;
+
+                        if (lastRawVector != Vector2.zero)
+                        {
+                            Vibrate(vibrationLength);
+                        }
                     }
 
                     joysticks[joyIndex].touchCircle.anchoredPosition = curRatioedTouchPosition;
@@ -394,6 +405,23 @@ public class KLD_TouchInputs : MonoBehaviour
         if (!_interractable)
         {
             joysticks[_joyIndex].endedInterractivity = false;
+        }
+    }
+
+    void Vibrate(float _time)
+    {
+        StartCoroutine(VibrateCoroutine(_time));
+    }
+
+    float t;
+    IEnumerator VibrateCoroutine(float _time)
+    {
+        t = 0f;
+        while (t < _time)
+        {
+            Handheld.Vibrate();
+            yield return null;
+            t += Time.deltaTime;
         }
     }
 

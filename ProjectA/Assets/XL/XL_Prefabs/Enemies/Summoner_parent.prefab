@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5528975635840500202}
   - component: {fileID: 5528975635840500203}
-  m_Layer: 7
+  m_Layer: 2
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -296,6 +296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b98d64bcef78e4da0b9acbb799ff60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitAnimator: {fileID: 0}
+  hitAnimatorLayer: 0
   attributes:
     maxHealth: 100
     health: 100
@@ -320,6 +322,7 @@ MonoBehaviour:
   projectileDamage: 80
   projectileExplosionRadius: 5
   animator: {fileID: 5528975637761708190}
+  lookAtConstraint: {fileID: 5528975637744543215}
 --- !u!135 &5528975636831807296
 SphereCollider:
   m_ObjectHideFlags: 0
