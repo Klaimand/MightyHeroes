@@ -22,6 +22,7 @@ public class KLD_SpellGrenade : KLD_Spell
     {
         grenadeAttributes.level = characterLevel;
         grenadeAttributes.Initialize();
+        isAiming = false;
     }
 
     public override void ActivateSpell(Vector3 direction, Transform pos, int characterLevel)
@@ -51,9 +52,24 @@ public class KLD_SpellGrenade : KLD_Spell
         impactZoneWorldDir.y = 0f;
         impactZoneWorldDir.z = _joyDirection.y;
 
-        impactZoneWorldDir = Quaternion.Euler(0f, 45f, 0f) * impactZoneWorldDir;
+        //impactZoneWorldDir = Quaternion.Euler(0f, 45f, 0f) * impactZoneWorldDir;
 
         //impactPoints = XL_Utilities.GenerateCurve(2, grenadeAttributes.throwingDistance - 1);
+
+        impactPos = _player.position + impactZoneWorldDir.normalized +
+        impactZoneWorldDir * Mathf.Lerp(grenadeAttributes.minThrowingDistance,
+        grenadeAttributes.throwingDistance, impactZoneWorldDir.magnitude);
+
+        impactZoneTransform.position = impactPos;
+    }
+
+    public override void OnUltlaunched(Transform _player)
+    {
+        if (!isAiming)
+        {
+            isAiming = true;
+            impactZoneTransform = XL_Pooler.instance.Pop("BlastGrenadeZone").transform;
+        }
 
         impactPos = _player.position + impactZoneWorldDir.normalized +
         impactZoneWorldDir * Mathf.Lerp(grenadeAttributes.minThrowingDistance,
@@ -69,7 +85,8 @@ public class KLD_SpellGrenade : KLD_Spell
 
     void DepopImpactZone()
     {
+        XL_Pooler.instance.DelayedDePop(1.5f, "BlastGrenadeZone", impactZoneTransform.gameObject);
+        //XL_Pooler.instance.DePop("BlastGrenadeZone", impactZoneTransform.gameObject);
         isAiming = false;
-        XL_Pooler.instance.DePop("BlastGrenadeZone", impactZoneTransform.gameObject);
     }
 }

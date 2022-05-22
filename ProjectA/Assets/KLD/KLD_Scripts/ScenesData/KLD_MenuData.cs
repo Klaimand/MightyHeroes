@@ -42,4 +42,6 @@ public class KLD_MenuData
     public Map map = Map.MALL;
 
     public Difficulty difficulty = Difficulty.EASY;
+
+    public int missionEnergyCost = 0;
 }

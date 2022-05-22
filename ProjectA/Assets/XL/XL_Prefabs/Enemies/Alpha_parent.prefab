@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90b98d64bcef78e4da0b9acbb799ff60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitAnimator: {fileID: 0}
   attributes:
     maxHealth: 100
     health: 100
@@ -462,6 +463,10 @@ PrefabInstance:
     - target: {fileID: 1089717838616605843, guid: ba713dc401759bd4d970d5f540726226, type: 3}
       propertyPath: m_TagString
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 2694413525864801783, guid: ba713dc401759bd4d970d5f540726226, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3869053544842354484, guid: ba713dc401759bd4d970d5f540726226, type: 3}
       propertyPath: m_LocalRotation.w
