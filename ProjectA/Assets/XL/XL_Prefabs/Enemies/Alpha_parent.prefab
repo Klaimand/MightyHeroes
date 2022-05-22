@@ -262,6 +262,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitAnimator: {fileID: 0}
+  hitAnimatorLayer: 0
   attributes:
     maxHealth: 100
     health: 100
@@ -276,13 +277,15 @@ MonoBehaviour:
   summonCooldown: 10
   nbEnemiesSummoned: 1
   summonDistance: 3
+  cannon: {fileID: 0}
+  cannonEdgesPos: []
   projectilespeed: 2
   projectileTravelTime: 1.3
   fireRate: 0.5
   projectileDamage: 80
-  projectileRange: 20
   projectileExplosionRadius: 5
   animator: {fileID: 3708816895282187125}
+  lookAtConstraint: {fileID: 0}
 --- !u!135 &3688438485610751149
 SphereCollider:
   m_ObjectHideFlags: 0
