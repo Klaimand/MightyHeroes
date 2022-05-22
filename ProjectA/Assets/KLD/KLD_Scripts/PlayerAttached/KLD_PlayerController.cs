@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Animations.Rigging;
 
 public class KLD_PlayerController : MonoBehaviour
 {
     //refs
     [SerializeField] KLD_TouchInputs inputs;
+    [SerializeField] KLD_PlayerShoot playerShoot;
     KLD_PlayerAim playerAim;
     Rigidbody rb;
     [SerializeField] Transform scaler = null;
@@ -46,6 +48,11 @@ public class KLD_PlayerController : MonoBehaviour
     float bonusSpeed = 0f;
     float speedRatio = 0f;
 
+    [HideInInspector] public float curAngleOffset = 0f;
+
+    //RigBuilder builder;
+    //MultiAimConstraint multiAimConstraint;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -67,9 +74,14 @@ public class KLD_PlayerController : MonoBehaviour
         //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
         //(runningBackward ? -1f : 1f);
 
-        DoFeetRotation();
+        //DoFeetRotation();
 
         AnimateLocomotionState();
+    }
+
+    void FixedUpdate()
+    {
+        DoFeetRotation();
     }
 
     void ProcessAxis()
@@ -90,6 +102,9 @@ public class KLD_PlayerController : MonoBehaviour
          timedAxis.normalized * timedMagnitude;
     }
 
+    float rigOffset;
+    MultiAimConstraint aimConstraint;
+
     void DoFeetRotation()
     {
         playerToLookAtTransform = lookAtTransform.position - transform.position;
@@ -98,12 +113,20 @@ public class KLD_PlayerController : MonoBehaviour
         //Debug.DrawRay(transform.position + Vector3.up, transform.forward * 5f, Color.magenta);
 
         forwardToAimAngle = Vector3.SignedAngle(transform.forward, playerToLookAtTransform, Vector3.up);
-        forwardToAimAngle -= 30f;
-        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle) + 30f;
+        //forwardToAimAngle -= 30f;
+        forwardToAimAngle -= curAngleOffset;
+        absoluteForwardToAimAngle = Mathf.Abs(forwardToAimAngle); //+ curAngleOffset;
+
+        //if (forwardToAimAngle > 0f)
+        //{
+        //    absoluteForwardToAimAngle -= curAngleOffset;
+        //}
 
         if (rb.velocity.sqrMagnitude > rbVelocityDead * rbVelocityDead)
         {
+            #region old buggy scaler
             //if its > 90 change scaler direction
+            /*
             if (absoluteForwardToAimAngle > 90f)
             {
                 runningBackward = true;
@@ -122,16 +145,36 @@ public class KLD_PlayerController : MonoBehaviour
             transform.LookAt((transform.position + worldLookAtPos)); //* (runningBackward ? -1f : 1f));
 
             //scaler.rotation = scalerRotation;
+            */
+            #endregion
+
+            if (!playerShoot.isAiming)
+            {
+                transform.LookAt(transform.position + rb.velocity);
+            }
+            else
+            {
+                transform.LookAt(playerAim.GetTargetPos());
+            }
+
+            if (Vector3.Angle(transform.forward, rb.velocity) > 90f)
+            {
+                runningBackward = true;
+            }
+            else
+            {
+                runningBackward = false;
+            }
         }
         else //we are not moving
         {
             runningBackward = false;
-            scaler.localRotation = Quaternion.identity;
+            //scaler.localRotation = Quaternion.identity;
 
-            if (absoluteForwardToAimAngle > 90f)
+            if (absoluteForwardToAimAngle > 60f)
             {
                 eulerRotationToDo.x = 0f;
-                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 90f) * Mathf.Sign(forwardToAimAngle));
+                eulerRotationToDo.y = ((absoluteForwardToAimAngle - 60f) * Mathf.Sign(forwardToAimAngle));
                 eulerRotationToDo.z = 0f;
                 transform.Rotate(eulerRotationToDo);
             }

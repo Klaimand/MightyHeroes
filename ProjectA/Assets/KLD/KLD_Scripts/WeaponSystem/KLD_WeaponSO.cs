@@ -55,6 +55,13 @@ public class KLD_WeaponSO : ScriptableObject
 
     [HideInInspector] public float shootDelay = 0f;
 
+    [Header("Screen Shakes")]
+    public float shakeLenght = 0.05f;
+
+    public float shakePower = 2f;
+
+    public float shakeFrequency = 1f;
+
     [Header("Animations"), Space(10)]
     public GameObject weaponHolder;
     //public AnimationClip holdingAnim;

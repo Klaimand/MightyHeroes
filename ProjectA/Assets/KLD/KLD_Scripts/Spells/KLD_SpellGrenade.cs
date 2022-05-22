@@ -52,7 +52,7 @@ public class KLD_SpellGrenade : KLD_Spell
         impactZoneWorldDir.y = 0f;
         impactZoneWorldDir.z = _joyDirection.y;
 
-        impactZoneWorldDir = Quaternion.Euler(0f, 45f, 0f) * impactZoneWorldDir;
+        //impactZoneWorldDir = Quaternion.Euler(0f, 45f, 0f) * impactZoneWorldDir;
 
         //impactPoints = XL_Utilities.GenerateCurve(2, grenadeAttributes.throwingDistance - 1);
 

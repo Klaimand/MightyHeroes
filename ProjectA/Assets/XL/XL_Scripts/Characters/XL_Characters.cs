@@ -16,12 +16,6 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     public bool isUltimateCharged;
     bool ultimateLaunched = false;
 
-    [SerializeField] private XL_HealthBarUI characterUI;
-
-    [SerializeField] Animator ultJoystickAnimator;
-    [SerializeField] Image ultCircleImage;
-    [SerializeField] Animator ultButtonAnimator;
-    [SerializeField] Button ultButton;
 
     enum UltState { NONE, DOWN, UP, PRESSED };
 
@@ -35,6 +29,21 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     PassiveSpellInitializer passiveSpellInitializer;
 
     Animator animator;
+
+    [Header("Screen Shakes")]
+    [SerializeField] float takeDamage_shakeLenght = 1f;
+    [SerializeField] float takeDamage_shakePower = 8f;
+    [SerializeField] float takeDamage_shakeFrequency = 3f;
+
+    [Header("UI")]
+    [SerializeField] private XL_HealthBarUI characterUI;
+
+    [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Image ultCircleImage;
+    [SerializeField] Animator ultButtonAnimator;
+    [SerializeField] Button ultButton;
+
+    [SerializeField] Image[] ultButtonImages;
 
     /*
     private void Awake()
@@ -110,6 +119,10 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         if (touchInputs.GetUseButtonForUltimate())
         {
             ultButtonAnimator.SetInteger("ultState", (int)ultState);
+            foreach (var image in ultButtonImages)
+            {
+                image.fillAmount = ultimateCharge * 0.01f;
+            }
         }
         else
         {
@@ -220,7 +233,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         direction.x = spellDirection.x;
         direction.z = spellDirection.y;
 
-        direction = Quaternion.Euler(0f, 45f, 0f) * direction;
+        //direction = Quaternion.Euler(0f, 45f, 0f) * direction;
 
         //ultimateCharge = 0;
         //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
@@ -268,6 +281,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             StopPassiveHeal();
             animator?.Play("Hit", 3, 0f);
             KLD_EventsManager.instance.InvokeLooseHealth(damage);
+
+            KLD_ScreenShakes.instance.StartShake(takeDamage_shakeLenght, takeDamage_shakePower, takeDamage_shakeFrequency);
         }
 
         health -= damage;

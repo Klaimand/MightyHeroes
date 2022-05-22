@@ -29,7 +29,6 @@ Transform:
   m_Children:
   - {fileID: 4050991595633550800}
   - {fileID: 4050991595912476606}
-  - {fileID: 4050991595632345429}
   - {fileID: 4050991595760265896}
   - {fileID: 4050991595463394927}
   m_Father: {fileID: 1760567891540297685}
@@ -128,7 +127,6 @@ Transform:
   m_Children:
   - {fileID: 2330270102467425599}
   - {fileID: 2330270102106078633}
-  - {fileID: 2330270102122296852}
   - {fileID: 2330270101068103854}
   m_Father: {fileID: 1760567891540297685}
   m_RootOrder: 4
@@ -197,9 +195,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2330270102786590580}
   - {fileID: 2330270102950714056}
-  - {fileID: 2330270102680159126}
   - {fileID: 2330270101738472730}
   m_Father: {fileID: 1760567891540297685}
   m_RootOrder: 2
@@ -357,7 +353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
@@ -375,15 +371,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Name
-      value: SpawnerMix [15 - 20 secondes]
+      value: SpawnerSwarmer [15 - 20 secondes]
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65
+      value: 37.5
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -391,7 +387,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -85.5
+      value: -90.5
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -423,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
@@ -439,11 +435,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -455,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
+      value: Swarmer
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
@@ -495,96 +491,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
   m_PrefabInstance: {fileID: 334475564}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &458218193
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2248362}
-    m_Modifications:
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Name
-      value: SpawnerKamikaze [10 - 15 secondes]
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 84
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -107.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
---- !u!4 &4050991595632345429 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-  m_PrefabInstance: {fileID: 458218193}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &458833492
 PrefabInstance:
@@ -667,7 +573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
@@ -689,7 +595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -797,7 +703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
@@ -835,7 +741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -874,12 +780,16 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: playerMinDist
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
-      value: 50
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.size
@@ -887,7 +797,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
@@ -899,11 +809,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.y
-      value: 25
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -927,7 +837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.data[1].proba
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.data[2].enemy
@@ -1041,11 +951,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -1095,7 +1005,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Name
-      value: SpawnerMix
+      value: SpawnerSwarmer ( 8 - 12 secondes)
       objectReference: {fileID: 0}
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Layer
@@ -1103,11 +1013,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 59
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1115,7 +1025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -114
+      value: -105
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1155,23 +1065,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
+      value: Swarmer
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
-      value: 0.2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[1].enemy
@@ -1272,12 +1182,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: playerMinDist
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].timeToActivate
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.size
@@ -1286,6 +1204,10 @@ PrefabInstance:
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].enemiesProbas.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
@@ -1297,11 +1219,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.y
-      value: 25
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].minMaxTimeBetweenSpawns.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].minMaxTimeBetweenSpawns.y
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -1328,6 +1258,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].enemiesProbas.Array.data[0].enemy
+      value: Swarmer
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].enemiesProbas.Array.data[0].proba
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
       value: 0
       objectReference: {fileID: 0}
@@ -1337,6 +1275,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.data[1].enemyPerSpawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: steps.Array.data[2].enemiesProbas.Array.data[0].enemyPerSpawn
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1415,11 +1357,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 15
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 20
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -1501,7 +1443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
@@ -1517,11 +1459,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 5000
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 5000
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -1533,7 +1475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Swarmer
+      value: Kamikaze
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
@@ -1557,7 +1499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemyPerSpawn
@@ -1643,11 +1585,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -1745,11 +1687,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -1867,11 +1809,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -1921,7 +1863,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Name
-      value: 'SpawnerMix (20- 25 secondes) '
+      value: 'SpawnerSwarmer (20- 25 secondes) '
       objectReference: {fileID: 0}
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Layer
@@ -1929,7 +1871,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1937,7 +1879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1973,7 +1915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
@@ -1989,11 +1931,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 5000
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 5000
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -2005,7 +1947,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
+      value: Swarmer
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
@@ -2037,7 +1979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemyPerSpawn
@@ -2067,7 +2009,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Name
-      value: SpawnerMix (20 - 25 Secondes)
+      value: SpawnerSwarmer (20 - 25 Secondes)
       objectReference: {fileID: 0}
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Layer
@@ -2119,7 +2061,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
@@ -2135,11 +2077,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 5000
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 5000
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -2151,7 +2093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
+      value: Swarmer
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
@@ -2273,11 +2215,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 20
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 25
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -2307,7 +2249,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Name
-      value: SpawnerSwarmer
+      value: SpawnerSwarmer (8 - 12 secondes)
       objectReference: {fileID: 0}
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Layer
@@ -2315,11 +2257,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 113.5
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2327,7 +2269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -124.5
+      value: -121
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2359,11 +2301,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: spawnRadius
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: playerMinDist
-      value: 6
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
@@ -2375,11 +2317,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -2400,132 +2342,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
   m_PrefabInstance: {fileID: 1760567891160891724}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1760567891331341552
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1760567890970525375}
-    m_Modifications:
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Name
-      value: SpawnerKamikaze ( 20 - 25 secondes)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 54.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].timeToActivate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
---- !u!4 &2330270102786590580 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-  m_PrefabInstance: {fileID: 1760567891331341552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1760567891333873942
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2535,7 +2351,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Name
-      value: SpawnerMix(15 - 20 secondes)
+      value: SpawnerSwarmer(15 - 20 secondes)
       objectReference: {fileID: 0}
     - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_Layer
@@ -2587,7 +2403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].timeToActivate
@@ -2595,7 +2411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].enemiesProbas.Array.size
@@ -2603,11 +2419,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 5000
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 5000
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -2619,11 +2435,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
+      value: Swarmer
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[1].enemy
@@ -2765,11 +2581,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 20
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
@@ -2928,180 +2744,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
   m_PrefabInstance: {fileID: 1760567891365587732}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1760567891410507794
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1760567890970525375}
-    m_Modifications:
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Name
-      value: SpawnerMix
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -85.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: spawnRadius
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].timeToActivate
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.y
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[1].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[1].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[2].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[2].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].proba
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[1].enemy
-      value: Swarmer
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[1].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[2].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[2].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[1].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[2].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[1].enemyPerSpawn
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[1].enemiesProbas.Array.data[2].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
---- !u!4 &2330270102680159126 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-  m_PrefabInstance: {fileID: 1760567891410507794}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1760567891616673467
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3127,7 +2769,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3265,11 +2907,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 15
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
@@ -3441,7 +3083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3510,100 +3152,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
   m_PrefabInstance: {fileID: 1760567891976218157}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1760567891993554320
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1760567890223499485}
-    m_Modifications:
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Name
-      value: SpawnerKamikaze (15- 20 secondes)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1943570387003994335, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 94
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.x
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].minMaxTimeBetweenSpawns.y
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemy
-      value: Kamikaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].proba
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-      propertyPath: steps.Array.data[0].enemiesProbas.Array.data[0].enemyPerSpawn
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
---- !u!4 &2330270102122296852 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4050991596048325508, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
-  m_PrefabInstance: {fileID: 1760567891993554320}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8512538177516630803
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3668,6 +3216,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
+      propertyPath: playerMinDist
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -3693,11 +3245,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.x
-      value: 30
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[1].minMaxTimeBetweenSpawns.y
-      value: 35
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7187694012913194175, guid: 2d16090283c4fbf489c04396df81f0b7, type: 3}
       propertyPath: steps.Array.data[2].minMaxTimeBetweenSpawns.x

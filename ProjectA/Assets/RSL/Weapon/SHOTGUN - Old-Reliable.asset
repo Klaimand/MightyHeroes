@@ -21,8 +21,8 @@ MonoBehaviour:
   type: 2
   rarity: 0
   reloadType: 1
-  bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
-  level: 0
+  bullet: {fileID: 11400000, guid: d9af93118cb16734e894f64b02e30c88, type: 2}
+  level: 1
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
@@ -110,9 +110,12 @@ MonoBehaviour:
     displayedName: Level 5
     isBPBReloading: 1
   shootDelay: 1.0909091
+  shakeLenght: 0.3
+  shakePower: 5
+  shakeFrequency: 3
   weaponHolder: {fileID: 660786425802636352, guid: 15daed1dad8109f45a9a5641daa12691, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: 6e3c70ee48c699a4bb617f582be701e1, type: 2}
-  shootAnimDelay: 0
+  shootAnimDelay: 0.3
   angleOffset: 30
   muzzleFlashFX: {fileID: 4493065256289968807, guid: 2041a7be34e1da54298060323d12e8b1, type: 3}
   lineRendererFX: {fileID: 5147150837283688741, guid: 5e100754e82112747bb8e6b96bce5ae4, type: 3}
