@@ -824,13 +824,31 @@ MonoBehaviour:
   - key: Summoner_DeathVFX
     pool:
       prefab: {fileID: 7140724754237550105, guid: 06eb6e7250e28d64e9ab222db2879f21, type: 3}
-      baseCount: 2
+      baseCount: 8
       baseRefreshSpeed: 2
       refreshSpeed: 2
   - key: Summoned_Swarmer
     pool:
       prefab: {fileID: 901648824140653448, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
       baseCount: 20
+      baseRefreshSpeed: 2
+      refreshSpeed: 2
+  - key: BlastPassiveFX
+    pool:
+      prefab: {fileID: 2565525656373484539, guid: 1a875a07403f9bc4a90a8a84da3ab09c, type: 3}
+      baseCount: 8
+      baseRefreshSpeed: 2
+      refreshSpeed: 2
+  - key: SayuriPassiveFX
+    pool:
+      prefab: {fileID: 5585906168634824263, guid: d780a0ffaf83942489432c6f9f278d9d, type: 3}
+      baseCount: 30
+      baseRefreshSpeed: 2
+      refreshSpeed: 2
+  - key: SayuriTrailFX
+    pool:
+      prefab: {fileID: 3874592900308506964, guid: b17000feb4aef2d4a920d6b8fa35aa04, type: 3}
+      baseCount: 2
       baseRefreshSpeed: 2
       refreshSpeed: 2
 --- !u!114 &8671646772427712702
@@ -1398,7 +1416,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458527930148275957, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: character
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3458527930148275957, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: touchInputs
