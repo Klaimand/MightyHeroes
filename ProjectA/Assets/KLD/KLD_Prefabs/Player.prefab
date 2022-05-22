@@ -171,6 +171,7 @@ MonoBehaviour:
   rbVelocityDead: 0.05
   forwardToAimAngle: 0
   absoluteForwardToAimAngle: 0
+  curAngleOffset: 0
 --- !u!114 &4918749990883480123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +189,7 @@ MonoBehaviour:
   playerShoot: {fileID: 4918749989807435229}
   targetPosTransform: {fileID: 0}
   targetPosAngleOffset: 30
+  targetPosDistanceOffset: 10
   isPressingAimJoystick: 0
   inputAimVector: {x: 0, y: 0}
   isShooting: 0
@@ -251,12 +253,16 @@ MonoBehaviour:
   controller: {fileID: 0}
   ultimateCharge: 0
   isUltimateCharged: 0
+  outOfCombatTime: 5
+  takeDamage_shakeLenght: 1
+  takeDamage_shakePower: 8
+  takeDamage_shakeFrequency: 3
   characterUI: {fileID: 7763574474891127590}
   ultJoystickAnimator: {fileID: 0}
   ultCircleImage: {fileID: 0}
   ultButtonAnimator: {fileID: 0}
   ultButton: {fileID: 0}
-  outOfCombatTime: 5
+  ultButtonImages: []
 --- !u!114 &7763574474891127590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.09411766, g: 0.49803925, b: 0.30980393, a: 1}
+  m_Color: {r: 0.101960786, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

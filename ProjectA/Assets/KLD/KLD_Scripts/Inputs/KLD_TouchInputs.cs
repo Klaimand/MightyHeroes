@@ -41,7 +41,7 @@ public class KLD_TouchInputs : MonoBehaviour
     [SerializeField] GameObject ultiJoystick = null;
     [SerializeField, Range(0.3f, 0.8f)] float leftTouchScreenRatio = 0.4f;
 
-    [SerializeField] float vibrationLength = 0.4f;
+    [SerializeField] long vibrationLength = 100L;
 
     [SerializeField] Joystick[] joysticks;
 
@@ -408,11 +408,14 @@ public class KLD_TouchInputs : MonoBehaviour
         }
     }
 
-    void Vibrate(float _time)
+    void Vibrate(long _time)
     {
-        StartCoroutine(VibrateCoroutine(_time));
+        //Vibration.Vibrate(_time);
+        //Handheld.Vibrate();
+        //StartCoroutine(VibrateCoroutine(_time));
     }
 
+    /*
     float t;
     IEnumerator VibrateCoroutine(float _time)
     {
@@ -424,6 +427,7 @@ public class KLD_TouchInputs : MonoBehaviour
             t += Time.deltaTime;
         }
     }
+    */
 
     #region Debug
 

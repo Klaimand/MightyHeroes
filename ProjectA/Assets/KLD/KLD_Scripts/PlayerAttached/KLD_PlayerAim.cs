@@ -243,10 +243,9 @@ public class KLD_PlayerAim : MonoBehaviour
         return playerAttributes;
     }
 
-    public Vector3 GetTargetPos() //debug la ptn de ta race
+    public Vector3 GetTargetPos()
     {
-        Debug.LogError("TARGET POS IS NOT WORKING ITS A DEBUG FUNCTION");
-        return Vector3.zero;
+        return targetPos;
     }
 
     public Vector2 GetInputAimVector()
