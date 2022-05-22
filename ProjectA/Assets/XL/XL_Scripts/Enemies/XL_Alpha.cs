@@ -31,13 +31,16 @@ public class XL_Alpha : XL_Enemy
 
     [SerializeField] private LookAtConstraint lookAtConstraint;
     private ConstraintSource source = new ConstraintSource();
-   protected override void Start()
-   {
+
+    bool dead = false;
+
+    protected override void Start()
+    {
         base.Start();
         source.sourceTransform = XL_GameManager.instance.players[0].transform;
         source.weight = 1;
         lookAtConstraint.AddSource(source);
-   }
+    }
 
     public override void Alert()
     {
@@ -81,17 +84,17 @@ public class XL_Alpha : XL_Enemy
 
         while (j < nbEnemiesSummoned)
         {
-            
+
             yield return new WaitForSeconds(0.85f);
             vfx = XL_Pooler.instance.PopPosition("SpawningVFX", transform.position + transform.up * 4);
 
             summonPosition = transform.forward * summonDistance;
             //XL_GameManager.instance.AddEnemyAttributes(XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position).GetComponent<XL_Enemy>().GetZombieAttributes());
-            XL_Pooler.instance.PopPosition("Swarmer", summonPosition + transform.position)
+            XL_Pooler.instance.PopPosition("Summoned_Swarmer", summonPosition + transform.position)
                 .transform.LookAt(XL_GameManager.instance.players[0].transform.position);
 
 
-            
+
             XL_Pooler.instance.DelayedDePop(0.8f, "SpawningVFX", vfx);
             j++;
         }
@@ -101,6 +104,8 @@ public class XL_Alpha : XL_Enemy
 
     public override void Die()
     {
+        if (dead) return;
+        dead = true;
         base.Die();
         KLD_EventsManager.instance.InvokeEnemyKill(Enemy.ALPHA);
         StopAllCoroutines();
@@ -119,8 +124,11 @@ public class XL_Alpha : XL_Enemy
 
     public override void TakeDamage(float damage)
     {
-        StartCoroutine(TakeDamageAnimationCoroutine());
-        base.TakeDamage(damage);
+        if (!dead)
+        {
+            StartCoroutine(TakeDamageAnimationCoroutine());
+            base.TakeDamage(damage);
+        }
 
     }
 
