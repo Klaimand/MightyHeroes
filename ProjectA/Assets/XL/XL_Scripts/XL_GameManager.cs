@@ -14,12 +14,48 @@ public class XL_GameManager : MonoBehaviour
 
 
     [SerializeField] KLD_EndingScreen endingScreen;
+    [SerializeField] KLD_TouchInputs inputs;
+    [SerializeField] KLD_PlayerController controller;
+    [SerializeField] ParticleSystem spawnFX;
 
     bool gameEnded = false;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    void Start()
+    {
+        inputs.disableInputs = true;
+        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        StartGame();
+    }
+
+    void StartGame()
+    {
+        StartCoroutine(StartGameCoroutine());
+    }
+
+    IEnumerator StartGameCoroutine()
+    {
+        yield return new WaitForSeconds(2f);
+
+        KLD_LoadingScreen.instance.HideLoadingScreen();
+
+        yield return new WaitForSeconds(1f);
+
+        spawnFX.Play();
+
+        yield return new WaitForSeconds(2f);
+
+        controller.DoSpawnAnimation();
+
+        yield return new WaitForSeconds(1.5f);
+
+        KLD_SpawnersManager.Instance.StartTimer();
+        XL_GameModeManager.instance.StartTimer();
+        inputs.disableInputs = false;
     }
 
     public void WinGame()
@@ -48,7 +84,7 @@ public class XL_GameManager : MonoBehaviour
 
     IEnumerator ChangeSceneCoroutine()
     {
-        //disable inputs
+        inputs.disableInputs = true;
 
         Time.timeScale = 0f;
 

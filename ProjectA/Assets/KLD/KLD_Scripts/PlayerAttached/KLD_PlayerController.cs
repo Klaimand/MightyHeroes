@@ -276,4 +276,12 @@ public class KLD_PlayerController : MonoBehaviour
         trailPS = _trail.transform.GetChild(0).GetComponent<ParticleSystem>();
         //trailPS.Stop();
     }
+
+    public void DoSpawnAnimation()
+    {
+        if (animator != null)
+        {
+            animator.SetTrigger("spawn");
+        }
+    }
 }

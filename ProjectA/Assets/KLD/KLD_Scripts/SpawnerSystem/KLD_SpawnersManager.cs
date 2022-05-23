@@ -14,6 +14,8 @@ public class KLD_SpawnersManager : MonoBehaviour
         private set { }
     }
 
+    bool canSpawn = false;
+
     [SerializeField] int maxEnemiesAtOnce = 30;
 
     Vector3 spawnerToPlayer = Vector3.zero;
@@ -29,17 +31,25 @@ public class KLD_SpawnersManager : MonoBehaviour
 
     }
 
+    public void StartTimer()
+    {
+        canSpawn = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        levelTime += Time.deltaTime;
+        if (canSpawn)
+        {
+            levelTime += Time.deltaTime;
+        }
     }
 
     public bool CanSpawn(Vector3 spawnerPosition, float minDist)
     {
         spawnerToPlayer = XL_GameManager.instance.players[0].transform.position - spawnerPosition;
 
-        return enemiesCount < maxEnemiesAtOnce
+        return canSpawn && enemiesCount < maxEnemiesAtOnce
         && spawnerToPlayer.sqrMagnitude > minDist * minDist;
     }
 
