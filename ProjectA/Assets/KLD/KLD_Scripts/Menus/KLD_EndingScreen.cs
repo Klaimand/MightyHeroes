@@ -44,8 +44,6 @@ public class KLD_EndingScreen : MonoBehaviour
     [ContextMenu("Initialize")]
     public void Initialize()
     {
-        KLD_MissionInfos.instance.RefreshMissionInfos(true);
-
         data = KLD_MissionInfos.instance.missionData;
 
         if (data.succeeded)
