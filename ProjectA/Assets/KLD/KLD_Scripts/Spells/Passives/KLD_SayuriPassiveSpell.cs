@@ -28,8 +28,10 @@ public class KLD_SayuriPassiveSpell : KLD_PassiveSpell
         KLD_EventsManager.instance.onEnemyHit += SpeedOnHit;
 
         curTrailGO = XL_Pooler.instance.PopPosition("SayuriTrailFX", transform.position, transform);
-        controller.trailGO = curTrailGO;
-        curTrailGO.SetActive(false);
+
+        controller.SetTrail(curTrailGO);
+        //controller.trailGO = curTrailGO;
+        //curTrailGO.SetActive(false);
     }
 
     void SpeedOnHit()
