@@ -40,7 +40,7 @@ public class XL_PlayerInfo : MonoBehaviour
         menuData.weapon = 0;
         menuData.map = 0;
         menuData.difficulty = 0;
-        menuData.missionEnergyCost = 0;
+        menuData.missionEnergyCost = 20;
     }
 
     public void SelectPlayer()
