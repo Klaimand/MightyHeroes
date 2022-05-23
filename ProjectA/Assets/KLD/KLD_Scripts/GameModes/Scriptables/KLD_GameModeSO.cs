@@ -5,6 +5,8 @@ using UnityEngine;
 //[CreateAssetMenu(fileName = "KLD_GameModeSO", menuName = "KLD/GameModeSO", order = 0)]
 public abstract class KLD_GameModeSO : ScriptableObject
 {
+    public string gamemodeName = "CAPTURE ZONE";
+    public string mapName = "MALL";
     public float missionMaxTime = 300f;
     [SerializeField] protected string objectiveString = "CAPTURE THE ZONES";
     public int maxObjectiveNb = 3;

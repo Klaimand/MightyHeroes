@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1374623302444646068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -71,6 +71,81 @@ MonoBehaviour:
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!1 &4697321682716778406
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3551611124993016805}
+  - component: {fileID: 9012072527534383068}
+  - component: {fileID: 4779469500929565300}
+  m_Layer: 5
+  m_Name: HealthBarBG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &3551611124993016805
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697321682716778406}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7763574476375477530}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2.63, y: 0.95}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &9012072527534383068
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697321682716778406}
+  m_CullTransparentMesh: 1
+--- !u!114 &4779469500929565300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697321682716778406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: c399566887ceb5e44b89e97fbf57396f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 0
+  m_FillAmount: 0.458
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -160,6 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputs: {fileID: 0}
+  playerShoot: {fileID: 4918749989807435229}
   scaler: {fileID: 4918749991401258337}
   lookAtTransform: {fileID: 0}
   timedAxis: {x: 0, y: 0}
@@ -250,19 +326,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   touchInputs: {fileID: 0}
   playerShoot: {fileID: 4918749989807435229}
-  controller: {fileID: 0}
+  controller: {fileID: 4918749990883480118}
   ultimateCharge: 0
   isUltimateCharged: 0
   outOfCombatTime: 5
-  takeDamage_shakeLenght: 1
+  takeDamage_shakeLenght: 0.4
   takeDamage_shakePower: 8
-  takeDamage_shakeFrequency: 3
+  takeDamage_shakeFrequency: 1
   characterUI: {fileID: 7763574474891127590}
   ultJoystickAnimator: {fileID: 0}
   ultCircleImage: {fileID: 0}
   ultButtonAnimator: {fileID: 0}
   ultButton: {fileID: 0}
-  ultButtonImages: []
+  ultButtonImages:
+  - {fileID: 0}
 --- !u!114 &7763574474891127590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,13 +366,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3be6ffc9a65eb74c9f6a5ca384013ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  character: 0
+  character: 2
   seri_characterLevel: 0
   weapon: 1
   seri_weaponLevel: 0
   charactersList:
   - {fileID: 11400000, guid: a064d8ce9fe3dd643970fe81c5b3b02d, type: 2}
   - {fileID: 11400000, guid: 94d834fce1bb46e42a274dac626e01ef, type: 2}
+  - {fileID: 11400000, guid: 55dea43496ed73e4d96008552406b7fd, type: 2}
   weaponsList:
   - {fileID: 11400000, guid: aba25dde72e48d245bcb88957417abb0, type: 2}
   - {fileID: 11400000, guid: a8b8d70eea9548642888ffbab16f066b, type: 2}
@@ -320,7 +398,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 4918749990883480119}
-  pointer: {fileID: 1374623302444646068}
+  pointer: {fileID: 0}
 --- !u!1 &4918749991401258338
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +637,7 @@ RectTransform:
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 7763574476375477530}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -634,7 +712,7 @@ RectTransform:
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 7763574476375477530}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -709,7 +787,7 @@ RectTransform:
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_Children: []
   m_Father: {fileID: 7763574476375477530}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -785,6 +863,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3551611124993016805}
   - {fileID: 7763574475618055329}
   - {fileID: 7763574476282276775}
   - {fileID: 7763574474759986274}

@@ -50,7 +50,8 @@ public class KLD_PlayerController : MonoBehaviour
 
     [HideInInspector] public float curAngleOffset = 0f;
 
-    [HideInInspector] public GameObject trailGO;
+    //[HideInInspector] public GameObject trailGO;
+    ParticleSystem trailPS;
 
     //RigBuilder builder;
     //MultiAimConstraint multiAimConstraint;
@@ -104,9 +105,6 @@ public class KLD_PlayerController : MonoBehaviour
          timedAxis.normalized * timedMagnitude;
     }
 
-    float rigOffset;
-    MultiAimConstraint aimConstraint;
-
     void DoFeetRotation()
     {
         playerToLookAtTransform = lookAtTransform.position - transform.position;
@@ -150,13 +148,14 @@ public class KLD_PlayerController : MonoBehaviour
             */
             #endregion
 
-            if (!playerShoot.isAiming)
+
+            if (playerShoot.isAiming)
             {
-                transform.LookAt(transform.position + rb.velocity);
+                transform.LookAt(playerAim.GetTargetPos());
             }
             else
             {
-                transform.LookAt(playerAim.GetTargetPos());
+                transform.LookAt(transform.position + rb.velocity);
             }
 
             if (Vector3.Angle(transform.forward, rb.velocity) > 90f)
@@ -240,7 +239,12 @@ public class KLD_PlayerController : MonoBehaviour
     bool isBonusSpeeded = false;
     public void AddBonusSpeedFor(float _bonusSpeed, float _duration)
     {
-        if (trailGO != null) { trailGO.SetActive(true); }
+        //if (trailGO != null) { trailGO.SetActive(true); }
+        if (!isBonusSpeeded && trailPS != null)
+        {
+            //print("started PS");
+            trailPS.Play();
+        }
         isBonusSpeeded = true;
         bonusSpeed = _bonusSpeed;
         bonusSpeedDuration = _duration;
@@ -252,13 +256,24 @@ public class KLD_PlayerController : MonoBehaviour
         if (isBonusSpeeded)
         {
             bonusSpeedDuration -= Time.deltaTime;
+            if (bonusSpeedDuration <= 0f)
+            {
+                //if (trailGO != null) { trailGO.SetActive(false); }
+                if (trailPS != null)
+                {
+                    //print("stopped PS");
+                    trailPS.Stop();
+                }
+                isBonusSpeeded = false;
+                bonusSpeed = 0f;
+                CalculateRealSpeed();
+            }
         }
-        if (bonusSpeedDuration <= 0f)
-        {
-            if (trailGO != null) { trailGO.SetActive(false); }
-            isBonusSpeeded = false;
-            bonusSpeed = 0f;
-            CalculateRealSpeed();
-        }
+    }
+
+    public void SetTrail(GameObject _trail)
+    {
+        trailPS = _trail.transform.GetChild(0).GetComponent<ParticleSystem>();
+        //trailPS.Stop();
     }
 }

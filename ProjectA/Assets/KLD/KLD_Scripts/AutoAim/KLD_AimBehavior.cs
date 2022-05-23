@@ -47,6 +47,7 @@ public class KLD_AimBehavior : ScriptableObject
         {
             return _zombieAttributes[bestZombieIndex];
         }
+        Debug.Log("retuen null");
         return null;
     }
 
