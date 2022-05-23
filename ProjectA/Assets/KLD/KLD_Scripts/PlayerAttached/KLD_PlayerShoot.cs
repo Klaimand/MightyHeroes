@@ -104,6 +104,11 @@ public class KLD_PlayerShoot : MonoBehaviour
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
         playerAim.targetPosAngleOffset = weapon.angleOffset;
+
+        animator.SetFloat("reloadSpeedScale",
+        (weapon.weaponAttributes[0].reloadSpeed / weapon.GetCurAttributes().reloadSpeed)
+        );
+
         StartCoroutine(DelayedStart());
         UpdateUI();
     }
