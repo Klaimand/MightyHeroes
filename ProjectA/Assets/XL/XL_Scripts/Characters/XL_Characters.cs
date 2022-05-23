@@ -7,20 +7,17 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 {
     [SerializeField] KLD_TouchInputs touchInputs;
     [SerializeField] KLD_PlayerShoot playerShoot;
+    [SerializeField] KLD_PlayerController controller;
     protected XL_CharacterAttributesSO characterAttributes;
     private float health;
 
     //private XL_ISpells spell;
     public float ultimateCharge;
     public bool isUltimateCharged;
+    bool ultimateLaunched = false;
 
-    [SerializeField] private XL_HealthBarUI characterUI;
 
-    [SerializeField] Animator ultJoystickAnimator;
-    [SerializeField] Animator ultButtonAnimator;
-    [SerializeField] Button ultButton;
-
-    enum UltState { NONE, DOWN, UP };
+    enum UltState { NONE, DOWN, UP, PRESSED };
 
     UltState ultState = UltState.NONE;
 
@@ -28,6 +25,25 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     [SerializeField] float outOfCombatTime = 5f;
     bool outOfCombat = true;
     float curOutOfCombatTime = 0f;
+
+    PassiveSpellInitializer passiveSpellInitializer;
+
+    Animator animator;
+
+    [Header("Screen Shakes")]
+    [SerializeField] float takeDamage_shakeLenght = 1f;
+    [SerializeField] float takeDamage_shakePower = 8f;
+    [SerializeField] float takeDamage_shakeFrequency = 3f;
+
+    [Header("UI")]
+    [SerializeField] private XL_HealthBarUI characterUI;
+
+    [SerializeField] Animator ultJoystickAnimator;
+    [SerializeField] Image ultCircleImage;
+    [SerializeField] Animator ultButtonAnimator;
+    [SerializeField] Button ultButton;
+
+    [SerializeField] Image[] ultButtonImages;
 
     /*
     private void Awake()
@@ -49,13 +65,23 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         characterAttributes = _character;
         characterAttributes.level = _characterLevel;
 
-        characterAttributes.Initialize();
+        passiveSpellInitializer = new PassiveSpellInitializer();
+        passiveSpellInitializer.character = this;
+        passiveSpellInitializer.controller = controller;
+
+        characterAttributes.Initialize(passiveSpellInitializer);
+
+        controller.SetBaseSpeed(characterAttributes.movementSpeed);
+
         health = characterAttributes.healthMax;
 
         ultimateCharge = 0f;
         //StartCoroutine(SpellCooldownCoroutine(ultimateChargeTick));
 
         curOutOfCombatTime = 99f;
+
+        //playerShoot.canUseUltimateWhenReloading = characterAttributes.canUseSpellWhenReloading;
+
         //StartCoroutine(OutOfCombatHealingCoroutine(1f));
     }
 
@@ -65,9 +91,21 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         DoSpellCoolDown();
         DoOutOfCombatHealing();
 
+        if (ultimateLaunched)
+        {
+            characterAttributes.CallOnUltLaunched(transform);
+        }
+
         if (ultimateCharge >= 100f)
         {
-            ultState = UltState.UP;
+            if (touchInputs.IsJoystickPressed(2))
+            {
+                ultState = UltState.PRESSED;
+            }
+            else
+            {
+                ultState = UltState.UP;
+            }
         }
         else if (ultimateCharge > 50f)
         {
@@ -81,15 +119,20 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         if (touchInputs.GetUseButtonForUltimate())
         {
             ultButtonAnimator.SetInteger("ultState", (int)ultState);
+            foreach (var image in ultButtonImages)
+            {
+                image.fillAmount = ultimateCharge * 0.01f;
+            }
         }
         else
         {
             ultJoystickAnimator.SetInteger("ultState", (int)ultState);
+            ultCircleImage.fillAmount = ultimateCharge * 0.01f;
         }
 
         if (touchInputs.GetUseButtonForUltimate())
         {
-            ultButton.interactable = isUltimateCharged && !playerShoot.isReloading;
+            ultButton.interactable = isUltimateCharged && (!playerShoot.isReloading || characterAttributes.canUseSpellWhenReloading);
         }
         else
         {
@@ -106,6 +149,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown += CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -116,6 +161,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         touchInputs.onActiveSkillJoystickDown -= CallSpellJoystickDown;
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
+
+        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;
@@ -163,6 +210,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (ultimateCharge >= 100f)
         {
+            ultimateLaunched = true;
             playerShoot.UseUltimate(characterAttributes.spellLaunchDuration);
             spellDirection = _direction;
 
@@ -176,6 +224,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        ultimateLaunched = false;
         characterAttributes.CallOnSpellLaunch();
 
         characterUI.UpdateUltBar(ultimateCharge * 0.01f);
@@ -184,7 +233,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         direction.x = spellDirection.x;
         direction.z = spellDirection.y;
 
-        direction = Quaternion.Euler(0f, 45f, 0f) * direction;
+        //direction = Quaternion.Euler(0f, 45f, 0f) * direction;
 
         //ultimateCharge = 0;
         //characterUI.UpdateUltBar(ultimateCharge * 0.01f);
@@ -227,8 +276,13 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (damage > 0) // if it takes damage, then reduce the damage taken
         {
-            if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
+            damage = Mathf.Max(damage - characterAttributes.armor, 1f);
+            //if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
+            animator?.Play("Hit", 3, 0f);
+            KLD_EventsManager.instance.InvokeLooseHealth(damage);
+
+            KLD_ScreenShakes.instance.StartShake(takeDamage_shakeLenght, takeDamage_shakePower, takeDamage_shakeFrequency);
         }
 
         health -= damage;
@@ -290,5 +344,10 @@ while (true)
         {
             ultimateCharge += playerShoot.GetWeaponUltChargeOnKill();
         }
+    }
+
+    public void SetAnimator(Animator _animator)
+    {
+        animator = _animator;
     }
 }

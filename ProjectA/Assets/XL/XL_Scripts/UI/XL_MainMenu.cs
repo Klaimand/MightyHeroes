@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class XL_MainMenu : MonoBehaviour
 {
+    public static XL_MainMenu instance;
+
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject characterSelectMenu;
     [SerializeField] private GameObject characterDetailsMenu;
     [SerializeField] private GameObject weaponSelectMenu;
     [SerializeField] private GameObject weaponDetailsMenu;
-    [SerializeField] private GameObject MapSelectMenu;
+    [SerializeField] private GameObject mapSelectMenu;
+    [SerializeField] private GameObject shopMenu;
 
     [Header("Save Characters and Weapons")]
     [SerializeField] private XL_CharacterAttributesSO[] characterAttributes;
@@ -31,19 +35,38 @@ public class XL_MainMenu : MonoBehaviour
     [Header("Mission Type")]
     [SerializeField] private GameObject[] missionTypes;
 
+    [Header("Loader Bars")]
+    [SerializeField] private TMP_Text characterXP;
+    [SerializeField] private TMP_Text weaponXP;
+
+    [Header("Go Button")]
+    [SerializeField] private Button goButton;
+    [SerializeField] private Image goImage;
+    [SerializeField] private Image arrowGoImage;
+
     //[Header("Loadout")]
 
 
     private void Awake()
     {
+        instance = this;
+
         InitPlayerPrefs();
         RefreshMainMenuUI();
+        RefreshTopOverlay();
     }
 
     private void InitPlayerPrefs()
     {
-        //DELETE PLAYERPREFS
-        PlayerPrefs.DeleteAll();
+        //---DELETE PLAYERPREFS---
+        //PlayerPrefs.DeleteAll();
+
+        if (KLD_MissionInfos.instance != null)
+        {
+            PlayerPrefs.SetInt("Energy", KLD_MissionInfos.instance.missionData.GetEnergy() + PlayerPrefs.GetInt("Energy"));
+            PlayerPrefs.SetInt("SoftCurrency", KLD_MissionInfos.instance.missionData.GetSoftCurrency() + PlayerPrefs.GetInt("SoftCurrency"));
+            PlayerPrefs.SetInt("HardCurrency", KLD_MissionInfos.instance.missionData.GetHardCurrency() + PlayerPrefs.GetInt("HardCurrency"));
+        }
 
         foreach (XL_CharacterAttributesSO ca in characterAttributes)
         {
@@ -68,49 +91,70 @@ public class XL_MainMenu : MonoBehaviour
         }
         if (!PlayerPrefs.HasKey("SoftCurrency"))
         {
-            PlayerPrefs.SetInt("SoftCurrency", 0);
+            PlayerPrefs.SetInt("SoftCurrency", 20000);
         }
         if (!PlayerPrefs.HasKey("HardCurrency"))
         {
-            PlayerPrefs.SetInt("HardCurrency", 0);
+            PlayerPrefs.SetInt("HardCurrency", 1000);
         }
         if (!PlayerPrefs.HasKey("SelectedHero"))
         {
             PlayerPrefs.SetInt("SelectedHero", 0);
         }
 
-        Debug.Log(PlayerPrefs.GetInt("Blast"));
-
         PlayerPrefs.Save();
     }
 
     private void RefreshMainMenuUI()
     {
-        //Energy
-        energyText.text = PlayerPrefs.GetInt("Energy").ToString();
-        energyMaxText.text = energyMax.ToString();
+        characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString();
+        weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString();
 
-        //SoftCurrency
-        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString();
-
-        //HardCurrency
-        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
-    } 
+        if (XL_PlayerInfo.instance.menuData.missionEnergyCost > PlayerPrefs.GetInt("Energy"))
+        {
+            goButton.interactable = false;
+            goImage.color = Color.red;
+            arrowGoImage.color = Color.red;
+        }
+        else
+        {
+            goButton.interactable = true;
+            goImage.color = Color.white;
+            arrowGoImage.color = Color.white;
+        }
+    }
 
     public void StartMission()
     {
+        if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
+        PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
+        
         SceneManager.LoadScene(1);
     }
 
     public void SwitchMainMenu()
     {
+        RefreshMainMenuUI();
         mainMenu.SetActive(true);
 
+        shopMenu.SetActive(false);
         characterSelectMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
         weaponSelectMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
-        MapSelectMenu.SetActive(false);
+        mapSelectMenu.SetActive(false);
+    }
+
+    public void SwitchShopMenu()
+    {
+        shopMenu.SetActive(true);
+
+        mainMenu.SetActive(false);
+        characterSelectMenu.SetActive(false);
+        characterDetailsMenu.SetActive(false);
+        weaponSelectMenu.SetActive(false);
+        weaponDetailsMenu.SetActive(false);
+        mapSelectMenu.SetActive(false);
     }
 
     public void SwitchCharaSelectMenu()
@@ -145,7 +189,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SwitchMapSelectMenu()
     {
-        MapSelectMenu.SetActive(true);
+        mapSelectMenu.SetActive(true);
 
         mainMenu.SetActive(false);
     }
@@ -158,5 +202,28 @@ public class XL_MainMenu : MonoBehaviour
         }
 
         missionTypes[idx].SetActive(true);
+    }
+
+    public void RefreshTopOverlay()
+    {
+        //Energy
+        energyText.text = PlayerPrefs.GetInt("Energy").ToString();
+        energyMaxText.text = energyMax.ToString();
+
+        //SoftCurrency
+        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString();
+
+        //HardCurrency
+        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
+    }
+
+    public KLD_WeaponSO GetWeaponSO(Weapon _weapon)
+    {
+        return weaponAttributes[(int)_weapon];
+    }
+
+    public int GetEnergyMaxAmount()
+    {
+        return energyMax;
     }
 }

@@ -17,6 +17,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
     //offsets
     public float targetPosAngleOffset = 0f;
+    [SerializeField] float targetPosDistanceOffset = 10f;
     Vector3 playerToTargetPos = Vector3.zero;
 
     [SerializeField] bool isPressingAimJoystick = false;
@@ -142,16 +143,16 @@ public class KLD_PlayerAim : MonoBehaviour
         {
             if (playerShoot.isAiming)
             {
-                targetPos = transform.position + playerAttributes.worldAimDirection;
+                targetPos = transform.position + playerAttributes.worldAimDirection * targetPosDistanceOffset;
             }
         }
         else if (rb.velocity.sqrMagnitude > 0.1f)
         {
-            targetPos = transform.position + rb.velocity;
+            targetPos = transform.position + rb.velocity * targetPosDistanceOffset;
         }
         else
         {
-            targetPos = transform.position + transform.forward;
+            targetPos = transform.position + transform.forward * targetPosDistanceOffset;
         }
 
         targetPos.y = transform.position.y;
@@ -166,10 +167,13 @@ public class KLD_PlayerAim : MonoBehaviour
             Debug.DrawRay(transform.position, playerToTargetPos, Color.yellow);
 
             targetPosTransform.position = transform.position + playerToTargetPos;
+
+            controller.curAngleOffset = targetPosAngleOffset;
         }
         else
         {
             targetPosTransform.position = targetPos;
+            controller.curAngleOffset = 0f;
         }
 
         /*right = Vector3.Cross(Vector3.up, playerToTargetPos).normalized;
@@ -239,10 +243,9 @@ public class KLD_PlayerAim : MonoBehaviour
         return playerAttributes;
     }
 
-    public Vector3 GetTargetPos() //debug la ptn de ta race
+    public Vector3 GetTargetPos()
     {
-        Debug.LogError("TARGET POS IS NOT WORKING ITS A DEBUG FUNCTION");
-        return Vector3.zero;
+        return targetPos;
     }
 
     public Vector2 GetInputAimVector()

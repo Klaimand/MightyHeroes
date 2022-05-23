@@ -25,7 +25,7 @@ public class XL_UIWeaponInfo
 
     public void DisplayLevel()
     {
-        weaponLvlUI.text = GetLevel().ToString();
+        weaponLvlUI.text = (GetLevel() + 1).ToString();
     }
 
     public int GetDamage()

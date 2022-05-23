@@ -15,6 +15,9 @@ public class XL_Swarmers : XL_Enemy
 
     [SerializeField] private int nbRaycast;
 
+    [Header("DeathVFX")]
+    [SerializeField] private GameObject deathVFX;
+
     private void Awake()
     {
         shader = model.GetComponent<MeshRenderer>().material;
@@ -46,6 +49,10 @@ public class XL_Swarmers : XL_Enemy
     {
         base.Die();
         KLD_EventsManager.instance.InvokeEnemyKill(Enemy.SWARMER);
+
+        deathVFX = XL_Pooler.instance.PopPosition("Swarmer_DeathVFX", transform.position);
+        XL_Pooler.instance.DelayedDePop(1.5f, "Swarmer_DeathVFX", deathVFX);
+
         XL_Pooler.instance.DePop("Swarmer", transform.gameObject);
         StopAllCoroutines();
     }

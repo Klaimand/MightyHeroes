@@ -20,13 +20,13 @@ MonoBehaviour:
   rarity: 0
   reloadType: 0
   bullet: {fileID: 11400000, guid: 91c6b559714fa2440914e29e891cf99e, type: 2}
-  level: 0
+  level: 1
   experience: 0
   weaponAttributes:
   - experienceToReach: 0
     bulletDamage: 13
     rpm: 650
-    reloadSpeed: 1.5
+    reloadSpeed: 0.5
     magazineSize: 30
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
@@ -40,7 +40,7 @@ MonoBehaviour:
   - experienceToReach: 800
     bulletDamage: 15
     rpm: 650
-    reloadSpeed: 1.4
+    reloadSpeed: 0.5
     magazineSize: 32
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
@@ -54,7 +54,7 @@ MonoBehaviour:
   - experienceToReach: 1800
     bulletDamage: 17
     rpm: 650
-    reloadSpeed: 1.3
+    reloadSpeed: 0.475
     magazineSize: 34
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
@@ -68,7 +68,7 @@ MonoBehaviour:
   - experienceToReach: 3100
     bulletDamage: 19
     rpm: 650
-    reloadSpeed: 1.2
+    reloadSpeed: 0.45
     magazineSize: 36
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
@@ -82,7 +82,7 @@ MonoBehaviour:
   - experienceToReach: 4700
     bulletDamage: 21
     rpm: 650
-    reloadSpeed: 1.1
+    reloadSpeed: 0.425
     magazineSize: 38
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
@@ -96,7 +96,7 @@ MonoBehaviour:
   - experienceToReach: 6300
     bulletDamage: 23
     rpm: 650
-    reloadSpeed: 1
+    reloadSpeed: 0.4
     magazineSize: 40
     bulletsPerShot: 1
     timeBetweenBullets: 0.07
@@ -108,6 +108,9 @@ MonoBehaviour:
     displayedName: Level 5
     isBPBReloading: 0
   shootDelay: 0.092307694
+  shakeLenght: 0.08
+  shakePower: 2
+  shakeFrequency: 0.7
   weaponHolder: {fileID: 8448994597956443654, guid: c3eda7ef7d05c154082ddf9b260c6a39, type: 3}
   animatorOverrideController: {fileID: 22100000, guid: bd8d1c891a162c54e8753937eccafe8c, type: 2}
   shootAnimDelay: 0.3
