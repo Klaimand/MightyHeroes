@@ -68,11 +68,12 @@ public class XL_MainMenu : MonoBehaviour
             PlayerPrefs.SetInt("HardCurrency", KLD_MissionInfos.instance.missionData.GetHardCurrency() + PlayerPrefs.GetInt("HardCurrency"));
         }
 
+        #region playerPrefs
+
         foreach (XL_CharacterAttributesSO ca in characterAttributes)
         {
             if (!PlayerPrefs.HasKey(ca.characterName))
             {
-                Debug.Log("Test");
                 PlayerPrefs.SetInt(ca.characterName, 1);
             }
             ca.level = PlayerPrefs.GetInt(ca.characterName);
@@ -103,6 +104,10 @@ public class XL_MainMenu : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+
+        #endregion
+
+        RefreshMainMenuUI();
     }
 
     private void RefreshMainMenuUI()
@@ -110,6 +115,12 @@ public class XL_MainMenu : MonoBehaviour
         characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString();
         weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString();
 
+        RefreshGOButton();
+    }
+
+    public void RefreshGOButton()
+    {
+        Debug.Log("Energy needed : " + XL_PlayerInfo.instance.menuData.missionEnergyCost);
         if (XL_PlayerInfo.instance.menuData.missionEnergyCost > PlayerPrefs.GetInt("Energy"))
         {
             goButton.interactable = false;
