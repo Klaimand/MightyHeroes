@@ -41,6 +41,8 @@ public class KLD_PlayerAim : MonoBehaviour
 
     [SerializeField, ReadOnly] KLD_PlayerAttributes playerAttributes;
 
+    [ReadOnly] public bool isAimingForNothing;
+
     /*
     //shooting
     [HideInInspector] public bool isReloading;
@@ -144,6 +146,10 @@ public class KLD_PlayerAim : MonoBehaviour
             if (playerShoot.isAiming)
             {
                 targetPos = transform.position + playerAttributes.worldAimDirection * targetPosDistanceOffset;
+            }
+            else
+            {
+                targetPos = transform.position + rb.velocity * targetPosDistanceOffset;
             }
         }
         else if (rb.velocity.sqrMagnitude > 0.1f)

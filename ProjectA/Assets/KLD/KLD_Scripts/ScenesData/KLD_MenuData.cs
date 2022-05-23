@@ -28,7 +28,7 @@ public enum Map
 public enum Difficulty
 {
     EASY,
-    MEDIUM,
+    NORMAL,
     HARD
 }
 

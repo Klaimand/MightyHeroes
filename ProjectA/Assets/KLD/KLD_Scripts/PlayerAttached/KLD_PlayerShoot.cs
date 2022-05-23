@@ -260,8 +260,14 @@ public class KLD_PlayerShoot : MonoBehaviour
     float curShootAnimDelay = 0f;
     void ProcessIsAimingAndShooting()
     {
+
         isAiming = (playerAim.GetIsPressingAimJoystick() && playerAim.GetSelectedZombie() != null) ||
          (playerAim.GetIsPressingAimJoystick() && playerAim.GetInputAimVector().sqrMagnitude > 0.1f);
+
+        if (isAiming && (playerAim.GetSelectedZombie() == null || playerAim.GetSelectedZombie()?.transform == null) && playerAim.GetInputAimVector().sqrMagnitude < 0.1f)
+        {
+            isAiming = false;
+        }
 
         if (!isAiming || isReloading)
         {

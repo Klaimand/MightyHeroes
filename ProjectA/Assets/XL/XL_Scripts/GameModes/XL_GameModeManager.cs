@@ -46,9 +46,14 @@ public class XL_GameModeManager : MonoBehaviour
     private void Start()
     {
         InitializeObjectives();
-        timerCoroutine = StartCoroutine(TimerCoroutine());
+        //timerCoroutine = StartCoroutine(TimerCoroutine());
         gameMode.InitGameModeUI(topLeftCorner, nbObjectives, objectivesNames.ToArray());
         uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
+    }
+
+    public void StartTimer()
+    {
+        timerCoroutine = StartCoroutine(TimerCoroutine());
     }
 
     void InitializeObjectives()
@@ -146,5 +151,15 @@ public class XL_GameModeManager : MonoBehaviour
     public int GetMissionRemainingTime()
     {
         return Mathf.RoundToInt(gameMode.missionMaxTime - missionTime);
+    }
+
+    public string GetGamemodeName()
+    {
+        return gameMode.gamemodeName;
+    }
+
+    public string GetMapName()
+    {
+        return gameMode.mapName;
     }
 }
