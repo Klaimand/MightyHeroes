@@ -6,6 +6,7 @@ public class XL_Kamikaze : XL_Enemy
 {
 
     [SerializeField] protected float chargeSpeedRatio = 2;
+    [SerializeField] protected float aggroDistance;
     [SerializeField] protected List<XL_IDamageable> objectsInExplosionRange = new List<XL_IDamageable>();
     [SerializeField] protected int explosionDamage;
     [SerializeField] protected float explosionRange;
@@ -79,7 +80,7 @@ public class XL_Kamikaze : XL_Enemy
         if (isAlerted && targetedPlayer != null)
         {
             agent.destination = targetedPlayer.position;
-            if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 2 && !isCharged)
+            if ((transform.position - targetedPlayer.position).magnitude < aggroDistance && !isCharged)
             {
                 animator.SetBool("Charging", true);
                 if (!isCharged) StartCoroutine(ChargingCoroutine());
