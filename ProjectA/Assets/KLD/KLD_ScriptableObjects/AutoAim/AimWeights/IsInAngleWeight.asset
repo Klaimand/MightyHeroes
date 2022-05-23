@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8789b9f064b3c584996de3c08e0efbb9, type: 3}
   m_Name: IsInAngleWeight
   m_EditorClassIdentifier: 
+  deadzone: 0.2
   maxAngle: 50
   inAngleScore: 0
   outOfAngleScore: -5000
-  drawRays: 1
+  angleScoreMultiplier: 100
+  returnZeroDistance: 3.5
+  drawRays: 0
   rayLenght: 5
