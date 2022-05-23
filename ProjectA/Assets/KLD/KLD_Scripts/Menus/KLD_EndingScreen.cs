@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class KLD_EndingScreen : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class KLD_EndingScreen : MonoBehaviour
     [SerializeField] Transform missionCompleteTransform;
     [SerializeField] Transform winSplashes;
     [SerializeField] Transform looseSplashes;
+
+    [Space(10)]
+    [SerializeField] Button skipButton;
 
 
     //global vars
@@ -91,19 +95,21 @@ public class KLD_EndingScreen : MonoBehaviour
     IEnumerator ShowStatsCoroutine()
     {
         StartCoroutine(DoTextAnimation(text_remainingTime, 0, data.remainingTime, fieldAnimationTime, fieldAnimationRefreshTime, "", true));
-        yield return new WaitForSeconds(timeBetweenFields);
+        yield return new WaitForSecondsRealtime(timeBetweenFields);
 
         StartCoroutine(DoTextAnimation(text_totalKill, 0, data.killedEnemies, fieldAnimationTime, fieldAnimationRefreshTime, "000", false));
-        yield return new WaitForSeconds(timeBetweenFields);
+        yield return new WaitForSecondsRealtime(timeBetweenFields);
 
         StartCoroutine(DoTextAnimation(text_softCurrency, 0, data.GetSoftCurrency(), fieldAnimationTime, fieldAnimationRefreshTime, "0000", false));
-        yield return new WaitForSeconds(timeBetweenFields);
+        yield return new WaitForSecondsRealtime(timeBetweenFields);
 
         StartCoroutine(DoTextAnimation(text_hardCurrency, 0, data.GetHardCurrency(), fieldAnimationTime, fieldAnimationRefreshTime, "000", false));
-        yield return new WaitForSeconds(timeBetweenFields);
+        yield return new WaitForSecondsRealtime(timeBetweenFields);
 
         StartCoroutine(DoTextAnimation(text_energy, 0, data.GetEnergy(), fieldAnimationTime, fieldAnimationRefreshTime, "000", false));
-        yield return new WaitForSeconds(timeBetweenFields);
+        yield return new WaitForSecondsRealtime(timeBetweenFields);
+
+        skipButton.interactable = true;
     }
 
     string FloatToTime(float _time)
@@ -113,31 +119,33 @@ public class KLD_EndingScreen : MonoBehaviour
         return minutes.ToString("00") + ":" + ((_time - (60 * minutes)).ToString("00"));
     }
 
-    float t;
-    float r;
+    //float t;
+    //float r;
     IEnumerator DoTextAnimation(TMP_Text _text, int _startValue, int _endValue, float _time, float _refreshSpeed,
     string _format, bool _timeFormat)
     {
-        t = 0;
+        float t = 0;
         while (t < _time)
         {
-            if (r > _refreshSpeed)
+            //if (r > _refreshSpeed)
+            //{
+            if (!_timeFormat)
             {
-                if (!_timeFormat)
-                {
-                    _text.text = Mathf.Lerp(_startValue, _endValue, t / _time).ToString(_format);
-                }
-                else
-                {
-                    _text.text = FloatToTime(Mathf.Lerp(_startValue, _endValue, t / _time));
-                }
-                r = 0f;
+                _text.text = Mathf.Lerp(_startValue, _endValue, t / _time).ToString(_format);
             }
+            else
+            {
+                _text.text = FloatToTime(Mathf.Lerp(_startValue, _endValue, t / _time));
+            }
+            //r = 0f;
+            //}
 
-            yield return null;
+            //yield return null;
+            yield return new WaitForSecondsRealtime(_refreshSpeed);
 
-            r += Time.deltaTime;
-            t += Time.deltaTime;
+            //r += Time.deltaTime;
+            //t += Time.deltaTime;
+            t += _refreshSpeed;
         }
     }
 

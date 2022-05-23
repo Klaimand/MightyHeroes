@@ -10,10 +10,12 @@ public class XL_GameManager : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     //public List<XL_Enemy> enemies = new List<XL_Enemy>();
     //public KLD_ZombieList zombieList;
+    [SerializeField] float timeBetweenInitAndShowStats = 1.5f;
 
-    [SerializeField] private GameObject EndingScreen;
-    [SerializeField] private TMP_Text text;
-    [SerializeField] private float endingScreenTime;
+
+    [SerializeField] KLD_EndingScreen endingScreen;
+
+    bool gameEnded = false;
 
     private void Awake()
     {
@@ -22,83 +24,48 @@ public class XL_GameManager : MonoBehaviour
 
     public void WinGame()
     {
-        //DeactivateAllEnemyScript();
-        Debug.Log("Game won !");
-        //Debug.Break();
-        /*
-        text.text = "Mission accomplished !";
-        EndingScreen.SetActive(true);
-        */
-        KLD_MissionInfos.instance.RefreshMissionInfos(true);
+        if (!gameEnded)
+        {
+            gameEnded = true;
 
-        print("Soft Currency : " + KLD_MissionInfos.instance.missionData.GetSoftCurrency() +
-        "\n Hard currency : " + KLD_MissionInfos.instance.missionData.GetHardCurrency());
+            KLD_MissionInfos.instance.RefreshMissionInfos(true);
 
-        StartCoroutine(ChangeSceneCoroutine(endingScreenTime));
+            StartCoroutine(ChangeSceneCoroutine());
+        }
     }
 
     public void LoseGame()
     {
-        //DeactivateAllEnemyScript();
-        //text.text = "Mission failed !";
-        //EndingScreen.SetActive(true);
-        Debug.Log("Game Lost !");
-        KLD_MissionInfos.instance.RefreshMissionInfos(false);
-
-        print("Soft Currency : " + KLD_MissionInfos.instance.missionData.GetSoftCurrency() +
-        "\n Hard currency : " + KLD_MissionInfos.instance.missionData.GetSoftCurrency());
-
-        StartCoroutine(ChangeSceneCoroutine(endingScreenTime));
-    }
-
-    IEnumerator ChangeSceneCoroutine(float t)
-    {
-        yield return new WaitForSeconds(t);
-
-        SceneManager.LoadScene(0);
-    }
-
-    /*
-    public void AddPlayer(GameObject player)
-    {
-        players.Add(player);
-    }
-
-    public void RemovePlayer(GameObject player)
-    {
-        players.Remove(player);
-        if (players.Count < 1) LoseGame();
-    }
-
-    public void AddEnemy(XL_Enemy enemy)
-    {
-        enemies.Add(enemy);
-        AddEnemyAttributes(enemy.GetZombieAttributes());
-    }
-
-    public void RemoveEnemy(XL_Enemy enemy)
-    {
-        enemies.Remove(enemy);
-        RemoveEnemyAttributes(enemy.GetZombieAttributes());
-    }
-
-    private void DeactivateAllEnemyScript()
-    {
-        foreach (XL_Enemy enemy in enemies)
+        if (!gameEnded)
         {
-            enemy.enabled = false;
+            gameEnded = true;
+
+            KLD_MissionInfos.instance.RefreshMissionInfos(false);
+
+            StartCoroutine(ChangeSceneCoroutine());
         }
     }
 
-    public void AddEnemyAttributes(KLD_ZombieAttributes zombieAttributes)
+    IEnumerator ChangeSceneCoroutine()
     {
-        zombieList.AddZombie(zombieAttributes);
+        //disable inputs
+
+        Time.timeScale = 0f;
+
+        endingScreen.gameObject.SetActive(true);
+
+        endingScreen.Initialize();
+
+        yield return new WaitForSecondsRealtime(timeBetweenInitAndShowStats);
+
+        endingScreen.ShowStats();
+
     }
 
-    public void RemoveEnemyAttributes(KLD_ZombieAttributes zombieAttributes)
+    //triggered by ending screen button
+    public void ChangeScene()
     {
-        zombieList.RemoveZombie(zombieAttributes);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(0);
     }
-    */
-
 }
