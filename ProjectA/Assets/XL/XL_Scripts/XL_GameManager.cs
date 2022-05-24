@@ -89,6 +89,10 @@ public class XL_GameManager : MonoBehaviour
     {
         inputs.disableInputs = true;
 
+        //player death anim
+
+        yield return new WaitForSeconds(2f);
+
         Time.timeScale = 0f;
 
         endingScreen.gameObject.SetActive(true);

@@ -56,6 +56,8 @@ public class KLD_PlayerController : MonoBehaviour
     //RigBuilder builder;
     //MultiAimConstraint multiAimConstraint;
 
+    bool spawning = true;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -64,7 +66,7 @@ public class KLD_PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        spawning = true;
     }
 
     void Update()
@@ -185,7 +187,11 @@ public class KLD_PlayerController : MonoBehaviour
 
     void AnimateLocomotionState()
     {
-        if (timedAxis == Vector2.zero)
+        if (spawning)
+        {
+            locomotionState = LocomotionState.RESPAWNING;
+        }
+        else if (timedAxis == Vector2.zero)
         {
             locomotionState = LocomotionState.IDLE;
         }
@@ -279,9 +285,10 @@ public class KLD_PlayerController : MonoBehaviour
 
     public void DoSpawnAnimation()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger("spawn");
-        }
+        spawning = false;
+        //if (animator != null)
+        //{
+        //    animator.SetTrigger("spawn");
+        //}
     }
 }
