@@ -62,6 +62,8 @@ public class XL_GameManager : MonoBehaviour
     {
         if (!gameEnded)
         {
+            KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
+
             gameEnded = true;
 
             KLD_MissionInfos.instance.RefreshMissionInfos(true);
