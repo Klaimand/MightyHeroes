@@ -118,8 +118,8 @@ public class KLD_AudioManager : MonoBehaviour
             }
         }
 
-        //GetSound("musique1").GetSource().loop = true;
-        //GetSound("musique2").GetSource().loop = true;
+        GetSound("MenuMusic").GetSource().loop = true;
+        GetSound("GameMusic").GetSource().loop = true;
 
         foreach (string sound in soundsToPlayOnStart)
         {
