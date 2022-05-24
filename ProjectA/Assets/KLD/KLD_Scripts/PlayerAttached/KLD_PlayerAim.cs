@@ -163,8 +163,9 @@ public class KLD_PlayerAim : MonoBehaviour
 
         targetPos.y = transform.position.y;
 
-        if ((playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING && selectedZombie != null)
-        || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
+        //if ((playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING && selectedZombie != null)
+        //|| playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
+        if (playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.AIMING || playerShoot.GetWeaponState() == KLD_PlayerShoot.WeaponState.SHOOTING)
         {
             playerToTargetPos = (targetPos - transform.position);
 
