@@ -81,6 +81,8 @@ public class KLD_WeaponSO : ScriptableObject
     [Header("Pooling")]
     public int fxPoolSize = 9;
 
+    [Header("Sound")]
+    public string soundKey = "THE_CLASSIC_RELOAD";
 
     int maxLevel = 0;
 
