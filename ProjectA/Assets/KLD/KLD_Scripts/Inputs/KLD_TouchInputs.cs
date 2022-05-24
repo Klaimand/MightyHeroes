@@ -57,6 +57,8 @@ public class KLD_TouchInputs : MonoBehaviour
 
     bool isPressingActiveSkillJoystick = false;
 
+    public bool disableInputs = true;
+
     public event Action onActiveSkillButton;
     public event Action onReloadButton;
     public event Action<Vector2> onActiveSkillJoystickRelease;
@@ -147,7 +149,7 @@ public class KLD_TouchInputs : MonoBehaviour
                     joyIndex = 1;
                 }
 
-                if (curTouch.phase == TouchPhase.Began && joysticks[joyIndex].interractable)
+                if (curTouch.phase == TouchPhase.Began && joysticks[joyIndex].interractable && !disableInputs)
                 {
                     if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId) || joyIndex == 2)
                     {
@@ -182,7 +184,7 @@ public class KLD_TouchInputs : MonoBehaviour
                         //joysticks[joyIndex].canvasGroup.alpha = 1f;
                     }
                 }
-                else if (curTouch.phase == TouchPhase.Moved && joysticks[joyIndex].interractable)
+                else if (curTouch.phase == TouchPhase.Moved && joysticks[joyIndex].interractable && !disableInputs)
                 {
                     //if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(i).fingerId))
                     //{
@@ -196,7 +198,7 @@ public class KLD_TouchInputs : MonoBehaviour
                         CallActiveSkillJoystickDown(joysticks[joyIndex].normalizedVector);
                     }
                 }
-                else if (curTouch.phase == TouchPhase.Stationary && joysticks[joyIndex].interractable)
+                else if (curTouch.phase == TouchPhase.Stationary && joysticks[joyIndex].interractable && !disableInputs)
                 {
                     DoDrag();
 
