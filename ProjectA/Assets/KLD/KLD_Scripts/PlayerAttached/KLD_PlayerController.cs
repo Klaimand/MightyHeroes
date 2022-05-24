@@ -57,6 +57,7 @@ public class KLD_PlayerController : MonoBehaviour
     //MultiAimConstraint multiAimConstraint;
 
     bool spawning = true;
+    bool isDead = false;
 
     void Awake()
     {
@@ -75,7 +76,14 @@ public class KLD_PlayerController : MonoBehaviour
 
         ProcessBonusSpeed();
 
-        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
+        if (!isDead)
+        {
+            rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
         //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
         //(runningBackward ? -1f : 1f);
 
@@ -191,6 +199,10 @@ public class KLD_PlayerController : MonoBehaviour
         {
             locomotionState = LocomotionState.RESPAWNING;
         }
+        else if (isDead)
+        {
+            locomotionState = LocomotionState.DIE;
+        }
         else if (timedAxis == Vector2.zero)
         {
             locomotionState = LocomotionState.IDLE;
@@ -290,5 +302,10 @@ public class KLD_PlayerController : MonoBehaviour
         //{
         //    animator.SetTrigger("spawn");
         //}
+    }
+
+    public void Die()
+    {
+        isDead = true;
     }
 }

@@ -43,6 +43,8 @@ public class KLD_PlayerAim : MonoBehaviour
 
     [ReadOnly] public bool isAimingForNothing;
 
+    bool isDead = false;
+
     /*
     //shooting
     [HideInInspector] public bool isReloading;
@@ -82,7 +84,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
         DoAim();
 
-        DrawSelectedLine();
+        //DrawSelectedLine();
 
         //isShooting = isPressingAimJoystick && selectedZombie != null ||
         // isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.1f;
@@ -127,6 +129,11 @@ public class KLD_PlayerAim : MonoBehaviour
 
     void DoAim()
     {
+        if (isDead)
+        {
+            return;
+        }
+
         selectedZombie = aimBehavior.GetZombieToTarget(zombieList.GetZombies(), playerAttributes);
 
         //targetPos = selectedZombie != null && isPressingAimJoystick ?
@@ -265,6 +272,10 @@ public class KLD_PlayerAim : MonoBehaviour
         return isPressingAimJoystick;
     }
 
+    public void Die()
+    {
+        isDead = true;
+    }
 
 
     #endregion

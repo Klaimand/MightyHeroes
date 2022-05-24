@@ -16,6 +16,7 @@ public class XL_GameManager : MonoBehaviour
     [SerializeField] KLD_EndingScreen endingScreen;
     [SerializeField] KLD_TouchInputs inputs;
     [SerializeField] KLD_PlayerController controller;
+    [SerializeField] KLD_PlayerAim playerAim;
     [SerializeField] ParticleSystem spawnFX;
 
     bool gameEnded = false;
@@ -63,7 +64,6 @@ public class XL_GameManager : MonoBehaviour
     {
         if (!gameEnded)
         {
-            KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
 
             gameEnded = true;
 
@@ -79,6 +79,9 @@ public class XL_GameManager : MonoBehaviour
         {
             gameEnded = true;
 
+            controller.Die();
+            playerAim.Die();
+
             KLD_MissionInfos.instance.RefreshMissionInfos(false);
 
             StartCoroutine(ChangeSceneCoroutine());
@@ -89,9 +92,9 @@ public class XL_GameManager : MonoBehaviour
     {
         inputs.disableInputs = true;
 
-        //player death anim
-
         yield return new WaitForSeconds(2f);
+
+        KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
 
         Time.timeScale = 0f;
 
