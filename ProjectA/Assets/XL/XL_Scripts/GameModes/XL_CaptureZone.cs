@@ -30,6 +30,9 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
             StopAllCoroutines();
             XL_GameModeManager.instance.CompleteObjective(index);
             onZoneCaptured.Invoke();
+
+            KLD_AudioManager.Instance.PlayCharacterSound("CaptureZone", 3);
+
             //Debug.Log("test");
             enabled = false;
         }

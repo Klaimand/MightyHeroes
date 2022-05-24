@@ -46,9 +46,14 @@ public class XL_GameModeManager : MonoBehaviour
     private void Start()
     {
         InitializeObjectives();
-        timerCoroutine = StartCoroutine(TimerCoroutine());
+        //timerCoroutine = StartCoroutine(TimerCoroutine());
         gameMode.InitGameModeUI(topLeftCorner, nbObjectives, objectivesNames.ToArray());
         uiMission.UpdateObjective(gameMode.GetGameModeHeader(nbObjectivesCompleted, nbObjectives));
+    }
+
+    public void StartTimer()
+    {
+        timerCoroutine = StartCoroutine(TimerCoroutine());
     }
 
     void InitializeObjectives()

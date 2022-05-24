@@ -51,6 +51,10 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [Header("Mesh")]
     public GameObject characterMesh;
 
+    [Header("Sound")]
+    public string characterSoundPrefix = "Blast_";
+    public int characterSoundIndex = 0;
+
     public void Initialize()
     {
         if (isPercentageHealthGrowth) healthMax = Mathf.Round(base_healthMax * Mathf.Pow(healthGrowth, level));
