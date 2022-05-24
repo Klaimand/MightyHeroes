@@ -30,8 +30,9 @@ public class XL_Swarmers : XL_Enemy
         shader.SetFloat("_AtkSldr", 0);
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         Move();
         DebugRaycast();
         if (attacking) shader.SetFloat("_AtkFloat", (Time.time - atkStartingTime) / attackAnimationSpeed + 0.5f);
@@ -82,6 +83,7 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Attack()
     {
+        selfAudioManager.PlaySound("Attack");
         //Debug.Log("Attacking");
         StartCoroutine(AttackCoroutine(attackAnimationSpeed));
         StartCoroutine(AttackCooldownCoroutine(attackAnimationSpeed));

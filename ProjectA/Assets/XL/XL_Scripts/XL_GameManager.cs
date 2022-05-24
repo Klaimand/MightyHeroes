@@ -45,6 +45,7 @@ public class XL_GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        KLD_AudioManager.Instance.PlaySound("SpawnHelico");
         spawnFX.Play();
 
         yield return new WaitForSeconds(2f);
@@ -62,6 +63,8 @@ public class XL_GameManager : MonoBehaviour
     {
         if (!gameEnded)
         {
+            KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
+
             gameEnded = true;
 
             KLD_MissionInfos.instance.RefreshMissionInfos(true);

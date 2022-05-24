@@ -14,6 +14,9 @@ public class KLD_DataObjective : MonoBehaviour, KLD_IObjective
         if (other.gameObject.CompareTag("Player"))
         {
             XL_GameModeManager.instance.CompleteObjective(index);
+
+            KLD_AudioManager.Instance.PlayCharacterSound("IntelPickup", 4);
+
             DespawnObjective();
         }
     }
