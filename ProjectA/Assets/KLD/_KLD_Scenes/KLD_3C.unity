@@ -2422,15 +2422,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef35af88a95f1c2448edb9ec6258e676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 3
+  spawnRadius: 1
   playerMinDist: 10
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 4, y: 5}
+    minMaxTimeBetweenSpawns: {x: 0, y: 1}
     enemiesProbas:
     - proba: 1
-      enemy: Kamikaze
-      enemyPerSpawn: 2
+      enemy: Alpha
+      enemyPerSpawn: 0
+  - timeToActivate: 10
+    minMaxTimeBetweenSpawns: {x: 10, y: 15}
+    enemiesProbas:
+    - proba: 1
+      enemy: Alpha
+      enemyPerSpawn: 1
 --- !u!4 &2091840206
 Transform:
   m_ObjectHideFlags: 0
