@@ -39,8 +39,9 @@ public class XL_Kamikaze : XL_Enemy
         }
     }
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         Move();
     }
 
@@ -58,6 +59,7 @@ public class XL_Kamikaze : XL_Enemy
     public override void Die()
     {
         base.Die();
+        selfAudioManager.GetSound("Engine").GetSource().Stop();
         KLD_EventsManager.instance.InvokeEnemyKill(Enemy.KAMIKAZE);
         foreach (ParticleSystem ps in chargeParticles)
         {
@@ -83,7 +85,11 @@ public class XL_Kamikaze : XL_Enemy
             if ((transform.position - targetedPlayer.position).magnitude < aggroDistance && !isCharged)
             {
                 animator.SetBool("Charging", true);
-                if (!isCharged) StartCoroutine(ChargingCoroutine());
+                if (!isCharged)
+                {
+                    StartCoroutine(ChargingCoroutine());
+                    selfAudioManager.PlaySound("Angry");
+                }
                 agent.speed = speed * chargeSpeedRatio;
             }
             if ((transform.position - targetedPlayer.position).magnitude < explosionRange * 0.5f)
@@ -106,6 +112,7 @@ public class XL_Kamikaze : XL_Enemy
         {
             ps.Play();
         }
+        selfAudioManager.PlaySound("Engine");
         animator.SetBool("Attacking", true);
         agent.isStopped = false;
 

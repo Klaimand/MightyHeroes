@@ -8,12 +8,19 @@ public class KLD_SelfAudioManager : MonoBehaviour
 
     Dictionary<string, Sound> soundsKey = new Dictionary<string, Sound>();
 
+    [SerializeField] string[] soundsToLoop;
+
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < sounds.Length; i++)
         {
             AddSoundToDictionnary(sounds[i]);
+        }
+
+        for (int i = 0; i < soundsToLoop.Length; i++)
+        {
+            GetSound(soundsToLoop[i]).GetSource().loop = true;
         }
     }
 
@@ -28,5 +35,10 @@ public class KLD_SelfAudioManager : MonoBehaviour
     public void PlaySound(string _key)
     {
         soundsKey[_key].Play();
+    }
+
+    public Sound GetSound(string _key)
+    {
+        return soundsKey[_key];
     }
 }

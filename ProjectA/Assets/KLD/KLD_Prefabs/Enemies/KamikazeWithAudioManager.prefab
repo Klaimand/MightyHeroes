@@ -45,14 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Attack
-    clips: []
-    group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
-    volume: 0.7
-    pitch: 1
-    canBeOverriden: 0
-    randomVolume: 0.2
-    randomPitch: 0.2
   - name: Chase
     clips:
     - {fileID: 8300000, guid: 24a9fd0221854ab4dbe65f398074d265, type: 3}
@@ -67,11 +59,31 @@ MonoBehaviour:
     clips:
     - {fileID: 8300000, guid: 93b4876715a5d80429c29fccbc1f0d03, type: 3}
     group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
-    volume: 0.7
+    volume: 0.5
     pitch: 1
     canBeOverriden: 0
     randomVolume: 0.2
     randomPitch: 0.2
+  - name: Engine
+    clips:
+    - {fileID: 8300000, guid: 0ee2ea7bede64d64a989d5f4ad7b2950, type: 3}
+    group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  - name: Angry
+    clips:
+    - {fileID: 8300000, guid: e45b8ad9bd7377841819c550ed0e4a7c, type: 3}
+    group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  soundsToLoop:
+  - Engine
 --- !u!1001 &6579924637917792859
 PrefabInstance:
   m_ObjectHideFlags: 0
