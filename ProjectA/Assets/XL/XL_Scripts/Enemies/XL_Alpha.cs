@@ -62,6 +62,8 @@ public class XL_Alpha : XL_Enemy
         velocity = XL_Utilities.GetVelocity(h, distance, projectileTravelTime);
         projectile.GetComponent<Rigidbody>().velocity = new Vector3(velocity[0] * (shootDirection.x / distance), velocity[1], velocity[0] * (shootDirection.z / distance));
         missileLaunched++;
+
+        selfAudioManager.PlaySound("Shooting");
     }
 
     private int j;
@@ -86,6 +88,7 @@ public class XL_Alpha : XL_Enemy
         {
 
             yield return new WaitForSeconds(0.85f);
+            selfAudioManager.PlaySound("Spawning");
             vfx = XL_Pooler.instance.PopPosition("SpawningVFX", transform.position + transform.up * 4);
 
             summonPosition = transform.forward * summonDistance;
@@ -106,12 +109,13 @@ public class XL_Alpha : XL_Enemy
     {
         if (dead) return;
         dead = true;
-        base.Die();
+        //base.Die();
         KLD_EventsManager.instance.InvokeEnemyKill(Enemy.ALPHA);
         StopAllCoroutines();
         canAttack = false;
 
         deathVFX = XL_Pooler.instance.PopPosition("Summoner_DeathVFX", transform.position);
+        selfAudioManager.PlaySound("Death", 1.45f);
         XL_Pooler.instance.DelayedDePop(2, "Summoner_DeathVFX", deathVFX);
 
         XL_Pooler.instance.DelayedDePop(1.6f, "Alpha", transform.gameObject);

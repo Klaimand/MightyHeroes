@@ -37,6 +37,17 @@ public class KLD_SelfAudioManager : MonoBehaviour
         soundsKey[_key].Play();
     }
 
+    public void PlaySound(string _key, float _delay)
+    {
+        StartCoroutine(PlaySoundCoroutine(_key, _delay));
+    }
+
+    IEnumerator PlaySoundCoroutine(string _key, float _delay)
+    {
+        yield return new WaitForSeconds(_delay);
+        PlaySound(_key);
+    }
+
     public Sound GetSound(string _key)
     {
         return soundsKey[_key];
