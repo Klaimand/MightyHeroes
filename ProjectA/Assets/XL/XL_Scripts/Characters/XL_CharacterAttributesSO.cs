@@ -9,6 +9,10 @@ public class XL_CharacterAttributesSO : ScriptableObject
     [Header("Name")]
     [SerializeField] public string characterName;
 
+    [Header("Unlock")]
+    public int unlockSoftCurrency;
+    public int unlockHardCurrency;
+
     [Header("Base Values")]
     [SerializeField] float base_healthMax;
     [SerializeField] float base_movementSpeed;

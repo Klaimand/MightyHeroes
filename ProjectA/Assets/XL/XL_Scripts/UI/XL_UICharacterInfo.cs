@@ -7,17 +7,23 @@ using TMPro;
 public class XL_UICharacterInfo
 {
     public GameObject characterUI;
+    public GameObject lockedSprite;
+    public GameObject unlockedSprite;
     public TMP_Text characterLvlUI;
     public XL_CharacterAttributesSO characterAttributes;
 
-    public void Activate()
+    public void Activate(int i)
     {
         characterUI.SetActive(true);
+        if (i == 0) lockedSprite.SetActive(true);
+        else unlockedSprite.SetActive(true);
     }
 
     public void Deactivate()
     {
         characterUI.SetActive(false);
+        lockedSprite.SetActive(false);
+        unlockedSprite.SetActive(false);
     }
 
     public void DisplayLevel()
