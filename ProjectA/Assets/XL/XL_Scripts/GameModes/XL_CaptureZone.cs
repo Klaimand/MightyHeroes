@@ -14,7 +14,17 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
     [SerializeField] private LayerMask layer;
     List<GameObject> playersInside = new List<GameObject>();
 
+    [SerializeField] ParticleSystem captureFX;
+    [SerializeField] ParticleSystem captureEndFX;
+    [SerializeField] Renderer zoneRenderer;
+    [SerializeField] Renderer[] eggsRenderers;
+
+    [SerializeField] float fadeTime = 2f;
+
+
     [SerializeField] UnityEvent onZoneCaptured;
+
+    bool captured = false;
 
     private void Start()
     {
@@ -25,8 +35,27 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     private void Update()
     {
-        if (GetObjectiveState())
+        if (!captured)
         {
+            if (playersInside.Count > 0)
+            {
+                if (!captureFX.isPlaying)
+                {
+                    captureFX.Play();
+                }
+            }
+            else
+            {
+                if (captureFX.isPlaying)
+                {
+                    captureFX.Stop();
+                }
+            }
+        }
+
+        if (GetObjectiveState() && !captured)
+        {
+            captured = true;
             StopAllCoroutines();
             XL_GameModeManager.instance.CompleteObjective(index);
             onZoneCaptured.Invoke();
@@ -34,7 +63,16 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
             KLD_AudioManager.Instance.PlayCharacterSound("CaptureZone", 3);
 
             //Debug.Log("test");
-            enabled = false;
+            captureFX.Stop();
+            captureEndFX.Play();
+            //enabled = false;
+
+            StartCoroutine(LerpMaterialValue(0.15f, -0.1f, fadeTime, zoneRenderer, "_Dissolve"));
+
+            //for (int i = 0; i < eggsRenderers.Length; i++)
+            //{
+            StartCoroutine(LerpMaterialValue(0f, 1f, fadeTime, eggsRenderers[0], "_Dissolve"));
+            //}
         }
     }
 
@@ -67,6 +105,20 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
             playersInside.Remove(other.gameObject);
         }
     }
+
+
+    IEnumerator LerpMaterialValue(float _startValue, float _endValue, float _time, Renderer _renderer, string _reference)
+    {
+        float t = 0;
+        while (t < _time)
+        {
+            _renderer.sharedMaterial.SetFloat(_reference, Mathf.Lerp(_startValue, _endValue, t / _time));
+
+            yield return null;
+            t += Time.deltaTime;
+        }
+    }
+
 
     public bool GetObjectiveState()
     {
