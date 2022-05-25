@@ -6,8 +6,13 @@ using UnityEngine.AI;
 
 public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 {
+    [Header("Sound")]
+    [SerializeField] Vector2 minMaxTimeBetweenChaseSounds = new Vector2(7f, 15f);
+    float curTimeBetweenChaseSound = 0f;
+    float curTimeSinceLastChaseSound = 0f;
+    [SerializeField] protected KLD_SelfAudioManager selfAudioManager;
 
-
+    [Space(10)]
     [SerializeField] Animator hitAnimator;
     [SerializeField] int hitAnimatorLayer = 0;
 
@@ -42,6 +47,17 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         Alert();
     }
 
+    protected virtual void Update()
+    {
+        if (curTimeSinceLastChaseSound > curTimeBetweenChaseSound)
+        {
+            curTimeBetweenChaseSound = Random.Range(minMaxTimeBetweenChaseSounds.x, minMaxTimeBetweenChaseSounds.y);
+            curTimeBetweenChaseSound = 0f;
+            selfAudioManager.PlaySound("Chase");
+        }
+        curTimeSinceLastChaseSound += Time.deltaTime;
+    }
+
     protected virtual void Initialize()
     {
         //Debug.Log("Initialized");
@@ -57,6 +73,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
 
     public virtual void Die()
     {
+        selfAudioManager.PlaySound("Death");
         //Debug.Log("Remove enemy : " + this.name);
         //XL_GameManager.instance.RemoveEnemyAttributes(attributes);
     }
@@ -137,6 +154,8 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         }
 
         //attributes.maxHealth = Random.Range(10, 101);
+        curTimeBetweenChaseSound = Random.Range(minMaxTimeBetweenChaseSounds.x, minMaxTimeBetweenChaseSounds.y);
+        curTimeSinceLastChaseSound = 0f;
     }
 
     void OnDisable()
