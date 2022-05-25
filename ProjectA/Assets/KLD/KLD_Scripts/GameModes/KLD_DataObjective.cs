@@ -17,6 +17,8 @@ public class KLD_DataObjective : MonoBehaviour, KLD_IObjective
 
             KLD_AudioManager.Instance.PlayCharacterSound("IntelPickup", 4);
 
+            collected = true;
+
             DespawnObjective();
         }
     }

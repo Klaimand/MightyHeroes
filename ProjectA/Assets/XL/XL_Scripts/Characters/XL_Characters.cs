@@ -150,7 +150,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
 
-        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
+        //KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -162,7 +162,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
 
-        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
+        //KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;

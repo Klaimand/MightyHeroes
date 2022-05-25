@@ -28,6 +28,8 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     private void Start()
     {
+        KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().loop = true;
+
         zoneRenderer.sharedMaterial.SetFloat("_Dissolve", 0.15f);
         eggsRenderer.sharedMaterial.SetFloat("_Dissolve", 0f);
 
@@ -45,6 +47,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
                 if (!captureFX.isPlaying)
                 {
                     captureFX.Play();
+                    KLD_AudioManager.Instance.PlaySound("TakingZone");
                 }
             }
             else
@@ -52,6 +55,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
                 if (captureFX.isPlaying)
                 {
                     captureFX.Stop();
+                    KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
                 }
             }
         }
@@ -64,6 +68,9 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
             onZoneCaptured.Invoke();
 
             KLD_AudioManager.Instance.PlayCharacterSound("CaptureZone", 3);
+
+            KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
+            KLD_AudioManager.Instance.PlaySound("ZoneTaken");
 
             //Debug.Log("test");
             captureFX.Stop();
