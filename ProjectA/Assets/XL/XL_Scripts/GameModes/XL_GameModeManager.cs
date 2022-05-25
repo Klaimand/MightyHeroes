@@ -135,7 +135,7 @@ public class XL_GameModeManager : MonoBehaviour
 
             if (missionTime <= 0)
             {
-                XL_GameManager.instance.LoseGame();
+                XL_GameManager.instance.LoseGame(false);
                 StopCoroutine(timerCoroutine);
             }
 
