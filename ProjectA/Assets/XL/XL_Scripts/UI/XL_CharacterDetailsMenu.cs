@@ -25,9 +25,16 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     [SerializeField] private Transform regenXScaler;
     [SerializeField] private float scalerRegenMax;
 
+    [Header("Unlock")]
+    [SerializeField] private GameObject unlockButton;
+    [SerializeField] private TMP_Text unlockText;
+
     [Header("Upgrade")]
     [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMP_Text upgradeText;
+
+    [Header("Select")]
+    [SerializeField] private GameObject selectButton;
 
     public int selectedPlayer = 0;
 
@@ -46,14 +53,30 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
 
         selectedPlayer = idx;
 
+        RefreshUI();
+    }
+
+    private void RefreshUI()
+    {
         CheckHasUpgrade();
         DisplayCharacterInfo();
 
-        characterInfos[idx].Activate();
+        characterInfos[selectedPlayer].Activate(PlayerPrefs.GetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked"));
     }
 
     private void CheckHasUpgrade()
     {
+        if (PlayerPrefs.GetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked") == 0)
+        {
+            upgradeButton.SetActive(false);
+            unlockButton.SetActive(true);
+            selectButton.SetActive(false);
+        }
+        else
+        {
+            unlockButton.SetActive(false);
+            selectButton.SetActive(true);
+        }
         if (characterInfos[selectedPlayer].GetLevel() + 1 >= characterInfos[selectedPlayer].characterAttributes.experienceToReach.Length) upgradeButton.SetActive(false);
         else upgradeButton.SetActive(true);
     }
@@ -65,6 +88,7 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
         healthText.text = characterInfos[selectedPlayer].GetHealth().ToString();
         armorText.text = characterInfos[selectedPlayer].GetArmor().ToString();
         regenText.text = characterInfos[selectedPlayer].GetRegen().ToString();
+        unlockText.text = characterInfos[selectedPlayer].characterAttributes.unlockSoftCurrency.ToString();
         upgradeText.text = characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()].ToString(); //Aled
 
         //Initialise Bar
@@ -75,11 +99,13 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
 
     public void UpgradeCharacter()
     {
-        Debug.Log(characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
         if (PlayerPrefs.GetInt("SoftCurrency") > characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()])
         {
             //Save new level
             PlayerPrefs.SetInt(characterInfos[selectedPlayer].characterAttributes.characterName, characterInfos[selectedPlayer].GetLevel() + 1);
+
+            //Save new currency amount
+            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
 
             //Increments character level
             characterInfos[selectedPlayer].characterAttributes.level++;
@@ -87,14 +113,27 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
             //Initialise stats for the current level
             characterInfos[selectedPlayer].characterAttributes.Initialize();
 
+            //Refresh currency overlay
+            XL_MainMenu.instance.RefreshTopOverlay();
+
+            RefreshUI();
+        }
+    }
+
+    public void UnlockCharacter()
+    {
+        if (PlayerPrefs.GetInt("SoftCurrency") > characterInfos[selectedPlayer].characterAttributes.unlockSoftCurrency)
+        {
+            //Unlock Character
+            PlayerPrefs.SetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked", 1);
+
             //Save new currency amount
-            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()]);
+            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - characterInfos[selectedPlayer].characterAttributes.unlockSoftCurrency);
 
             //Refresh currency overlay
             XL_MainMenu.instance.RefreshTopOverlay();
 
-            DisplayCharacterInfo();
-            CheckHasUpgrade();
+            RefreshUI();
         }
     }
 }

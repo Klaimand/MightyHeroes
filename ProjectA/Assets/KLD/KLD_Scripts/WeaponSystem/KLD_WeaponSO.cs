@@ -34,6 +34,8 @@ public class KLD_WeaponSO : ScriptableObject
 {
     public string weaponName = "newWeapon";
 
+    public int unlockSoftCurrency = 1500;
+
     [TextArea(3, 8)]
     public string description = "This is a new weapon.";
 
@@ -81,6 +83,8 @@ public class KLD_WeaponSO : ScriptableObject
     [Header("Pooling")]
     public int fxPoolSize = 9;
 
+    [Header("Sound")]
+    public string soundKey = "THE_CLASSIC_RELOAD";
 
     int maxLevel = 0;
 

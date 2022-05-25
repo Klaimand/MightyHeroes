@@ -16,6 +16,7 @@ public class XL_GameManager : MonoBehaviour
     [SerializeField] KLD_EndingScreen endingScreen;
     [SerializeField] KLD_TouchInputs inputs;
     [SerializeField] KLD_PlayerController controller;
+    [SerializeField] KLD_PlayerAim playerAim;
     [SerializeField] ParticleSystem spawnFX;
 
     bool gameEnded = false;
@@ -28,7 +29,7 @@ public class XL_GameManager : MonoBehaviour
     void Start()
     {
         inputs.disableInputs = true;
-        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        //KLD_LoadingScreen.instance.ShowLoadingScreen();
         StartGame();
     }
 
@@ -45,6 +46,7 @@ public class XL_GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
+        KLD_AudioManager.Instance.PlaySound("SpawnHelico");
         spawnFX.Play();
 
         yield return new WaitForSeconds(2f);
@@ -62,31 +64,50 @@ public class XL_GameManager : MonoBehaviour
     {
         if (!gameEnded)
         {
-            KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
-
             gameEnded = true;
 
-            KLD_MissionInfos.instance.RefreshMissionInfos(true);
-
-            StartCoroutine(ChangeSceneCoroutine());
+            StartCoroutine(ChangeSceneCoroutine(true, false));
         }
     }
 
-    public void LoseGame()
+    public void LoseGame(bool _dead)
     {
         if (!gameEnded)
         {
             gameEnded = true;
 
-            KLD_MissionInfos.instance.RefreshMissionInfos(false);
-
-            StartCoroutine(ChangeSceneCoroutine());
+            StartCoroutine(ChangeSceneCoroutine(false, _dead));
         }
     }
 
-    IEnumerator ChangeSceneCoroutine()
+    IEnumerator ChangeSceneCoroutine(bool _victory, bool _dead)
     {
+        KLD_MissionInfos.instance.RefreshMissionInfos(_victory);
+
+        playerAim.Die();
         inputs.disableInputs = true;
+
+        if (_victory)
+        {
+            XL_Pooler.instance.PopPosition("VictoryFX", players[0].transform.position);
+
+            controller.SetPlayerState(PlayerState.WIN);
+
+            yield return new WaitForSeconds(2f);
+
+            KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
+        }
+        else
+        {
+            controller.SetPlayerState(_dead ? PlayerState.DEAD : PlayerState.LOOSE);
+
+            if (_dead)
+            {
+                KLD_AudioManager.Instance.PlayCharacterSound("Death", 8);
+            }
+            yield return new WaitForSeconds(2f);
+        }
+
 
         Time.timeScale = 0f;
 
@@ -104,6 +125,10 @@ public class XL_GameManager : MonoBehaviour
     public void ChangeScene()
     {
         Time.timeScale = 1f;
+
+        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        KLD_AudioManager.Instance.OutOfGameMusic();
+
         SceneManager.LoadScene(0);
     }
 }

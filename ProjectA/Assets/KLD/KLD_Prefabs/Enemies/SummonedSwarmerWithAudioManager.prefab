@@ -1,0 +1,152 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8403018103792037405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5325704417069008931}
+  - component: {fileID: 8748849525254515791}
+  m_Layer: 0
+  m_Name: SummonedSwarmerWithAudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5325704417069008931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8403018103792037405}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8904209970534872304}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8748849525254515791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8403018103792037405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e0164b99b86f1649a3e2765bf0296d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Attack
+    clips:
+    - {fileID: 8300000, guid: 4f5c3770b82457144bb7d420e73f9b24, type: 3}
+    - {fileID: 8300000, guid: 5dbf5de314ca0fd429514dcdfcb087ae, type: 3}
+    - {fileID: 8300000, guid: 46f96f5d5d01cd54495d9c6d8422e3b8, type: 3}
+    - {fileID: 8300000, guid: 8b41974026ae45342b3fcad884ce84d2, type: 3}
+    group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0.2
+    randomPitch: 0.2
+  - name: Chase
+    clips:
+    - {fileID: 8300000, guid: 828f9162d0986a043a53aa803a4124ae, type: 3}
+    - {fileID: 8300000, guid: 8f2e2e6452641b746901d167c1c7bb54, type: 3}
+    - {fileID: 8300000, guid: 88552f83d8d74764e8e8229cccd60468, type: 3}
+    group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0.2
+    randomPitch: 0.2
+  - name: Death
+    clips:
+    - {fileID: 8300000, guid: b972ccd869b511747a77b35f96ea7b8a, type: 3}
+    - {fileID: 8300000, guid: 5f46725ca77db454496bec18f2715175, type: 3}
+    - {fileID: 8300000, guid: 8b367a78368ac404b87f28adc707c248, type: 3}
+    group: {fileID: -40896633249073277, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0.2
+    randomPitch: 0.2
+  soundsToLoop: []
+--- !u!1001 &8579734554568660857
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 5325704417069008931}
+    m_Modifications:
+    - target: {fileID: 901648824140653448, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_Name
+      value: Summoned_Swarmer_parent
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 901648824140653450, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: selfAudioManager
+      value: 
+      objectReference: {fileID: 8748849525254515791}
+    - target: {fileID: 6765556740270379895, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a3bb6ddf8c60e214c8e66ae94db18222, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+--- !u!4 &8904209970534872304 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 901648824140653449, guid: dd510605ebe61af4f82eddb1af3705aa, type: 3}
+  m_PrefabInstance: {fileID: 8579734554568660857}
+  m_PrefabAsset: {fileID: 0}

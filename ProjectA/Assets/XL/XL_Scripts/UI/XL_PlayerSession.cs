@@ -26,8 +26,6 @@ public class XL_PlayerSession : MonoBehaviour
         wait = new WaitForSeconds(timeToRecoverEnergy);
 
         instance.StartCoroutine(InitializeCoroutine());
-
-        
     }
 
     private int _energy;
@@ -62,7 +60,6 @@ public class XL_PlayerSession : MonoBehaviour
     {
         if (XL_MainMenu.instance != null)
         {
-            
             if (XL_MainMenu.instance.GetEnergyMaxAmount() <= PlayerPrefs.GetInt("Energy"))
             {
                 PlayerPrefs.SetInt("Energy", XL_MainMenu.instance.GetEnergyMaxAmount());
