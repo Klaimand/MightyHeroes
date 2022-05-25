@@ -125,6 +125,10 @@ public class XL_GameManager : MonoBehaviour
     public void ChangeScene()
     {
         Time.timeScale = 1f;
+
+        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        KLD_AudioManager.Instance.OutOfGameMusic();
+
         SceneManager.LoadScene(0);
     }
 }

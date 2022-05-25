@@ -225,8 +225,47 @@ public class KLD_AudioManager : MonoBehaviour
         _source.Stop();
     }
 
-    public void SetReverb(bool value)
+    public void FadeInInst(AudioSource _source, float time)
     {
-        mixer.SetFloat("ReverbMix", value ? 0f : -80f);
+        StartCoroutine(FadeIn(_source, time));
+    }
+
+    IEnumerator FadeIn(AudioSource _source, float time)
+    {
+        _source.Play();
+        float curTime = 0f;
+        float endVolume = 0.7f;
+
+        while (curTime < time)
+        {
+            _source.volume = Mathf.Lerp(0f, endVolume, curTime / time);
+            curTime += Time.deltaTime;
+            yield return null;
+        }
+        _source.volume = endVolume;
+    }
+
+    public void OutOfMenuMusic()
+    {
+        StartCoroutine(OutOfMenuMusicCoroutine());
+    }
+
+    IEnumerator OutOfMenuMusicCoroutine()
+    {
+        FadeOut(GetSound("MenuMusic").GetSource(), 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        FadeIn(GetSound("GameMusic").GetSource(), 0.5f);
+    }
+
+    public void OutOfGameMusic()
+    {
+        StartCoroutine(OutOfGameMusicCoroutine());
+    }
+
+    IEnumerator OutOfGameMusicCoroutine()
+    {
+        FadeOut(GetSound("GameMusic").GetSource(), 0.5f);
+        yield return new WaitForSeconds(0.3f);
+        FadeIn(GetSound("MenuMusic").GetSource(), 0.5f);
     }
 }
