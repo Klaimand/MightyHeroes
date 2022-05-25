@@ -66,7 +66,6 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
 
     private void CheckHasUpgrade()
     {
-        Debug.Log("is unlocked : " + PlayerPrefs.GetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked"));
         if (PlayerPrefs.GetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked") == 0)
         {
             upgradeButton.SetActive(false);

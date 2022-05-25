@@ -54,6 +54,11 @@ public class XL_MainMenu : MonoBehaviour
         InitPlayerPrefs();
         RefreshMainMenuUI();
         RefreshTopOverlay();
+
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.Initialise();
+        }
     }
 
     private void InitPlayerPrefs()
@@ -244,6 +249,46 @@ public class XL_MainMenu : MonoBehaviour
     public KLD_WeaponSO GetWeaponSO(Weapon _weapon)
     {
         return weaponAttributes[(int)_weapon];
+    }
+
+    public void SelectPlayer()
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectPlayer();
+        }
+    }
+
+    public void SelectWeapon()
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectWeapon();
+        }
+    }
+
+    public void SelectMap(int idx)
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectMap(idx);
+        }
+    }
+
+    public void SelectDifficulty(int idx)
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectDifficulty(idx);
+        }
+    }
+
+    public void SetEnergyCost(int energyCost)
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SetEnergyCost(energyCost);
+        }
     }
 
     public int GetEnergyMaxAmount()
