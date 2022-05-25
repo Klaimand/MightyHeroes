@@ -1892,6 +1892,7 @@ MonoBehaviour:
   clampMin: 0
   clampMax: 0
   lerpStrength: 0.2
+  deactivateThreshold: 0
   buttons: []
 --- !u!1 &1398687035302022029
 GameObject:
@@ -2349,6 +2350,7 @@ MonoBehaviour:
   clampMin: 0
   clampMax: 0
   lerpStrength: 0.2
+  deactivateThreshold: 0
   buttons: []
 --- !u!1 &1398687035456329643
 GameObject:
@@ -2474,6 +2476,7 @@ MonoBehaviour:
   clampMin: 0
   clampMax: 0
   lerpStrength: 0.2
+  deactivateThreshold: 0
   buttons: []
 --- !u!1 &1398687035464455525
 GameObject:
@@ -3939,6 +3942,7 @@ MonoBehaviour:
   clampMin: 0
   clampMax: 0
   lerpStrength: 0.2
+  deactivateThreshold: 0
   buttons: []
 --- !u!1 &1398687036220290699
 GameObject:
@@ -5444,7 +5448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -6862,17 +6866,27 @@ MonoBehaviour:
   - {fileID: 1398687035270181250}
   weaponInfos:
   - weaponUI: {fileID: 1398687036155251250}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     weaponLvlUI: {fileID: 1398687035628690162}
     weaponAttributes: {fileID: 11400000, guid: aba25dde72e48d245bcb88957417abb0, type: 2}
   - weaponUI: {fileID: 1398687036375558200}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     weaponLvlUI: {fileID: 1398687036400376685}
     weaponAttributes: {fileID: 11400000, guid: a8b8d70eea9548642888ffbab16f066b, type: 2}
   - weaponUI: {fileID: 1398687035691621482}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     weaponLvlUI: {fileID: 1398687035238370851}
     weaponAttributes: {fileID: 11400000, guid: 442483801d895a44ea30b5cdbd403aa8, type: 2}
   - weaponUI: {fileID: 1398687035031605621}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     weaponLvlUI: {fileID: 1398687035339638811}
     weaponAttributes: {fileID: 11400000, guid: a5683c25f68643748af52f8c5e9d0907, type: 2}
   - weaponUI: {fileID: 1398687035894845833}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     weaponLvlUI: {fileID: 1398687035305199444}
     weaponAttributes: {fileID: 11400000, guid: 97e84cd235c466545b1f217bd6f7987a, type: 2}
