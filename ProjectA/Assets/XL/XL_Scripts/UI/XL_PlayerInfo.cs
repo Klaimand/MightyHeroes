@@ -37,7 +37,7 @@ public class XL_PlayerInfo : MonoBehaviour
     private void InitialiseMenuData()
     {
         menuData.character = 0;
-        menuData.weapon = 0;
+        menuData.weapon = (Weapon)1;
         menuData.map = 0;
         menuData.difficulty = 0;
         menuData.missionEnergyCost = 20;
