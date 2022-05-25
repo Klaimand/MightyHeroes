@@ -131,6 +131,7 @@ public class KLD_PlayerAim : MonoBehaviour
     {
         if (isDead)
         {
+            targetPos = transform.position + transform.forward;
             return;
         }
 

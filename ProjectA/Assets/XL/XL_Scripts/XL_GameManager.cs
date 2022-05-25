@@ -64,14 +64,9 @@ public class XL_GameManager : MonoBehaviour
     {
         if (!gameEnded)
         {
-
             gameEnded = true;
 
-            controller.SetPlayerState(PlayerState.WIN);
-
-            KLD_MissionInfos.instance.RefreshMissionInfos(true);
-
-            StartCoroutine(ChangeSceneCoroutine());
+            StartCoroutine(ChangeSceneCoroutine(true, false));
         }
     }
 
@@ -81,22 +76,38 @@ public class XL_GameManager : MonoBehaviour
         {
             gameEnded = true;
 
-            controller.SetPlayerState(_dead ? PlayerState.DEAD : PlayerState.LOOSE);
-
-            KLD_MissionInfos.instance.RefreshMissionInfos(false);
-
-            StartCoroutine(ChangeSceneCoroutine());
+            StartCoroutine(ChangeSceneCoroutine(false, _dead));
         }
     }
 
-    IEnumerator ChangeSceneCoroutine()
+    IEnumerator ChangeSceneCoroutine(bool _victory, bool _dead)
     {
+        KLD_MissionInfos.instance.RefreshMissionInfos(_victory);
+
         playerAim.Die();
         inputs.disableInputs = true;
 
-        yield return new WaitForSeconds(2f);
+        if (_victory)
+        {
+            XL_Pooler.instance.PopPosition("VictoryFX", players[0].transform.position);
 
-        KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
+            controller.SetPlayerState(PlayerState.WIN);
+
+            yield return new WaitForSeconds(2f);
+
+            KLD_AudioManager.Instance.PlayCharacterSound("Victory", 8);
+        }
+        else
+        {
+            controller.SetPlayerState(_dead ? PlayerState.DEAD : PlayerState.LOOSE);
+
+            if (_dead)
+            {
+                KLD_AudioManager.Instance.PlayCharacterSound("Death", 8);
+            }
+            yield return new WaitForSeconds(2f);
+        }
+
 
         Time.timeScale = 0f;
 

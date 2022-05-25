@@ -85,6 +85,10 @@ public class KLD_PlayerController : MonoBehaviour
         }
         else
         {
+            if (playerState == PlayerState.WIN)
+            {
+                transform.rotation = Quaternion.identity;
+            }
             rb.velocity = Vector3.zero;
         }
         //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
