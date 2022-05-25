@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class XL_ShopMenu : MonoBehaviour
 {
-    [Header("Cards")]
-    [SerializeField] private GameObject currencyCards;
-    [SerializeField] private GameObject characterCards;
-    [SerializeField] private GameObject weaponCards;
 
     public void BuySoftCurrency(int amount) 
     {
@@ -25,20 +21,5 @@ public class XL_ShopMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") + amount);
         XL_MainMenu.instance.RefreshTopOverlay();
-    }
-
-    public void SwitchCurrencyCards()
-    {
-
-    }
-
-    public void SwitchWeaponCards()
-    {
-
-    }
-
-    public void SwitchCharacterCards()
-    {
-
     }
 }

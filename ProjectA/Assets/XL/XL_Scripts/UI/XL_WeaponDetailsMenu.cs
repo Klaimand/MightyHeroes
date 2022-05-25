@@ -68,8 +68,8 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
         if (PlayerPrefs.GetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName + "Unlocked") == 0)
         {
             upgradeButton.SetActive(false);
-            selectButton.SetActive(false);
             unlockButton.SetActive(true);
+            selectButton.SetActive(false);
         }
         else
         {

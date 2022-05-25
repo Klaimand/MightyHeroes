@@ -9,6 +9,7 @@ public class XL_MainMenu : MonoBehaviour
 {
     public static XL_MainMenu instance;
 
+    [SerializeField] private GameObject mainMenuProps;
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject characterSelectMenu;
     [SerializeField] private GameObject characterDetailsMenu;
@@ -184,6 +185,7 @@ public class XL_MainMenu : MonoBehaviour
     public void SwitchMainMenu()
     {
         RefreshMainMenuUI();
+        mainMenuProps.SetActive(true);
         mainMenu.SetActive(true);
 
         shopMenu.SetActive(false);
@@ -198,19 +200,23 @@ public class XL_MainMenu : MonoBehaviour
     {
         shopMenu.SetActive(true);
 
+        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
         characterSelectMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
         weaponSelectMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
         mapSelectMenu.SetActive(false);
+
     }
 
     public void SwitchCharaSelectMenu()
     {
         characterSelectMenu.SetActive(true);
 
+        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
+        shopMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
     }
 
@@ -225,7 +231,9 @@ public class XL_MainMenu : MonoBehaviour
     {
         weaponSelectMenu.SetActive(true);
 
+        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
+        shopMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
     }
 
@@ -240,6 +248,7 @@ public class XL_MainMenu : MonoBehaviour
     {
         mapSelectMenu.SetActive(true);
 
+        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
     }
 
