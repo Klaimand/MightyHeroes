@@ -67,20 +67,21 @@ public class XL_GameManager : MonoBehaviour
 
             gameEnded = true;
 
+            controller.SetPlayerState(PlayerState.WIN);
+
             KLD_MissionInfos.instance.RefreshMissionInfos(true);
 
             StartCoroutine(ChangeSceneCoroutine());
         }
     }
 
-    public void LoseGame()
+    public void LoseGame(bool _dead)
     {
         if (!gameEnded)
         {
             gameEnded = true;
 
-            controller.Die();
-            playerAim.Die();
+            controller.SetPlayerState(_dead ? PlayerState.DEAD : PlayerState.LOOSE);
 
             KLD_MissionInfos.instance.RefreshMissionInfos(false);
 
@@ -90,6 +91,7 @@ public class XL_GameManager : MonoBehaviour
 
     IEnumerator ChangeSceneCoroutine()
     {
+        playerAim.Die();
         inputs.disableInputs = true;
 
         yield return new WaitForSeconds(2f);

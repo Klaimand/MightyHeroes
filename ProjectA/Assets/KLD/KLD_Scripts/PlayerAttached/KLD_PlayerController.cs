@@ -4,6 +4,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Animations.Rigging;
 
+public enum PlayerState { DEFAULT, WIN, LOOSE, DEAD };
+
 public class KLD_PlayerController : MonoBehaviour
 {
     //refs
@@ -29,7 +31,7 @@ public class KLD_PlayerController : MonoBehaviour
     float timedMagnitude = 0f;
 
     [SerializeField, Header("Animation")] Animator animator;
-    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING, RUNNING_BACKWARD };
+    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING, RUNNING_BACKWARD, WIN };
     LocomotionState locomotionState = LocomotionState.IDLE;
 
     [SerializeField] float rbVelocityDead = 0.05f;
@@ -57,7 +59,8 @@ public class KLD_PlayerController : MonoBehaviour
     //MultiAimConstraint multiAimConstraint;
 
     bool spawning = true;
-    bool isDead = false;
+
+    PlayerState playerState = PlayerState.DEFAULT;
 
     void Awake()
     {
@@ -76,7 +79,7 @@ public class KLD_PlayerController : MonoBehaviour
 
         ProcessBonusSpeed();
 
-        if (!isDead)
+        if (playerState == PlayerState.DEFAULT)
         {
             rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
         }
@@ -199,9 +202,20 @@ public class KLD_PlayerController : MonoBehaviour
         {
             locomotionState = LocomotionState.RESPAWNING;
         }
-        else if (isDead)
+        else if (playerState != PlayerState.DEFAULT)
         {
-            locomotionState = LocomotionState.DIE;
+            if (playerState == PlayerState.DEAD)
+            {
+                locomotionState = LocomotionState.DIE;
+            }
+            else if (playerState == PlayerState.LOOSE)
+            {
+                locomotionState = LocomotionState.IDLE;
+            }
+            else if (playerState == PlayerState.WIN)
+            {
+                locomotionState = LocomotionState.WIN;
+            }
         }
         else if (timedAxis == Vector2.zero)
         {
@@ -304,8 +318,8 @@ public class KLD_PlayerController : MonoBehaviour
         //}
     }
 
-    public void Die()
+    public void SetPlayerState(PlayerState _playerState)
     {
-        isDead = true;
+        playerState = _playerState;
     }
 }

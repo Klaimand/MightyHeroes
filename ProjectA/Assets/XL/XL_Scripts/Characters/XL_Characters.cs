@@ -268,7 +268,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         StopAllCoroutines();
         //XL_GameManager.instance.RemovePlayer(transform.gameObject);
         //transform.gameObject.SetActive(false);
-        XL_GameManager.instance.LoseGame();
+        XL_GameManager.instance.LoseGame(true);
     }
 
     [ContextMenu("Take 100 Damage")]
