@@ -33,6 +33,9 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMP_Text upgradeText;
 
+    [Header("Select")]
+    [SerializeField] private GameObject selectButton;
+
     public int selectedPlayer = 0;
 
     private void Awake()
@@ -63,13 +66,17 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
 
     private void CheckHasUpgrade()
     {
-        Debug.Log("is unlocked : " + PlayerPrefs.GetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked"));
         if (PlayerPrefs.GetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked") == 0)
         {
             upgradeButton.SetActive(false);
             unlockButton.SetActive(true);
+            selectButton.SetActive(false);
         }
-        else unlockButton.SetActive(false);
+        else
+        {
+            unlockButton.SetActive(false);
+            selectButton.SetActive(true);
+        }
         if (characterInfos[selectedPlayer].GetLevel() + 1 >= characterInfos[selectedPlayer].characterAttributes.experienceToReach.Length) upgradeButton.SetActive(false);
         else upgradeButton.SetActive(true);
     }
@@ -117,7 +124,7 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("SoftCurrency") > characterInfos[selectedPlayer].characterAttributes.unlockSoftCurrency)
         {
-            //Save new level
+            //Unlock Character
             PlayerPrefs.SetInt(characterInfos[selectedPlayer].characterAttributes.characterName + "Unlocked", 1);
 
             //Save new currency amount

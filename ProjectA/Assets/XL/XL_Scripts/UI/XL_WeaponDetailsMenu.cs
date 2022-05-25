@@ -25,9 +25,16 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     [SerializeField] private Transform magazineSizeXScaler;
     [SerializeField] private float scalerMagazineSizeMax;
 
+    [Header("Unlock")]
+    [SerializeField] private GameObject unlockButton;
+    [SerializeField] private TMP_Text unlockText;
+
     [Header("Upgrade")]
     [SerializeField] private GameObject upgradeButton;
     [SerializeField] private TMP_Text upgradeText;
+
+    [Header("Select")]
+    [SerializeField] private GameObject selectButton;
 
     public int selectedWeapon = 0;
 
@@ -45,14 +52,30 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
 
         selectedWeapon = idx;
 
+        RefreshUI();
+    }
+
+    private void RefreshUI()
+    {
         CheckHasUpgrade();
         DisplayWeaponInfo();
 
-        weaponInfos[idx].Activate();
+        weaponInfos[selectedWeapon].Activate(PlayerPrefs.GetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName + "Unlocked"));
     }
 
     private void CheckHasUpgrade()
     {
+        if (PlayerPrefs.GetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName + "Unlocked") == 0)
+        {
+            upgradeButton.SetActive(false);
+            selectButton.SetActive(false);
+            unlockButton.SetActive(true);
+        }
+        else
+        {
+            unlockButton.SetActive(false);
+            selectButton.SetActive(true);
+        }
         if (weaponInfos[selectedWeapon].GetLevel() + 1 >= weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes.Length) upgradeButton.SetActive(false);
         else upgradeButton.SetActive(true);
     }
@@ -64,6 +87,7 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
         damageText.text = weaponInfos[selectedWeapon].GetDamage().ToString();
         rpmText.text = weaponInfos[selectedWeapon].GetRPM().ToString();
         magazineSizeText.text = weaponInfos[selectedWeapon].GetMagazine().ToString();
+        unlockText.text = weaponInfos[selectedWeapon].weaponAttributes.unlockSoftCurrency.ToString();
         upgradeText.text = weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach.ToString(); //Aled
 
         //Initialise Bar
@@ -78,13 +102,37 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
         Debug.Log(weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
         if (PlayerPrefs.GetInt("SoftCurrency") > weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach) 
         {
+            //Save new level
             PlayerPrefs.SetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName, weaponInfos[selectedWeapon].GetLevel() + 1);
+
+            //Save new currency amount
             PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
+
+            //Refresh currency overlay
             XL_MainMenu.instance.RefreshTopOverlay();
+
+            //Increments weapon level
             weaponInfos[selectedWeapon].weaponAttributes.level++;
 
             CheckHasUpgrade();
             DisplayWeaponInfo();
+        }
+    }
+
+    public void UnlockWeapon()
+    {
+        if (PlayerPrefs.GetInt("SoftCurrency") > weaponInfos[selectedWeapon].weaponAttributes.unlockSoftCurrency)
+        {
+            //Unlock weapon
+            PlayerPrefs.SetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName + "Unlocked", 1);
+
+            //Save new currency amount
+            PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") - weaponInfos[selectedWeapon].weaponAttributes.unlockSoftCurrency);
+
+            //Refresh currency overlay
+            XL_MainMenu.instance.RefreshTopOverlay();
+
+            RefreshUI();
         }
     }
 }
