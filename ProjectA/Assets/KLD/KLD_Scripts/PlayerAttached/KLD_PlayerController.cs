@@ -4,6 +4,8 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.Animations.Rigging;
 
+public enum PlayerState { DEFAULT, WIN, LOOSE, DEAD };
+
 public class KLD_PlayerController : MonoBehaviour
 {
     //refs
@@ -29,7 +31,7 @@ public class KLD_PlayerController : MonoBehaviour
     float timedMagnitude = 0f;
 
     [SerializeField, Header("Animation")] Animator animator;
-    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING, RUNNING_BACKWARD };
+    enum LocomotionState { IDLE, RUNNING, DIE, RESPAWNING, RUNNING_BACKWARD, WIN };
     LocomotionState locomotionState = LocomotionState.IDLE;
 
     [SerializeField] float rbVelocityDead = 0.05f;
@@ -56,6 +58,10 @@ public class KLD_PlayerController : MonoBehaviour
     //RigBuilder builder;
     //MultiAimConstraint multiAimConstraint;
 
+    bool spawning = true;
+
+    PlayerState playerState = PlayerState.DEFAULT;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -64,7 +70,7 @@ public class KLD_PlayerController : MonoBehaviour
 
     void Start()
     {
-
+        spawning = true;
     }
 
     void Update()
@@ -73,7 +79,18 @@ public class KLD_PlayerController : MonoBehaviour
 
         ProcessBonusSpeed();
 
-        rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
+        if (playerState == PlayerState.DEFAULT)
+        {
+            rb.velocity = (refTransform.right * rawAxis.x + refTransform.forward * rawAxis.y) * realSpeed;
+        }
+        else
+        {
+            if (playerState == PlayerState.WIN)
+            {
+                transform.rotation = Quaternion.identity;
+            }
+            rb.velocity = Vector3.zero;
+        }
         //rb.velocity = (refTransform.right * timedAxis.x + refTransform.forward * timedAxis.y) * speed *
         //(runningBackward ? -1f : 1f);
 
@@ -185,7 +202,26 @@ public class KLD_PlayerController : MonoBehaviour
 
     void AnimateLocomotionState()
     {
-        if (timedAxis == Vector2.zero)
+        if (spawning)
+        {
+            locomotionState = LocomotionState.RESPAWNING;
+        }
+        else if (playerState != PlayerState.DEFAULT)
+        {
+            if (playerState == PlayerState.DEAD)
+            {
+                locomotionState = LocomotionState.DIE;
+            }
+            else if (playerState == PlayerState.LOOSE)
+            {
+                locomotionState = LocomotionState.IDLE;
+            }
+            else if (playerState == PlayerState.WIN)
+            {
+                locomotionState = LocomotionState.WIN;
+            }
+        }
+        else if (timedAxis == Vector2.zero)
         {
             locomotionState = LocomotionState.IDLE;
         }
@@ -279,9 +315,15 @@ public class KLD_PlayerController : MonoBehaviour
 
     public void DoSpawnAnimation()
     {
-        if (animator != null)
-        {
-            animator.SetTrigger("spawn");
-        }
+        spawning = false;
+        //if (animator != null)
+        //{
+        //    animator.SetTrigger("spawn");
+        //}
+    }
+
+    public void SetPlayerState(PlayerState _playerState)
+    {
+        playerState = _playerState;
     }
 }
