@@ -29,7 +29,7 @@ public class XL_GameManager : MonoBehaviour
     void Start()
     {
         inputs.disableInputs = true;
-        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        //KLD_LoadingScreen.instance.ShowLoadingScreen();
         StartGame();
     }
 

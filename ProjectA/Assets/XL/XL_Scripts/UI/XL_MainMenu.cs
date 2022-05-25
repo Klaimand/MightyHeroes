@@ -66,6 +66,12 @@ public class XL_MainMenu : MonoBehaviour
         KLD_LoadingScreen.instance.HideLoadingScreen();
     }
 
+    [ContextMenu("ResetPlayerPrefs")]
+    void DeletePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     private void InitPlayerPrefs()
     {
         //---DELETE PLAYERPREFS---
@@ -165,6 +171,13 @@ public class XL_MainMenu : MonoBehaviour
         {
             KLD_LoadingScreen.instance.ShowLoadingScreen();
         }
+
+        StartCoroutine(WaitAndLaunchScene());
+    }
+
+    IEnumerator WaitAndLaunchScene()
+    {
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene((int)XL_PlayerInfo.instance.menuData.difficulty + 1);
     }
 

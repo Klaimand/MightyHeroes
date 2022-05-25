@@ -61,7 +61,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 0
+  m_Depth: -10
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0e74a72746e4724791f457473195669, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 5225612050294241043}
   tipsText: {fileID: 8508442871001370414}
   tips:
   - tip: THE FEDERATION IS A COALITION REGROUPING EVERY COUNTRY TO FIGHT AGAINST
@@ -324,6 +325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: add7ded20d26c9b45818217332d0ebaf, type: 3}
+--- !u!1 &8508442870377634102 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 20031831748253866, guid: add7ded20d26c9b45818217332d0ebaf, type: 3}
+  m_PrefabInstance: {fileID: 8526199675112276380}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8508442870377634058 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 20031831748253846, guid: add7ded20d26c9b45818217332d0ebaf, type: 3}
@@ -340,3 +346,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!225 &3780826514500358468
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508442870377634102}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!95 &5225612050294241043
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508442870377634102}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 369b5d3f94eafee4daaf81fc56e25cfa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

@@ -252,9 +252,9 @@ public class KLD_AudioManager : MonoBehaviour
 
     IEnumerator OutOfMenuMusicCoroutine()
     {
-        FadeOut(GetSound("MenuMusic").GetSource(), 0.5f);
-        yield return new WaitForSeconds(0.3f);
-        FadeIn(GetSound("GameMusic").GetSource(), 0.5f);
+        FadeOutInst(GetSound("MenuMusic").GetSource(), 1.5f);
+        yield return new WaitForSeconds(0.5f);
+        FadeInInst(GetSound("GameMusic").GetSource(), 1.5f);
     }
 
     public void OutOfGameMusic()
@@ -264,8 +264,8 @@ public class KLD_AudioManager : MonoBehaviour
 
     IEnumerator OutOfGameMusicCoroutine()
     {
-        FadeOut(GetSound("GameMusic").GetSource(), 0.5f);
-        yield return new WaitForSeconds(0.3f);
-        FadeIn(GetSound("MenuMusic").GetSource(), 0.5f);
+        FadeOutInst(GetSound("GameMusic").GetSource(), 1.5f);
+        yield return new WaitForSeconds(0.5f);
+        FadeInInst(GetSound("MenuMusic").GetSource(), 1.5f);
     }
 }
