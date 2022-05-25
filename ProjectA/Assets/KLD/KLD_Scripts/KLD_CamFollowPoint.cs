@@ -36,15 +36,15 @@ public class KLD_CamFollowPoint : MonoBehaviour
         {
             transform.position = player.position + playerToTargetPos * distanceFromPlayerOnAim;
 
-            cam1.Priority = 0;
-            cam2.Priority = 10;
+            //cam1.Priority = 0;
+            //cam2.Priority = 10;
         }
         else
         {
             transform.position = player.position;
 
-            cam1.Priority = 10;
-            cam2.Priority = 0;
+            //cam1.Priority = 10;
+            //cam2.Priority = 0;
         }
     }
 }

@@ -78,6 +78,11 @@ public class KLD_PlayerShoot : MonoBehaviour
     bool canFreeShoot = false;
     [SerializeField, ReadOnly] float rpmRatio = 1f;
 
+    [Header("Sound")]
+    [SerializeField] Vector2Int minMaxEnemyKilledToSound = new Vector2Int(2, 4);
+    int curEnemyToSound;
+    int curEnemyKilledSinceLastSound;
+
     void Awake()
     {
         playerAim = GetComponent<KLD_PlayerAim>();
@@ -104,6 +109,11 @@ public class KLD_PlayerShoot : MonoBehaviour
         weapon.ValidateValues();
         curBullets = weapon.GetCurAttributes().magazineSize;
         playerAim.targetPosAngleOffset = weapon.angleOffset;
+
+        animator.SetFloat("reloadSpeedScale",
+        (weapon.weaponAttributes[0].reloadSpeed / weapon.GetCurAttributes().reloadSpeed)
+        );
+
         StartCoroutine(DelayedStart());
         UpdateUI();
     }
@@ -117,11 +127,15 @@ public class KLD_PlayerShoot : MonoBehaviour
     void OnEnable()
     {
         touchInputs.onReloadButton += Reload;
+
+        KLD_EventsManager.instance.onEnemyKill += SoundOnEnemyKilled;
     }
 
     void OnDisable()
     {
         touchInputs.onReloadButton -= Reload;
+
+        KLD_EventsManager.instance.onEnemyKill -= SoundOnEnemyKilled;
     }
 
     // Update is called once per frame
@@ -222,6 +236,7 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         if (canReload)
         {
+            KLD_AudioManager.Instance.PlayCharacterSound("Reload", 1);
             curReloadCoroutine = StartCoroutine(ReloadCoroutine());
         }
     }
@@ -354,6 +369,19 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         return weapon.GetCurAttributes().activePointsPerKill;
     }
+
+    void SoundOnEnemyKilled(Enemy _enemy)
+    {
+        curEnemyKilledSinceLastSound++;
+        if (curEnemyKilledSinceLastSound >= curEnemyToSound)
+        {
+            curEnemyKilledSinceLastSound = 0;
+            curEnemyToSound = Random.Range(minMaxEnemyKilledToSound.x, minMaxEnemyKilledToSound.y);
+
+            KLD_AudioManager.Instance.PlayCharacterSound("Kill", 0);
+        }
+    }
+
 
     #region Sayuri Ult
 

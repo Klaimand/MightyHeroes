@@ -18,6 +18,9 @@ public class KLD_IsInAimAngleWeight : KLD_AimWeight
     [SerializeField] float outOfAngleScore = -5000f;
     [SerializeField] float angleScoreMultiplier = 100f;
 
+    [Header("Feel")]
+    [SerializeField] float returnZeroDistance = 2f;
+
     [SerializeField, Header("Debug"), Space(10)] bool drawRays = false;
     Vector3 ray1 = Vector3.zero;
     Vector3 ray2 = Vector3.zero;
@@ -69,7 +72,14 @@ public class KLD_IsInAimAngleWeight : KLD_AimWeight
         }
         else
         {
-            return outOfAngleScore;
+            if (playerToZombie.sqrMagnitude < returnZeroDistance * returnZeroDistance)
+            {
+                return 0f;
+            }
+            else
+            {
+                return outOfAngleScore;
+            }
         }
     }
 }

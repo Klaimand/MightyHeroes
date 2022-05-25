@@ -210,6 +210,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     {
         if (ultimateCharge >= 100f)
         {
+            KLD_AudioManager.Instance.PlayCharacterSound("ActiveAbility", 2);
+
             ultimateLaunched = true;
             playerShoot.UseUltimate(characterAttributes.spellLaunchDuration);
             spellDirection = _direction;
@@ -274,13 +276,15 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void TakeDamage(float damage)
     {
-        if (damage > 0) // if it takes damage, then reduce the damage taken
+        if (damage > 0f) // if it takes damage, then reduce the damage taken
         {
             damage = Mathf.Max(damage - characterAttributes.armor, 1f);
             //if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
             animator?.Play("Hit", 3, 0f);
             KLD_EventsManager.instance.InvokeLooseHealth(damage);
+
+            KLD_AudioManager.Instance.PlayCharacterSound("TakeDamage", 5);
 
             KLD_ScreenShakes.instance.StartShake(takeDamage_shakeLenght, takeDamage_shakePower, takeDamage_shakeFrequency);
         }
@@ -289,6 +293,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         if (health < 1)
         {
+            KLD_AudioManager.Instance.PlayCharacterSound("Death", 7);
+
             Die();
         }
 
@@ -349,5 +355,15 @@ while (true)
     public void SetAnimator(Animator _animator)
     {
         animator = _animator;
+    }
+
+    public string GetCharacterSoundPrefix()
+    {
+        return characterAttributes.characterSoundPrefix;
+    }
+
+    public int GetCharacterSoundIndex()
+    {
+        return characterAttributes.characterSoundIndex;
     }
 }

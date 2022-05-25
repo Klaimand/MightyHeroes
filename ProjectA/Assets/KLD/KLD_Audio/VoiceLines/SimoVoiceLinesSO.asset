@@ -1,0 +1,132 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04c4697d1e23f2f47977e25a6f4d7f7c, type: 3}
+  m_Name: SimoVoiceLinesSO
+  m_EditorClassIdentifier: 
+  prefix: Simo_
+  kill:
+    name: Kill
+    clips:
+    - {fileID: 8300000, guid: ed0cddceba3d00c4984711fbe14d409e, type: 3}
+    - {fileID: 8300000, guid: 72916947d74555940bf38408ca10ebc9, type: 3}
+    - {fileID: 8300000, guid: bff21ade87ae61b48a324eda59abc81c, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  reload:
+    name: Reload
+    clips:
+    - {fileID: 8300000, guid: ef771e80966ec4a41a0578341014ea61, type: 3}
+    - {fileID: 8300000, guid: 84f71c7c51e09a043a60229483fbd9f4, type: 3}
+    - {fileID: 8300000, guid: 1391f4729d85c8b468ab8383083fc189, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  activeAbility:
+    name: ActiveAbility
+    clips:
+    - {fileID: 8300000, guid: a3061343405faa143a348e03c36d3c2c, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  captureZone:
+    name: CaptureZone
+    clips:
+    - {fileID: 8300000, guid: 7f327e5693f30f04f90489341a30a4da, type: 3}
+    - {fileID: 8300000, guid: a6534f334131aac46b194bbb0edc8ecf, type: 3}
+    - {fileID: 8300000, guid: 31c6965dc70333f4cae77a60d09b11e1, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  intelPickup:
+    name: IntelPickup
+    clips:
+    - {fileID: 8300000, guid: 464dadfe21b6d314d99133f5041a156a, type: 3}
+    - {fileID: 8300000, guid: c0f9507879e15cb4f93ff674658639c4, type: 3}
+    - {fileID: 8300000, guid: a790c44668771484abc0f2d95e38106e, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  takeDamage:
+    name: TakeDamage
+    clips:
+    - {fileID: 8300000, guid: 46a3c530847ad844daa7826e6735ac93, type: 3}
+    - {fileID: 8300000, guid: 71ddccef0814a4d468656b3180a64e27, type: 3}
+    - {fileID: 8300000, guid: c225300e565bdf34e9a99e567e34ead9, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  healing:
+    name: Healing
+    clips:
+    - {fileID: 8300000, guid: e9ab8f2277d13d84abf6cdd73a12a0f2, type: 3}
+    - {fileID: 8300000, guid: 77d2f9e9e7bc8fc4fa54e0609c079de3, type: 3}
+    - {fileID: 8300000, guid: 083d128e0750418419f2922439e41d42, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  death:
+    name: Death
+    clips:
+    - {fileID: 8300000, guid: 486d0eded37da9847b95b17e63c076ba, type: 3}
+    - {fileID: 8300000, guid: 5795786862a24b6409dae9cb0d661ad1, type: 3}
+    - {fileID: 8300000, guid: c56d9a4af53d4f840a7d9a2d31f66039, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  victory:
+    name: Victory
+    clips:
+    - {fileID: 8300000, guid: 8136598a9d495824281245ee7e4948b8, type: 3}
+    - {fileID: 8300000, guid: 878ef1b13db16384b977be46e198843f, type: 3}
+    - {fileID: 8300000, guid: ef46a852b73c78943ab4a2b5d152358e, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  pickCharacter:
+    name: PickCharacter
+    clips:
+    - {fileID: 8300000, guid: 4fdf34ae68230be4fb49b33117b8811f, type: 3}
+    group: {fileID: -1308845020599830508, guid: 848c8716d58f07b459e99c0f4d1572fd, type: 2}
+    volume: 0.7
+    pitch: 1
+    canBeOverriden: 0
+    randomVolume: 0
+    randomPitch: 0
+  priorities: 0a000000320000005000000046000000460000003c000000140000005a00000064000000c8000000
