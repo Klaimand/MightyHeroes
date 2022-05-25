@@ -17,7 +17,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
     [SerializeField] ParticleSystem captureFX;
     [SerializeField] ParticleSystem captureEndFX;
     [SerializeField] Renderer zoneRenderer;
-    [SerializeField] Renderer[] eggsRenderers;
+    [SerializeField] Renderer eggsRenderer;
 
     [SerializeField] float fadeTime = 2f;
 
@@ -28,6 +28,9 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     private void Start()
     {
+        zoneRenderer.sharedMaterial.SetFloat("_Dissolve", 0.15f);
+        eggsRenderer.sharedMaterial.SetFloat("_Dissolve", 0f);
+
         capturePercentage = 0;
         playersInside.Clear();
         StartCoroutine(CaptureZoneCoroutine(tickTime));
@@ -71,7 +74,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
             //for (int i = 0; i < eggsRenderers.Length; i++)
             //{
-            StartCoroutine(LerpMaterialValue(0f, 1f, fadeTime, eggsRenderers[0], "_Dissolve"));
+            StartCoroutine(LerpMaterialValue(0f, 1f, fadeTime, eggsRenderer, "_Dissolve"));
             //}
         }
     }
