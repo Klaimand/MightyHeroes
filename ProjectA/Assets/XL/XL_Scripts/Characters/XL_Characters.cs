@@ -226,6 +226,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        print("aabb");
         ultimateLaunched = false;
         characterAttributes.CallOnSpellLaunch();
 
