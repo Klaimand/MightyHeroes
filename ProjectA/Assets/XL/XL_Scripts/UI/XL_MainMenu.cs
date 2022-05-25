@@ -59,7 +59,7 @@ public class XL_MainMenu : MonoBehaviour
     private void InitPlayerPrefs()
     {
         //---DELETE PLAYERPREFS---
-        //PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteAll();
 
         if (KLD_MissionInfos.instance != null)
         {
@@ -76,8 +76,13 @@ public class XL_MainMenu : MonoBehaviour
             {
                 PlayerPrefs.SetInt(ca.characterName, 1);
             }
+            if (!PlayerPrefs.HasKey(ca.characterName + "Unlocked"))
+            {
+                PlayerPrefs.SetInt(ca.characterName, 0);
+            }
             ca.level = PlayerPrefs.GetInt(ca.characterName);
         }
+        PlayerPrefs.SetInt("BlastUnlocked", 1);
         foreach (KLD_WeaponSO wa in weaponAttributes)
         {
             if (!PlayerPrefs.HasKey(wa.weaponName))
@@ -120,7 +125,6 @@ public class XL_MainMenu : MonoBehaviour
 
     public void RefreshGOButton()
     {
-        Debug.Log("Energy needed : " + XL_PlayerInfo.instance.menuData.missionEnergyCost);
         if (XL_PlayerInfo.instance.menuData.missionEnergyCost > PlayerPrefs.GetInt("Energy"))
         {
             goButton.interactable = false;
@@ -139,7 +143,11 @@ public class XL_MainMenu : MonoBehaviour
     {
         if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
-        
+
+        if (KLD_LoadingScreen.instance != null)
+        {
+            KLD_LoadingScreen.instance.ShowLoadingScreen();
+        }
         SceneManager.LoadScene(1);
     }
 

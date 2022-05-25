@@ -27,12 +27,15 @@ public class XL_Kamikaze : XL_Enemy
     protected override void Initialize()
     {
         base.Initialize();
+
+        Debug.Log("Initialize Kamikaze");
         isCharged = false;
         ResetAnimator();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         foreach (ParticleSystem ps in chillParticles)
         {
             ps.Play();

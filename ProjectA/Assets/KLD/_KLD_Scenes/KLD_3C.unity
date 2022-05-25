@@ -1787,6 +1787,58 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2894548911554202639, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912053552778, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912068987899, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912166426589, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912408815698, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912543544536, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912642712660, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894548912693487856, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687177705108343077, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174209417629446230, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174209418430507309, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5174209418430507311, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5408565714724367284, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289896, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: objectiveName
       value: MARKET
@@ -1840,6 +1892,14 @@ PrefabInstance:
       value: CaptureZoneWithUI
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289901, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5769086575517305441, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7480685521268853324, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -2426,17 +2486,11 @@ MonoBehaviour:
   playerMinDist: 10
   steps:
   - timeToActivate: 0
-    minMaxTimeBetweenSpawns: {x: 0, y: 1}
+    minMaxTimeBetweenSpawns: {x: 5, y: 8}
     enemiesProbas:
     - proba: 1
-      enemy: Alpha
-      enemyPerSpawn: 0
-  - timeToActivate: 10
-    minMaxTimeBetweenSpawns: {x: 10, y: 15}
-    enemiesProbas:
-    - proba: 1
-      enemy: Alpha
-      enemyPerSpawn: 1
+      enemy: Swarmer
+      enemyPerSpawn: 2
 --- !u!4 &2091840206
 Transform:
   m_ObjectHideFlags: 0

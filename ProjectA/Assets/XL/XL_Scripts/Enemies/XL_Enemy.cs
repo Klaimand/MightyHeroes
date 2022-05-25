@@ -140,7 +140,9 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         if (health < 1) Die();
     }
 
-    void OnEnable()
+    
+
+    protected virtual void OnEnable()
     {
         if (firstInit)
         {
