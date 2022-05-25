@@ -78,7 +78,7 @@ public class XL_MainMenu : MonoBehaviour
             }
             if (!PlayerPrefs.HasKey(ca.characterName + "Unlocked"))
             {
-                PlayerPrefs.SetInt(ca.characterName, 0);
+                PlayerPrefs.SetInt(ca.characterName+"Unlocked", 0);
             }
             ca.level = PlayerPrefs.GetInt(ca.characterName);
         }
@@ -89,8 +89,13 @@ public class XL_MainMenu : MonoBehaviour
             {
                 PlayerPrefs.SetInt(wa.weaponName, 1);
             }
+            if (!PlayerPrefs.HasKey(wa.weaponName + "Unlocked"))
+            {
+                PlayerPrefs.SetInt(wa.weaponName + "Unlocked", 0);
+            }
             wa.level = PlayerPrefs.GetInt(wa.weaponName);
         }
+        PlayerPrefs.SetInt("The ClassicUnlocked", 1);
         if (!PlayerPrefs.HasKey("Energy"))
         {
             PlayerPrefs.SetInt("Energy", 100);

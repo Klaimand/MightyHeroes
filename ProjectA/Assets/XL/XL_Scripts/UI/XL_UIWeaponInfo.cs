@@ -10,17 +10,23 @@ public class XL_UIWeaponInfo
     //CURRENTLY WORKS ONLY FOR LEVEL 0 
 
     public GameObject weaponUI;
+    public GameObject lockedSprite;
+    public GameObject unlockedSprite;
     public TMP_Text weaponLvlUI;
     public KLD_WeaponSO weaponAttributes;
 
-    public void Activate()
+    public void Activate(int i)
     {
         weaponUI.SetActive(true);
+        if (i == 0) lockedSprite.SetActive(true);
+        else unlockedSprite.SetActive(true);
     }
 
     public void Deactivate()
     {
         weaponUI.SetActive(false);
+        lockedSprite.SetActive(false);
+        unlockedSprite.SetActive(false);
     }
 
     public void DisplayLevel()
