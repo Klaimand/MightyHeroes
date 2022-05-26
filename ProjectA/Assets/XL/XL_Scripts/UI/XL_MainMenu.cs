@@ -54,12 +54,28 @@ public class XL_MainMenu : MonoBehaviour
         InitPlayerPrefs();
         RefreshMainMenuUI();
         RefreshTopOverlay();
+
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.Initialise();
+        }
+    }
+
+    void Start()
+    {
+        KLD_LoadingScreen.instance.HideLoadingScreen();
+    }
+
+    [ContextMenu("ResetPlayerPrefs")]
+    void DeletePlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     private void InitPlayerPrefs()
     {
         //---DELETE PLAYERPREFS---
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         if (KLD_MissionInfos.instance != null)
         {
@@ -74,11 +90,11 @@ public class XL_MainMenu : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey(ca.characterName))
             {
-                PlayerPrefs.SetInt(ca.characterName, 1);
+                PlayerPrefs.SetInt(ca.characterName, 0);
             }
             if (!PlayerPrefs.HasKey(ca.characterName + "Unlocked"))
             {
-                PlayerPrefs.SetInt(ca.characterName, 0);
+                PlayerPrefs.SetInt(ca.characterName + "Unlocked", 0);
             }
             ca.level = PlayerPrefs.GetInt(ca.characterName);
         }
@@ -87,10 +103,15 @@ public class XL_MainMenu : MonoBehaviour
         {
             if (!PlayerPrefs.HasKey(wa.weaponName))
             {
-                PlayerPrefs.SetInt(wa.weaponName, 1);
+                PlayerPrefs.SetInt(wa.weaponName, 0);
+            }
+            if (!PlayerPrefs.HasKey(wa.weaponName + "Unlocked"))
+            {
+                PlayerPrefs.SetInt(wa.weaponName + "Unlocked", 0);
             }
             wa.level = PlayerPrefs.GetInt(wa.weaponName);
         }
+        PlayerPrefs.SetInt("The ClassicUnlocked", 1);
         if (!PlayerPrefs.HasKey("Energy"))
         {
             PlayerPrefs.SetInt("Energy", 100);
@@ -144,11 +165,20 @@ public class XL_MainMenu : MonoBehaviour
         if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
 
+        KLD_AudioManager.Instance.OutOfMenuMusic();
+
         if (KLD_LoadingScreen.instance != null)
         {
             KLD_LoadingScreen.instance.ShowLoadingScreen();
         }
-        SceneManager.LoadScene(1);
+
+        StartCoroutine(WaitAndLaunchScene());
+    }
+
+    IEnumerator WaitAndLaunchScene()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene((int)XL_PlayerInfo.instance.menuData.difficulty + 1);
     }
 
     public void SwitchMainMenu()
@@ -239,6 +269,46 @@ public class XL_MainMenu : MonoBehaviour
     public KLD_WeaponSO GetWeaponSO(Weapon _weapon)
     {
         return weaponAttributes[(int)_weapon];
+    }
+
+    public void SelectPlayer()
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectPlayer();
+        }
+    }
+
+    public void SelectWeapon()
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectWeapon();
+        }
+    }
+
+    public void SelectMap(int idx)
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectMap(idx);
+        }
+    }
+
+    public void SelectDifficulty(int idx)
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SelectDifficulty(idx);
+        }
+    }
+
+    public void SetEnergyCost(int energyCost)
+    {
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.SetEnergyCost(energyCost);
+        }
     }
 
     public int GetEnergyMaxAmount()

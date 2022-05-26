@@ -8,6 +8,8 @@ public class KLD_LoadingScreen : MonoBehaviour
 
     public static KLD_LoadingScreen instance;
 
+    [SerializeField] Animator animator;
+
     [SerializeField] TMP_Text tipsText;
 
     [SerializeField] Tip[] tips;
@@ -35,12 +37,20 @@ public class KLD_LoadingScreen : MonoBehaviour
 
     public void ShowLoadingScreen()
     {
-        tipsText.text = tips[Random.Range(0, tips.Length)].tip.ToUpper();
         transform.GetChild(0).gameObject.SetActive(true);
+        animator.SetTrigger("fadeIn");
+        tipsText.text = tips[Random.Range(0, tips.Length)].tip.ToUpper();
     }
 
     public void HideLoadingScreen()
     {
+        animator.SetTrigger("fadeOut");
+        StartCoroutine(WaitAndDisableLoadingScreen());
+    }
+
+    IEnumerator WaitAndDisableLoadingScreen()
+    {
+        yield return new WaitForSeconds(1.3f);
         transform.GetChild(0).gameObject.SetActive(false);
     }
 }

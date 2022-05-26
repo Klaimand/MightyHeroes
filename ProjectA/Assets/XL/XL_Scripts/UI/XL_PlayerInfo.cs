@@ -34,6 +34,18 @@ public class XL_PlayerInfo : MonoBehaviour
         InitialiseMenuData();
     }
 
+    public void Initialise()
+    {
+        if (XL_CharacterDetailsMenu.instance != null)
+        {
+            characterMenu = XL_CharacterDetailsMenu.instance;
+        }
+        if (XL_WeaponDetailsMenu.instance != null)
+        {
+            weaponMenu = XL_WeaponDetailsMenu.instance;
+        }
+    }
+
     private void InitialiseMenuData()
     {
         menuData.character = 0;
@@ -45,12 +57,14 @@ public class XL_PlayerInfo : MonoBehaviour
 
     public void SelectPlayer()
     {
+        Debug.Log("Changed Character");
         menuData.character = (Character)characterMenu.selectedPlayer;
         onCharacterChange?.Invoke(menuData.character);
     }
 
     public void SelectWeapon()
     {
+        Debug.Log("Changed Weapon");
         menuData.weapon = (Weapon)weaponMenu.selectedWeapon;
         onWeaponChange?.Invoke(menuData.weapon);
     }

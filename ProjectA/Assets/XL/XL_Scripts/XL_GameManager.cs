@@ -10,6 +10,7 @@ public class XL_GameManager : MonoBehaviour
     public List<GameObject> players = new List<GameObject>();
     //public List<XL_Enemy> enemies = new List<XL_Enemy>();
     //public KLD_ZombieList zombieList;
+    [SerializeField] float startLoadingTime = 5f;
     [SerializeField] float timeBetweenInitAndShowStats = 1.5f;
 
 
@@ -29,7 +30,7 @@ public class XL_GameManager : MonoBehaviour
     void Start()
     {
         inputs.disableInputs = true;
-        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        //KLD_LoadingScreen.instance.ShowLoadingScreen();
         StartGame();
     }
 
@@ -40,7 +41,7 @@ public class XL_GameManager : MonoBehaviour
 
     IEnumerator StartGameCoroutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(startLoadingTime);
 
         KLD_LoadingScreen.instance.HideLoadingScreen();
 
@@ -125,6 +126,10 @@ public class XL_GameManager : MonoBehaviour
     public void ChangeScene()
     {
         Time.timeScale = 1f;
+
+        KLD_LoadingScreen.instance.ShowLoadingScreen();
+        KLD_AudioManager.Instance.OutOfGameMusic();
+
         SceneManager.LoadScene(0);
     }
 }

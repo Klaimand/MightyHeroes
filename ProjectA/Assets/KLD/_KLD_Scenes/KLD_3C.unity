@@ -592,7 +592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.15
+      value: 29.11
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalPosition.y
@@ -600,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.73
+      value: -30.35
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1842,7 +1842,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.81
+      value: -0.28
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1850,7 +1850,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -21.77
+      value: -27.65
       objectReference: {fileID: 0}
     - target: {fileID: 5680595177427289897, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1883,6 +1883,10 @@ PrefabInstance:
     - target: {fileID: 5680595177427289901, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
       propertyPath: m_Name
       value: CaptureZoneWithUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680595177427289901, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f5b55ad7a9f062499e894a2eed32881, type: 3}
@@ -2471,7 +2475,7 @@ MonoBehaviour:
     enemiesProbas:
     - proba: 1
       enemy: Swarmer
-      enemyPerSpawn: 2
+      enemyPerSpawn: 3
 --- !u!4 &2091840206
 Transform:
   m_ObjectHideFlags: 0
@@ -2493,6 +2497,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1434995791563878340, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: character
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8671646772427712698, guid: 683f14f283869454489ac31322d6c303, type: 3}
+      propertyPath: startLoadingTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8671646773670392588, guid: 683f14f283869454489ac31322d6c303, type: 3}
       propertyPath: m_RootOrder
       value: 2

@@ -28,7 +28,7 @@ public class XL_Kamikaze : XL_Enemy
     {
         base.Initialize();
 
-        Debug.Log("Initialize Kamikaze");
+        //Debug.Log("Initialize Kamikaze");
         isCharged = false;
         ResetAnimator();
     }
