@@ -28,7 +28,7 @@ public class XL_UICharacterInfo
 
     public void DisplayLevel()
     {
-        characterLvlUI.text = (GetLevel() + 1).ToString();
+        characterLvlUI.text = (GetLevel() + 1).ToString("N0");
     }
 
     public float GetHealth()
