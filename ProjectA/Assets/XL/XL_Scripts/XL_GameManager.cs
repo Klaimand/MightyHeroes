@@ -41,7 +41,11 @@ public class XL_GameManager : MonoBehaviour
 
     IEnumerator StartGameCoroutine()
     {
-        yield return new WaitForSeconds(startLoadingTime);
+        yield return new WaitForSeconds(startLoadingTime / 2f);
+
+        KLD_MissionInfos.instance.InitialiseMissionData();
+
+        yield return new WaitForSeconds(startLoadingTime / 2f);
 
         KLD_LoadingScreen.instance.HideLoadingScreen();
 
