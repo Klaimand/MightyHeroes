@@ -73,8 +73,10 @@ public class XL_MainMenu : MonoBehaviour
         PlayerPrefs.DeleteAll();
         InitPlayerPrefs();
 
-        RefreshMainMenuUI();
-        RefreshTopOverlay();
+        if (XL_WeaponDetailsMenu.instance != null) XL_WeaponDetailsMenu.instance.selectedWeapon = 1;
+        if (XL_CharacterDetailsMenu.instance != null) XL_CharacterDetailsMenu.instance.selectedPlayer = 0;
+        SelectPlayer();
+        SelectWeapon();
     }
 
     private void InitPlayerPrefs()
@@ -135,10 +137,10 @@ public class XL_MainMenu : MonoBehaviour
         }
 
         PlayerPrefs.Save();
-
         #endregion
 
         RefreshMainMenuUI();
+        RefreshTopOverlay();
     }
 
     private void RefreshMainMenuUI()
