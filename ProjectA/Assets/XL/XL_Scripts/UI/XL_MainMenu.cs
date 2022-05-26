@@ -9,7 +9,6 @@ public class XL_MainMenu : MonoBehaviour
 {
     public static XL_MainMenu instance;
 
-    [SerializeField] private GameObject mainMenuProps;
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject characterSelectMenu;
@@ -18,7 +17,6 @@ public class XL_MainMenu : MonoBehaviour
     [SerializeField] private GameObject weaponDetailsMenu;
     [SerializeField] private GameObject mapSelectMenu;
     [SerializeField] private GameObject shopMenu;
-    [SerializeField] private GameObject topBarOverlay;
 
     [Header("Save Characters and Weapons")]
     [SerializeField] private XL_CharacterAttributesSO[] characterAttributes;
@@ -70,9 +68,13 @@ public class XL_MainMenu : MonoBehaviour
     }
 
     [ContextMenu("ResetPlayerPrefs")]
-    void DeletePlayerPrefs()
+    public void DeletePlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
+        InitPlayerPrefs();
+
+        RefreshMainMenuUI();
+        RefreshTopOverlay();
     }
 
     private void InitPlayerPrefs()
@@ -188,7 +190,6 @@ public class XL_MainMenu : MonoBehaviour
     public void SwitchMainMenu()
     {
         RefreshMainMenuUI();
-        mainMenuProps.SetActive(true);
         mainMenu.SetActive(true);
 
         shopMenu.SetActive(false);
@@ -203,7 +204,6 @@ public class XL_MainMenu : MonoBehaviour
     {
         shopMenu.SetActive(true);
 
-        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
         characterSelectMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
@@ -217,7 +217,6 @@ public class XL_MainMenu : MonoBehaviour
     {
         characterSelectMenu.SetActive(true);
 
-        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
         shopMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
@@ -234,7 +233,6 @@ public class XL_MainMenu : MonoBehaviour
     {
         weaponSelectMenu.SetActive(true);
 
-        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
         shopMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
@@ -251,22 +249,12 @@ public class XL_MainMenu : MonoBehaviour
     {
         mapSelectMenu.SetActive(true);
 
-        mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
     }
 
     public void SwitchOptionMenu()
     {
-        optionMenu.SetActive(true);
-
-        topBarOverlay.SetActive(false);
-    }
-
-    public void DeselectOptionMenu()
-    {
-        topBarOverlay.SetActive(true);
-
-        optionMenu.SetActive(false);
+        optionMenu.SetActive(!optionMenu.activeSelf);
     }
 
     public void SelectMissionType(int idx)

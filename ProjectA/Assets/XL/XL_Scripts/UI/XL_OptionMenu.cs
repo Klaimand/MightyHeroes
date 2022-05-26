@@ -22,7 +22,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         muteAllButton.SetActive(false);
 
-        KLD_MenuAudioCaller.instance.MuteVolume();
+        KLD_MenuAudioCaller.instance.MuteGame();
         unmuteAllButton.SetActive(true);
     }
 
@@ -30,7 +30,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         unmuteAllButton.SetActive(false);
 
-        KLD_MenuAudioCaller.instance.UnmuteVolume();
+        KLD_MenuAudioCaller.instance.UnmuteGame();
         muteAllButton.SetActive(true);
     }
 
@@ -38,7 +38,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         muteMusicButton.SetActive(false);
 
-        KLD_MenuAudioCaller.instance.MuteGame();
+        KLD_MenuAudioCaller.instance.MuteVolume();
         unmuteMusicButton.SetActive(true);
     }
 
@@ -46,7 +46,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         unmuteMusicButton.SetActive(false);
 
-        KLD_MenuAudioCaller.instance.UnmuteGame();
+        KLD_MenuAudioCaller.instance.UnmuteVolume();
         muteMusicButton.SetActive(true);
     }
 

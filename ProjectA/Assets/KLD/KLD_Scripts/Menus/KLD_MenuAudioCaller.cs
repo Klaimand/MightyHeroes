@@ -53,11 +53,11 @@ public class KLD_MenuAudioCaller : MonoBehaviour
 
     public void MuteVolume()
     {
-        KLD_AudioManager.Instance.GetAudioMixer().SetFloat("VolumeVolume", -80f);
+        KLD_AudioManager.Instance.GetAudioMixer().SetFloat("MusicVolume", -80f);
     }
 
     public void UnmuteVolume()
     {
-        KLD_AudioManager.Instance.GetAudioMixer().SetFloat("VolumeVolume", 0f);
+        KLD_AudioManager.Instance.GetAudioMixer().SetFloat("MusicVolume", 0f);
     }
 }
