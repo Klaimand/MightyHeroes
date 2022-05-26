@@ -193,6 +193,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             if (curOutOfCombatTime > outOfCombatTime)
             {
                 outOfCombat = true;
+                KLD_AudioManager.Instance.PlayCharacterSound("Healing", 6);
             }
         }
         else
