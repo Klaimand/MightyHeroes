@@ -284,6 +284,11 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (controller.GetPlayerState() != PlayerState.DEFAULT)
+        {
+            return;
+        }
+
         if (damage > 0f) // if it takes damage, then reduce the damage taken
         {
             damage = Mathf.Max(damage - characterAttributes.armor, 1f);

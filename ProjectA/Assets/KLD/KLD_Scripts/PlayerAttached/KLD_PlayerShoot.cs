@@ -145,6 +145,13 @@ public class KLD_PlayerShoot : MonoBehaviour
 
         AnimateWeaponState();
 
+        if (controller.GetPlayerState() != PlayerState.DEFAULT)
+        {
+            isShooting = false;
+            isAiming = false;
+            return;
+        }
+
         canReload = !isReloading && curBullets < weapon.GetCurAttributes().magazineSize;
         reloadButton.interactable = canReload;
         reloadFlames.SetBool("enabled", isReloading);
