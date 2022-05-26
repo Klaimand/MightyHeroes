@@ -84,11 +84,11 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     {
         //Initialise Text
         weaponInfos[selectedWeapon].DisplayLevel();
-        damageText.text = weaponInfos[selectedWeapon].GetDamage().ToString();
-        rpmText.text = weaponInfos[selectedWeapon].GetRPM().ToString();
-        magazineSizeText.text = weaponInfos[selectedWeapon].GetMagazine().ToString();
-        unlockText.text = weaponInfos[selectedWeapon].weaponAttributes.unlockSoftCurrency.ToString();
-        upgradeText.text = weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach.ToString(); //Aled
+        damageText.text = weaponInfos[selectedWeapon].GetDamage().ToString("N0");
+        rpmText.text = weaponInfos[selectedWeapon].GetRPM().ToString("N0");
+        magazineSizeText.text = weaponInfos[selectedWeapon].GetMagazine().ToString("N0");
+        unlockText.text = weaponInfos[selectedWeapon].weaponAttributes.unlockSoftCurrency.ToString("N0");
+        upgradeText.text = weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach.ToString("N0"); //Aled
 
         //Initialise Bar
         damageXScaler.localScale = new Vector3(weaponInfos[selectedWeapon].GetDamage() / scalerDamageMax, damageXScaler.localScale.y, damageXScaler.localScale.z);

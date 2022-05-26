@@ -85,11 +85,11 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     {
         //initialise Text
         characterInfos[selectedPlayer].DisplayLevel();
-        healthText.text = characterInfos[selectedPlayer].GetHealth().ToString();
-        armorText.text = characterInfos[selectedPlayer].GetArmor().ToString();
-        regenText.text = characterInfos[selectedPlayer].GetRegen().ToString();
-        unlockText.text = characterInfos[selectedPlayer].characterAttributes.unlockSoftCurrency.ToString();
-        upgradeText.text = characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()].ToString(); //Aled
+        healthText.text = characterInfos[selectedPlayer].GetHealth().ToString("N0");
+        armorText.text = characterInfos[selectedPlayer].GetArmor().ToString("N0");
+        regenText.text = characterInfos[selectedPlayer].GetRegen().ToString("N0");
+        unlockText.text = characterInfos[selectedPlayer].characterAttributes.unlockSoftCurrency.ToString("N0");
+        upgradeText.text = characterInfos[selectedPlayer].characterAttributes.experienceToReach[characterInfos[selectedPlayer].GetLevel()].ToString("N0"); //Aled
 
         //Initialise Bar
         healthXScaler.localScale = new Vector3(characterInfos[selectedPlayer].GetHealth() / scalerHealthMax, healthXScaler.localScale.y, healthXScaler.localScale.z);

@@ -139,8 +139,8 @@ public class XL_MainMenu : MonoBehaviour
 
     private void RefreshMainMenuUI()
     {
-        characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString();
-        weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString();
+        characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString("N0");
+        weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString("N0");
 
         RefreshGOButton();
     }
@@ -265,14 +265,14 @@ public class XL_MainMenu : MonoBehaviour
     public void RefreshTopOverlay()
     {
         //Energy
-        energyText.text = PlayerPrefs.GetInt("Energy").ToString();
-        energyMaxText.text = energyMax.ToString();
+        energyText.text = PlayerPrefs.GetInt("Energy").ToString("N0");
+        energyMaxText.text = energyMax.ToString("N0");
 
         //SoftCurrency
-        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString();
+        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString("N0");
 
         //HardCurrency
-        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
+        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString("N0");
     }
 
     public KLD_WeaponSO GetWeaponSO(Weapon _weapon)

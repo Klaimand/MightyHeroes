@@ -14,6 +14,8 @@ public class XL_WeaponSelectMenu : MonoBehaviour
         {
             wi.DisplayLevel();
         }
+
+        SwitchWeaponMenu(0);
     }
 
     public void SwitchWeaponMenu(int idx)
