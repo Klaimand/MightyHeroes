@@ -74,6 +74,9 @@ public class KLD_MissionInfos : MonoBehaviour
 
     public void RefreshMissionInfos(bool _succeeded)
     {
+        KLD_EventsManager.instance.onEnemyKill -= AddKilledEnemy;
+        KLD_EventsManager.instance.onHealthLoose -= AddLoosedHealth;
+
         missionData.remainingTime = Mathf.RoundToInt(XL_GameModeManager.instance.GetMissionTime());
         //enemies killed refreshed by event
         //loosed health added by event

@@ -279,4 +279,9 @@ public class KLD_AudioManager : MonoBehaviour
             }
         }
     }
+
+    public AudioMixer GetAudioMixer()
+    {
+        return mixer;
+    }
 }
