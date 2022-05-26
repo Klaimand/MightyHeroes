@@ -11,12 +11,14 @@ public class XL_MainMenu : MonoBehaviour
 
     [SerializeField] private GameObject mainMenuProps;
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject characterSelectMenu;
     [SerializeField] private GameObject characterDetailsMenu;
     [SerializeField] private GameObject weaponSelectMenu;
     [SerializeField] private GameObject weaponDetailsMenu;
     [SerializeField] private GameObject mapSelectMenu;
     [SerializeField] private GameObject shopMenu;
+    [SerializeField] private GameObject topBarOverlay;
 
     [Header("Save Characters and Weapons")]
     [SerializeField] private XL_CharacterAttributesSO[] characterAttributes;
@@ -250,6 +252,20 @@ public class XL_MainMenu : MonoBehaviour
 
         mainMenuProps.SetActive(false);
         mainMenu.SetActive(false);
+    }
+
+    public void SwitchOptionMenu()
+    {
+        optionMenu.SetActive(true);
+
+        topBarOverlay.SetActive(false);
+    }
+
+    public void DeselectOptionMenu()
+    {
+        topBarOverlay.SetActive(true);
+
+        optionMenu.SetActive(false);
     }
 
     public void SelectMissionType(int idx)
