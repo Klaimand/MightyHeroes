@@ -17,7 +17,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
     [SerializeField] ParticleSystem captureFX;
     [SerializeField] ParticleSystem captureEndFX;
     [SerializeField] Renderer zoneRenderer;
-    [SerializeField] Renderer[] eggsRenderers;
+    [SerializeField] Renderer eggsRenderer;
 
     [SerializeField] float fadeTime = 2f;
 
@@ -28,6 +28,11 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     private void Start()
     {
+        KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().loop = true;
+
+        zoneRenderer.sharedMaterial.SetFloat("_Dissolve", 0.15f);
+        eggsRenderer.sharedMaterial.SetFloat("_Dissolve", 0f);
+
         capturePercentage = 0;
         playersInside.Clear();
         StartCoroutine(CaptureZoneCoroutine(tickTime));
@@ -42,6 +47,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
                 if (!captureFX.isPlaying)
                 {
                     captureFX.Play();
+                    KLD_AudioManager.Instance.PlaySound("TakingZone");
                 }
             }
             else
@@ -49,6 +55,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
                 if (captureFX.isPlaying)
                 {
                     captureFX.Stop();
+                    KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
                 }
             }
         }
@@ -62,6 +69,9 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
             KLD_AudioManager.Instance.PlayCharacterSound("CaptureZone", 3);
 
+            KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
+            KLD_AudioManager.Instance.PlaySound("ZoneTaken");
+
             //Debug.Log("test");
             captureFX.Stop();
             captureEndFX.Play();
@@ -71,7 +81,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
             //for (int i = 0; i < eggsRenderers.Length; i++)
             //{
-            StartCoroutine(LerpMaterialValue(0f, 1f, fadeTime, eggsRenderers[0], "_Dissolve"));
+            StartCoroutine(LerpMaterialValue(0f, 1f, fadeTime, eggsRenderer, "_Dissolve"));
             //}
         }
     }

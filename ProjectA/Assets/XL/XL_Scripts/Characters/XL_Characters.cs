@@ -150,7 +150,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
 
-        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
+        //KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -162,7 +162,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
 
-        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
+        //KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;
@@ -193,6 +193,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             if (curOutOfCombatTime > outOfCombatTime)
             {
                 outOfCombat = true;
+                KLD_AudioManager.Instance.PlayCharacterSound("Healing", 6);
             }
         }
         else
@@ -226,6 +227,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        print("aabb");
         ultimateLaunched = false;
         characterAttributes.CallOnSpellLaunch();
 
@@ -268,7 +270,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
         StopAllCoroutines();
         //XL_GameManager.instance.RemovePlayer(transform.gameObject);
         //transform.gameObject.SetActive(false);
-        XL_GameManager.instance.LoseGame();
+        XL_GameManager.instance.LoseGame(true);
     }
 
     [ContextMenu("Take 100 Damage")]
