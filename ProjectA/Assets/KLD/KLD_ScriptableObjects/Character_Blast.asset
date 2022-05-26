@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Character_Blast
   m_EditorClassIdentifier: 
   characterName: Blast
+  unlockSoftCurrency: 0
+  unlockHardCurrency: 0
   base_healthMax: 300
   base_movementSpeed: 20
   base_armor: 30
@@ -44,8 +46,10 @@ MonoBehaviour:
   isPercentageHealingTickGrowth: 1
   healingTickGrowth: 1.08
   spellSO: {fileID: 11400000, guid: 0e2347a0eefa66a47b20ca279ef2f993, type: 2}
-  spellLaunchDuration: 0.9
+  spellLaunchDuration: 0.75
   spellIsButton: 0
   canUseSpellWhenReloading: 0
   passiveSpell: {fileID: 11400000, guid: b37d836175c64ea459d6c1cbe1e4b424, type: 2}
   characterMesh: {fileID: 6050656808467317075, guid: 5eda5fa80f9103b4c90cad7dcdbe7128, type: 3}
+  characterSoundPrefix: Blast_
+  characterSoundIndex: 0
