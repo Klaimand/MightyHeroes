@@ -116,7 +116,13 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
             //Refresh currency overlay
             XL_MainMenu.instance.RefreshTopOverlay();
 
+            KLD_MenuAudioCaller.instance.PlayCharacterBuySound();
+
             RefreshUI();
+        }
+        else
+        {
+            KLD_MenuAudioCaller.instance.PlayUINegativeSound();
         }
     }
 
@@ -133,7 +139,13 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
             //Refresh currency overlay
             XL_MainMenu.instance.RefreshTopOverlay();
 
+            KLD_MenuAudioCaller.instance.PlayCharacterBuySound();
+
             RefreshUI();
+        }
+        else
+        {
+            KLD_MenuAudioCaller.instance.PlayUINegativeSound();
         }
     }
 }

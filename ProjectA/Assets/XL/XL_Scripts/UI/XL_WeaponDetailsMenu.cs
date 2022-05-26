@@ -100,7 +100,7 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     public void UpgradeWeapon() 
     {
         Debug.Log(weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach);
-        if (PlayerPrefs.GetInt("SoftCurrency") > weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach) 
+        if (PlayerPrefs.GetInt("SoftCurrency") > weaponInfos[selectedWeapon].weaponAttributes.weaponAttributes[weaponInfos[selectedWeapon].GetLevel()].experienceToReach)
         {
             //Save new level
             PlayerPrefs.SetInt(weaponInfos[selectedWeapon].weaponAttributes.weaponName, weaponInfos[selectedWeapon].GetLevel() + 1);
@@ -114,8 +114,14 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
             //Increments weapon level
             weaponInfos[selectedWeapon].weaponAttributes.level++;
 
+            KLD_MenuAudioCaller.instance.PlayWeaponBuySound();
+
             CheckHasUpgrade();
             DisplayWeaponInfo();
+        }
+        else
+        {
+            KLD_MenuAudioCaller.instance.PlayUINegativeSound();
         }
     }
 
@@ -132,7 +138,13 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
             //Refresh currency overlay
             XL_MainMenu.instance.RefreshTopOverlay();
 
+            KLD_MenuAudioCaller.instance.PlayWeaponBuySound();
+
             RefreshUI();
+        }
+        else
+        {
+            KLD_MenuAudioCaller.instance.PlayUINegativeSound();
         }
     }
 }

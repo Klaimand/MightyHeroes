@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class XL_OptionMenu : MonoBehaviour
 {
+
     [Header("All Sounds Buttons")]
     [SerializeField] private GameObject muteAllButton;
     [SerializeField] private GameObject unmuteAllButton;
@@ -21,6 +22,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         muteAllButton.SetActive(false);
 
+        KLD_MenuAudioCaller.instance.MuteVolume();
         unmuteAllButton.SetActive(true);
     }
 
@@ -28,6 +30,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         unmuteAllButton.SetActive(false);
 
+        KLD_MenuAudioCaller.instance.UnmuteVolume();
         muteAllButton.SetActive(true);
     }
 
@@ -35,6 +38,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         muteMusicButton.SetActive(false);
 
+        KLD_MenuAudioCaller.instance.MuteGame();
         unmuteMusicButton.SetActive(true);
     }
 
@@ -42,6 +46,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         unmuteMusicButton.SetActive(false);
 
+        KLD_MenuAudioCaller.instance.UnmuteGame();
         muteMusicButton.SetActive(true);
     }
 
@@ -49,6 +54,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         muteSFXButton.SetActive(false);
 
+        KLD_MenuAudioCaller.instance.MuteSFX();
         unmuteSFXButton.SetActive(true);
     }
 
@@ -56,6 +62,7 @@ public class XL_OptionMenu : MonoBehaviour
     {
         unmuteSFXButton.SetActive(false);
 
+        KLD_MenuAudioCaller.instance.UnmuteSFX();
         muteSFXButton.SetActive(true);
     }
 }

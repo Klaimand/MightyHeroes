@@ -168,6 +168,7 @@ public class XL_MainMenu : MonoBehaviour
         if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
 
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         KLD_AudioManager.Instance.OutOfMenuMusic();
 
         if (KLD_LoadingScreen.instance != null)
@@ -298,6 +299,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectPlayer()
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectPlayer();
@@ -306,6 +308,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectWeapon()
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectWeapon();
@@ -314,6 +317,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectMap(int idx)
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectMap(idx);
@@ -322,6 +326,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectDifficulty(int idx)
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectDifficulty(idx);

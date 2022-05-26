@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class KLD_MenuAudioCaller : MonoBehaviour
 {
+    public static KLD_MenuAudioCaller instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
     public void PlayUIPositiveSound()
     {
         KLD_AudioManager.Instance.PlaySound("UI_Positive");
@@ -46,7 +53,7 @@ public class KLD_MenuAudioCaller : MonoBehaviour
 
     public void MuteVolume()
     {
-        KLD_AudioManager.Instance.GetAudioMixer().SetFloat("SFXVolume", -80f);
+        KLD_AudioManager.Instance.GetAudioMixer().SetFloat("VolumeVolume", -80f);
     }
 
     public void UnmuteVolume()
