@@ -280,6 +280,7 @@ MonoBehaviour:
     worldAimDirection: {x: 0, y: 0, z: 0}
     worldUltAimDirection: {x: 0, y: 0, z: 0}
     normalizedAimInput: {x: 0, y: 0}
+  isAimingForNothing: 0
 --- !u!114 &4918749989807435229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +313,7 @@ MonoBehaviour:
   leftHandIK: {fileID: 7123856286201549827}
   rightHandIK: {fileID: 7123856285112390003}
   rpmRatio: 1
+  minMaxEnemyKilledToSound: {x: 1, y: 4}
 --- !u!114 &7763574474891127591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: 2
   seri_characterLevel: 0
-  weapon: 1
+  weapon: 4
   seri_weaponLevel: 0
   charactersList:
   - {fileID: 11400000, guid: a064d8ce9fe3dd643970fe81c5b3b02d, type: 2}
