@@ -890,6 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   players:
   - {fileID: 8671646772181465857}
+  startLoadingTime: 5
   timeBetweenInitAndShowStats: 1.5
   endingScreen: {fileID: 6605705671447515291}
   inputs: {fileID: 3592941992684990966}
@@ -2154,7 +2155,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7468365929270818811, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: minMaxDistanceFromObjective.x
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468365929270818811, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
+      propertyPath: minMaxDistanceFromObjective.y
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 7468365929270818811, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: minMaxPointerDistanceFromPlayer.x
