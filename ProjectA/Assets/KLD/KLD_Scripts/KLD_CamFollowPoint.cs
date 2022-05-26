@@ -18,8 +18,8 @@ public class KLD_CamFollowPoint : MonoBehaviour
 
     float t;
 
-    [SerializeField] float acceleration = 2f;
-    [SerializeField] float deceleration = 2f;
+    //[SerializeField] float acceleration = 2f;
+    //[SerializeField] float deceleration = 2f;
 
     Vector3 playerToTargetPos;
 

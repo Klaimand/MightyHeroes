@@ -82,6 +82,8 @@ public class KLD_PlayerShoot : MonoBehaviour
     [SerializeField] Vector2Int minMaxEnemyKilledToSound = new Vector2Int(2, 4);
     int curEnemyToSound;
     int curEnemyKilledSinceLastSound;
+    [Range(0f, 1f)]
+    [SerializeField] float reloadVoiceLineChance = 0.35f;
 
     void Awake()
     {
@@ -243,7 +245,10 @@ public class KLD_PlayerShoot : MonoBehaviour
     {
         if (canReload)
         {
-            KLD_AudioManager.Instance.PlayCharacterSound("Reload", 1);
+            if (Random.value < reloadVoiceLineChance)
+            {
+                KLD_AudioManager.Instance.PlayCharacterSound("Reload", 1);
+            }
             KLD_AudioManager.Instance.PlaySound(weapon.soundKey);
             curReloadCoroutine = StartCoroutine(ReloadCoroutine());
         }

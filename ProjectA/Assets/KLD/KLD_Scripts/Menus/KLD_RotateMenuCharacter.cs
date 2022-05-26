@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine.Events;
 
 public class KLD_RotateMenuCharacter : MonoBehaviour
 {
@@ -78,6 +79,14 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
     [SerializeField] float stopVel = 3f;
     [SerializeField] float maxVel = 720f;
 
+
+    [Header("Click")]
+    [SerializeField] UnityEvent onClick;
+    [SerializeField] float maxClickTime = 0.2f;
+    [SerializeField] float maxClickDeltaPos = 30f;
+    float clickTime = 0f;
+    Vector2 clickPos;
+
     void UpdateTouches()
     {
         if (Input.touchCount > 0)
@@ -93,6 +102,9 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
                 if (inZone)
                 {
                     curVel = 0f;
+
+                    clickTime = Time.time;
+                    clickPos = curTouch.position;
                 }
             }
             else if (curTouch.phase == TouchPhase.Stationary)
@@ -111,6 +123,15 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
             }
             else if (curTouch.phase == TouchPhase.Ended)
             {
+                if (Time.time - clickTime < maxClickTime)
+                {
+                    if ((curTouch.position - clickPos).magnitude < maxClickDeltaPos)
+                    {
+                        curVel = 0f;
+                        onClick.Invoke();
+                    }
+                }
+
                 inZone = false;
             }
         }
