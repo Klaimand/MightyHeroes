@@ -46,16 +46,16 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
             {
                 if (!captureFX.isPlaying)
                 {
-                    captureFX.Play();
                     KLD_AudioManager.Instance.PlaySound("TakingZone");
+                    captureFX.Play();
                 }
             }
             else
             {
                 if (captureFX.isPlaying)
                 {
-                    captureFX.Stop();
                     KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
+                    captureFX.Stop();
                 }
             }
         }
