@@ -341,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LoadingScreenObject
       objectReference: {fileID: 0}
+    - target: {fileID: 7068513562200807316, guid: d765bea319e03eb44a2a679527a1ca51, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d765bea319e03eb44a2a679527a1ca51, type: 3}
 --- !u!1 &364728552 stripped
@@ -4017,8 +4021,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4840756737024837497}
-  - {fileID: 8451355222081447523}
   - {fileID: 3596523587922338733}
+  - {fileID: 8451355222081447523}
   m_Father: {fileID: 4840756737182908090}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5032,7 +5036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5738,6 +5742,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5692613131882832772, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5692613131882832775, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5692613131882832792, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
@@ -6527,7 +6535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2927977013601852254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6821,7 +6829,7 @@ RectTransform:
   m_LocalScale: {x: 0.80382776, y: 0.80382776, z: 0.80382776}
   m_Children: []
   m_Father: {fileID: 564947377162786773}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -14432,7 +14440,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1431534900653349389, guid: 4496a14ad65637f48a40025f8b6a8743, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640719774230520705, guid: 4496a14ad65637f48a40025f8b6a8743, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -15346,7 +15354,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 564947377162786773}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
