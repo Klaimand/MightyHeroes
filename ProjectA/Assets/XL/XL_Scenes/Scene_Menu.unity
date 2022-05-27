@@ -343,7 +343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7068513562200807316, guid: d765bea319e03eb44a2a679527a1ca51, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d765bea319e03eb44a2a679527a1ca51, type: 3}
@@ -2802,6 +2802,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1628402107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3621317341548361312, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
+  m_PrefabInstance: {fileID: 2105351460612869960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1700709624 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4907930373434918186, guid: 74d7f0da440d8404dbff71f04614617a, type: 3}
@@ -3560,6 +3571,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2070838641}
   m_CullTransparentMesh: 1
+--- !u!114 &2110034553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9036896930672228462, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
+  m_PrefabInstance: {fileID: 2105351460612869960}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &53790829609891433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5518,7 +5540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2105351460297975862, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
       propertyPath: buttons.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2105351460297975862, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
       propertyPath: deactivateThreshold
@@ -5536,6 +5558,14 @@ PrefabInstance:
       propertyPath: buttons.Array.data[2]
       value: 
       objectReference: {fileID: 788703033}
+    - target: {fileID: 2105351460297975862, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
+      propertyPath: buttons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1628402107}
+    - target: {fileID: 2105351460297975862, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
+      propertyPath: buttons.Array.data[4]
+      value: 
+      objectReference: {fileID: 2110034553}
     - target: {fileID: 2105351460392735271, guid: ba2a308c19f59364eb6d1f30145b1571, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 2
