@@ -141,6 +141,11 @@ public class XL_MainMenu : MonoBehaviour
 
         RefreshMainMenuUI();
         RefreshTopOverlay();
+
+        if (!PlayerPrefs.HasKey("hasDoneTutorial"))
+        {
+            StartCoroutine(WaitAndLaunchScene(3));
+        }
     }
 
     private void RefreshMainMenuUI()
@@ -172,6 +177,13 @@ public class XL_MainMenu : MonoBehaviour
         if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
 
+        StartCoroutine(WaitAndLaunchScene((int)XL_PlayerInfo.instance.menuData.map + 1));
+    }
+
+
+    IEnumerator WaitAndLaunchScene(int sceneIdx)
+    {
+        yield return new WaitForEndOfFrame();
         KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         KLD_AudioManager.Instance.OutOfMenuMusic();
 
@@ -180,13 +192,8 @@ public class XL_MainMenu : MonoBehaviour
             KLD_LoadingScreen.instance.ShowLoadingScreen();
         }
 
-        StartCoroutine(WaitAndLaunchScene());
-    }
-
-    IEnumerator WaitAndLaunchScene()
-    {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene((int)XL_PlayerInfo.instance.menuData.map + 1);
+        SceneManager.LoadScene(sceneIdx);
     }
 
     public void SwitchMainMenu()
@@ -256,6 +263,8 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SwitchOptionMenu()
     {
+        if (optionMenu.activeSelf) KLD_MenuAudioCaller.instance.PlayUINegativeSound();
+        else KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         optionMenu.SetActive(!optionMenu.activeSelf);
     }
 

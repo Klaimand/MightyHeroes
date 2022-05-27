@@ -13,6 +13,7 @@ public class XL_WeaponSelectMenu : MonoBehaviour
         foreach (XL_UIWeaponInfo wi in weaponInfos)
         {
             wi.DisplayLevel();
+            wi.Activate(PlayerPrefs.GetInt(wi.weaponAttributes.weaponName + "Unlocked"));
         }
 
         SwitchWeaponMenu(0);
