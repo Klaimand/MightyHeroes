@@ -165,6 +165,13 @@ public class XL_MainMenu : MonoBehaviour
             KLD_AudioManager.Instance.GetSound("MenuMusic").GetSource().Stop();
             KLD_AudioManager.Instance.FadeInInst(KLD_AudioManager.Instance.GetSound("GameMusic").GetSource(), 2f);
         }
+        else
+        {
+            SelectMap(0);
+            SelectDifficulty(0);
+            SelectMissionType(0);
+            SetEnergyCost(20);
+        }
     }
 
     IEnumerator StartFirstTutorialCoroutine()
