@@ -42,4 +42,12 @@ public class KLD_EventsManager : MonoBehaviour
     {
         onHealthLoose?.Invoke(_healthLoosed);
     }
+
+
+    public Action onGameEnd;
+
+    public void InvokeGameEnd()
+    {
+        onGameEnd?.Invoke();
+    }
 }

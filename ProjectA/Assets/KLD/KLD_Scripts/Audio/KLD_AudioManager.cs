@@ -268,4 +268,20 @@ public class KLD_AudioManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         FadeInInst(GetSound("MenuMusic").GetSource(), 1.5f);
     }
+
+    public void StopAllLoopingSounds()
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (soundsKey[sounds[i].name].GetSource().loop)
+            {
+                soundsKey[sounds[i].name].GetSource().Stop();
+            }
+        }
+    }
+
+    public AudioMixer GetAudioMixer()
+    {
+        return mixer;
+    }
 }

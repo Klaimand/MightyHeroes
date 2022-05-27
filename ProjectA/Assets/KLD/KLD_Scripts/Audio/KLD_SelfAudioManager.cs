@@ -10,6 +10,16 @@ public class KLD_SelfAudioManager : MonoBehaviour
 
     [SerializeField] string[] soundsToLoop;
 
+    void OnEnable()
+    {
+        KLD_EventsManager.instance.onGameEnd += EndGame;
+    }
+
+    void OnDisable()
+    {
+        KLD_EventsManager.instance.onGameEnd -= EndGame;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,5 +61,13 @@ public class KLD_SelfAudioManager : MonoBehaviour
     public Sound GetSound(string _key)
     {
         return soundsKey[_key];
+    }
+
+    void EndGame()
+    {
+        for (int i = 0; i < soundsToLoop.Length; i++)
+        {
+            GetSound(soundsToLoop[i]).GetSource().Stop();
+        }
     }
 }

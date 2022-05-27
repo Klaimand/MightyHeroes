@@ -45,6 +45,10 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     [SerializeField] Image[] ultButtonImages;
 
+
+    bool cantCharge = false;
+    float chargeRatio = 1f;
+
     /*
     private void Awake()
     {
@@ -150,7 +154,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         KLD_EventsManager.instance.onEnemyKill += AddUltChargeOnEnemyKill;
 
-        KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
+        //KLD_EventsManager.instance.onEnemyHit += StopPassiveHeal;
     }
 
     void OnDisable()
@@ -162,7 +166,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
         KLD_EventsManager.instance.onEnemyKill -= AddUltChargeOnEnemyKill;
 
-        KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
+        //KLD_EventsManager.instance.onEnemyHit -= StopPassiveHeal;
     }
 
     Vector3 direction;
@@ -171,9 +175,9 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     void DoSpellCoolDown()
     {
-        if (!isUltimateCharged)
+        if (!isUltimateCharged && !cantCharge)
         {
-            ultimateCharge += Time.deltaTime * characterAttributes.activeTick;
+            ultimateCharge += Time.deltaTime * characterAttributes.activeTick * chargeRatio;
 
             if (ultimateCharge >= 100f)
             {
@@ -193,6 +197,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
             if (curOutOfCombatTime > outOfCombatTime)
             {
                 outOfCombat = true;
+                KLD_AudioManager.Instance.PlayCharacterSound("Healing", 6);
             }
         }
         else
@@ -226,6 +231,7 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void DoSpell() //Activated by anim
     {
+        KLD_AudioManager.Instance.PlaySound("UseUltimate");
         ultimateLaunched = false;
         characterAttributes.CallOnSpellLaunch();
 
@@ -346,7 +352,7 @@ while (true)
 
     public void AddUltChargeOnEnemyKill(Enemy _enemy)
     {
-        if (!isUltimateCharged)
+        if (!isUltimateCharged && !cantCharge)
         {
             ultimateCharge += playerShoot.GetWeaponUltChargeOnKill();
         }
@@ -365,5 +371,15 @@ while (true)
     public int GetCharacterSoundIndex()
     {
         return characterAttributes.characterSoundIndex;
+    }
+
+    public void SetCantCharge(bool _cantCharge)
+    {
+        cantCharge = _cantCharge;
+    }
+
+    public void SetChargeRatio(float _ratio)
+    {
+        chargeRatio = _ratio;
     }
 }
