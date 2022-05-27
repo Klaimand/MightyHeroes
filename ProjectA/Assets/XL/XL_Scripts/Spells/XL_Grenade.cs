@@ -25,6 +25,8 @@ public class XL_Grenade : MonoBehaviour
         {
             KLD_ScreenShakes.instance.StartShake(shakeLenght, shakePower, shakeFrequency);
 
+            KLD_AudioManager.Instance.PlaySound("BlastGrenade");
+
             XL_Pooler.instance.PopPosition("Explosion", transform.position).GetComponent<XL_Explosion>().StartExplosion(explosionDamage, explosionRadius, 0.1f);
             XL_Pooler.instance.DePop("BlastGrenade", gameObject);
         }

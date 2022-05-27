@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f34653075bc8048878f7f944b13830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overrideScreenSize: 1
+  overrideScreenSize: 0
   overridenScreenSize: {x: 1480, y: 720}
   horizontalBounds: {x: 0.36, y: 0.64}
   verticalBounds: {x: 0.15, y: 0.75}
@@ -120,6 +120,11 @@ MonoBehaviour:
   drag: 0.4
   stopVel: 0.2
   maxVel: 360
+  onClick:
+    m_PersistentCalls:
+      m_Calls: []
+  maxClickTime: 0.2
+  maxClickDeltaPos: 50
 --- !u!1 &2997932095442056147
 GameObject:
   m_ObjectHideFlags: 0
