@@ -10,8 +10,11 @@ public class KLD_TutorialObjective : MonoBehaviour, KLD_IObjective
 
     public void CompleteObjective()
     {
-        completed = true;
-        XL_GameModeManager.instance.CompleteObjective(index);
+        if (!completed)
+        {
+            completed = true;
+            XL_GameModeManager.instance.CompleteObjective(index);
+        }
     }
 
     string KLD_IObjective.GetObjectiveName()
