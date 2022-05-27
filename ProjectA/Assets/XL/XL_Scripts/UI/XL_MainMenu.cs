@@ -10,6 +10,7 @@ public class XL_MainMenu : MonoBehaviour
     public static XL_MainMenu instance;
 
     [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject optionMenu;
     [SerializeField] private GameObject characterSelectMenu;
     [SerializeField] private GameObject characterDetailsMenu;
     [SerializeField] private GameObject weaponSelectMenu;
@@ -67,9 +68,13 @@ public class XL_MainMenu : MonoBehaviour
     }
 
     [ContextMenu("ResetPlayerPrefs")]
-    void DeletePlayerPrefs()
+    public void DeletePlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
+        InitPlayerPrefs();
+
+        RefreshMainMenuUI();
+        RefreshTopOverlay();
     }
 
     private void InitPlayerPrefs()
@@ -138,8 +143,8 @@ public class XL_MainMenu : MonoBehaviour
 
     private void RefreshMainMenuUI()
     {
-        characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString();
-        weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString();
+        characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString("N0");
+        weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString("N0");
 
         RefreshGOButton();
     }
@@ -165,6 +170,7 @@ public class XL_MainMenu : MonoBehaviour
         if (energyMax <= PlayerPrefs.GetInt("Energy")) XL_PlayerSession.instance.StartCoroutine(XL_PlayerSession.instance.EnergyCoroutine());
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") - XL_PlayerInfo.instance.menuData.missionEnergyCost);
 
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         KLD_AudioManager.Instance.OutOfMenuMusic();
 
         if (KLD_LoadingScreen.instance != null)
@@ -204,6 +210,7 @@ public class XL_MainMenu : MonoBehaviour
         weaponSelectMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
         mapSelectMenu.SetActive(false);
+
     }
 
     public void SwitchCharaSelectMenu()
@@ -211,6 +218,7 @@ public class XL_MainMenu : MonoBehaviour
         characterSelectMenu.SetActive(true);
 
         mainMenu.SetActive(false);
+        shopMenu.SetActive(false);
         characterDetailsMenu.SetActive(false);
     }
 
@@ -226,6 +234,7 @@ public class XL_MainMenu : MonoBehaviour
         weaponSelectMenu.SetActive(true);
 
         mainMenu.SetActive(false);
+        shopMenu.SetActive(false);
         weaponDetailsMenu.SetActive(false);
     }
 
@@ -243,6 +252,11 @@ public class XL_MainMenu : MonoBehaviour
         mainMenu.SetActive(false);
     }
 
+    public void SwitchOptionMenu()
+    {
+        optionMenu.SetActive(!optionMenu.activeSelf);
+    }
+
     public void SelectMissionType(int idx)
     {
         foreach (GameObject go in missionTypes)
@@ -256,14 +270,14 @@ public class XL_MainMenu : MonoBehaviour
     public void RefreshTopOverlay()
     {
         //Energy
-        energyText.text = PlayerPrefs.GetInt("Energy").ToString();
-        energyMaxText.text = energyMax.ToString();
+        energyText.text = PlayerPrefs.GetInt("Energy").ToString("N0");
+        energyMaxText.text = energyMax.ToString("N0");
 
         //SoftCurrency
-        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString();
+        softCurrencyText.text = PlayerPrefs.GetInt("SoftCurrency").ToString("N0");
 
         //HardCurrency
-        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString();
+        hardCurrencyText.text = PlayerPrefs.GetInt("HardCurrency").ToString("N0");
     }
 
     public KLD_WeaponSO GetWeaponSO(Weapon _weapon)
@@ -273,6 +287,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectPlayer()
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectPlayer();
@@ -281,6 +296,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectWeapon()
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectWeapon();
@@ -289,6 +305,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectMap(int idx)
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectMap(idx);
@@ -297,6 +314,7 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SelectDifficulty(int idx)
     {
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectDifficulty(idx);

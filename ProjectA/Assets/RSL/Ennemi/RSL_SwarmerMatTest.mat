@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cb8c2d37a8e11c744a73c3119b78e8f6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 08db7cb666114a1498c7edb1c2f53062, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -68,7 +68,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ShadowMapTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 3575b52938ff73040bb687baace16136, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -76,7 +76,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - light_mask:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a002b67e4cc72eb40bf8300e6c6440fe, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -138,7 +138,7 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SDepthSens: 1
-    - _SOutlineThk: 1
+    - _SOutlineThk: 3
     - _S_NormalsSens: 1
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
@@ -153,16 +153,16 @@ Material:
     - _TailAmpBoost: 0.3
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - energy: 0
+    - energy: 1
     - energy_speed: 1
     m_Colors:
-    - Color_af8aeeb4ad5249b1a4134639953709d7: {r: 0, g: 0, b: 0, a: 0}
+    - Color_af8aeeb4ad5249b1a4134639953709d7: {r: 1, g: 0.4862745, b: 0, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _SLightColor: {r: 1, g: 0.7764706, b: 0.6, a: 0}
+    - _SLightColor: {r: 0.54901963, g: 0.35686275, b: 0.2, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []

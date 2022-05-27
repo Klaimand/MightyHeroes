@@ -630,6 +630,7 @@ MonoBehaviour:
   clampMin: -750
   clampMax: -330
   lerpStrength: 0.2
+  deactivateThreshold: 0
   buttons: []
 --- !u!1 &2105351460337409127
 GameObject:
@@ -1284,7 +1285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.69803923}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1762,7 +1763,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2105351461100326561
 Transform:
   m_ObjectHideFlags: 0
@@ -3050,11 +3051,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterInfos:
   - characterUI: {fileID: 2105351461611284284}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     characterLvlUI: {fileID: 2105351460693119639}
     characterAttributes: {fileID: 11400000, guid: 38dc6858e8a33e34288a632cbf7cb0a2, type: 2}
   - characterUI: {fileID: 2105351460077479959}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     characterLvlUI: {fileID: 2105351461370207642}
     characterAttributes: {fileID: 11400000, guid: 52074c7cc2a50f04d8dcc3fd154d3d82, type: 2}
   - characterUI: {fileID: 2105351459992351195}
+    lockedSprite: {fileID: 0}
+    unlockedSprite: {fileID: 0}
     characterLvlUI: {fileID: 2105351461103007973}
     characterAttributes: {fileID: 11400000, guid: 2cb751a483757ab488338b4e3a75cd9a, type: 2}

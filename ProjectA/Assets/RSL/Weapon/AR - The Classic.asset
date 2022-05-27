@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AR - The Classic
   m_EditorClassIdentifier: 
   weaponName: The Classic
+  unlockSoftCurrency: 1500
   description: "\u201C Le Classic est un fusil automatique fiable manufactur\xE9
     par la F\xE9d\xE9ration. Il est l\xE9ger, ne demande pas beaucoup d\u2019entretien
     et utilise des munitions qui sont produites virtuellement dans tous les pays.
@@ -24,7 +25,7 @@ MonoBehaviour:
   level: 0
   experience: 0
   weaponAttributes:
-  - experienceToReach: 0
+  - experienceToReach: 800
     bulletDamage: 23
     rpm: 450
     reloadSpeed: 0.75
@@ -38,7 +39,7 @@ MonoBehaviour:
     activePointsPerKill: 2
     displayedName: Level 0
     isBPBReloading: 0
-  - experienceToReach: 800
+  - experienceToReach: 1800
     bulletDamage: 25
     rpm: 450
     reloadSpeed: 0.7
@@ -52,7 +53,7 @@ MonoBehaviour:
     activePointsPerKill: 2
     displayedName: Level 1
     isBPBReloading: 0
-  - experienceToReach: 1800
+  - experienceToReach: 3100
     bulletDamage: 28
     rpm: 450
     reloadSpeed: 0.65
@@ -66,7 +67,7 @@ MonoBehaviour:
     activePointsPerKill: 2
     displayedName: Level 2
     isBPBReloading: 0
-  - experienceToReach: 3100
+  - experienceToReach: 4700
     bulletDamage: 32
     rpm: 450
     reloadSpeed: 0.6
@@ -80,7 +81,7 @@ MonoBehaviour:
     activePointsPerKill: 2
     displayedName: Level 3
     isBPBReloading: 0
-  - experienceToReach: 4700
+  - experienceToReach: 6300
     bulletDamage: 36
     rpm: 450
     reloadSpeed: 0.55
@@ -94,7 +95,7 @@ MonoBehaviour:
     activePointsPerKill: 2
     displayedName: Level 4
     isBPBReloading: 0
-  - experienceToReach: 6300
+  - experienceToReach: 0
     bulletDamage: 40
     rpm: 450
     reloadSpeed: 0.5
@@ -121,3 +122,4 @@ MonoBehaviour:
   impactFX: {fileID: 921483033988333306, guid: 06e686953c8600a499733386b61f3a34, type: 3}
   wallImpactFX: {fileID: 921483033988333306, guid: 9037783167575af4c97095ad5a0ec7d4, type: 3}
   fxPoolSize: 20
+  soundKey: THE_CLASSIC_RELOAD
