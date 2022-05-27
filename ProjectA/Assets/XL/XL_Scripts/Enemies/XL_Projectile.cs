@@ -22,10 +22,10 @@ public class XL_Projectile : MonoBehaviour
         if (!collision.transform.CompareTag("Enemy"))
         {
             objectHit = collision.transform.GetComponent<XL_IDamageable>();
-            if (objectHit != null)
-            {
-                objectHit.TakeDamage(damage);
-            }
+            //if (objectHit != null)
+            //{
+            //    objectHit.TakeDamage(damage);
+            //}
             //Debug.Log("Depoped because of collision");
             StopAllCoroutines();
             XL_Pooler.instance.PopPosition("Summoner_Explosion", transform.position).GetComponent<XL_Explosion>().StartExplosion(damage, radius, 0.1f);
