@@ -142,7 +142,7 @@ public class XL_MainMenu : MonoBehaviour
         RefreshMainMenuUI();
         RefreshTopOverlay();
 
-        if (!PlayerPrefs.HasKey("hasDoneTutorial"))
+        if (!PlayerPrefs.HasKey("HasDoneTutorial"))
         {
             StartCoroutine(WaitAndLaunchScene(3));
         }
