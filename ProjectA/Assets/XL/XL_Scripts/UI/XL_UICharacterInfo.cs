@@ -15,8 +15,17 @@ public class XL_UICharacterInfo
     public void Activate(int i)
     {
         characterUI.SetActive(true);
-        if (i == 0) lockedSprite.SetActive(true);
-        else unlockedSprite.SetActive(true);
+        if (i == 0)
+        {
+            unlockedSprite.SetActive(false);
+            lockedSprite.SetActive(true);            
+        }
+        else
+        {
+            lockedSprite.SetActive(false);
+            unlockedSprite.SetActive(true);            
+        }
+        
     }
 
     public void Deactivate()

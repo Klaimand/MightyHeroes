@@ -18,8 +18,17 @@ public class XL_UIWeaponInfo
     public void Activate(int i)
     {
         weaponUI.SetActive(true);
-        if (i == 0) lockedSprite.SetActive(true);
-        else unlockedSprite.SetActive(true);
+        if (i == 0)
+        {
+            lockedSprite.SetActive(true);
+            unlockedSprite.SetActive(false);
+        }
+        else
+        {
+            unlockedSprite.SetActive(true);
+            lockedSprite.SetActive(false);
+        } 
+        Debug.Log(weaponAttributes.weaponName + " locked ? : " + i);
     }
 
     public void Deactivate()

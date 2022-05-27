@@ -256,6 +256,8 @@ public class XL_MainMenu : MonoBehaviour
 
     public void SwitchOptionMenu()
     {
+        if (optionMenu.activeSelf) KLD_MenuAudioCaller.instance.PlayUINegativeSound();
+        else KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         optionMenu.SetActive(!optionMenu.activeSelf);
     }
 
