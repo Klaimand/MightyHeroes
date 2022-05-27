@@ -144,8 +144,18 @@ public class XL_MainMenu : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("HasDoneTutorial"))
         {
-            StartCoroutine(WaitAndLaunchScene(3));
+            StartCoroutine(StartFirstTutorialCoroutine());
         }
+    }
+
+    IEnumerator StartFirstTutorialCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        SelectMap(2);
+        SelectDifficulty(2);
+        SelectMissionType(2);
+        SetEnergyCost(5);
+        StartCoroutine(WaitAndLaunchScene(3));
     }
 
     private void RefreshMainMenuUI()
@@ -183,7 +193,6 @@ public class XL_MainMenu : MonoBehaviour
 
     IEnumerator WaitAndLaunchScene(int sceneIdx)
     {
-        yield return new WaitForEndOfFrame();
         KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         KLD_AudioManager.Instance.OutOfMenuMusic();
 
