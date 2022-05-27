@@ -182,6 +182,11 @@ public class XL_MainMenu : MonoBehaviour
         characterXP.text = (characterAttributes[(int)XL_PlayerInfo.instance.menuData.character].level + 1).ToString("N0");
         weaponXP.text = (weaponAttributes[(int)XL_PlayerInfo.instance.menuData.weapon].level + 1).ToString("N0");
 
+        if (XL_PlayerInfo.instance != null)
+        {
+            SelectMissionType((int)XL_PlayerInfo.instance.menuData.map);
+        }
+
         RefreshGOButton();
     }
 
