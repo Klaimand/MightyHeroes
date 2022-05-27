@@ -47,11 +47,14 @@ public class XL_MainMenu : MonoBehaviour
 
     //[Header("Loadout")]
 
+    bool launchTutorial = false;
+
 
     private void Awake()
     {
         instance = this;
 
+        /*
         InitPlayerPrefs();
         RefreshMainMenuUI();
         RefreshTopOverlay();
@@ -60,11 +63,24 @@ public class XL_MainMenu : MonoBehaviour
         {
             XL_PlayerInfo.instance.Initialise();
         }
+        */
     }
 
     void Start()
     {
-        KLD_LoadingScreen.instance.HideLoadingScreen();
+        InitPlayerPrefs();
+
+        if (XL_PlayerInfo.instance != null)
+        {
+            XL_PlayerInfo.instance.Initialise();
+        }
+
+        if (!launchTutorial)
+        {
+            RefreshMainMenuUI();
+            RefreshTopOverlay();
+            KLD_LoadingScreen.instance.HideLoadingScreen();
+        }
     }
 
     [ContextMenu("ResetPlayerPrefs")]
@@ -144,7 +160,10 @@ public class XL_MainMenu : MonoBehaviour
 
         if (!PlayerPrefs.HasKey("HasDoneTutorial"))
         {
+            launchTutorial = true;
             StartCoroutine(StartFirstTutorialCoroutine());
+            KLD_AudioManager.Instance.GetSound("MenuMusic").GetSource().Stop();
+            KLD_AudioManager.Instance.FadeInInst(KLD_AudioManager.Instance.GetSound("GameMusic").GetSource(), 2f);
         }
     }
 
@@ -194,10 +213,10 @@ public class XL_MainMenu : MonoBehaviour
     IEnumerator WaitAndLaunchScene(int sceneIdx)
     {
         KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
-        KLD_AudioManager.Instance.OutOfMenuMusic();
 
-        if (KLD_LoadingScreen.instance != null)
+        if (KLD_LoadingScreen.instance != null && !launchTutorial)
         {
+            KLD_AudioManager.Instance.OutOfMenuMusic();
             KLD_LoadingScreen.instance.ShowLoadingScreen();
         }
 
@@ -312,6 +331,7 @@ public class XL_MainMenu : MonoBehaviour
         {
             XL_PlayerInfo.instance.SelectPlayer();
         }
+        KLD_AudioManager.Instance.PlayCharacterSound("PickCharacter", 9, (int)XL_PlayerInfo.instance.menuData.character);
     }
 
     public void SelectWeapon()

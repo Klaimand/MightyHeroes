@@ -166,6 +166,32 @@ public class KLD_AudioManager : MonoBehaviour
         }
     }
 
+    public void PlayCharacterSound(string _key, int _index, int _characterIndex)
+    {
+        int _priority = GetCurCharacterPriority(_index);
+
+        if (!isVoicing || (isVoicing && _priority > curVoicePriority))
+        {
+            if (isVoicing)
+            {
+                GetSound(lastVoiceLineKey).Stop();
+                if (curVoiceLineCoroutine != null)
+                {
+                    StopCoroutine(curVoiceLineCoroutine);
+                }
+            }
+            curVoicePriority = _priority;
+
+            lastVoiceLineKey = voiceLines[_characterIndex].prefix + _key;
+            soundsKey[lastVoiceLineKey].Play();
+
+            isVoicing = true;
+            curVoiceLineCoroutine = StartCoroutine(PlayVoiceLineCoroutine(
+                GetSound(lastVoiceLineKey).GetSource().clip.length
+            ));
+        }
+    }
+
     bool isVoicing = false;
     int curVoicePriority = 0;
     string lastVoiceLineKey;
@@ -179,7 +205,8 @@ public class KLD_AudioManager : MonoBehaviour
 
     public int GetCurCharacterPriority(int _index)
     {
-        return voiceLines[KLD_CharacterInfos.instance.GetCharacterSoundIndex()].priorities[_index];
+        return voiceLines[0].priorities[_index];
+        //return voiceLines[KLD_CharacterInfos.instance.GetCharacterSoundIndex()].priorities[_index];
     }
 
     #region Obsolete

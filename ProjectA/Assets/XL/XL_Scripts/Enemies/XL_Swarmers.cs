@@ -100,7 +100,7 @@ public class XL_Swarmers : XL_Enemy
         shader.SetFloat("_AtkSldr", 1);
         yield return new WaitForSeconds(t);
 
-        
+
 
         for (int i = 0; i < nbRaycast + 1; i++)
         {
@@ -110,6 +110,7 @@ public class XL_Swarmers : XL_Enemy
                 if (hits[j].transform.CompareTag("Player") && !playersHit.Contains(hits[j].transform.gameObject))
                 {
                     attackParticles = XL_Pooler.instance.PopPosition("SwarmerAttackVFX", hits[j].transform.position, hits[j].transform);
+                    XL_Pooler.instance.DelayedDePop(2, "SwarmerAttackVFX", attackParticles);
                     attackParticles.GetComponentInChildren<ParticleSystem>().Play();
                     playersHit.Add(hits[j].transform.gameObject);
                     if (hits[j].transform != null) hits[j].transform.GetComponent<XL_IDamageable>().TakeDamage(damage); //PERF
@@ -117,8 +118,6 @@ public class XL_Swarmers : XL_Enemy
             }
         }
         attacking = false;
-
-        XL_Pooler.instance.DelayedDePop(2, "SwarmerAttackVFX", attackParticles);
 
         shader.SetFloat("_AtkSldr", 0);
     }

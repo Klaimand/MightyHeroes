@@ -33,7 +33,7 @@ public class KLD_MissionInfos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitialiseMissionData();
+        //InitialiseMissionData();
     }
 
     public void InitialiseMissionData()
