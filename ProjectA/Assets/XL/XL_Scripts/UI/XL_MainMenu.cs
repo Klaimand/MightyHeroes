@@ -121,15 +121,15 @@ public class XL_MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("The ClassicUnlocked", 1);
         if (!PlayerPrefs.HasKey("Energy"))
         {
-            PlayerPrefs.SetInt("Energy", 100);
+            PlayerPrefs.SetInt("Energy", 150);
         }
         if (!PlayerPrefs.HasKey("SoftCurrency"))
         {
-            PlayerPrefs.SetInt("SoftCurrency", 20000);
+            PlayerPrefs.SetInt("SoftCurrency", 0);
         }
         if (!PlayerPrefs.HasKey("HardCurrency"))
         {
-            PlayerPrefs.SetInt("HardCurrency", 1000);
+            PlayerPrefs.SetInt("HardCurrency", 0);
         }
         if (!PlayerPrefs.HasKey("SelectedHero"))
         {
@@ -186,7 +186,7 @@ public class XL_MainMenu : MonoBehaviour
     IEnumerator WaitAndLaunchScene()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene((int)XL_PlayerInfo.instance.menuData.difficulty + 1);
+        SceneManager.LoadScene((int)XL_PlayerInfo.instance.menuData.map + 1);
     }
 
     public void SwitchMainMenu()

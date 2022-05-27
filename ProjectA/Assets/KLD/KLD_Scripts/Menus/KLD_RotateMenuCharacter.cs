@@ -8,6 +8,7 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
 {
     //[SerializeField] Vector2Int referenceResolution = new Vector2Int(2260, 1080);
     //Vector2 resolutionRatio = Vector2.one;
+    [SerializeField] GameObject mainMenuGO;
     [SerializeField] bool overrideScreenSize = false;
     [SerializeField, ShowIf("overrideScreenSize")] Vector2Int overridenScreenSize = Vector2Int.zero;
 
@@ -20,6 +21,8 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
     Vector2Int rectMin;
     Vector2Int rectMax;
     RectInt pixelsRect;
+
+    bool isInMainMenu = false;
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +53,12 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isInMainMenu = mainMenuGO.activeSelf;
+        if (!isInMainMenu)
+        {
+            return;
+        }
+
         UpdateTouches();
         ProcessVel();
         curAngle += curVel;
@@ -154,5 +163,10 @@ public class KLD_RotateMenuCharacter : MonoBehaviour
     {
         curVel = 0f;
         curAngle = 0f;
+    }
+
+    public void SetIsInMainMenu(bool _b)
+    {
+        isInMainMenu = _b;
     }
 }
