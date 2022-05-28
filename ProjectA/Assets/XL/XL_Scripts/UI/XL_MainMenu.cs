@@ -206,7 +206,7 @@ public class XL_MainMenu : MonoBehaviour
             SelectMissionType((int)XL_PlayerInfo.instance.menuData.map);
             SelectPlayer();
             SelectWeapon();
-            
+
         }
 
 
@@ -360,7 +360,7 @@ public class XL_MainMenu : MonoBehaviour
             XL_PlayerInfo.instance.SelectPlayer();
             PlayerPrefs.SetInt("SelectedHero", (int)XL_PlayerInfo.instance.menuData.character);
         }
-        KLD_AudioManager.Instance.PlayCharacterSound("PickCharacter", 9, (int)XL_PlayerInfo.instance.menuData.character);
+        //KLD_AudioManager.Instance.PlayCharacterSound("PickCharacter", 9, (int)XL_PlayerInfo.instance.menuData.character);
     }
 
     public void SelectWeapon()

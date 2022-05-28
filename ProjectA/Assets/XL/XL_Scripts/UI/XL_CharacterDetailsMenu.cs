@@ -57,6 +57,11 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
         RefreshUI();
     }
 
+    public void CallCharacterPickupAudio()
+    {
+        KLD_AudioManager.Instance.PlayCharacterSound("PickCharacter", 9, selectedPlayer);
+    }
+
     private void RefreshUI()
     {
         CheckHasUpgrade();
