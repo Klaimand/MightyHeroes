@@ -41,6 +41,7 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        selectedWeapon = PlayerPrefs.GetInt("SelectedWeapon");
     }
 
     public void Select(int idx)
@@ -50,7 +51,9 @@ public class XL_WeaponDetailsMenu : MonoBehaviour
             wi.Deactivate();
         }
 
+        
         selectedWeapon = idx;
+
 
         RefreshUI();
     }

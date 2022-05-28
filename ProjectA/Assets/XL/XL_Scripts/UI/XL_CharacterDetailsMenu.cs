@@ -41,6 +41,7 @@ public class XL_CharacterDetailsMenu : MonoBehaviour
     private void Awake()
     {
         instance = this;
+        selectedPlayer = PlayerPrefs.GetInt("SelectedHero");
     }
 
     public void Select(int idx)
