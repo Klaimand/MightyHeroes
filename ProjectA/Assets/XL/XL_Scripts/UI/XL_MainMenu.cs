@@ -73,12 +73,14 @@ public class XL_MainMenu : MonoBehaviour
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.Initialise();
+            if (XL_WeaponDetailsMenu.instance != null) XL_WeaponDetailsMenu.instance.selectedWeapon = (int)XL_PlayerInfo.instance.menuData.weapon;
+            if (XL_CharacterDetailsMenu.instance != null) XL_CharacterDetailsMenu.instance.selectedPlayer = (int)XL_PlayerInfo.instance.menuData.character;
         }
 
         if (!launchTutorial)
         {
-            RefreshMainMenuUI();
-            RefreshTopOverlay();
+            //RefreshMainMenuUI();
+            //RefreshTopOverlay();
             KLD_LoadingScreen.instance.HideLoadingScreen();
         }
     }
@@ -151,6 +153,10 @@ public class XL_MainMenu : MonoBehaviour
         {
             PlayerPrefs.SetInt("SelectedHero", 0);
         }
+        if (!PlayerPrefs.HasKey("SelectedWeapon"))
+        {
+            PlayerPrefs.SetInt("SelectedWeapon", 1);
+        }
 
         PlayerPrefs.Save();
         #endregion
@@ -192,7 +198,11 @@ public class XL_MainMenu : MonoBehaviour
         if (XL_PlayerInfo.instance != null)
         {
             SelectMissionType((int)XL_PlayerInfo.instance.menuData.map);
+            SelectPlayer();
+            SelectWeapon();
+            
         }
+
 
         RefreshGOButton();
     }
@@ -342,6 +352,7 @@ public class XL_MainMenu : MonoBehaviour
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectPlayer();
+            PlayerPrefs.SetInt("SelectedHero", (int)XL_PlayerInfo.instance.menuData.character);
         }
         KLD_AudioManager.Instance.PlayCharacterSound("PickCharacter", 9, (int)XL_PlayerInfo.instance.menuData.character);
     }
@@ -352,6 +363,7 @@ public class XL_MainMenu : MonoBehaviour
         if (XL_PlayerInfo.instance != null)
         {
             XL_PlayerInfo.instance.SelectWeapon();
+            PlayerPrefs.SetInt("SelectedWeapon", (int)XL_PlayerInfo.instance.menuData.weapon);
         }
     }
 
