@@ -81,12 +81,24 @@ public class KLD_CharacterRefresher : MonoBehaviour
         ChangeWeapon((Weapon)curWeaponIndex);
     }
 
+    int i;
+
     void ChangeWeapon(Weapon _weapon) //called by event
     {
         rotateMenuCharacter.ResetVelAndAngle();
         curWeaponIndex = (int)_weapon;
 
-        if (weaponHolderParent.childCount > 3) { Destroy(weaponHolderParent.GetChild(3).gameObject); }
+        if (weaponHolderParent.childCount > 3)
+        {
+            i = weaponHolderParent.childCount - 3;
+
+            for (int j = i - 1; j >= 0; j--)
+            {
+                Destroy(weaponHolderParent.GetChild(3 + j).gameObject);
+            }
+
+            //Destroy(weaponHolderParent.GetChild(3).gameObject);
+        }
 
         weapon = mainMenu.GetWeaponSO(_weapon);
 

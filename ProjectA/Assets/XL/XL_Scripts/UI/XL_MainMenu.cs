@@ -81,6 +81,8 @@ public class XL_MainMenu : MonoBehaviour
             RefreshTopOverlay();
             KLD_LoadingScreen.instance.HideLoadingScreen();
         }
+
+        XL_PlayerInfo.instance.CallSceneRestart();
     }
 
     [ContextMenu("ResetPlayerPrefs")]
@@ -147,9 +149,13 @@ public class XL_MainMenu : MonoBehaviour
         {
             PlayerPrefs.SetInt("HardCurrency", 0);
         }
-        if (!PlayerPrefs.HasKey("SelectedHero"))
+        if (!PlayerPrefs.HasKey("SelectedCharacter"))
         {
-            PlayerPrefs.SetInt("SelectedHero", 0);
+            PlayerPrefs.SetInt("SelectedCharacter", 0);
+        }
+        if (!PlayerPrefs.HasKey("SelectedWeapon"))
+        {
+            PlayerPrefs.SetInt("SelectedWeapon", 1);
         }
 
         PlayerPrefs.Save();
