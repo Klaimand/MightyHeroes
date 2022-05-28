@@ -261,7 +261,7 @@ MonoBehaviour:
     difficultyRatio: 0.5
     difficultyOffset: 0.5
     softCurrencyRatio: 0.1
-    loosedHealthRatio: 0.2
+    loosedHealthRatio: 0.045
   remainingTimeRatio: 1.5
   killedEnemiesRatio: 1
   difficultyRatio: 0.5
@@ -475,8 +475,6 @@ MonoBehaviour:
   inputs: {fileID: 3592941992684990966}
   player: {fileID: 8671646772181465862}
   distanceFromPlayerOnAim: 2
-  acceleration: 4
-  deceleration: 4
   cam1: {fileID: 1816673920}
   cam2: {fileID: 377752414607913447}
 --- !u!1 &4852413950262748697
@@ -1919,11 +1917,11 @@ PrefabInstance:
       objectReference: {fileID: 2196164260221012348}
     - target: {fileID: 4918749989807435229, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: minMaxEnemyKilledToSound.x
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4918749989807435229, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: minMaxEnemyKilledToSound.y
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4918749990883480112, guid: e6f5e44fe299af545b575d4f2c6f84c9, type: 3}
       propertyPath: m_Name

@@ -31,7 +31,7 @@ public class KLD_MissionData
     {
         return Mathf.RoundToInt(
             (remainingTime * remainingTimeRatio + killedEnemies * killedEnemiesRatio) * (difficulty * difficultyRatio + difficultyOffset)
-            );
+            ) * 2;
     }
 
     int hardCurrencyToReturn;

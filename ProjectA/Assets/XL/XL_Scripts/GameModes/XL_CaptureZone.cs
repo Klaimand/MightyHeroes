@@ -24,7 +24,22 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     [SerializeField] UnityEvent onZoneCaptured;
 
+    [Header("Shadows")]
+    [SerializeField] Color white = Color.white;
+    [SerializeField] Color noAlpha = new Color(1f, 1f, 1f, 0f);
+    [SerializeField] SpriteRenderer[] eggsShadows;
+
     bool captured = false;
+
+    void OnEnable()
+    {
+        KLD_EventsManager.instance.onGameEnd += GameEnd;
+    }
+
+    void OnDisable()
+    {
+        KLD_EventsManager.instance.onGameEnd -= GameEnd;
+    }
 
     private void Start()
     {
@@ -82,6 +97,11 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
             //for (int i = 0; i < eggsRenderers.Length; i++)
             //{
             StartCoroutine(LerpMaterialValue(0f, 1f, fadeTime, eggsRenderer, "_Dissolve"));
+
+            foreach (var rd in eggsShadows)
+            {
+                StartCoroutine(FadeEgg(fadeTime, rd));
+            }
             //}
         }
     }
@@ -119,7 +139,7 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     IEnumerator LerpMaterialValue(float _startValue, float _endValue, float _time, Renderer _renderer, string _reference)
     {
-        float t = 0;
+        float t = 0f;
         while (t < _time)
         {
             _renderer.sharedMaterial.SetFloat(_reference, Mathf.Lerp(_startValue, _endValue, t / _time));
@@ -129,6 +149,22 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
         }
     }
 
+    IEnumerator FadeEgg(float _time, SpriteRenderer _image)
+    {
+        float t = 0f;
+
+        while (t < _time)
+        {
+            _image.color = Color.Lerp(white, noAlpha, t / _time);
+            yield return null;
+            t += Time.deltaTime;
+        }
+    }
+
+    void GameEnd()
+    {
+        KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
+    }
 
     public bool GetObjectiveState()
     {
