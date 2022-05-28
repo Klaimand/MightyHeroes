@@ -53,6 +53,15 @@ public class XL_PlayerInfo : MonoBehaviour
         menuData.map = 0;
         menuData.difficulty = 0;
         menuData.missionEnergyCost = 20;
+
+        if (!PlayerPrefs.HasKey("SelectedHero"))
+        {
+            PlayerPrefs.SetInt("SelectedHero", 0);
+        }
+        if (!PlayerPrefs.HasKey("SelectedWeapon"))
+        {
+            PlayerPrefs.SetInt("SelectedWeapon", 1);
+        }
     }
 
     public void SelectPlayer()
