@@ -31,6 +31,11 @@ public class XL_PlayerInfo : MonoBehaviour
             menuData = new KLD_MenuData();
         }
 
+        //InitialiseMenuData();
+    }
+
+    void Start()
+    {
         InitialiseMenuData();
     }
 
@@ -48,17 +53,51 @@ public class XL_PlayerInfo : MonoBehaviour
 
     private void InitialiseMenuData()
     {
-        menuData.character = 0;
-        menuData.weapon = (Weapon)1;
+        if (!PlayerPrefs.HasKey("SelectedCharacter"))
+        {
+            menuData.character = 0;
+        }
+        else
+        {
+            menuData.character = (Character)PlayerPrefs.GetInt("SelectedCharacter");
+        }
+
+        if (!PlayerPrefs.HasKey("SelectedWeapon"))
+        {
+            menuData.weapon = (Weapon)1;
+        }
+        else
+        {
+            menuData.weapon = (Weapon)PlayerPrefs.GetInt("SelectedWeapon");
+        }
+
+        StartCoroutine(WaitAndRefreshChara());
+        //onCharacterChange?.Invoke(menuData.character);
+        //onWeaponChange?.Invoke(menuData.weapon);
+
         menuData.map = 0;
         menuData.difficulty = 0;
         menuData.missionEnergyCost = 20;
+    }
+
+    public void CallSceneRestart()
+    {
+        StartCoroutine(WaitAndRefreshChara());
+    }
+
+    IEnumerator WaitAndRefreshChara()
+    {
+        yield return null;
+        onCharacterChange?.Invoke(menuData.character);
+        onWeaponChange?.Invoke(menuData.weapon);
     }
 
     public void SelectPlayer()
     {
         Debug.Log("Changed Character");
         menuData.character = (Character)characterMenu.selectedPlayer;
+        PlayerPrefs.SetInt("SelectedCharacter", characterMenu.selectedPlayer);
+        print(PlayerPrefs.GetInt("SelectedCharacter"));
         onCharacterChange?.Invoke(menuData.character);
     }
 
@@ -66,6 +105,8 @@ public class XL_PlayerInfo : MonoBehaviour
     {
         Debug.Log("Changed Weapon");
         menuData.weapon = (Weapon)weaponMenu.selectedWeapon;
+        PlayerPrefs.SetInt("SelectedWeapon", weaponMenu.selectedWeapon);
+        print(PlayerPrefs.GetInt("SelectedWeapon"));
         onWeaponChange?.Invoke(menuData.weapon);
     }
 
