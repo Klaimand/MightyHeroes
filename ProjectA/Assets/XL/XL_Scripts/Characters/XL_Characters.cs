@@ -49,6 +49,8 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
     bool cantCharge = false;
     float chargeRatio = 1f;
 
+    bool tutorialUnkillable = false;
+
     /*
     private void Awake()
     {
@@ -282,12 +284,26 @@ public class XL_Characters : MonoBehaviour, XL_IDamageable
 
     public void TakeDamage(float damage)
     {
+        if (controller.GetPlayerState() != PlayerState.DEFAULT)
+        {
+            return;
+        }
+
         if (damage > 0f) // if it takes damage, then reduce the damage taken
         {
             damage = Mathf.Max(damage - characterAttributes.armor, 1f);
             //if ((damage - characterAttributes.armor) < 1) damage = 1; //the character will always take 1 damage;
             StopPassiveHeal();
             animator?.Play("Hit", 3, 0f);
+
+            //tuto debug
+            if (tutorialUnkillable && health < characterAttributes.healthMax / 3f
+            || tutorialUnkillable && health - damage < 0f)
+            {
+                health = characterAttributes.healthMax / 3f - 1f;
+                damage = 0f;
+            }
+
             KLD_EventsManager.instance.InvokeLooseHealth(damage);
 
             KLD_AudioManager.Instance.PlayCharacterSound("TakeDamage", 5);
@@ -381,5 +397,10 @@ while (true)
     public void SetChargeRatio(float _ratio)
     {
         chargeRatio = _ratio;
+    }
+
+    public void SetTutorialUnkillable(bool _unkillable)
+    {
+        tutorialUnkillable = _unkillable;
     }
 }

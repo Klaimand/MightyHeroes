@@ -33,7 +33,7 @@ public class KLD_MissionInfos : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitialiseMissionData();
+        //InitialiseMissionData();
     }
 
     public void InitialiseMissionData()
@@ -83,7 +83,18 @@ public class KLD_MissionInfos : MonoBehaviour
         missionData.succeeded = _succeeded;
         if (XL_PlayerInfo.instance != null)
         {
-            missionData.difficulty = (int)XL_PlayerInfo.instance.menuData.difficulty + 1;
+            if ((int)XL_PlayerInfo.instance.menuData.difficulty == 2)
+            {
+                missionData.difficulty = 1;
+                missionData.difficultyRatio = 0.05f;
+                missionData.difficultyOffset = 0f;
+            }
+            else
+            {
+                missionData.difficulty = (int)XL_PlayerInfo.instance.menuData.difficulty + 1;
+            }
+
+
             missionData.missionEnergyCost = XL_PlayerInfo.instance.menuData.missionEnergyCost;
         }
     }

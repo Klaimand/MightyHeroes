@@ -22,14 +22,14 @@ public enum Map
 {
     MALL,
     PARK,
-    MARINA
+    TUTO
 }
 
 public enum Difficulty
 {
     EASY,
     NORMAL,
-    HARD
+    TUTO
 }
 
 

@@ -326,4 +326,9 @@ public class KLD_PlayerController : MonoBehaviour
     {
         playerState = _playerState;
     }
+
+    public PlayerState GetPlayerState()
+    {
+        return playerState;
+    }
 }

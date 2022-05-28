@@ -4,41 +4,25 @@ using UnityEngine;
 
 public class XL_ShopMenu : MonoBehaviour
 {
-    [Header("Cards")]
-    [SerializeField] private GameObject currencyCards;
-    [SerializeField] private GameObject characterCards;
-    [SerializeField] private GameObject weaponCards;
 
     public void BuySoftCurrency(int amount) 
     {
         PlayerPrefs.SetInt("SoftCurrency", PlayerPrefs.GetInt("SoftCurrency") + amount);
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         XL_MainMenu.instance.RefreshTopOverlay();
     }
 
     public void BuyHardCurrency(int amount) 
     {
         PlayerPrefs.SetInt("HardCurrency", PlayerPrefs.GetInt("HardCurrency") + amount);
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         XL_MainMenu.instance.RefreshTopOverlay();
     }
 
     public void BuyEnergy(int amount) 
     {
         PlayerPrefs.SetInt("Energy", PlayerPrefs.GetInt("Energy") + amount);
+        KLD_MenuAudioCaller.instance.PlayUIPositiveSound();
         XL_MainMenu.instance.RefreshTopOverlay();
-    }
-
-    public void SwitchCurrencyCards()
-    {
-
-    }
-
-    public void SwitchWeaponCards()
-    {
-
-    }
-
-    public void SwitchCharacterCards()
-    {
-
     }
 }

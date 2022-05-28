@@ -314,6 +314,7 @@ MonoBehaviour:
   rightHandIK: {fileID: 7123856285112390003}
   rpmRatio: 1
   minMaxEnemyKilledToSound: {x: 1, y: 4}
+  reloadVoiceLineChance: 0.35
 --- !u!114 &7763574474891127591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,6 +402,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 4918749990883480119}
   pointer: {fileID: 0}
+  pointerImage: {fileID: 0}
+  image: {fileID: 0}
+  minMaxPointerDistanceFromPlayer: {x: 90, y: 150}
+  minMaxDistanceFromObjective: {x: 1, y: 10}
+  minMaxAlpha: {x: 0, y: 1}
+  alphaCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4918749991401258338
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,7 +482,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.01}
+  m_AnchoredPosition: {x: 0, y: 0.1}
   m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7709597135775014261
@@ -896,7 +908,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &7763574476375477605
 MonoBehaviour:

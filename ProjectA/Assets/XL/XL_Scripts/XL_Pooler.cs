@@ -161,6 +161,7 @@ public class XL_Pooler : MonoBehaviour
 
     public void DePop(string key, GameObject go)
     {
+        //print(key);
         pools[key].queue.Enqueue(go);
 
         go.transform.parent = transform;

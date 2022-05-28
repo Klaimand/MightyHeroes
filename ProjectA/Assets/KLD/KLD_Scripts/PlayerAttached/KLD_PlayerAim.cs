@@ -82,7 +82,7 @@ public class KLD_PlayerAim : MonoBehaviour
 
         ProcessPlayerAttributeAimVector();
 
-        DoAim();
+        //DoAim();
 
         //DrawSelectedLine();
 
@@ -90,6 +90,11 @@ public class KLD_PlayerAim : MonoBehaviour
         // isPressingAimJoystick && inputAimVector.sqrMagnitude > 0.1f;
 
         //AnimateWeaponState();
+    }
+
+    void FixedUpdate()
+    {
+        DoAim();
     }
 
     void ProcessPlayerAttributeAimVector()

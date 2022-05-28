@@ -12,6 +12,7 @@ public class XL_CharacterSelectMenu : MonoBehaviour
         {
             ci.characterAttributes.Initialize();
             ci.DisplayLevel();
+            ci.Activate(PlayerPrefs.GetInt(ci.characterAttributes.characterName + "Unlocked"));
         }
     }
 }

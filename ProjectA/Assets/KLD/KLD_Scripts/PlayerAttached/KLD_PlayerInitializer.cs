@@ -36,6 +36,11 @@ public class KLD_PlayerInitializer : MonoBehaviour
         {
             weapon = XL_PlayerInfo.instance.menuData.weapon;
             character = XL_PlayerInfo.instance.menuData.character;
+
+            if (XL_PlayerInfo.instance.menuData.map == Map.TUTO)
+            {
+                character = Character.BLAST;
+            }
         }
 
 
