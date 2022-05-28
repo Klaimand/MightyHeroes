@@ -113,6 +113,7 @@ public class XL_GameManager : MonoBehaviour
             yield return new WaitForSeconds(2f);
         }
 
+        KLD_EventsManager.instance.InvokeGameEnd();
 
         Time.timeScale = 0f;
 

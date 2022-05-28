@@ -203,17 +203,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104235399}
   m_CullTransparentMesh: 1
---- !u!114 &139518382 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
-  m_PrefabInstance: {fileID: 724700261}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f34653075bc8048878f7f944b13830, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &192303442 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5076501595134662809, guid: f28f9920361dd2d4991e0d6322059c2e, type: 3}
@@ -1972,7 +1961,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1980,7 +1969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1989,7 +1978,7 @@ PrefabInstance:
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 139518382}
+      objectReference: {fileID: 1918251531}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2004,7 +1993,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: SetIsInMainMenu
+      value: PlayUIPositiveSound
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2012,7 +2001,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: KLD_RotateMenuCharacter, Assembly-CSharp
+      value: KLD_MenuAudioCaller, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1299693266, guid: f9babf435672f5747a953be9b3e2fa4b, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -5698,6 +5687,10 @@ PrefabInstance:
     - target: {fileID: 5076501595530458876, guid: f28f9920361dd2d4991e0d6322059c2e, type: 3}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5490475367920415008, guid: f28f9920361dd2d4991e0d6322059c2e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5490475367920415009, guid: f28f9920361dd2d4991e0d6322059c2e, type: 3}
       propertyPath: m_RootOrder
@@ -15053,6 +15046,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1918251530}
     m_Modifications:
+    - target: {fileID: 1099173767460779201, guid: 9dad3e50b6983d04c946fdc01680ddd0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2137857203437819620, guid: 9dad3e50b6983d04c946fdc01680ddd0, type: 3}
       propertyPath: m_Pivot.x
       value: 0

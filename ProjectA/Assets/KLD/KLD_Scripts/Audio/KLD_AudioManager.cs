@@ -302,7 +302,11 @@ public class KLD_AudioManager : MonoBehaviour
         {
             if (soundsKey[sounds[i].name].GetSource().loop)
             {
-                soundsKey[sounds[i].name].GetSource().Stop();
+                if (sounds[i].name != "MenuMusic" && sounds[i].name != "GameMusic")
+                {
+                    //soundsKey[sounds[i].name].GetSource().Stop();
+                    FadeOutInst(soundsKey[sounds[i].name].GetSource(), 0.5f);
+                }
             }
         }
     }

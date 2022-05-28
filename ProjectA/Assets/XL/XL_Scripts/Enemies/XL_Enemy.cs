@@ -10,6 +10,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
     [SerializeField] Vector2 minMaxTimeBetweenChaseSounds = new Vector2(7f, 15f);
     float curTimeBetweenChaseSound = 0f;
     float curTimeSinceLastChaseSound = 0f;
+    bool noChaseSound = false;
     [SerializeField] protected KLD_SelfAudioManager selfAudioManager;
 
     [Space(10)]
@@ -53,7 +54,10 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         {
             curTimeBetweenChaseSound = Random.Range(minMaxTimeBetweenChaseSounds.x, minMaxTimeBetweenChaseSounds.y);
             curTimeBetweenChaseSound = 0f;
-            selfAudioManager.PlaySound("Chase");
+            if (!noChaseSound)
+            {
+                selfAudioManager.PlaySound("Chase");
+            }
         }
         curTimeSinceLastChaseSound += Time.deltaTime;
     }
@@ -140,7 +144,7 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         if (health < 1) Die();
     }
 
-    
+
 
     protected virtual void OnEnable()
     {
@@ -158,6 +162,8 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         //attributes.maxHealth = Random.Range(10, 101);
         curTimeBetweenChaseSound = Random.Range(minMaxTimeBetweenChaseSounds.x, minMaxTimeBetweenChaseSounds.y);
         curTimeSinceLastChaseSound = 0f;
+
+        KLD_EventsManager.instance.onGameEnd += DisableChaseSounds;
     }
 
     void OnDisable()
@@ -170,6 +176,13 @@ public abstract class XL_Enemy : MonoBehaviour, XL_IDamageable
         {
             didFirstDisable = true;
         }
+
+        KLD_EventsManager.instance.onGameEnd -= DisableChaseSounds;
+    }
+
+    void DisableChaseSounds()
+    {
+        noChaseSound = true;
     }
 
     void InitZombieList()

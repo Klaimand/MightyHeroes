@@ -31,6 +31,16 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
 
     bool captured = false;
 
+    void OnEnable()
+    {
+        KLD_EventsManager.instance.onGameEnd += GameEnd;
+    }
+
+    void OnDisable()
+    {
+        KLD_EventsManager.instance.onGameEnd -= GameEnd;
+    }
+
     private void Start()
     {
         KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().loop = true;
@@ -151,6 +161,10 @@ public class XL_CaptureZone : MonoBehaviour, KLD_IObjective
         }
     }
 
+    void GameEnd()
+    {
+        KLD_AudioManager.Instance.GetSound("TakingZone").GetSource().Stop();
+    }
 
     public bool GetObjectiveState()
     {

@@ -91,7 +91,7 @@ public class KLD_MissionInfos : MonoBehaviour
             }
             else
             {
-                missionData.difficulty = (int)XL_PlayerInfo.instance.menuData.difficulty + 1;
+                missionData.difficulty = (int)XL_PlayerInfo.instance.menuData.difficulty;// + 1;
             }
 
 
