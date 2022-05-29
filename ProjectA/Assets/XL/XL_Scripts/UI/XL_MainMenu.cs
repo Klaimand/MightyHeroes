@@ -159,10 +159,6 @@ public class XL_MainMenu : MonoBehaviour
         {
             PlayerPrefs.SetInt("SelectedWeapon", 1);
         }
-        if (!PlayerPrefs.HasKey("SelectedWeapon"))
-        {
-            PlayerPrefs.SetInt("SelectedWeapon", 1);
-        }
 
         PlayerPrefs.Save();
         #endregion
