@@ -71,11 +71,13 @@ public class XL_Swarmers : XL_Enemy
             if (targetedPlayer != null)
             {
                 agent.destination = targetedPlayer.position;
+                /*
                 if ((transform.position - targetedPlayer.position).magnitude < attackRange)
                 {
                     agent.isStopped = true;
                     if (canAttack) Attack();
                 }
+                */
             }
         }
 
@@ -83,10 +85,12 @@ public class XL_Swarmers : XL_Enemy
 
     public override void Attack()
     {
+        /*
         selfAudioManager.PlaySound("Attack");
         //Debug.Log("Attacking");
         StartCoroutine(AttackCoroutine(attackAnimationSpeed));
         StartCoroutine(AttackCooldownCoroutine(attackAnimationSpeed));
+        */
     }
 
     float atkStartingTime;

@@ -25,47 +25,39 @@ public class KLD_Zombie : MonoBehaviour
 
     void OnEnable()
     {
-        if (zombieList == null)
-        {
-            zombieList = GameObject.Find("ZombieManager").GetComponent<KLD_ZombieList>();
-        }
-        if (attributes.transform == null)
-        {
-            attributes.transform = transform;
-        }
+        attributes.transform = transform;
+        attributes.health = attributes.maxHealth; //Random.Range(10, 101);
+        KLD_ZombieList.Instance.AddZombie(attributes);
 
-        zombieList.AddZombie(attributes);
-
-        attributes.health = Random.Range(10, 101);
-        UpdateHealthBar();
+        //UpdateHealthBar();
     }
 
     void OnDisable()
     {
-        zombieList.RemoveZombie(attributes);
+        KLD_ZombieList.Instance.RemoveZombie(attributes);
     }
 
     void OnValidate()
     {
-        UpdateHealthBar();
+        //UpdateHealthBar();
         attributes.OnValidate();
 
-        if (gUIStyle == null) SetupGUIStyle();
+        //if (gUIStyle == null) SetupGUIStyle();
     }
+    /*
+        void OnDrawGizmos()
+        {
+    #if UNITY_EDITOR
+            Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString("F1"), gUIStyle);
+    #endif
+        }
 
-    void OnDrawGizmos()
-    {
-#if UNITY_EDITOR
-        Handles.Label(transform.position + Vector3.up * 3.5f, attributes.score.ToString("F1"), gUIStyle);
-#endif
-    }
+        // Update is called once per frame
+        void Update()
+        {
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+        }
+*/
     void UpdateHealthBar()
     {
         scale.x = (attributes.health / (float)attributes.maxHealth);
@@ -74,17 +66,18 @@ public class KLD_Zombie : MonoBehaviour
 
         healthBar.localScale = scale;
     }
+    /*
+            [ContextMenu("Setup GUI Style")]
+            void SetupGUIStyle()
+            {
+                GUIStyle _gui = new GUIStyle();
 
-    [ContextMenu("Setup GUI Style")]
-    void SetupGUIStyle()
-    {
-        GUIStyle _gui = new GUIStyle();
-
-        _gui.normal.textColor = Color.white;
-        _gui.fontSize = 30;
-        _gui.alignment = TextAnchor.UpperCenter;
+                _gui.normal.textColor = Color.white;
+                _gui.fontSize = 30;
+                _gui.alignment = TextAnchor.UpperCenter;
 
 
-        gUIStyle = _gui;
-    }
+                gUIStyle = _gui;
+            }
+            */
 }
